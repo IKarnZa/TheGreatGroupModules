@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/Customers/Discount.cshtml" hash="ffffffffd86d5c2d" filehash="3ede10f4115b" flags="110000" assembly="App_Web_discount.cshtml.4204622" type="ASP._Page_Views_Customers_Discount_cshtml">
+    <filedeps>
+        <filedep name="/Views/Customers/Discount.cshtml" />
+    </filedeps>
+</preserve>
