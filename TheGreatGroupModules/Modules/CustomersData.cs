@@ -57,13 +57,11 @@ namespace TheGreatGroupModules.Modules
                 string StrSql = @"  SELECT c.* ,
                                    s.SubDistrictName as CustomerSubDistrict,
                                    d.DistrictName as CustomerDistrict,
-                                   p.ProvinceName as CustomerProvince,
-                                   z.ZipCodeName as CustomerZipCode
+                                   p.ProvinceName as CustomerProvince
                                    FROM customer c 
                                   LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
                                   LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
                                   LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
-                                  LEFT OUTER JOIN zipcode z ON z.ZipcodeId = c.CustomerZipCodeId
                                 where Deleted=0 ";
 
                 if (!String.IsNullOrEmpty(item.CustomerFirstName))
@@ -93,7 +91,7 @@ namespace TheGreatGroupModules.Modules
                 IList<Customers> listData = new List<Customers>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    listData = Customers.ToObjectList(dt);
+                    listData = Customers.ToObjectList2(dt);
                 }
 
                 return listData;
@@ -129,7 +127,7 @@ namespace TheGreatGroupModules.Modules
              CustomerSubDistrictId,
              CustomerDistrictId,
              CustomerProvinceId,
-             CustomerZipCodeId,
+             CustomerZipCode,
              CustomerMobile,
              CustomerEmail,
              Activated,

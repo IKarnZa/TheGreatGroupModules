@@ -33,7 +33,7 @@ namespace TheGreatGroupModules.Models
         public string CustomerMobile { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerIdCard { get; set; }
-        
+        public string CustomerCareer { get; set; }
         public int Activated { get; set; }
         public int Deleted { get; set; }
 
@@ -55,7 +55,29 @@ namespace TheGreatGroupModules.Models
                 CustomerZipCode = dr.Field<string>("CustomerZipCode"),
                 CustomerEmail = dr.Field<string>("CustomerEmail"),
                 CustomerMobile = dr.Field<string>("CustomerMobile"),
+                CustomerCareer = dr.Field<string>("CustomerCareer"),
+            }).ToList();
+        }
+
+        public static IList<Customers> ToObjectList2(DataTable dt)
+        {
+            return dt.AsEnumerable().Select(dr => new Customers()
+            {
+                CustomerID = dr.Field<int>("CustomerId"),
+                CustomerTitleName = dr.Field<string>("CustomerTitleName"),
+                CustomerCode = dr.Field<string>("CustomerCode"),
+                CustomerNickName = dr.Field<string>("CustomerNickName"),
+                CustomerFirstName = dr.Field<string>("CustomerFirstname"),
+                CustomerLastName = dr.Field<string>("CustomerLastname"),
+                CustomerAddress1 = dr.Field<string>("CustomerAddress1") 
+                 +" ตำบล/แขวง"  + dr.Field<string>("CustomerSubDistrict")
+                 + " อำเภอ/เขต" + dr.Field<string>("CustomerDistrict")
+                 + " จังหวัด" + dr.Field<string>("CustomerProvince")
+                 +" " + dr.Field<string>("CustomerZipCode"),
+                CustomerEmail = dr.Field<string>("CustomerEmail"),
+                CustomerMobile = dr.Field<string>("CustomerMobile"),
                 CustomerIdCard = dr.Field<string>("CustomerIdCard"),
+                CustomerCareer = dr.Field<string>("CustomerCareer"),
             }).ToList();
         }
     }

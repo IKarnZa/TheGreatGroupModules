@@ -26,7 +26,7 @@ namespace TheGreatGroupModules.Modules
             
             DataTable dt = DBHelper.List(StrSql, ObjConn);
             if (dt.Rows.Count > 0)
-                return Convert.ToInt32(dt.Rows[0][0].ToString()) + 1;
+                return dt.Rows[0][0]!=DBNull.Value? Convert.ToInt32(dt.Rows[0][0].ToString()) + 1:1;
             else
                 return -99;
 

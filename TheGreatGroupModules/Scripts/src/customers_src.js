@@ -61,7 +61,8 @@ $("#gridshow").hide();
             rowAlternationEnabled: true,
             showBorders: true,
         
-       
+            //editing: {
+            //allowUpdating:true},
             searchPanel: {
                 visible: true,
                 width: 300,
@@ -96,31 +97,9 @@ $("#gridshow").hide();
               {
                   dataField: "CustomerAddress1",
                   caption: "ที่อยู่",
-                  width: 200,
+                  width: 500,
                      
               },
-              {
-                  dataField: "CustomerSubDistrict",
-                  caption: "ตำบล",
-                  width: 150,
-              },
-            {
-                dataField: "CustomerDistrict",
-                caption: "อำเภอ",
-                width: 150,
-            },
-             
-                {
-                    dataField: "CustomerProvince",
-                    caption: "จังหวัด",
-                    width: 150,
-
-                },
-            {
-                dataField: "CustomerZipCode",
-                caption: "รหัสไปรษณีย์",
-                width: 100,
-            },
              {
                  dataField: "CustomerMobile",
                  caption: "เบอร์ติดต่อ",
@@ -133,26 +112,32 @@ $("#gridshow").hide();
               },
               {
                   dataField: "CustomerID",
-                  caption: "แก้ไขข้อมูลลูกค้า",
+                  caption: "",
                   alignment: 'center',
                   allowFiltering: false,
+                  fixed: true,
+                  fixedPosition: 'right',
+                  width: 50,
                   cellTemplate: function (container, options) {
                       console.log(options.key);
                       $("<div>")
-                          .append("<a href='\PurchaseOrder'  class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                          .append("<a href='\PurchaseOrder' title='แก้ไขข้อมูลลูกค้า' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
                           .appendTo(container);
                   }
 
               },
               {
                   dataField: "CustomerID",
-                  caption: "ซื้อสินค้า",
-                  alignment: 'center',
+                  caption: "",
+                  alignment: '',
                   allowFiltering: false,
+                  width: 50,
+                  fixed: true,
+                  fixedPosition: 'right',
                   cellTemplate: function (container, options) {
                       console.log(options.key);
                       $("<div>")
-                          .append("<a href='\PurchaseOrder'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
+                          .append("<a href='\PurchaseOrder'  title='ซื้อสินค้า'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
                           .appendTo(container);
                   }
 
@@ -160,13 +145,16 @@ $("#gridshow").hide();
               ,
               {
                   dataField: "CustomerID",
-                  caption: "ประวัติการซื้อ",
+                  caption: "",
                   alignment: 'center',
+                  width: 50,
                   allowFiltering: false,
+                  fixed: true,
+                  fixedPosition: 'right',
                   cellTemplate: function (container, options) {
                       console.log(options.key);
                       $("<div>")
-                          .append("<a href='\CustomerProduct'  class='btn btn-warning btn-circle btn-sm' ><i class='fa fa-user'></i></a>")
+                          .append("<a href='\CustomerProduct' title='ประวัติการซื้อ'  class='btn btn-warning btn-circle btn-sm' ><i class='fa fa-user'></i></a>")
                           .appendTo(container);
                   }
 
@@ -200,7 +188,7 @@ $("#gridshow").hide();
                                 console.log(blob.size);
                                 var link = document.createElement('a');
                                 link.href = window.URL.createObjectURL(blob);
-                                link.download = "บัตรสมาชิก.pdf";
+                                link.download = "ข้อมูลสมาชิกปัจจุบัน.pdf";
                                 link.click();
                             };
 

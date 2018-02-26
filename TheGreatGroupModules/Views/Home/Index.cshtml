@@ -16,10 +16,10 @@
 <div class="row">
     <div class="col-lg-3 col-sm-6 col-xs-12">
         <div class="white-box analytics-info">
-            <h3 class="box-title">Total Visit</h3>
+            <h3 class="box-title">ลูกค้าใหม่ทั้งหมด</h3>
             <ul class="list-inline two-part">
                 <li>
-                    <div id="sparklinedash"></div>
+                    <div id="customertsparkdash"></div>
                 </li>
                 <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">659</span></li>
             </ul>
@@ -62,75 +62,112 @@
 <!--/.row -->
 
 
+
 <div class="row">
-    <div class="col-md-12 col-lg-8 col-sm-12 col-xs-12">
-        <div class="white-box">
-            <h3 class="box-title">Products Yearly Sales</h3>
-            <ul class="list-inline text-right">
-                <li>
-                    <h5><i class="fa fa-circle m-r-5 text-info"></i>Mac</h5>
-                </li>
-                <li>
-                    <h5><i class="fa fa-circle m-r-5 text-inverse"></i>Windows</h5>
-                </li>
-            </ul>
-            <div id="ct-visits" style="height: 405px;"></div>
-        </div>
-    </div>
-    <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12">
-        <div class="panel">
-            <div class="p-20">
-                <div class="row">
-                    <div class="col-xs-8">
-                        <h4 class="m-b-0">Total Earnings</h4>
-                        <h2 class="m-t-0 font-medium">$580.50</h2>
-                    </div>
-                    <div class="col-xs-4 p-20">
-                        <select class="form-control">
-                            <option>DEC</option>
-                            <option>JAN</option>
-                            <option>FEB</option>
-                        </select>
-                    </div>
+    <div class="col-md-7 col-sm-12 col-lg-8">
+        <div class="white-box p-b-0">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h2 class="font-medium m-t-0">$458.50</h2>
+                    <h5 class="text-muted m-t-0">Expence for December 1 to 10</h5>
+                </div>
+                <div class="col-xs-4">
+                    <div class="circle-md pull-right circle bg-info"><i class="ti-plus"></i></div>
                 </div>
             </div>
-            <div class="panel-footer bg-extralight">
-                <ul class="earning-box">
-                    <li>
-                        <div class="er-row">
-                            <div class="er-pic"><img src="~/Template/plugins/images/users/genu.jpg" alt="varun" width="60" class="img-circle"></div>
-                            <div class="er-text">
-                                <h3>Andrew Simon</h3><span class="text-muted">10-11-2016</span>
+            <div class="row m-t-30 minus-margin">
+                <div class="col-sm-12 col-sm-6 b-t b-r">
+                    <ul class="expense-box">
+                        <li>
+                            <i class="ti-headphone-alt text-info"></i>
+                            <div>
+                                <h2>$250</h2>
+                                <h4>Entertainment</h4>
                             </div>
-                            <div class="er-count ">$<span class="counter">46</span></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="er-row">
-                            <div class="er-pic"><img src="~/Template/plugins/images/users/govinda.jpg" alt="varun" width="60" class="img-circle"></div>
-                            <div class="er-text">
-                                <h3>Daniel Kristeen</h3><span class="text-muted">10-11-2016</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-sm-6  b-t">
+                    <ul class="expense-box">
+                        <li>
+                            <i class="ti-home text-info"></i>
+                            <div>
+                                <h2>$60.50</h2>
+                                <h4>House Rent</h4>
                             </div>
-                            <div class="er-count ">$<span class="counter">55</span></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="er-row">
-                            <div class="er-pic"><img src="~/Template/plugins/images/users/pawandeep.jpg" alt="varun" width="60" class="img-circle"></div>
-                            <div class="er-text">
-                                <h3>Chris gyle</h3><span class="text-muted">10-11-2016</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row minus-margin">
+                <div class="col-sm-12 col-sm-6  b-t b-r">
+                    <ul class="expense-box">
+                        <li>
+                            <i class="fa fa-paper-plane-o text-info"></i>
+                            <div>
+                                <h2>$28</h2>
+                                <h4>Travel</h4>
                             </div>
-                            <div class="er-count ">$<span class="counter">66</span></div>
-                        </div>
-                    </li>
-                    <li class="center">
-                        <a class="btn btn-rounded btn-info btn-block p-10">Withdrow money</a>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-sm-6  b-t">
+                    <ul class="expense-box">
+                        <li>
+                            <i class="ti-shopping-cart text-info"></i>
+                            <div>
+                                <h2>$70</h2>
+                                <h4>Shopping</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- col-md-3 -->
+    <div class="col-md-5 col-sm-12 col-lg-4">
+        <div class="white-box">
+            <h3 class="box-title">Sales</h3>
+            <div id="morris-donut-chart" style="height:318px; padding-top: 50px;"></div>
+            <div class="row p-t-30">
+                <div class="col-xs-8 p-t-30">
+                    <h3 class="font-medium">TOTAL SALES</h3>
+                    <h5 class="text-muted m-t-0">160 sales monthly</h5>
+                </div>
+                <div class="col-xs-4 p-t-30">
+                    <div class="circle-md pull-right circle bg-info"><i class="ti-shopping-cart"></i></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- /.row -->
+@section Scripts {
 
+    <script>
+        $(function () {
 
+            var sparklineLogin1 = function () {
+                $('#customertsparkdash').sparkline([0, 2, 5, 2, 1, 0, 1], {
+                    type: 'bar',
+                    height: '30',
+                    barWidth: '4',
+                    resize: true,
+                    barSpacing: '5',
+                    barColor: '#7ace4c'
+                });
+            }
 
+            var sparkResize;
+            $(window).on("resize", function (e) {
+                clearTimeout(sparkResize);
+                sparkResize = setTimeout(sparklineLogin, 500);
+            });
+            sparklineLogin1();
+
+        });
+
+        </script>
+        
+        }
