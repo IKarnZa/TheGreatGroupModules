@@ -6,23 +6,63 @@ $("#gridshow").hide();
 
 function SearchStaff() {
 
+ 
     $("#loadIndicator").dxLoadIndicator({
         visible: true
     });
+    if ($("#zoneid").val() == '') {
 
-    $.post("../Customers/GetCustomers", {
+        $("#toast").dxToast({
+            message: "กรุณาเลือกสาย",
+            type: "error",
+            displayTime: 3000
+        })
+        $("#toast").dxToast("show");
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
+        });
+        return;
+    }
 
-        CustomerFirstName: "",
-        CustomerLastName: "",
-        CustomerMobile: "",
-        CustomerIdCard: "",
+    if ($("#StaffID").val() == '') {
 
-    })
+        $("#toast").dxToast({
+            message: "กรุณาเลือกรายชื่อพนักงาน",
+            type: "error",
+            displayTime: 3000
+        })
+        $("#toast").dxToast("show");
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
+        });
+        return;
+    }
+    var date = $("#DateAsOf").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+    if (date == '' || date == null) {
+
+        $("#toast").dxToast({
+            message: "กรุณาเลือกวันที่",
+            type: "error",
+            displayTime: 3000
+        })
+        $("#toast").dxToast("show");
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
+        });
+        return;
+    }
+        
+   
+
+    var url = "../ManagePayment/GetDailyReceiptsReport?staffId=" + $("#StaffID").val() +
+        "&dateAsOf=" + $('#DateAsOf').val();
+
+    $.get(url)
 .done(function (data) {
     console.log(data);
     if (data.success == true) {
 
-        Load_DataGrid(data.data);
+        Load_DataGrid(data);
 
 
         $("#gridshow").show();
@@ -51,29 +91,42 @@ function btnClear() {
     $("#CustomerMobile").val('');
     $("#CustomerIdCard").val('');
 }
+
+function btnSaveData() {
+
+    $("#loadIndicator").dxLoadIndicator({
+        visible: true
+    });
+
+    var url = "../ManagePayment/SaveActivateDailyReceipts?staffId=" + $("#StaffID").val() +
+        "&dateAsOf=" + $('#DateAsOf').val();
+    
+    $.get(url)
+.done(function (data) {
+
+    if (data.success == true) {
+        SearchStaff();
+        DevExpress.ui.notify("บันทึกการตรวจสอบสำเร็จ !!!");
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
+        });
+
+    } else {
+        DevExpress.ui.notify(data.errMsg);
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
+        });
+
+    }
+
+});
+}
+
 function Load_DataGrid(data) {
-    data = [{
-        No: "1.",
-        data1:"GT00009999",
-        data2: "นายวิรุศ ภักดี",
-        data3: "2",
-        data4: "250.00",
-        data5: "250.00",
-        data6: "7,900.00",
-        data7: "",
-    }, {
-        No: "2.",
-        data1: "GT0009499",
-        data2: "นายธนวัตร มีดี",
-        data3: "45",
-        data4: "250.00",
-        data5: "250.00",
-        data6: "8,250.00",
-        data7: "",
-    },
-    ]
+
+
     $("#gridContainer").dxDataGrid({
-        dataSource: data,
+        dataSource: data.data,
         showColumnLines: true,
         showRowLines: true,
       //  rowAlternationEnabled: true,
@@ -87,7 +140,7 @@ function Load_DataGrid(data) {
             placeholder: "ค้นหา..."
         },
         filterRow: {
-            visible: true,
+            visible: false,
             applyFilter: "auto"
         },
         export: {
@@ -102,69 +155,86 @@ function Load_DataGrid(data) {
         columnFixing: {
             enabled: true
         },
-        columns: [{
-            dataField: "No",
-            caption: "ลำดับ",
-            width: 140,
-            alignment: 'center',
-            allowFiltering: false
-        },  {
-            dataField: "data1",
+        columns: [
+          {
+            dataField: "ContractNumber",
             caption: "เลขที่สัญญา",
-            width: 140,
+            width: 120,
             alignment: 'left',
-            allowFiltering: false
+            allowFiltering: false,
+            fixed: false,
+             fixedPosition: 'left',
         },
         {
-            dataField: "data2",
+            dataField: "CustomerName",
             caption: "ชื่อ-นามสกุล",
-            width: 240,
+            width: 230,
+            fixed: false,
+            fixedPosition: 'left',
         },
          {
-             dataField: "data3",
-             caption: "งวดที่",
+             dataField: "ContractCreateDate_Text",
+             caption: "วันที่ทำสัญญา",
              alignment: 'center',
              width: 120,
 
          },
           {
-              dataField: "data4",
-              caption: "ยอดเรียกเก็บ",
-              width: 150,
+              dataField: "ContractExpDate_Text",
+              caption: "วันที่หมดสัญญา",
+              width: 120,
               alignment: 'right',
           },
-      
+
         {
-            dataField: "data5",
-            caption: "ยอดที่ชำระ",
+            dataField: "ContractAmount_Text",
+            caption: "งวดละ",
             alignment: 'right',
-            width: 150,
+            width: 100,
         },
+             {
+                 dataField: "PriceReceipts_Text",
+                 caption: "ยอดที่ชำระ",
+                 alignment: 'right',
+                 width: 100,
+                 fixed: false,
+                 fixedPosition: 'right',
+             
+             },
 
             {
-                dataField: "data6",
+                dataField: "Balance_Text",
                 caption: "ยอดคงเหลือ",
-                width: 150,
+                width: 120,
                 alignment: 'right',
-
+                fixed: false,
+                fixedPosition: 'right',
             },
         {
-            dataField: "data7",
+            dataField: "Remark",
             caption: "หมายเหตุ",
             alignment: 'center',
-            width: 200,
+            width: 100,
+            fixed: false,
+            fixedPosition: 'right'
         },
-       
+            {
+                dataField: "Status",
+                caption: "สถานะ",
+                alignment: 'center',
+                width: 100,
+                fixed: true,
+                fixedPosition: 'right'
+            },
 
         ],
         summary: {
             totalItems: [
-                { column: 'data2', displayFormat: 'จำนวนลูกค้าในสายทั้งหมด 32 คน' },
-                 { column: 'data3', displayFormat: 'ยอดรวมทั้งสิ้น' },
-                   { column: 'data4', displayFormat: '250.00' },
-                     { column: 'data5', displayFormat: '250.00' },
-                      { column: 'data6', displayFormat: '16,150.00' },
-            ],},
+                { column: 'CustomerName', displayFormat: 'จำนวนลูกค้าทั้งหมด ' + data.countData + ' คน' },
+                 { column: 'ContractAmount_Text', displayFormat: 'ยอดรวม' },
+                   { column: 'PriceReceipts_Text', displayFormat: data.SumData }
+            ],
+        },
         onToolbarPreparing: function (e) {
             e.toolbarOptions.items.push({
                 location: "before",
@@ -184,3 +254,7 @@ function Load_DataGrid(data) {
     });
 
 }
+
+
+
+   

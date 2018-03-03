@@ -162,14 +162,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\GoldData.cs" />
     <Compile Include="Models\Province.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\Staffs.cs" />
     <Compile Include="Modules\Component\ExportFunction.cs" />
     <Compile Include="Modules\Component\ExportParameter.cs" />
     <Compile Include="Modules\CustomersData.cs" />
     <Compile Include="Modules\DBHelper.cs" />
     <Compile Include="Modules\ExportFunction.cs" />
     <Compile Include="Modules\Extensions.cs" />
+    <Compile Include="Modules\Report.cs" />
+    <Compile Include="Modules\ReportData.cs" />
     <Compile Include="Modules\SettingData.cs" />
+    <Compile Include="Modules\StaffData.cs" />
     <Compile Include="Modules\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\CustomerReport.cs">
@@ -180,6 +186,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\datepicker-th.js" />
+    <Content Include="Content\generic.light.custom.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -254,6 +262,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\src\customers_src.js" />
     <Content Include="Scripts\src\customer_product.js" />
+    <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\installment.js" />
     <Content Include="Scripts\src\reports_src.js" />
     <Content Include="Scripts\_references.js" />
@@ -2350,6 +2359,8 @@
     <Content Include="Template\plugins\images\users\sonu.jpg" />
     <Content Include="Template\plugins\images\users\varun.jpg" />
     <Content Include="Template\plugins\images\weather-bg.jpg" />
+    <Content Include="Template\plugins\images\logo1.png" />
+    <Content Include="Template\plugins\images\web_logo_part3.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

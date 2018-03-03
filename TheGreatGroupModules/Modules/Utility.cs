@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -193,7 +194,7 @@ namespace TheGreatGroupModules.Modules
             return dateTime;
 
         }
-
+       
         public static bool ExportPDF(string filename, string pathCrystalReport, IEnumerable<object> listObject, Dictionary<string, object> parameters)
         {
             try
@@ -215,6 +216,6 @@ namespace TheGreatGroupModules.Modules
                 throw ex;
             }
         }
- 
+
     }
 }

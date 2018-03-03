@@ -27,7 +27,7 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-xs-12">
         <div class="white-box analytics-info">
-            <h3 class="box-title">Total Page Views</h3>
+            <h3 class="box-title">ยอดขายเพิ่มขึ้น</h3>
             <ul class="list-inline two-part">
                 <li>
                     <div id="sparklinedash2"></div>
@@ -38,7 +38,18 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-xs-12">
         <div class="white-box analytics-info">
-            <h3 class="box-title">Unique Visitor</h3>
+            <h3 class="box-title">จำนวนลูกค้าที่เก็บเงินวันนี้</h3>
+            <ul class="list-inline two-part">
+                <li>
+                    <div id="sparklinedash4"></div>
+                </li>
+                <li class="text-right"><i class="ti-arrow-up text-danger"></i> <span class="text-danger">18%</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 col-xs-12">
+        <div class="white-box analytics-info">
+            <h3 class="box-title">จำนวนลูกค้าปิดบัญชี</h3>
             <ul class="list-inline two-part">
                 <li>
                     <div id="sparklinedash3"></div>
@@ -47,17 +58,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-6 col-xs-12">
-        <div class="white-box analytics-info">
-            <h3 class="box-title">Bounce Rate</h3>
-            <ul class="list-inline two-part">
-                <li>
-                    <div id="sparklinedash4"></div>
-                </li>
-                <li class="text-right"><i class="ti-arrow-down text-danger"></i> <span class="text-danger">18%</span></li>
-            </ul>
-        </div>
-    </div>
+    
 </div>
 <!--/.row -->
 
@@ -68,56 +69,91 @@
         <div class="white-box p-b-0">
             <div class="row">
                 <div class="col-xs-8">
-                    <h2 class="font-medium m-t-0">$458.50</h2>
-                    <h5 class="text-muted m-t-0">Expence for December 1 to 10</h5>
-                </div>
-                <div class="col-xs-4">
-                    <div class="circle-md pull-right circle bg-info"><i class="ti-plus"></i></div>
+                    <h2 class="font-medium m-t-0">ราคาทองคําวันนี้</h2>
+                    <h5 class="text-muted m-t-0">ประจำวันที่ @DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</h5>
                 </div>
             </div>
-            <div class="row m-t-30 minus-margin">
-                <div class="col-sm-12 col-sm-6 b-t b-r">
+            
+            <div class="row minus-margin">
+                <div class="col-sm-12 col-sm-4 b-t b-r">
                     <ul class="expense-box">
                         <li>
-                            <i class="ti-headphone-alt text-info"></i>
                             <div>
-                                <h2>$250</h2>
-                                <h4>Entertainment</h4>
+                                <h2>96.5 %</h2>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-12 col-sm-6  b-t">
+                <div class="col-sm-12 col-sm-4  b-t b-r">
                     <ul class="expense-box">
                         <li>
-                            <i class="ti-home text-info"></i>
                             <div>
-                                <h2>$60.50</h2>
-                                <h4>House Rent</h4>
+                                <h2 class="text-danger">ขายออก (บาท)</h2>
+                            </div>
+                        </li> 
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-sm-4  b-t">
+                    <ul class="expense-box">
+                        <li>
+                            <div>
+                                <h2 class="text-danger">รับซื้อ (บาท)</h2>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="row minus-margin">
-                <div class="col-sm-12 col-sm-6  b-t b-r">
+                <div class="col-sm-12 col-sm-4 b-t b-r">
                     <ul class="expense-box">
                         <li>
-                            <i class="fa fa-paper-plane-o text-info"></i>
-                            <div>
-                                <h2>$28</h2>
-                                <h4>Travel</h4>
+                            <div> 
+                                <h2>ทองคำแท่ง</h2>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-12 col-sm-6  b-t">
+                <div class="col-sm-12 col-sm-4  b-t b-r">
+                    <ul class="expense-box">
+                        <li class="pull-right text-right">
+                            <div id="T1">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-sm-4  b-t">
+                    <ul class="expense-box">
+                        <li class="pull-right text-right">
+                            <div id="T2">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row minus-margin">
+                <div class="col-sm-12 col-sm-4 b-t b-r">
                     <ul class="expense-box">
                         <li>
-                            <i class="ti-shopping-cart text-info"></i>
                             <div>
-                                <h2>$70</h2>
-                                <h4>Shopping</h4>
+                                <h2>ทองรูปพรรณ</h2>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-sm-4  b-t b-r">
+                    <ul class="expense-box"> 
+                        <li class="pull-right text-right">
+                            <div id="T3">
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-sm-4  b-t">
+                    <ul class="expense-box">
+                        <li class="pull-right text-right">
+                            <div id="T4">
+
                             </div>
                         </li>
                     </ul>
@@ -128,23 +164,21 @@
     <!-- col-md-3 -->
     <div class="col-md-5 col-sm-12 col-lg-4">
         <div class="white-box">
-            <h3 class="box-title">Sales</h3>
-            <div id="morris-donut-chart" style="height:318px; padding-top: 50px;"></div>
-            <div class="row p-t-30">
-                <div class="col-xs-8 p-t-30">
-                    <h3 class="font-medium">TOTAL SALES</h3>
-                    <h5 class="text-muted m-t-0">160 sales monthly</h5>
-                </div>
-                <div class="col-xs-4 p-t-30">
-                    <div class="circle-md pull-right circle bg-info"><i class="ti-shopping-cart"></i></div>
-                </div>
-            </div>
+            <h3 class="box-title"> <i class="fa fa-user-plus"></i> รายชื่อลูกค้าใหม่ล่าสุดสัปดาห์นี้</h3>
+            <ul class="list-group">
+                <li class="list-group-item">นางสมพร มีรัก<span class="badge badge-success">new</span></li>
+                <li class="list-group-item">นางสุรีย์ มีสุข <span class="badge badge-success">new</span></li>
+                <li class="list-group-item">นายชัย ดีดี</li>
+                <li class="list-group-item">นางสาวแสนใจ ใจดี</li>
+                <li class="list-group-item">นายวิรุธ มีพิรุธ</li>
+            </ul>
         </div>
+
     </div>
 </div>
 <!-- /.row -->
 @section Scripts {
-
+@Scripts.Render(@"\Scripts/src/index.js")
     <script>
         $(function () {
 
@@ -162,12 +196,13 @@
             var sparkResize;
             $(window).on("resize", function (e) {
                 clearTimeout(sparkResize);
-                sparkResize = setTimeout(sparklineLogin, 500);
+                sparkResize = setTimeout(sparklineLogin1, 500);
             });
             sparklineLogin1();
 
         });
 
+    
         </script>
         
         }

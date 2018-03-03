@@ -12,7 +12,7 @@ namespace TheGreatGroupModules.Models
         public int ProvinceID { get; set; }
         public string ProvinceName { get; set; }
 
-        public static IList<Province> ToObjectList(DataTable dt)
+        public static List<Province> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new Province()
             {
@@ -29,7 +29,7 @@ namespace TheGreatGroupModules.Models
         public int ProvinceID { get; set; }
         public string DistrictName { get; set; }
 
-        public static IList<District> ToObjectList(DataTable dt)
+        public static List<District> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new District()
             {
@@ -49,7 +49,7 @@ namespace TheGreatGroupModules.Models
         public string SubDistrictName { get; set; }
         public string SubDistrictZipCode { get; set; }
         
-        public static IList<SubDistrict> ToObjectList(DataTable dt)
+        public static List<SubDistrict> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new SubDistrict()
             {

@@ -19,7 +19,7 @@ namespace TheGreatGroupModules.Controllers
             try
             {
 
-                IList<Province> listData = new List<Province>();
+                List<Province> listData = new List<Province>();
                 SettingData data = new SettingData();
                 listData = data.GetProvince();
 
@@ -48,7 +48,7 @@ namespace TheGreatGroupModules.Controllers
 
             try
             {
-                IList<District> listData = new List<District>();
+                List<District> listData = new List<District>();
                 SettingData data = new SettingData();
                  listData = data.GetDistrict(id);
 
@@ -76,7 +76,7 @@ namespace TheGreatGroupModules.Controllers
             try
             {
 
-                IList<SubDistrict> listData = new List<SubDistrict>();
+                List<SubDistrict> listData = new List<SubDistrict>();
                 SettingData data = new SettingData();
                 listData = data.GetSubDistrict(id);
                 return Json(new
@@ -105,7 +105,7 @@ namespace TheGreatGroupModules.Controllers
             try
             {
 
-                IList<SubDistrict> listData = new List<SubDistrict>();
+                List<SubDistrict> listData = new List<SubDistrict>();
                 SettingData data = new SettingData();
                 listData = data.GetZipCode(id);
                 return Json(new

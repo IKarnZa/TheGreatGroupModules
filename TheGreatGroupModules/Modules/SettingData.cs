@@ -12,7 +12,7 @@ namespace TheGreatGroupModules.Modules
     {
 
         private string errMsg = "";
-        public IList<Province> GetProvince()
+        public List<Province> GetProvince()
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -26,7 +26,7 @@ namespace TheGreatGroupModules.Modules
                                    FROM province where 0=0";
                 StrSql += @" Order by ProvinceName ASC";
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
-                IList<Province> listData = new List<Province>();
+                List<Province> listData = new List<Province>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
                    listData = Province.ToObjectList(dt);
@@ -45,7 +45,7 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public IList<District> GetDistrict(int id)
+        public List<District> GetDistrict(int id)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -67,7 +67,7 @@ namespace TheGreatGroupModules.Modules
                 StrSql += @" Order by DistrictName ASC";
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
-                IList<District> listData = new List<District>();
+                List<District> listData = new List<District>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     listData = District.ToObjectList(dt);
@@ -85,7 +85,7 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public IList<SubDistrict> GetSubDistrict(int id)
+        public List<SubDistrict> GetSubDistrict(int id)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -106,7 +106,7 @@ namespace TheGreatGroupModules.Modules
                 }
                 StrSql += @" Order by SubDistrictName ASC";
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
-                IList<SubDistrict> listData = new List<SubDistrict>();
+                List<SubDistrict> listData = new List<SubDistrict>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     listData = SubDistrict.ToObjectList(dt);
@@ -124,7 +124,7 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public IList<SubDistrict> GetZipCode(int id)
+        public List<SubDistrict> GetZipCode(int id)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -145,7 +145,7 @@ namespace TheGreatGroupModules.Modules
                 }
                 StrSql += @" Order by SubDistrictName ASC";
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
-                IList<SubDistrict> listData = new List<SubDistrict>();
+                List<SubDistrict> listData = new List<SubDistrict>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     listData = SubDistrict.ToObjectList(dt);
