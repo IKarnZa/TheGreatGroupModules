@@ -16,11 +16,18 @@ namespace TheGreatGroupModules.Report
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+             int staffID = Convert.ToInt32((Request.Params["staffID"]==null ? Request.Params["staffID"] :"0"));
+             string date= Request.Params["date"];
+              if (Request.Params["date"] == null)
+                date = "04/03/2018";
+
+
             IList<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
             ReportData data = new ReportData();
-            int staffID = 1;
-             string date ="04/03/2018";
+          
+          
+             staffID = Convert.ToInt32(Request.Params["staffID"].ToString());
+           
             listData = data.GetDailyReceiptsReport(staffID, date);
 
             string sourceViewReport = @"\Report\Report1.rdlc";
@@ -38,7 +45,7 @@ namespace TheGreatGroupModules.Report
             string encoding = string.Empty;
             string extension = string.Empty;
             string PDF_FOLDER_FILE = "../PDF/";
-            string PDF_FILE_NAME = "FULLTax";
+            string PDF_FILE_NAME = "DailyReport";
 
             byte[] bytes = ReportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 

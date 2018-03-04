@@ -75,10 +75,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Microsoft.ReportViewer.WebForms.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\AmazonOnline\Source\Repos\VTECSystem\VTECSystem\VTECSystem\bin\MySql.Data.dll</HintPath>
@@ -210,7 +207,6 @@
     <Compile Include="Report\ReportPage1.aspx.designer.cs">
       <DependentUpon>ReportPage1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\datepicker-th.js" />
@@ -288,6 +284,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\src\add_customer.js" />
     <Content Include="Scripts\src\customers_src.js" />
     <Content Include="Scripts\src\customer_product.js" />
     <Content Include="Scripts\src\index.js" />
@@ -426,19 +423,6 @@
     <Content Include="Sources\Lib\ts\dx.all.legacy.d.ts" />
     <Content Include="Sources\Lib\ts\jquery.d.ts" />
     <Content Include="Sources\Lib\ts\knockout.d.ts" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Template\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Template\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Template\bootstrap\dist\css\bootstrap.css" />
@@ -3277,6 +3261,7 @@
     <Content Include="Views\ManagePayment\Installment.cshtml" />
     <Content Include="Views\ManagePayment\CustomerHistory.cshtml" />
     <Content Include="Views\Customers\CustomerProduct.cshtml" />
+    <Content Include="Views\Customers\EditCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
