@@ -128,7 +128,7 @@ namespace TheGreatGroupModules.Modules
 
         public static String ReplaceString(String text)
         {
-            String data;
+            String data="";
             if (String.IsNullOrEmpty(text))
             {
                 text = "";

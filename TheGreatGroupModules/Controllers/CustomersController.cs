@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using TheGreatGroupModules.Models;
 using CrystalDecisions.Shared;
 using TheGreatGroupModules.Modules;
+using System.Web.Routing;
 namespace TheGreatGroupModules.Controllers
 {
     public class CustomersController : Controller
@@ -22,7 +23,12 @@ namespace TheGreatGroupModules.Controllers
         {
             return View();
         }
-        public ActionResult PurchaseOrder()
+        public ActionResult PurchaseOrder(int CustomerID)
+        {
+            return View();
+        }
+
+        public ActionResult EditCustomer(int CustomerID)
         {
             return View();
         }
@@ -39,8 +45,9 @@ namespace TheGreatGroupModules.Controllers
           
             return View();
         }
-        public ActionResult CustomerProduct()
+        public ActionResult CustomerProduct(int CustomerID)
         {
+            ViewBag.CustomerID = CustomerID;
 
             return View();
         }
@@ -344,29 +351,24 @@ namespace TheGreatGroupModules.Controllers
 
         }
            [HttpPost]
-        public JsonResult AddCustomers(Customers item)
+        public ActionResult AddCustomers(Customers item)
         {
             try
-            { new CustomersData().AddCustomer(item);
+            {
+                new CustomersData().AddCustomer(ref item );
 
-                return Json(new
-                {
-                    data="",
-                    success = true
-                }, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("CustomerProduct", new RouteValueDictionary(
+    new { controller = "Customers", action = "PurchaseOrder", CustomerID = item.CustomerID }));
+           
             }
             catch (Exception ex)
             {
-                return Json(new
-                {
-                    success = false,
-                    errMsg = ex.Message
-                }, JsonRequestBehavior.AllowGet);
-
+                
+                return RedirectToAction("AddCustomer");
             }
 
-
-
+           
+       
         }
 
 

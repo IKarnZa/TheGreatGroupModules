@@ -34,6 +34,28 @@ namespace TheGreatGroupModules.Models
         public string CustomerEmail { get; set; }
         public string CustomerIdCard { get; set; }
         public string CustomerCareer { get; set; }
+           public string   CustomerStatus{ get; set; }
+          public string     CustomerPartner{ get; set; }
+            public string   CustomerJob{ get; set; }
+            public string   CustomerJobYear{ get; set; }
+          public string     CustomerSalary{ get; set; }
+           public string    CustomerJobAddress{ get; set; }
+           public int    CustomerJobSubDistrictId{ get; set; }
+           public int CustomerJobDistrictId { get; set; }
+           public int CustomerJobProvinceId { get; set; }
+          public string     CustomerJobZipCode{ get; set; }
+          public string     CustomerSpouseTitle{ get; set; }
+           public string    CustomerSpouseFirstName{ get; set; }
+           public string    CustomerSpouseLastName{ get; set; }
+           public string    CustomerSpouseNickName{ get; set; }
+           public string    CustomerSpouseAddress{ get; set; }
+           public int CustomerSpouseSubDistrictId { get; set; }
+           public int CustomerSpouseDistrictId { get; set; }
+           public int CustomerSpouseProvinceId { get; set; }
+            public string   CustomerSpouseZipCode{ get; set; }
+            public string   CustomerSpouseMobile{ get; set; }
+            public string   CustomerSpouseTelephone{ get; set; }
+           public int    SaleID{ get; set; }
         public int Activated { get; set; }
         public int Deleted { get; set; }
 

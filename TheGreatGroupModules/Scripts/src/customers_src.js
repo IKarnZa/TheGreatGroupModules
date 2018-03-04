@@ -1,6 +1,5 @@
 ﻿
 var data = [];
-
 $("#gridshow").hide();
   
   
@@ -121,7 +120,7 @@ $("#gridshow").hide();
                   cellTemplate: function (container, options) {
                       console.log(options.key);
                       $("<div>")
-                          .append("<a href='\PurchaseOrder' title='แก้ไขข้อมูลลูกค้า' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                          .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
                           .appendTo(container);
                   }
 
@@ -135,9 +134,9 @@ $("#gridshow").hide();
                   fixed: true,
                   fixedPosition: 'right',
                   cellTemplate: function (container, options) {
-                      console.log(options.key);
+                  
                       $("<div>")
-                          .append("<a href='\PurchaseOrder'  title='ซื้อสินค้า'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
+                          .append("<a href='\PurchaseOrder?CustomerID=" + options.key.CustomerID + "'  title='ซื้อสินค้า'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
                           .appendTo(container);
                   }
 
@@ -154,7 +153,7 @@ $("#gridshow").hide();
                   cellTemplate: function (container, options) {
                       console.log(options.key);
                       $("<div>")
-                          .append("<a href='\CustomerProduct' title='ประวัติการซื้อ'  class='btn btn-warning btn-circle btn-sm' ><i class='fa fa-user'></i></a>")
+                          .append("<a href='\PurchaseOrder?CustomerID=" + options.key.CustomerID + "' title='ประวัติการซื้อ'  class='btn btn-warning btn-circle btn-sm' ><i class='fa fa-user'></i></a>")
                           .appendTo(container);
                   }
 

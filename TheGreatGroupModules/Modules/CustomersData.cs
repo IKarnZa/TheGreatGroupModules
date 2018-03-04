@@ -106,13 +106,12 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public void AddCustomer(Customers item)
+        public void AddCustomer(ref Customers item)
         {
+            item.CustomerID = Utility.GetMaxID("Customer", "CustomerID");
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-            
             try
             {
-                item.CustomerID = Utility.GetMaxID("Customer", "CustomerID");
                 item.CustomerCode = "MB" + item.CustomerID.ToString("000000000");
                 string StrSql = @" INSERT INTO db_greatgroup_dev.customer
             (CustomerId,
@@ -129,10 +128,30 @@ namespace TheGreatGroupModules.Modules
              CustomerZipCode,
              CustomerMobile,
              CustomerEmail,
+             CustomerJob,
+             CustomerJobYear,
+             CustomerSalary,
+             CustomerJobAddress,
+             CustomerJobSubDistrictId,
+             CustomerJobDistrictId,
+             CustomerJobProvinceId,
+             CustomerJobZipCode,
+             CustomerSpouseTitle,
+             CustomerSpouseFirstName,
+             CustomerSpouseLastName,
+             CustomerSpouseNickName,
+             CustomerSpouseAddress,
+             CustomerSpouseSubDistrictId,
+             CustomerSpouseDistrictId,
+             CustomerSpouseProvinceId,
+             CustomerSpouseZipCode,
+             CustomerSpouseMobile,
+             CustomerSpouseTelephone,
+             SaleID,
              Activated,
              Deleted)values("
-            
-             +item.CustomerID+ ","
+
+             + item.CustomerID+ ","
              + Utility.ReplaceString(item.CustomerCode)+ ","
              + Utility.ReplaceString(item.CustomerTitleName)+ ","
              +Utility.ReplaceString(item.CustomerFirstName)+ ","
@@ -143,9 +162,29 @@ namespace TheGreatGroupModules.Modules
              + item.CustomerSubDistrictId+ ","
              +  item.CustomerDistrictId+ ","
              +  item.CustomerProvinceId+ ","
-             +  item.CustomerZipCode+ ","
-             +Utility.ReplaceString(  item.CustomerMobile)+ ","
+             + Utility.ReplaceString(item.CustomerZipCode) + ","
+             +Utility.ReplaceString(item.CustomerMobile)+ ","
            + Utility.ReplaceString(item.CustomerEmail) + ","
+           + Utility.ReplaceString(item.CustomerJob) + ","
+            + Utility.ReplaceString(item.CustomerJobYear) + ","
+           + Utility.ReplaceString(item.CustomerSalary) + ","
+           + Utility.ReplaceString(item.CustomerJobAddress) + ","
+           + item.CustomerJobSubDistrictId + ","
+           + item.CustomerJobDistrictId + ","
+           + item.CustomerJobProvinceId + ","
+           + Utility.ReplaceString(item.CustomerJobZipCode) + ","
+            + Utility.ReplaceString(item.CustomerSpouseTitle) + ","
+           + Utility.ReplaceString(item.CustomerSpouseFirstName) + ","
+           + Utility.ReplaceString(item.CustomerSpouseLastName) + ","
+           + Utility.ReplaceString(item.CustomerSpouseNickName) + ","
+           + Utility.ReplaceString(item.CustomerSpouseAddress) + ","
+           + item.CustomerSpouseSubDistrictId + ","
+           + item.CustomerSpouseDistrictId + ","
+           + item.CustomerSpouseProvinceId + ","
+           + Utility.ReplaceString(item.CustomerSpouseZipCode) + ","
+           + Utility.ReplaceString(item.CustomerSpouseMobile) + ","
+           + Utility.ReplaceString(item.CustomerSpouseTelephone) + ","
+           + 1 + ","
            + 1 + ","
            +  0+ ")";
 
