@@ -579,7 +579,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1083,6 +1083,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ClosedAccReport</DataSetName>
+        <Top>0.125in</Top>
         <Left>0.23958in</Left>
         <Height>0.55209in</Height>
         <Width>7.78125in</Width>
@@ -1093,17 +1094,17 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>11.7in</Height>
+    <Height>0.73959in</Height>
     <Style>
       <Border>
         <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>8.36459in</Width>
+  <Width>8.59772in</Width>
   <Page>
     <PageHeader>
-      <Height>1.50917in</Height>
+      <Height>1.38417in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1177,35 +1178,6 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox1">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Left>0.23958in</Left>
-          <Height>0.07292in</Height>
-          <Width>7.78125in</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
         <Image Name="Logo">
           <Source>Embedded</Source>
           <Value>ai_web_logo_part1</Value>
@@ -1214,7 +1186,7 @@
           <Left>0.23958in</Left>
           <Height>0.66667in</Height>
           <Width>0.7448in</Width>
-          <ZIndex>3</ZIndex>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1261,7 +1233,7 @@
           <Left>0.12847in</Left>
           <Height>0.31945in</Height>
           <Width>1.02953in</Width>
-          <ZIndex>4</ZIndex>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1294,7 +1266,7 @@
           <Left>1.73091in</Left>
           <Height>0.31945in</Height>
           <Width>1.54909in</Width>
-          <ZIndex>5</ZIndex>
+          <ZIndex>4</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1329,7 +1301,7 @@
           <Left>6.48959in</Left>
           <Height>0.31945in</Height>
           <Width>1.53125in</Width>
-          <ZIndex>6</ZIndex>
+          <ZIndex>5</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1348,9 +1320,137 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>4.11458in</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <Height>0.90625in</Height>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox65">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Signed</Value>
+                  <Style>
+                    <FontFamily>Angsana New</FontFamily>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox62</rd:DefaultName>
+          <Top>0.77305cm</Top>
+          <Left>13.14975cm</Left>
+          <Height>0.52063cm</Height>
+          <Width>1.4552cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox66">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>ลงชื่อ</Value>
+                  <Style>
+                    <FontFamily>Angsana New</FontFamily>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox62</rd:DefaultName>
+          <Top>0.3175cm</Top>
+          <Left>13.17621cm</Left>
+          <Height>0.49417cm</Height>
+          <Width>1.4552cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox67">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>CASHIER</Value>
+                  <Style>
+                    <FontFamily>Angsana New</FontFamily>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox62</rd:DefaultName>
+          <Top>0.87007cm</Top>
+          <Left>18.6619cm</Left>
+          <Height>0.52063cm</Height>
+          <Width>1.73749cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox68">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>พนักงาน</Value>
+                  <Style>
+                    <FontFamily>Angsana New</FontFamily>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox62</rd:DefaultName>
+          <Top>0.34944cm</Top>
+          <Left>18.6619cm</Left>
+          <Height>0.49417cm</Height>
+          <Width>1.73749cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Textbox>
+        <Line Name="Line1">
+          <Top>1.3907cm</Top>
+          <Left>14.69598cm</Left>
+          <Height>0cm</Height>
+          <Width>3.84531cm</Width>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
@@ -1514,6 +1614,7 @@ AAAFAGS7CDirXCouqbwqsCwRAABAAQDZLQHuqLwq8OJcLumXCAAAoACA7JYA6by2XC5+PJfzqkAAAEAB
 AABQAABktQzYZ/4zWnKVuwJiluTz+e0rRYAyAAAABQBAdoqAqwbj8u3K5PaZ/4xDKmXAy0aVAemZAV4tCACAAgAgQ4XApXFJ522jyoD0zoC9cv/3mIAyAAAABQBABsuA9M6A2XE5slIG7Jv7vzsDPCoAAIACACBDZcCyuHywUgbsnNtyZ8Cz8/n81kMEPSoAAIACACBjZcDKuJydTuUQwWfn/vRRgdGFAAAAKAAAMlAGpIcIPvZRgdGFwOhHBdwdAACgAAAgI4VA+qhAOmdXCoFDKoXA1rMDtpYBHhcAAFAAAJChQuB/7w6YO/8Zu6RFQKUQeHay5XGBfM5hggAACgAAsuO2W65aEZcLK/PYQuCwJJ+fOqoQcIcAAEAG2eAB8LfuEFAIAABsm4/eetOvTqq1fyh3AADwt+4QmJdsOUMgeUwpAABAHVEAAPB4CoHWuMyvlALPSq9JPp9/TCngLgEAAAUAAHVeCAzE5ZrKnFIpBTorpcCjdwmkX1dKgdHFgFIAAEABAECdlwJ3xSWdC7f+2tz5z1hUKQXmKQUAABQAAGS3FNh6l8D/mrvvMxePKgXmP1oKhEoRsLUUyCkGAAAUAADUcylw86+vjsvVjykFuiplwJ65LY8Q7JkkyZ6PKQTcLQAAoAAAoM5LgaVxWVr59pOVUmBipRRIZ49RX0+RGABQZ4ZFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZNj/E2AACMqo6+QyjNMAAAAASUVORK5CYII=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>76e7db3f-03c3-4693-b535-55290defb4a7</rd:ReportID>
 </Report>
