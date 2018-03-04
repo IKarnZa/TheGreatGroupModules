@@ -1284,7 +1284,14 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>ประจำวันที่ 18/02/2018</Value>
+                  <Value>ประจำวันที่  </Value>
+                  <Style>
+                    <FontFamily>Angsana New</FontFamily>
+                    <FontSize>16pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!DateAsOf.Value</Value>
                   <Style>
                     <FontFamily>Angsana New</FontFamily>
                     <FontSize>16pt</FontSize>
@@ -1292,15 +1299,15 @@
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Left</TextAlign>
+                <TextAlign>Right</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox57</rd:DefaultName>
           <Top>1.06472in</Top>
-          <Left>6.48959in</Left>
+          <Left>5.89584in</Left>
           <Height>0.31945in</Height>
-          <Width>1.53125in</Width>
+          <Width>2.125in</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
@@ -1700,6 +1707,14 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="DateAsOf">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <EmbeddedImages>
     <EmbeddedImage Name="web_logo_part1">
       <MIMEType>image/png</MIMEType>

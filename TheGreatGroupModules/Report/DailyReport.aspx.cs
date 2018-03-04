@@ -30,14 +30,17 @@ namespace TheGreatGroupModules.Report
            
             listData = data.GetDailyReceiptsReport(staffID, date);
 
+            var param = new ReportParameter[1];
+            param[0] = new ReportParameter("DateAsOf", date);
+
             string sourceViewReport = @"\Report\DailyReport.rdlc";
             ReportViewer ReportViewer1 = new ReportViewer();
             ReportViewer1.LocalReport.ReportPath = Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~/")) + sourceViewReport;
             ReportDataSource rpt = new ReportDataSource("ClosedAccReport", listData);
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(rpt);
-
-          //  ReportViewer1.LocalReport.SetParameters(param);
+            ReportViewer1.LocalReport.SetParameters(param);
+         
             string fileType = ".pdf";
             Warning[] warnings = null;
             string[] streamIds = null;
@@ -46,7 +49,7 @@ namespace TheGreatGroupModules.Report
             string extension = string.Empty;
             string PDF_FOLDER_FILE = "../PDF/";
             string PDF_FILE_NAME = "DailyReport";
-
+            
             byte[] bytes = ReportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
             string PDF_File = Convert.ToString((Convert.ToString(PDF_FOLDER_FILE + Convert.ToString("/"))

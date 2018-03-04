@@ -246,7 +246,7 @@ function Load_DataGrid(data) {
                         clearFilterButton = e.component;
                     },
                     onClick: function (e) {
-                        window.open('/Report/ReportPage1.aspx?staffID=' + $("#StaffID").val() +
+                        window.open('/Report/DailyReport.aspx?staffID=' + $("#StaffID").val() +
                         "&date=" + $('#DateAsOf').val(), '_blank');
                         //window.location.href = '/Report/ReportPage1.aspx?staffID=' + $("#StaffID").val() +
                         //"&date=" + $('#DateAsOf').val();
