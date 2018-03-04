@@ -165,7 +165,10 @@ namespace TheGreatGroupModules.Modules
         public void PaymentDailyReceipts(DailyReceiptsReport item)
         {
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            if (item.PriceReceipts<=0) {
 
+                throw new Exception("จำนวนเงินต้องมากว่า 0 บาท");
+            }
             try
             {
              
@@ -179,7 +182,7 @@ namespace TheGreatGroupModules.Modules
                    item.CustomerID, item.ContractID
                   );
 
-                decimal interest = item.PriceReceipts* (rate / 100); //ดอกเบี้ย
+                decimal interest = item.PriceReceipts * (rate / 100); //ดอกเบี้ย
                 decimal Priciple = item.PriceReceipts - interest; // เงินต้น
 
 

@@ -102,15 +102,15 @@ namespace TheGreatGroupModules.Controllers
 
             try
             {
-                List<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
+                IList<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
                 ReportData data = new ReportData();
                 listData = data.GetCustomerDetailOnCard(staffId, CustomerID, ContractID);
-
 
 
                 return Json(new
                 {
                     data = listData,
+                    latest_transaction=listData,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -146,7 +146,7 @@ namespace TheGreatGroupModules.Controllers
                 return Json(new
                 {
                     success = false,
-                    errMsg = ex.Message
+                    data = ex.Message
                 }, JsonRequestBehavior.AllowGet);
 
             }

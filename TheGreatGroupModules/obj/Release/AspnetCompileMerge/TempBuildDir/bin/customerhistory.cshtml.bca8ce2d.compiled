@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/ManagePayment/CustomerHistory.cshtml" hash="ffffffffd86d5c2d" filehash="ffffe0ee2ab6a35a" flags="110000" assembly="App_Web_customerhistory.cshtml.bca8ce2d" type="ASP._Page_Views_ManagePayment_CustomerHistory_cshtml">
+    <filedeps>
+        <filedep name="/Views/ManagePayment/CustomerHistory.cshtml" />
+    </filedeps>
+</preserve>

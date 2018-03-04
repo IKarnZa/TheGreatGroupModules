@@ -28,8 +28,8 @@ C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\System.Web.WebPages.xml
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\System.Web.WebPages.Razor.xml
-C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Debug\TheGreatGroupModules.csprojResolveAssemblyReference.cache
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Debug\TheGreatGroupModules.dll
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Debug\TheGreatGroupModules.pdb
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\Excel.dll
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\NPOI.dll
+C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Debug\TheGreatGroupModules.csprojResolveAssemblyReference.cache

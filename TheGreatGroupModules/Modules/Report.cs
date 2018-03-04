@@ -6,6 +6,7 @@ using System.Web;
 
 namespace TheGreatGroupModules.Modules
 {
+    
 
     /*  บันทึกค่างวดรายวัน */
     public class DailyReceiptsReport 
@@ -17,6 +18,7 @@ namespace TheGreatGroupModules.Modules
         public string CustomerName { get; set; }
         public DateTime ContractCreateDate { get; set; }
         public DateTime ContractExpDate  { get; set; }
+       
         public decimal ContractAmountLast { get; set; }
         public decimal ContractAmount { get; set; }
         

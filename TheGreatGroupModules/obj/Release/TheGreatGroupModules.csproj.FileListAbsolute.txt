@@ -31,3 +31,5 @@ C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Release\TheGreatGroupModules.dll
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Release\TheGreatGroupModules.pdb
 C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\obj\Release\TheGreatGroupModules.csprojResolveAssemblyReference.cache
+C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\Excel.dll
+C:\Users\Acer\Documents\Doc_S\Projects\TheGreatGroupModules\TheGreatGroupModules\bin\NPOI.dll

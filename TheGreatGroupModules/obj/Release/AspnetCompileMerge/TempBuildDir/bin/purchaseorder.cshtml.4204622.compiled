@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/Customers/PurchaseOrder.cshtml" hash="ffffffffd86d5c2d" filehash="ffffbbfeda4ec4b9" flags="110000" assembly="App_Web_purchaseorder.cshtml.4204622" type="ASP._Page_Views_Customers_PurchaseOrder_cshtml">
+    <filedeps>
+        <filedep name="/Views/Customers/PurchaseOrder.cshtml" />
+    </filedeps>
+</preserve>

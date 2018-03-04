@@ -61,10 +61,11 @@ $("#gridshow").hide();
             rowAlternationEnabled: true,
             showBorders: true,
         
-       
+            //editing: {
+            //allowUpdating:true},
             searchPanel: {
                 visible: true,
-                width: 240,
+                width: 300,
                 placeholder: "ค้นหา..."
             },
             filterRow: {
@@ -79,14 +80,14 @@ $("#gridshow").hide();
             allowColumnReordering: true,
             allowColumnResizing: true,
             columnAutoWidth: true,
-        
+            height:500,
             columnFixing: {
                 enabled: true
             },
             columns: [{
                 dataField: "CustomerCode",
                 caption: "รหัสลูกค้า",
-                width: 100,
+                width: 140,
                 allowFiltering: false
             }, {
                 dataField: "CustomerName",
@@ -96,31 +97,9 @@ $("#gridshow").hide();
               {
                   dataField: "CustomerAddress1",
                   caption: "ที่อยู่",
-                  width: 240,
+                  width: 500,
                      
               },
-              {
-                  dataField: "CustomerSubDistrict",
-                  caption: "ตำบล",
-                  width: 100,
-              },
-            {
-                dataField: "CustomerSubDistrict",
-                caption: "อำเภอ",
-                width: 100,
-            },
-             
-                {
-                    dataField: "CustomerProvince",
-                    caption: "จังหวัด",
-                    width: 160,
-
-                },
-            {
-                dataField: "CustomerZipCode",
-                caption: "รหัสไปรษณีย์",
-                width: 100,
-            },
              {
                  dataField: "CustomerMobile",
                  caption: "เบอร์ติดต่อ",
@@ -133,18 +112,53 @@ $("#gridshow").hide();
               },
               {
                   dataField: "CustomerID",
-                  caption: "ทำสัญญา",
+                  caption: "",
                   alignment: 'center',
                   allowFiltering: false,
+                  fixed: true,
+                  fixedPosition: 'right',
+                  width: 50,
                   cellTemplate: function (container, options) {
                       console.log(options.key);
                       $("<div>")
-                          .append("<button type='button'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-list-alt'></i></button>")
+                          .append("<a href='\PurchaseOrder' title='แก้ไขข้อมูลลูกค้า' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                          .appendTo(container);
+                  }
+
+              },
+              {
+                  dataField: "CustomerID",
+                  caption: "",
+                  alignment: '',
+                  allowFiltering: false,
+                  width: 50,
+                  fixed: true,
+                  fixedPosition: 'right',
+                  cellTemplate: function (container, options) {
+                      console.log(options.key);
+                      $("<div>")
+                          .append("<a href='\PurchaseOrder'  title='ซื้อสินค้า'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
                           .appendTo(container);
                   }
 
               }
+              ,
+              {
+                  dataField: "CustomerID",
+                  caption: "",
+                  alignment: 'center',
+                  width: 50,
+                  allowFiltering: false,
+                  fixed: true,
+                  fixedPosition: 'right',
+                  cellTemplate: function (container, options) {
+                      console.log(options.key);
+                      $("<div>")
+                          .append("<a href='\CustomerProduct' title='ประวัติการซื้อ'  class='btn btn-warning btn-circle btn-sm' ><i class='fa fa-user'></i></a>")
+                          .appendTo(container);
+                  }
 
+              }
             ],
             onToolbarPreparing: function(e) {
                 e.toolbarOptions.items.push( {
@@ -156,8 +170,51 @@ $("#gridshow").hide();
                         onInitialized: function(e) {
                             clearFilterButton = e.component;
                         },
-                        onClick: function(e) {
-                            DevExpress.ui.notify("Export PDF Successful!");
+                        onClick: function (e) {
+                            var params = {
+
+                                CustomerFirstName: $("#CustomerFirstName").val(),
+                                CustomerLastName: $("#CustomerLastName").val(),
+                                CustomerMobile: $("#CustomerMobile").val(),
+                                CustomerIdCard: $("#CustomerIdCard").val()
+
+                            };
+                            var req = new XMLHttpRequest();
+                            req.open("POST", "../Customers/ExportPDF", true);
+                            req.responseType = "blob";
+                            req.send(params);
+                            req.onload = function (event) {
+                                var blob = req.response;
+                                console.log(blob.size);
+                                var link = document.createElement('a');
+                                link.href = window.URL.createObjectURL(blob);
+                                link.download = "ข้อมูลสมาชิกปัจจุบัน.pdf";
+                                link.click();
+                            };
+
+                            //req.send();
+
+                            //var http = new XMLHttpRequest();
+                            //var url = "../Customers/ExportPDF";
+                         
+                            //http.open("POST", url, true);
+
+                            ////Send the proper header information along with the request
+                            //http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                            //http.onreadystatechange = function () {//Call a function when the state changes.
+                            //    if (http.readyState == 4 && http.status == 200) {
+                            //        alert(http.responseText);
+                            //    }
+                            //}
+                            //http.send(params);
+                            //$.get("../Customers/ExportPDF")
+                            //.done(function (data) {
+
+                            //        DevExpress.ui.notify("Export PDF Successful!");
+                                
+                            //});
+                          
                         }
                     }
                 })
@@ -165,4 +222,48 @@ $("#gridshow").hide();
         });
 
     }
-    
+
+    function AddCustomer() {
+
+        var data = {
+            CustomerTitleName: $('#CustomerTitleName').val(),
+            CustomerFirstName: $('#CustomerFirstName').val(),
+            CustomerLastName: $('#CustomerLastName').val(),
+            CustomerNickName: $('#CustomerNickName').val(),
+            CustomerIdCard: $('#CustomerIdCard').val(),
+            CustomerAddress1: $('#CustomerAddress1').val(),
+            CustomerAddress2: $('#CustomerAddress2').val(),
+            CustomerProvinceId: $('#CustomerProvince').val(),
+            CustomerDistrictId: $('#CustomerDistrict').val(),
+            CustomerSubDistrictId: $('#CustomerSubDistrict').val(),
+            CustomerZipCode: $('#CustomerZipCode').val(),
+            CustomerMobile: $('#CustomerMobile').val(),
+            CustomerEmail: $('#CustomerEmail').val(),
+        }
+
+        $("#loadIndicator").dxLoadIndicator({
+            visible: true
+        });
+
+        $.post("../Customers/AddCustomers", data)
+    .done(function (data) {
+       
+        if (data.success == true) {
+
+            DevExpress.ui.notify(" เพิ่มลูกค้าเรียบร้อยแล้ว ");
+            $("#loadIndicator").dxLoadIndicator({
+                visible: false
+            });
+
+        } else {
+
+            $("#loadIndicator").dxLoadIndicator({
+                visible: false
+            });
+
+            DevExpress.ui.notify(data.errMsg);
+        }
+
+
+    });
+    }
