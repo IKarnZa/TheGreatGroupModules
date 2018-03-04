@@ -1,43 +1,33 @@
 ﻿using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TheGreatGroupModules.Models;
 using TheGreatGroupModules.Modules;
 
 namespace TheGreatGroupModules.Report
 {
-    public partial class ReportPage1 : System.Web.UI.Page
+    public partial class ContractReport : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-             int staffID = Convert.ToInt32((Request.Params["staffID"]==null ? Request.Params["staffID"] :"0"));
-             string date= Request.Params["date"];
-              if (Request.Params["date"] == null)
-                date = "04/03/2018";
-
-
             IList<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
             ReportData data = new ReportData();
-          
-          
-             staffID = Convert.ToInt32(Request.Params["staffID"].ToString());
-           
+            int staffID = 1;
+            string date = "04/03/2018";
             listData = data.GetDailyReceiptsReport(staffID, date);
 
-            string sourceViewReport = @"\Report\Report1.rdlc";
+            string sourceViewReport = @"\Report\ContractBookReport.rdlc";
             ReportViewer ReportViewer1 = new ReportViewer();
             ReportViewer1.LocalReport.ReportPath = Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~/")) + sourceViewReport;
             ReportDataSource rpt = new ReportDataSource("ClosedAccReport", listData);
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(rpt);
 
-          //  ReportViewer1.LocalReport.SetParameters(param);
+            //  ReportViewer1.LocalReport.SetParameters(param);
             string fileType = ".pdf";
             Warning[] warnings = null;
             string[] streamIds = null;
@@ -45,12 +35,12 @@ namespace TheGreatGroupModules.Report
             string encoding = string.Empty;
             string extension = string.Empty;
             string PDF_FOLDER_FILE = "../PDF/";
-            string PDF_FILE_NAME = "DailyReport";
+            string PDF_FILE_NAME = "FULLTax";
 
             byte[] bytes = ReportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
             string PDF_File = Convert.ToString((Convert.ToString(PDF_FOLDER_FILE + Convert.ToString("/"))
-                + PDF_FILE_NAME) +  "_" ) + fileType;
+                + PDF_FILE_NAME) + "_") + fileType;
 
             //########################### Check Folder ######################################
 
