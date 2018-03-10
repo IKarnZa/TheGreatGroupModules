@@ -33,7 +33,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>อยู่บ้านเลขที่................................................................................................................................................................................................................................</Value>
+                <Value>อยู่บ้านเลขที่..............................................................................................................................................................................................................................</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -45,7 +45,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>บัตรประจำตัวประชาชน/บัตรข้าราชการเลขที่.............................................................ซึ่งต่อไปนี้สัญญาฉบับนี้เรียกว่า "ผู้ซื้อ" ฝ่ายหนึ่ง ทั้งสองฝ่ายได้ตกลง</Value>
+                <Value>บัตรประจำตัวประชาชน/บัตรข้าราชการ เลขที่............................................................ซึ่งต่อไปนี้สัญญาฉบับนี้เรียกว่า "ผู้ซื้อ" ฝ่ายหนึ่ง ทั้งสองฝ่ายได้ตกลง</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -91,17 +91,21 @@
               <TextRun>
                 <Value>นางพิมพิศา เทศยา</Value>
                 <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.47037in</Top>
+        <Top>2.43375in</Top>
         <Left>3.03183in</Left>
-        <Height>0.30702in</Height>
+        <Height>0.33827in</Height>
         <Width>4.87568in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -132,7 +136,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.60378in</Top>
+        <Top>3.58989in</Top>
         <Left>0.39458in</Left>
         <Height>0.35069in</Height>
         <Width>7.78014in</Width>
@@ -154,7 +158,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>ทองรูปพรรณ 2 สลึง (7.6 กรัม) จำนวน 1 รายการ0</Value>
+                <Value>ทองรูปพรรณ 2 สลึง (7.6 กรัม) จำนวน 1 รายการ</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -166,9 +170,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.90933in</Top>
+        <Top>3.85004in</Top>
         <Left>0.70708in</Left>
-        <Height>0.46777in</Height>
+        <Height>1.02243in</Height>
         <Width>7.46764in</Width>
         <ZIndex>3</ZIndex>
         <Style>
@@ -248,7 +252,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>        ข้อ 4. หากผู้ซื้อผิดนัดชำระหนี้เป็นรายวันตามสัญญา ข้อ 2. แม้แต่งวดหนึ่งให้ถือว่าผิดนัดหมดทุกงวด และให้ผู้ขายมีสิทธิเข้ายึดทรัพย์สินที่ได้ซื้อไปคืน บรรดาเงินที่ผู้ซื้อได้ส่งชำระให้แก่ผู้ขายไปก่อนแล้วให้ตกเป็นของผู้ขาย และผู้ซื้อยังต้องรับผิดชอบในเงินที่ผู้ขายต้องเสียไปในการซ่อมแซมทรัพย์สินที่ขายให้มีสภาพดีเช่นเดิม เว้นแต่ผู้ซื้อจะเจ็บป่วยจนไม่สามารถมาทำงานได้นานเกิน 5 วันขึ้นไป โดยมีใบรับรองแพทย์ของโรงพยาบาลราชการมาแสดง จะไม่นับระยะเวลาที่เจ็บป่วย มารวมเข้ากับระยะเวลาที่ผิดนัด</Value>
+                <Value>        ข้อ 4. หากผู้ซื้อผิดนัดชำระหนี้เป็นรายวันตามสัญญา ข้อ (2.) แม้แต่งวดหนึ่งให้ถือว่าผิดนัดหมดทุกงวด และให้ผู้ขายมีสิทธิเข้ายึดทรัพย์สินที่ได้ซื้อไปคืน บรรดาเงินที่ผู้ซื้อได้ส่งชำระให้แก่ผู้ขายไปก่อนแล้วให้ตกเป็นของผู้ขาย และผู้ซื้อยังต้องรับผิดชอบในเงินที่ผู้ขายต้องเสียไปในการซ่อมแซมทรัพย์สินที่ขายให้มีสภาพดีเช่นเดิม เว้นแต่ผู้ซื้อจะเจ็บป่วยจนไม่สามารถมาทำงานได้นานเกิน 5 วันขึ้นไป โดยมีใบรับรองแพทย์ของโรงพยาบาลราชการมาแสดง จะไม่นับระยะเวลาที่เจ็บป่วย มารวมเข้ากับระยะเวลาที่ผิดนัด</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -296,9 +300,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.58507in</Top>
+        <Top>4.71007in</Top>
         <Left>0.21638in</Left>
-        <Height>6.33507in</Height>
+        <Height>6.00654in</Height>
         <Width>7.83971in</Width>
         <ZIndex>4</ZIndex>
         <Style>
@@ -334,7 +338,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>0.375in</Top>
-        <Height>0.36111in</Height>
+        <Height>0.50825in</Height>
         <Width>8.1916in</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -351,10 +355,10 @@
         <Source>Embedded</Source>
         <Value>ai_web_logo_part1</Value>
         <Sizing>Fit</Sizing>
-        <Top>0.375in</Top>
-        <Left>0.22569in</Left>
-        <Height>0.72917in</Height>
-        <Width>0.81772in</Width>
+        <Top>0.36111in</Top>
+        <Left>0.35069in</Left>
+        <Height>0.8073in</Height>
+        <Width>0.8646in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -372,7 +376,7 @@
                 <Value>บริษัท เดอะเกรท กรุ๊ป จำกัด</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -387,7 +391,7 @@
                 <Value>The Great Group Co.,Ltd.</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
-                  <FontSize>7pt</FontSize>
+                  <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -399,9 +403,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox55</rd:DefaultName>
         <Top>1.11806in</Top>
-        <Left>0.11458in</Left>
-        <Height>0.36806in</Height>
-        <Width>1.10245in</Width>
+        <Left>0.10417in</Left>
+        <Height>0.41494in</Height>
+        <Width>1.35765in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -482,9 +486,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox57</rd:DefaultName>
-        <Top>1.14888in</Top>
+        <Top>1.2027in</Top>
         <Left>5.47175in</Left>
-        <Height>0.59202in</Height>
+        <Height>0.53819in</Height>
         <Width>2.71985in</Width>
         <ZIndex>9</ZIndex>
         <Style>
@@ -758,6 +762,8 @@
               <TextRun>
                 <Value>940/23 ถนนเศรษฐกิจ 1 ตำบลมหาชัย อำเภอเมืองสมุทรสาคร จังหวัดสมุทรสาคร</Value>
                 <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -766,7 +772,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox18</rd:DefaultName>
-        <Top>2.72531in</Top>
+        <Top>2.69903in</Top>
         <Left>1.05083in</Left>
         <Height>0.30208in</Height>
         <Width>6.85668in</Width>
@@ -790,6 +796,8 @@
               <TextRun>
                 <Value>1-7499-00759-86-1</Value>
                 <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -800,9 +808,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox19</rd:DefaultName>
-        <Top>3.01in</Top>
+        <Top>2.96in</Top>
         <Left>2.54042in</Left>
-        <Height>0.2183in</Height>
+        <Height>0.27439in</Height>
         <Width>1.86458in</Width>
         <ZIndex>20</ZIndex>
         <Style>
@@ -822,7 +830,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>        ข้อ 8. ในการติดต่อ ส่งเอกสาร บันทึกข้อตกลง หนังสือ หนังสือเตือน หนังสือบอกเลิกสัญญา หรือเอกสาร หรือหนังสืออื่นๆ ผู้ซื้อตกลงให้ผู้ขายติดต่อ ส่งเอกสาร บันทึกข้อความ หนังสือ หนังสือเตือน หนังสือบอกเลิกสัญญา หรือตามทะเบียนราษฎร หรือสถานที่อื่นใดตามที่ตกลงกับผู้ขายเป็นลายลักษณ์อักษร ตามแต่ผู้ขายจะเลือก และให้ถือว่าการส่งเช่นนั้น เป็นการส่งโดยชอบและผู้ซื้อรับทราบแล้ว ไม่ว่าผู้ซื้อจะได้รับด้วยตนเองหรือไม่ก็ตาม โดยผู้ซื้อจะไม่ยกเหตุแห่งการไม่ได้รับด้วยตนเองมาเป็นประโยชน์ใดๆ ทั้งสิ้น หากมีการเปลี่ยนแปลงที่อยู่หรือสถานที่ติดต่อ สถานที่ส่งเอกสารหรือหนังสือดังกล่าวข้างต้น จะต้องแจ้งเป็นหนังสือของผู้ขาย ทราบภายใน 7 วัน นับตั้งแต่วันเปลี่ยนแปลง</Value>
+                <Value>        ข้อ 8. ในการติดต่อ ส่งเอกสาร บันทึกข้อตกลง หนังสือ หนังสือเตือน หนังสือบอกเลิกสัญญา หรือเอกสาร หรือหนังสืออื่นๆ ผู้ซื้อตกลงให้ผู้ขายติดต่อ ส่งเอกสาร บันทึกข้อความ หนังสือ หนังสือเตือน หนังสือบอกเลิกสัญญา หรือตามทะเบียนราษฎร์ หรือสถานที่อื่นใดตามที่ตกลงกับผู้ขายเป็นลายลักษณ์อักษร ตามแต่ผู้ขายจะเลือก และให้ถือว่าการส่งเช่นนั้น เป็นการส่งโดยชอบและผู้ซื้อรับทราบแล้ว ไม่ว่าผู้ซื้อจะได้รับด้วยตนเองหรือไม่ก็ตาม โดยผู้ซื้อจะไม่ยกเหตุแห่งการไม่ได้รับด้วยตนเองมาเป็นประโยชน์ใดๆ ทั้งสิ้น หากมีการเปลี่ยนแปลงที่อยู่หรือสถานที่ติดต่อ สถานที่ส่งเอกสารหรือหนังสือดังกล่าวข้างต้น จะต้องแจ้งเป็นหนังสือของผู้ขาย ทราบภายใน 7 วัน นับตั้งแต่วันเปลี่ยนแปลง</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -953,9 +961,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>12.21648in</Top>
+        <Top>11.71648in</Top>
         <Left>0.22569in</Left>
-        <Height>7.30052in</Height>
+        <Height>6.84379in</Height>
         <Width>7.83971in</Width>
         <ZIndex>21</ZIndex>
         <Style>
@@ -988,8 +996,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>52.09849cm</Top>
-        <Left>1.5875cm</Left>
+        <Top>49.55849cm</Top>
+        <Left>2.54cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>22</ZIndex>
@@ -1019,8 +1027,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>52.80777cm</Top>
-        <Left>1.5875cm</Left>
+        <Top>50.26777cm</Top>
+        <Left>2.54cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>23</ZIndex>
@@ -1050,8 +1058,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>53.97566cm</Top>
-        <Left>1.59814cm</Left>
+        <Top>51.43566cm</Top>
+        <Left>2.55064cm</Left>
         <Height>0.70928cm</Height>
         <Width>8.3537cm</Width>
         <ZIndex>24</ZIndex>
@@ -1072,6 +1080,7 @@
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1081,8 +1090,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>54.68494cm</Top>
-        <Left>1.59814cm</Left>
+        <Top>52.14494cm</Top>
+        <Left>2.55064cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>25</ZIndex>
@@ -1112,8 +1121,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>55.88066cm</Top>
-        <Left>1.59814cm</Left>
+        <Top>53.34066cm</Top>
+        <Left>2.55064cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>26</ZIndex>
@@ -1143,8 +1152,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>56.58994cm</Top>
-        <Left>1.59814cm</Left>
+        <Top>54.04994cm</Top>
+        <Left>2.55064cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>27</ZIndex>
@@ -1174,8 +1183,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>52.0985cm</Top>
-        <Left>10.49346cm</Left>
+        <Top>49.5585cm</Top>
+        <Left>11.44596cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>28</ZIndex>
@@ -1205,8 +1214,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>52.79454cm</Top>
-        <Left>10.49346cm</Left>
+        <Top>50.25454cm</Top>
+        <Left>11.44596cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>29</ZIndex>
@@ -1236,8 +1245,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>53.97567cm</Top>
-        <Left>10.5041cm</Left>
+        <Top>53.34067cm</Top>
+        <Left>11.4566cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>30</ZIndex>
@@ -1267,8 +1276,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>54.68494cm</Top>
-        <Left>10.5041cm</Left>
+        <Top>54.04994cm</Top>
+        <Left>11.4566cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>31</ZIndex>
@@ -1298,8 +1307,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>55.88067cm</Top>
-        <Left>10.5041cm</Left>
+        <Top>55.24567cm</Top>
+        <Left>6.3766cm</Left>
         <Height>1.48911cm</Height>
         <Width>10.2597cm</Width>
         <ZIndex>32</ZIndex>
@@ -1329,8 +1338,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>56.60317cm</Top>
-        <Left>10.5041cm</Left>
+        <Top>55.96817cm</Top>
+        <Left>6.3766cm</Left>
         <Height>0.70928cm</Height>
         <Width>7.49327cm</Width>
         <ZIndex>33</ZIndex>
@@ -1347,7 +1356,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>ลงชื่อ......................................................................ผู้ขายหรือผู้รับมอบอำนาจจากผู้ขาย</Value>
+                <Value>ลงชื่อ......................................................................ผู้ขาย หรือผู้รับมอบอำนาจจากผู้ขาย</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -1360,8 +1369,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>49.84816cm</Top>
-        <Left>5.40814cm</Left>
+        <Top>47.62566cm</Top>
+        <Left>5.72564cm</Left>
         <Height>0.70928cm</Height>
         <Width>11.82629cm</Width>
         <ZIndex>34</ZIndex>
@@ -1391,8 +1400,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox62</rd:DefaultName>
-        <Top>50.62799cm</Top>
-        <Left>5.40814cm</Left>
+        <Top>48.40549cm</Top>
+        <Left>5.72564cm</Left>
         <Height>0.70928cm</Height>
         <Width>10.92671cm</Width>
         <ZIndex>35</ZIndex>
@@ -1423,7 +1432,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>4.547in</Top>
+        <Top>4.67895in</Top>
         <Left>2.64459in</Left>
         <Height>0.33644in</Height>
         <Width>0.38889in</Width>
@@ -1459,7 +1468,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>4.555in</Top>
+        <Top>4.681in</Top>
         <Left>4.01396in</Left>
         <Height>0.33644in</Height>
         <Width>0.69097in</Width>
@@ -1495,47 +1504,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>5.09536in</Top>
+        <Top>5.2105in</Top>
         <Left>5.67266in</Left>
         <Height>0.33644in</Height>
         <Width>0.69097in</Width>
         <ZIndex>38</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox56">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>28 กุมภาพันธ์ 2561</Value>
-                <Style>
-                  <FontFamily>Angsana New</FontFamily>
-                  <FontSize>14pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>5.36in</Top>
-        <Left>0.7848in</Left>
-        <Height>0.40936in</Height>
-        <Width>1.59722in</Width>
-        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1567,9 +1540,45 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>5.63182in</Top>
+        <Top>5.73078in</Top>
         <Left>5.93063in</Left>
-        <Height>0.33644in</Height>
+        <Height>0.36248in</Height>
+        <Width>1.59722in</Width>
+        <ZIndex>39</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox59">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>28 กุมภาพันธ์ 2561</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox52</rd:DefaultName>
+        <Top>5.47188in</Top>
+        <Left>0.80604in</Left>
+        <Height>0.40936in</Height>
         <Width>1.59722in</Width>
         <ZIndex>40</ZIndex>
         <Style>
@@ -1582,11 +1591,1573 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox12">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>( หน้า 2 )</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox12</rd:DefaultName>
+        <Top>11.33373in</Top>
+        <Height>0.31331in</Height>
+        <Width>8.17472in</Width>
+        <ZIndex>41</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox8">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>หนังสือสัญญาค้ำประกัน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>22pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <ListLevel>1</ListLevel>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Top>23.3532in</Top>
+        <Left>0.00844in</Left>
+        <Height>0.50825in</Height>
+        <Width>8.1916in</Width>
+        <ZIndex>42</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox64">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ทำที่ บริษัท เดอะเกรท กรุ๊ป จำกัด</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox57</rd:DefaultName>
+        <Top>24.01363in</Top>
+        <Left>5.45202in</Left>
+        <Height>0.31945in</Height>
+        <Width>2.70297in</Width>
+        <ZIndex>43</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox65">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>เลขที่ 555/171 หมู่ที่ 1 ตำบลบางแก้ว</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>อำเภอเมืองสมุทรสงคราม จังหวัดสมุทรสงคราม</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox57</rd:DefaultName>
+        <Top>24.33308in</Top>
+        <Left>5.45202in</Left>
+        <Height>0.53819in</Height>
+        <Width>2.71985in</Width>
+        <ZIndex>44</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox66">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>วันที่</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox57</rd:DefaultName>
+        <Top>24.89905in</Top>
+        <Left>5.2866in</Left>
+        <Height>0.27778in</Height>
+        <Width>0.30556in</Width>
+        <ZIndex>45</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox67">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>เดือน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox57</rd:DefaultName>
+        <Top>24.89905in</Top>
+        <Left>5.98674in</Left>
+        <Height>0.27778in</Height>
+        <Width>0.35716in</Width>
+        <ZIndex>46</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox68">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>พ.ศ.</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox57</rd:DefaultName>
+        <Top>24.89905in</Top>
+        <Left>7.23626in</Left>
+        <Height>0.27778in</Height>
+        <Width>0.3125in</Width>
+        <ZIndex>47</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Line Name="Line6">
+        <Top>25.12909in</Top>
+        <Left>5.58049in</Left>
+        <Height>0in</Height>
+        <Width>0.40625in</Width>
+        <ZIndex>48</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>0.5pt</Width>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line7">
+        <Top>25.12909in</Top>
+        <Left>6.31091in</Left>
+        <Height>0in</Height>
+        <Width>0.92708in</Width>
+        <ZIndex>49</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>0.5pt</Width>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line8">
+        <Top>25.12909in</Top>
+        <Left>7.51924in</Left>
+        <Height>0in</Height>
+        <Width>0.51713in</Width>
+        <ZIndex>50</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>0.5pt</Width>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox51">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>28</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox48</rd:DefaultName>
+        <Top>24.89905in</Top>
+        <Left>5.59216in</Left>
+        <Height>0.27778in</Height>
+        <Width>0.39458in</Width>
+        <ZIndex>51</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox56">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>กุมภาพันธ์</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox48</rd:DefaultName>
+        <Top>24.89905in</Top>
+        <Left>6.3439in</Left>
+        <Height>0.32378in</Height>
+        <Width>0.87846in</Width>
+        <ZIndex>52</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox69">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>2561</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox48</rd:DefaultName>
+        <Top>24.89905in</Top>
+        <Left>7.51924in</Left>
+        <Height>0.27778in</Height>
+        <Width>0.51713in</Width>
+        <ZIndex>53</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox9">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>      ทั้งสองฝ่ายได้ตกลงทำสัญญากัน โดยมีรายละเอียดดังต่อไปนี้
+      ข้อ 1. หากผู้ซื้อผิดสัญญาไม่ว่าข้อใดข้อหนึ่งตามหนังสือสัญญาซื้อขาย ฉบับลงวันที่...............................................ผู้ค้ำประกันจะรับผิดชอบ ชดใช้หนี้ที่ผู้ซื้อต้องรับผิดชอบต่อผู้ขายเต็มจำนวนตามสัญญา โดยผู้ค้ำประกันจะรับผิดชอบชำระราคาตามสัญญาซื้อขายอย่างลูกหนี้ร่วม ร่วมกับผู้ซื้อทันที</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>      ข้อ 2. หากผู้ขายผ่อนเวลาการชำระหนี้ให้แก่ผู้ซื้อ ให้ถือว่าผู้ค้ำประกันได้ให้ความตกลงยินยอมในการผ่อนระยะเวลาให้แก่ผู้ซื้อด้วย และผู้ค้ำประกันยังคงมีความรับผิดตามหนังสือสัญญาค้ำประกันในข้อ (1.) เต็มทุกประการ</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>     ข้อ 3. ผู้ค้ำประกันสัญญาว่าจะไม่ยกข้อต่อสู้ตามประมวลกฎหมายแพ่งและพาณิชย์ มาตรา 694 ซึ่งผู้ซื้อในฐานะลูกหนี้มีต่อผู้ขายขึ้นต่อสู้ผู้ขาย และในกรณีที่ผู้ซื้อถึงแก่ความตายแม้หนี้นั้น จะขาดอายุความตามหฎหมายแพ่งและพาณิชย์ มาตรา 1754 ผู้ค้ำประกันยอมรับผิดในหนี้ตามตลอดไป โดยจะไม่ยกอายุความดังกล่าวนี้ เพื่อปฏิเสธความรับผิด</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>     หนังสือสัญญาค้ำประกันนี้ได้ทำเป็นสองฉบับ มีข้อความถูกต้องตรงกัน ผู้ค้ำประกันได้อ่านข้อความในหนังสือค้ำประกันแล้ว จึงลงลายมือชื่อไว้ต่อหน้าพยาน และได้รับหนังสือค้ำประกันไว้เป็นหลักฐานหนึ่งฉบับ</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>27.21625in</Top>
+        <Left>0.12972in</Left>
+        <Height>3.12994in</Height>
+        <Width>7.89437in</Width>
+        <ZIndex>54</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>      โดยหนังสือฉบับนี้ ข้าพเจ้า ................................................................................................................................................................................................</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>อยู่บ้านเลขที่..............................................................................................................................................................................................................................</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>บัตรประจำตัวประชาชน/บัตรข้าราชการ เลขที่............................................................ซึ่งต่อไปนี้สัญญาฉบับนี้เรียกว่า "ผู้ค้ำประกัน" ฝ่ายหนึ่งขอทำสัญญา
+ค้ำประกัน ฉบับนี้ ไว้ให้แก่ บริษัท เดอะเกรท กรุ๊ป จำกัด อยู่บ้านเลขที่ 555/171 หมู่ที่ 1 ตำบลบางแก้ว อำเภอเมืองสมุทรสงคราม จังหวัดสมุทรสงคราม ซึ่งต่อไปในสัญญาฉบับนี้เรียกว่า "ผู้ขาย" ฝ่ายหนึ่ง เพื่อประกันการชำระหนี้ของผู้ซื้อตามสัญญาซื้อขายแบบผ่อนรายวัน ฉบับลงวันที่......................................
+ระหว่างบริษัท เดอะเกรท กรุ๊ป จำกัด ผู้ขาย กับ....................................................................................ผู้ซื้อ</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>25.45275in</Top>
+        <Left>0.12972in</Left>
+        <Height>1.76648in</Height>
+        <Width>7.89437in</Width>
+        <ZIndex>55</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox11">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพุด นวลดี</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>25.43in</Top>
+        <Left>1.81086in</Left>
+        <Height>0.32427in</Height>
+        <Width>5.90143in</Width>
+        <ZIndex>56</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox20">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>940/24 ถนนเศรษฐกิจ 1 ตำบลมหาชัย อำเภอเมืองสมุทรสาคร จังหวัดสมุทรสาคร</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox18</rd:DefaultName>
+        <Top>25.69in</Top>
+        <Left>0.82986in</Left>
+        <Height>0.30208in</Height>
+        <Width>6.85668in</Width>
+        <ZIndex>57</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox21">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>3-3204-00015-47-3</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox19</rd:DefaultName>
+        <Top>25.95in</Top>
+        <Left>2.44445in</Left>
+        <Height>0.29041in</Height>
+        <Width>1.86458in</Width>
+        <ZIndex>58</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox89">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>28 กุมภาพันธ์ 2561</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox52</rd:DefaultName>
+        <Top>26.44825in</Top>
+        <Left>6.64592in</Left>
+        <Height>0.48147in</Height>
+        <Width>1.26159in</Width>
+        <ZIndex>59</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox37">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพุด นวลดี</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox37</rd:DefaultName>
+        <Top>20.48in</Top>
+        <Left>1.18104in</Left>
+        <Height>0.27924in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>60</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox90">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................ผู้ค้ำประกัน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>51.4259cm</Top>
+        <Left>11.41602cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>8.3537cm</Width>
+        <ZIndex>61</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox91">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>52.13518cm</Top>
+        <Left>11.41602cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>62</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox13">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพิมพิศา เทศยา</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>19.74in</Top>
+        <Left>1.18104in</Left>
+        <Height>0.27413in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>63</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox92">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>28 กุมภาพันธ์ 2561</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox52</rd:DefaultName>
+        <Top>27.458in</Top>
+        <Left>4.65576in</Left>
+        <Height>0.36128in</Height>
+        <Width>1.46632in</Width>
+        <ZIndex>64</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox45">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพิมพิศา เทศยา</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox45</rd:DefaultName>
+        <Top>26.7048in</Top>
+        <Left>2.475in</Left>
+        <Height>0.51442in</Height>
+        <Width>2.61058in</Width>
+        <ZIndex>65</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox14">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพรพิศา เทศยา</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>19.735in</Top>
+        <Left>4.68706in</Left>
+        <Height>0.27413in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>66</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox38">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพุด นวลดี2</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox37</rd:DefaultName>
+        <Top>20.475in</Top>
+        <Left>4.6502in</Left>
+        <Height>0.27924in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>67</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Image Name="Logo2">
+        <Source>Embedded</Source>
+        <Value>ai_web_logo_part1</Value>
+        <Sizing>Fit</Sizing>
+        <Top>23.3532in</Top>
+        <Left>0.39458in</Left>
+        <Height>0.8073in</Height>
+        <Width>0.8646in</Width>
+        <ZIndex>68</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Textbox Name="Textbox84">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>บริษัท เดอะเกรท กรุ๊ป จำกัด</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>The Great Group Co.,Ltd.</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox55</rd:DefaultName>
+        <Top>24.1605in</Top>
+        <Left>0.14806in</Left>
+        <Height>0.41494in</Height>
+        <Width>1.35765in</Width>
+        <ZIndex>69</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox85">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................ผู้ซื้อ</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>81.4222cm</Top>
+        <Left>11.36195cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>70</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox86">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>82.13148cm</Top>
+        <Left>11.36195cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>71</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox87">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................ผู้ค้ำประกัน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>79.48937cm</Top>
+        <Left>2.48259cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>8.3537cm</Width>
+        <ZIndex>72</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox88">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>80.19865cm</Top>
+        <Left>2.48259cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>73</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox93">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................พยาน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>81.39437cm</Top>
+        <Left>2.48259cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>74</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox94">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>82.10365cm</Top>
+        <Left>2.48259cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>75</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox97">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................พยาน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>83.29938cm</Top>
+        <Left>2.49855cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>76</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox98">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>84.00865cm</Top>
+        <Left>2.49855cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>77</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox39">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพุด นวลดี</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox37</rd:DefaultName>
+        <Top>31.52477in</Top>
+        <Left>1.15425in</Left>
+        <Height>0.27924in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>78</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox103">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................ผู้ค้ำประกัน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>79.47961cm</Top>
+        <Left>11.34797cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>8.3537cm</Width>
+        <ZIndex>79</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox104">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>80.18889cm</Top>
+        <Left>11.34797cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>80</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox15">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพิมพิศา เทศยา</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>32.28677in</Top>
+        <Left>4.65425in</Left>
+        <Height>0.27413in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>81</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox40">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นางพุด นวลดี2</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox37</rd:DefaultName>
+        <Top>31.51477in</Top>
+        <Left>4.62341in</Left>
+        <Height>0.27924in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>82</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox99">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>ลงชื่อ.................................................................พยาน</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>83.29938cm</Top>
+        <Left>11.34797cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>83</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox100">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>   (.........................................................................)</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox62</rd:DefaultName>
+        <Top>84.00865cm</Top>
+        <Left>11.34797cm</Left>
+        <Height>0.70928cm</Height>
+        <Width>7.49327cm</Width>
+        <ZIndex>84</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox41">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>นายสุนธร เทศยา</Value>
+                <Style>
+                  <FontFamily>Angsana New</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox37</rd:DefaultName>
+        <Top>21.985in</Top>
+        <Left>2.62617in</Left>
+        <Height>0.27924in</Height>
+        <Width>2.22744in</Width>
+        <ZIndex>85</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>23.27717in</Height>
+    <Height>33.70822in</Height>
     <Style />
   </Body>
-  <Width>8.20848in</Width>
+  <Width>8.22977in</Width>
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
