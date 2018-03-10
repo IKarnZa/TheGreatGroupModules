@@ -1598,7 +1598,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>( หน้า 2 )</Value>
+                <Value>- หน้า 2 -</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
