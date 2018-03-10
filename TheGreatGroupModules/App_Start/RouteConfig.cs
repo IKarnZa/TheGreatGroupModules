@@ -13,6 +13,11 @@ namespace TheGreatGroupModules
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // This informs MVC Routing Engine to send any requests for .aspx page to the WebForms engine
+            routes.IgnoreRoute("{resource}.aspx/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.aspx");
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

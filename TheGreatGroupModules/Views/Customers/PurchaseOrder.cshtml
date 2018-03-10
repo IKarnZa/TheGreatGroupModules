@@ -27,11 +27,8 @@
                 <div class="col-md-12">
                     <div class="pull-left">
                         <address>
-                            <h4> &nbsp;<b>ชื่อลูกค้า : นางวิไล สุดงาม</b></h4>
-                            <p class="text-muted m-l-5">
-                                สำนักงาน : 555/171 หมู่ที่ 1 ตำบลบางแก้ว อำเภอเมืองสมุทรสงคราม จังหวัดสมุทรสงคราม
-                                <br /> เลขผู้เสียภาษีอากร : 0 7555 6000 0349
-                            </p>
+                            <div id="customerName"></div>
+                            <div id="customerAddress"></div>
                         </address>
                     </div>
                     <div class="pull-right text-right">
@@ -47,83 +44,49 @@
                 <div class="col-md-12">
                     <br>
                     <div class="clearfix"></div>
-                    <form class="form-horizontal">
+                   
                         <div class="row">
                             
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-4 control-label">เลือกสินค้า</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control select2" id="CustomerProvince">
-                                            <option>เลือก</option>
-                                        </select>
+                                <div class="dx-fieldset">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label text-right">เพิ่มสินค้า : </div>
+                                        <div class="dx-field-value"><div class="lookup" id="product_name"></div></div>
                                     </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="dx-fieldset">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label text-right">จำนวน : </div>
+                                        <div class="dx-field-value" id="product_amount"></div>
+                                    </div>
+                                </div>
 
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label"> จำนวน </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="CustomerMobile" placeholder="" value="20">
+                            <div class="col-md-2">
+
+                                <div class="dx-fieldset">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label"></div>
+                                        <div class="dx-field-value" ><button class="btn btn-success btn-sm" onclick="AddProduct()"> <i class="fa fa-plus"></i> เพิ่มสินค้า </button></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-success" type="submit"> <i class="fa fa-plus"></i> เพิ่มสินค้า </button>
-                            </div>
                         </div>
-                    </form>
+                
 </div>
             </div>
           
             <div class="row">
                 <div class="col-md-12">
-                    <div class="table-responsive m-t-40" style="clear: both;">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>รายการสินค้า</th>
-                                    <th class="text-right">จำนวน(หน่วย)</th>
-                                    <th class="text-right">ราคาต่อหน่วย</th>
-                                    <th class="text-right">จำนวนเงิน</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>ทองรูปพรรณ น้ำหนัก 2 สลึง (7.6 กรัม)</td>
-                                    <td class="text-right"><input type="text" class="form-control text-right" id="CustomerMobile" width="100" placeholder="" value="1"> </td>
-                                    <td class="text-right"> 12,704.00 </td>
-                                    <td class="text-right"> 12,704.00 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center"></td>
-                                    <td>ค่ากำเหน็จ</td>
-                                    <td class="text-right"></td>
-                                    <td class="text-right"> 800.00 </td>
-                                    <td class="text-right"> 800.00 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center" colspan="3"></td>
-                                    <td class="text-right">รวมเงิน </td>
-                                    <td class="text-right"> 13504.00 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center" colspan="3"></td>
-                                    <td class="text-right">ภาษีมูลค่าเพิ่ม (7%) </td>
-                                    <td class="text-right"> 264.85 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center" colspan="3"></td>
-                                    <td class="text-right">รวมเงินทั้งสิ้น </td>
-                                    <td class="text-right"> 13,768.85 </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                    <div id="gridData">
                     </div>
-                </div>
+
+                        
+                    </div>
 
             </div>
 
@@ -148,7 +111,167 @@
 <script>
     $(function () {
         $(".select2").select2();
+        var products = [];
+        LoadDataGrid(products);
+        var CustomerID = getUrlParameter('CustomerID');
+      
 
-    })
+        $.get("../Customers/GetDataPurchaseData/" + CustomerID)
+ .done(function (result) {
+     console.log(result)
+     var response = result.data[0];
+     if (result.success == true) {
+         $("#customerName").html(' <h4> &nbsp;<b>ชื่อลูกค้า : </b>' + response.CustomerName + '</h4>');
+         $("#customerAddress").html('  <p class="text-muted m-l-5">ที่อยู่ : '+response.CustomerAddress1+'</p>');
+         $("#product_name").dxLookup({
+             dataSource: result.dataProduct,
+             displayExpr: 'ProductDetail',
+             valueExpr: 'ProductID',
+             title: 'เลือกสินค้า',
+             placeholder: 'เลือกสินค้า',
+             cancelButtonText: "ยกเลิก",
+             seachPlaceholder:'เลือกสินค้า',
+         });
+
+     } else {
+
+     }
+
+ });
+        $("#product_amount").dxTextBox({
+            placeholder: 'ใส่จำนวน',
+            value:1
+        });
+
+    });
+    var listproducts = new Array();
+    var sumPrice = 0;
+    function AddProduct() {
+
+        var lookup = $("#product_name").data("dxLookup");
+        var selectedValue = lookup.option("value");
+
+        
+        $.post("../Products/GetListProductCart?CustomerID=" + getUrlParameter('CustomerID') + "&productID=" + $("#product_name").dxLookup("instance").option("value") + "&unit=" + $("#product_amount").dxTextBox('option', 'value'))
+.done(function (result) {
+    var i = listproducts.length;
+  
+    result.data.forEach(function (element) {
+        i++;
+        element.No = i;
+        listproducts.push(element);
+        sumPrice += (element.Unit * element.ProductPrice);
+       
+      
+    });
+    
+
+    var theGrid = $('#gridData').dxDataGrid('instance');
+    var sumItem = {
+        totalItems: [
+             { column: 'ProductPrice', displayFormat: 'รวมเงิน' },
+             {
+
+                 column: 'ProductPrice',
+                 showInColumn: "TotalPrice",
+                 summaryType: "sum",
+                 customizeText: function(options) {
+                     
+                     return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                     
+                 }
+             
+             }
+        ],
+        calculateCustomSummary: function (options) {
+            console.log(options);
+            if (options.name === "SelectedRowsSummary") {
+                if (options.summaryProcess === "start") {
+                    options.totalValue = 0;
+                }
+                if (options.summaryProcess === "calculate") {
+                    if (options.component.isRowSelected(options.value.ID)) {
+                        options.totalValue = options.totalValue + options.value.ProductPrice;
+                        options.totalValue = options.totalValue.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                }
+            }}
+    };
+    theGrid.option('summary', sumItem);
+    theGrid.option('dataSource', listproducts);
+    theGrid.option('height', 300);
+  
+
+  
+});
+    }
+ 
+    function LoadDataGrid(productsdatasource,dataSum) {
+        $("#gridData").dxDataGrid({
+            dataSource: productsdatasource,
+            showColumnLines: true,
+            showRowLines: true,
+            rowAlternationEnabled: true,
+            showBorders: true,
+            editing: {
+                mode: "row",
+                allowDeleting: true,
+            },
+            columns: [
+                {
+                    dataField: "No",
+                    caption: "ลำดับที่",
+                    width: 80,
+                    alignment: 'center',
+                    allowFiltering: false
+                },
+                {
+                    dataField: "ProductName",
+                    caption: "รายการสินค้า",
+                    width: 450,
+                    alignment: 'left',
+                    allowFiltering: false
+
+                }, {
+                    dataField: "Unit",
+                    caption: "จำนวน(หน่วย)",
+                    width: 160,
+                    alignment: 'right',
+                    alignment: 'center',
+                },
+              {
+                  dataField: "ProductPrice",
+                  caption: "ราคาต่อหน่วย",
+                  width: 160,
+                  alignment: 'right',
+                  customizeText: function (options) {
+                      if (options.value !== 0) {
+                          return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        
+                      }
+                  }
+
+              },
+             {
+                 dataField: "TotalPrice",
+                 caption: "จำนวนเงิน",
+                 alignment: 'right',
+                 width: 160,
+             }, ],
+            summary: {
+               
+            },
+            onRowUpdated: function (e) {
+                console.log(e);
+            },
+            onRowRemoving: function (e) {
+                console.log(e);
+            },
+            onRowRemoved: function (e) {
+                console.log(e)
+              
+            }
+        });
+    }
     </script>
 }

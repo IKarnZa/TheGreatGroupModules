@@ -44,9 +44,9 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string StrSql = @"    SELECT c.CustomerID, ct.ContractID ,CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName ,c.CustomerNickName,                                  
+                string StrSql = @"    SELECT c.CustomerID,c.CustomerMobile, ct.ContractID ,CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName ,c.CustomerNickName,                                  
                                      ct.ContractNumber,ct.ContractCreateDate,ct.ContractExpDate ,ct.ContractAmount,
-                                             SUM( a.PriceReceipts ) AS PriceReceipts,ct.ContractAmountLast,
+                                     ct.ContractPayment,SUM( a.PriceReceipts ) AS PriceReceipts,ct.ContractAmountLast,
                                     Case When a.Activated>0 then 'ตรวจสอบแล้ว' else 'รอการตรวจสอบ' end as Status, 
                                     Case When a.Remark  IS NULL then '' else a.Remark end as Remark, 
                                     ( SELECT  ct.ContractPayment- SUM(d.PriceReceipts)  FROM  daily_receipts d
@@ -102,9 +102,9 @@ namespace TheGreatGroupModules.Modules
             {
             List<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
 
-            string StrSql = @"    SELECT  c.CustomerID, ct.ContractID ,
+            string StrSql = @"    SELECT  c.CustomerID, ct.ContractID ,c.CustomerMobile, ct.ContractPayment,
                                        CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName 
-                                    ,c.CustomerNickName,                                  
+                                    ,c.CustomerNickName,c.SaleID As StaffID   ,                         
                                      ct.ContractNumber,ct.ContractCreateDate,ct.ContractExpDate ,ct.ContractAmount,
                                              SUM( a.PriceReceipts ) AS PriceReceipts,ct.ContractAmountLast,
                                     ( SELECT  ct.ContractPayment- IFNULL( SUM(d.PriceReceipts),0 )
@@ -142,13 +142,47 @@ namespace TheGreatGroupModules.Modules
           
         }
 
-        public IList<Transaction> GetTransaction(int staffId, int CustomerID, int ContractID)
+        public IList<LastTransaction> GetTransaction(string staffId, string CustomerID, string ContractID)
         {
 
-            IList<Transaction> listData = new List<Transaction>();
+            IList<LastTransaction> listData = new List<LastTransaction>();
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string StrSql = @" 
+                    SELECT tb.* FROM (
+                    SELECT DATE(dr.DateAsOf)  AS DateAsOf ,
+                    SUM(dr.PriceReceipts) AS Amount 
+                    FROM daily_receipts dr
+                    LEFT JOIN contract c ON dr.ContractID=c.ContractID
+                    WHERE dr.Deleted=0 AND
+                    dr.customerID=1 AND 
+                    dr.ContractID=1
+                    GROUP BY dr.customerID,dr.ContractID,DATE(dr.DateAsOf)
+                    ) tb ";
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = dt.AsEnumerable().Select(dr => new LastTransaction()
+                    {
+                        DateAsOf = dr.Field<DateTime>("DateAsOf"),
+                        Amount = dr.Field<decimal>("Amount"),
+                     
+                    }).ToList();
+                }
 
+                return listData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+          
 
-            return listData;
         
         }
     }

@@ -75,13 +75,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Microsoft.ReportViewer.WebForms.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\AmazonOnline\Source\Repos\VTECSystem\VTECSystem\VTECSystem\bin\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>D:\KTB\CMKBL\Lib\NPOI.dll</HintPath>
@@ -175,6 +172,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagePaymentController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -182,6 +180,7 @@
     </Compile>
     <Compile Include="Models\Customers.cs" />
     <Compile Include="Models\GoldData.cs" />
+    <Compile Include="Modules\ProductData.cs" />
     <Compile Include="Models\Province.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Staffs.cs" />
@@ -191,6 +190,7 @@
     <Compile Include="Modules\DBHelper.cs" />
     <Compile Include="Modules\ExportFunction.cs" />
     <Compile Include="Modules\Extensions.cs" />
+    <Compile Include="Modules\Products.cs" />
     <Compile Include="Modules\Report.cs" />
     <Compile Include="Modules\ReportData.cs" />
     <Compile Include="Modules\SettingData.cs" />
@@ -213,11 +213,12 @@
     <Compile Include="Report\DailyReport.aspx.cs">
       <DependentUpon>DailyReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Report\DailyReport.aspx.designer.cs">
       <DependentUpon>DailyReport.aspx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\datepicker-th.js" />
@@ -278,10 +279,16 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\icons\dxicons.ttf" />
+    <Content Include="Content\icons\dxicons.woff" />
+    <Content Include="Content\icons\dxiconsios.ttf" />
+    <Content Include="Content\icons\dxiconsios.woff" />
     <None Include="Properties\PublishProfiles\publish_web.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Report\ContractBookReport.aspx" />
-    <Content Include="Report\DailyReport.aspx" />
+    <Content Include="Report\DailyReport.aspx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -296,9 +303,12 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\src\add_customer.js" />
     <Content Include="Scripts\src\customers_src.js" />
     <Content Include="Scripts\src\customer_product.js" />
+    <Content Include="Scripts\src\edit_customer.js" />
     <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\init.js" />
     <Content Include="Scripts\src\installment.js" />
     <Content Include="Scripts\src\reports_src.js" />
     <Content Include="Scripts\_references.js" />
@@ -434,19 +444,6 @@
     <Content Include="Sources\Lib\ts\dx.all.legacy.d.ts" />
     <Content Include="Sources\Lib\ts\jquery.d.ts" />
     <Content Include="Sources\Lib\ts\knockout.d.ts" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Template\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Template\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Template\bootstrap\dist\css\bootstrap.css" />
@@ -3285,6 +3282,7 @@
     <Content Include="Views\ManagePayment\Installment.cshtml" />
     <Content Include="Views\ManagePayment\CustomerHistory.cshtml" />
     <Content Include="Views\Customers\CustomerProduct.cshtml" />
+    <Content Include="Views\Customers\EditCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3295,12 +3293,16 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Report\ContractBookReport.rdlc" />
+    <EmbeddedResource Include="Report\ContractBookReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CustomerReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\DailyReport.rdlc" />
+    <EmbeddedResource Include="Report\DailyReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

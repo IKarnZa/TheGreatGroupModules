@@ -1,8 +1,9 @@
 ﻿@{
-    ViewBag.Title = "เพิ่มข้อมูลลูกค้าใหม่";
+    ViewBag.Title = "แก้ไขข้อมูลลูกค้า";
     ViewBag.MainMenu = "ระบบจัดการข้อมูลลูกค้า";
     Layout = "~/Views/Shared/_LayoutPartial.cshtml";
 }
+
 <div class="row bg-title">
     <!-- .page title -->
     <div class="col-md-5">
@@ -14,7 +15,7 @@
 
 </div>
 <div class="row">
-    
+
     <div class="col-lg-12 ">
         <div class="white-box">
 
@@ -27,8 +28,8 @@
                 <div id="button" class="pull-"></div>
             </form>
         </div>
-        </div>
     </div>
+</div>
 </div>
 
 <style>
@@ -55,12 +56,12 @@
 </style>
 
 @section Scripts {
-@Scripts.Render("../Scripts/src/add_customer.js")
+    @Scripts.Render("../Scripts/src/edit_customer.js")
     <script>
 
-      
-           
-     
+
+
+
 
     </script>
 }

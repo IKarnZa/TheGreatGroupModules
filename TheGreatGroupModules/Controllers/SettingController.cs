@@ -12,6 +12,32 @@ namespace TheGreatGroupModules.Controllers
     public class SettingController : Controller
     {
 
+        // GET: /Setting/GetLocation/
+        public JsonResult GetLocation()
+        {
+            List<Province> listData = new List<Province>();
+            SettingData data = new SettingData();
+            listData = data.GetProvince();
+
+
+            List<District> listData1 = new List<District>();
+            SettingData data1 = new SettingData();
+            listData1 = data.GetDistrict(0);
+
+
+            List<SubDistrict> listData2 = new List<SubDistrict>();
+            SettingData data2 = new SettingData();
+            listData2 = data.GetSubDistrict(0);
+            return Json(new
+            {
+                dataProvince = listData,
+                dataDistrict = listData1,
+                dataSubDistrict = listData2,
+                success = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: /Setting/GetProvince/
         public JsonResult GetProvince()
         {
@@ -51,6 +77,8 @@ namespace TheGreatGroupModules.Controllers
                 List<District> listData = new List<District>();
                 SettingData data = new SettingData();
                  listData = data.GetDistrict(id);
+
+           
 
                 return Json(new
                 {

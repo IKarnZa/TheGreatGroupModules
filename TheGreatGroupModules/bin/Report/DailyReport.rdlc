@@ -1327,7 +1327,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.1875in</Height>
+      <Height>1.09375in</Height>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Textbox Name="Textbox65">
@@ -1350,7 +1350,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.72555cm</Top>
+          <Top>0.77305cm</Top>
           <Left>13.14975cm</Left>
           <Height>0.52063cm</Height>
           <Width>1.4552cm</Width>
@@ -1380,7 +1380,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.27cm</Top>
+          <Top>0.3175cm</Top>
           <Left>13.17621cm</Left>
           <Height>0.49417cm</Height>
           <Width>1.4552cm</Width>
@@ -1409,7 +1409,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.82257cm</Top>
+          <Top>0.87007cm</Top>
           <Left>18.3444cm</Left>
           <Height>0.52063cm</Height>
           <Width>1.73749cm</Width>
@@ -1438,7 +1438,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.30194cm</Top>
+          <Top>0.34944cm</Top>
           <Left>18.3444cm</Left>
           <Height>0.49417cm</Height>
           <Width>1.73749cm</Width>
@@ -1450,7 +1450,7 @@
           </Style>
         </Textbox>
         <Line Name="Line1">
-          <Top>2.3432cm</Top>
+          <Top>1.3907cm</Top>
           <Left>14.69598cm</Left>
           <Height>0cm</Height>
           <Width>3.52781cm</Width>
@@ -1481,7 +1481,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.62853cm</Top>
+          <Top>0.67603cm</Top>
           <Left>5.27966cm</Left>
           <Height>0.52063cm</Height>
           <Width>1.4552cm</Width>
@@ -1512,7 +1512,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.17298cm</Top>
+          <Top>0.22048cm</Top>
           <Left>5.30612cm</Left>
           <Height>0.49417cm</Height>
           <Width>1.4552cm</Width>
@@ -1541,7 +1541,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.72555cm</Top>
+          <Top>0.77305cm</Top>
           <Left>10.47431cm</Left>
           <Height>0.52063cm</Height>
           <Width>1.73749cm</Width>
@@ -1570,7 +1570,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox62</rd:DefaultName>
-          <Top>1.20492cm</Top>
+          <Top>0.25242cm</Top>
           <Left>10.47431cm</Left>
           <Height>0.49417cm</Height>
           <Width>1.73749cm</Width>
@@ -1582,7 +1582,7 @@
           </Style>
         </Textbox>
         <Line Name="Line2">
-          <Top>2.24618cm</Top>
+          <Top>1.29368cm</Top>
           <Left>6.82589cm</Left>
           <Height>0cm</Height>
           <Width>3.52781cm</Width>
@@ -1593,110 +1593,6 @@
             </Border>
           </Style>
         </Line>
-        <Textbox Name="Textbox1">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>จำนวนลูกค้าในสายทั้งหมด : </Value>
-                  <Style>
-                    <FontFamily>Angsana New</FontFamily>
-                    <FontSize>12pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.02778in</Top>
-          <Left>0.23958in</Left>
-          <Height>0.25in</Height>
-          <Width>1.42188in</Width>
-          <ZIndex>10</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox3">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>48</Value>
-                  <Style>
-                    <FontFamily>Angsana New</FontFamily>
-                    <FontSize>12pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.02778in</Top>
-          <Left>1.56424in</Left>
-          <Height>0.25in</Height>
-          <Width>0.31424in</Width>
-          <ZIndex>11</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox6">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>คน</Value>
-                  <Style>
-                    <FontFamily>Angsana New</FontFamily>
-                    <FontSize>12pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.02778in</Top>
-          <Left>1.87848in</Left>
-          <Height>0.25in</Height>
-          <Width>0.23264in</Width>
-          <ZIndex>12</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
       </ReportItems>
       <Style>
         <Border>

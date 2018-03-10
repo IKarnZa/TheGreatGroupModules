@@ -21,18 +21,26 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string StrSql = @" Select * From Customer where Deleted=0 ";
+                string StrSql = @"  SELECT c.* ,
+                                   s.SubDistrictName as CustomerSubDistrict,
+                                   d.DistrictName as CustomerDistrict,
+                                   p.ProvinceName as CustomerProvince
+                                   FROM customer c 
+                                  LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
+                                  LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
+                                  LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
+                                where Deleted=0 ";
 
                 if (id > 0) { 
                 
-                   StrSql +=  @" and CustomerID="+id ;
+                   StrSql +=  @" and c.CustomerID="+id ;
                 }
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
                 IList<Customers> listData = new List<Customers>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    listData = Customers.ToObjectList(dt);
+                    listData = Customers.ToObjectList2(dt);
                 }
 
                 return listData;
@@ -106,13 +114,12 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public void AddCustomer(Customers item)
+        public void AddCustomer(ref Customers item)
         {
+            item.CustomerID = Utility.GetMaxID("Customer", "CustomerID");
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-            
             try
             {
-                item.CustomerID = Utility.GetMaxID("Customer", "CustomerID");
                 item.CustomerCode = "MB" + item.CustomerID.ToString("000000000");
                 string StrSql = @" INSERT INTO db_greatgroup_dev.customer
             (CustomerId,
@@ -127,12 +134,41 @@ namespace TheGreatGroupModules.Modules
              CustomerDistrictId,
              CustomerProvinceId,
              CustomerZipCode,
-             CustomerMobile,
+             CustomerMobile, 
+             CustomerTelephone,
+             CustomerStatus,
              CustomerEmail,
+             CustomerCareer,
+             CustomerJob,
+             CustomerJobYear,
+             CustomerSalary,
+             CustomerJobAddress,
+             CustomerJobSubDistrictId,
+             CustomerJobDistrictId,
+             CustomerJobProvinceId,
+             CustomerJobZipCode,
+             CustomerSpouseTitle,
+             CustomerSpouseFirstName,
+             CustomerSpouseLastName,
+             CustomerSpouseNickName,
+             CustomerSpouseAddress,
+             CustomerSpouseSubDistrictId,
+             CustomerSpouseDistrictId,
+             CustomerSpouseProvinceId,
+             CustomerSpouseZipCode,
+             CustomerSpouseMobile,
+             CustomerSpouseTelephone,
+            CustomerEmergencyTitle,
+            CustomerEmergencyFirstName,
+            CustomerEmergencyLastName,
+            CustomerEmergencyRelation,
+            CustomerEmergencyMobile,
+            CustomerEmergencyTelephone,
+             SaleID,
+            CustomerPartner,
              Activated,
              Deleted)values("
-            
-             +item.CustomerID+ ","
+             + item.CustomerID+ ","
              + Utility.ReplaceString(item.CustomerCode)+ ","
              + Utility.ReplaceString(item.CustomerTitleName)+ ","
              +Utility.ReplaceString(item.CustomerFirstName)+ ","
@@ -143,9 +179,39 @@ namespace TheGreatGroupModules.Modules
              + item.CustomerSubDistrictId+ ","
              +  item.CustomerDistrictId+ ","
              +  item.CustomerProvinceId+ ","
-             +  item.CustomerZipCode+ ","
-             +Utility.ReplaceString(  item.CustomerMobile)+ ","
+             + Utility.ReplaceString(item.CustomerZipCode) + ","
+             +Utility.ReplaceString(item.CustomerMobile)+ ","
+              +Utility.ReplaceString(item.CustomerTelephone)+ ","
+              +Utility.ReplaceString(item.CustomerStatus)+ ","
            + Utility.ReplaceString(item.CustomerEmail) + ","
+           + Utility.ReplaceString(item.CustomerCareer) + ","
+           + Utility.ReplaceString(item.CustomerJob) + ","
+            + Utility.ReplaceString(item.CustomerJobYear) + ","
+           + Utility.ReplaceString(item.CustomerSalary) + ","
+           + Utility.ReplaceString(item.CustomerJobAddress) + ","
+           + item.CustomerJobSubDistrictId + ","
+           + item.CustomerJobDistrictId + ","
+           + item.CustomerJobProvinceId + ","
+           + Utility.ReplaceString(item.CustomerJobZipCode) + ","
+            + Utility.ReplaceString(item.CustomerSpouseTitle) + ","
+           + Utility.ReplaceString(item.CustomerSpouseFirstName) + ","
+           + Utility.ReplaceString(item.CustomerSpouseLastName) + ","
+           + Utility.ReplaceString(item.CustomerSpouseNickName) + ","
+           + Utility.ReplaceString(item.CustomerSpouseAddress) + ","
+           + item.CustomerSpouseSubDistrictId + ","
+           + item.CustomerSpouseDistrictId + ","
+           + item.CustomerSpouseProvinceId + ","
+           + Utility.ReplaceString(item.CustomerSpouseZipCode) + ","
+           + Utility.ReplaceString(item.CustomerSpouseMobile) + ","
+           + Utility.ReplaceString(item.CustomerSpouseTelephone) + ","
+           + Utility.ReplaceString(item.CustomerEmergencyTitle) + ","
+           + Utility.ReplaceString(item.CustomerEmergencyFirstName) + ","
+           + Utility.ReplaceString(item.CustomerEmergencyLastName) + ","
+           + Utility.ReplaceString(item.CustomerEmergencyRelation) + ","
+           + Utility.ReplaceString(item.CustomerEmergencyMobile) + ","
+           + Utility.ReplaceString(item.CustomerEmergencyTelephone) + ","
+           + item.SaleID + ","
+           + item.CustomerPartner + ","
            + 1 + ","
            +  0+ ")";
 
@@ -251,6 +317,53 @@ namespace TheGreatGroupModules.Modules
                     rate = (decimal)dt.Rows[0]["ContractInterest"];
                 }
 
+        }
+
+
+        public Customers GetCustomerInfo_ByID(int id)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+
+                string StrSql = @"  SELECT c.* ,
+                                   s.SubDistrictName as CustomerSubDistrict,
+                                   d.DistrictName as CustomerDistrict,
+                                   p.ProvinceName as CustomerProvince
+                                   FROM customer c 
+                                  LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
+                                  LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
+                                  LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
+                                where Deleted=0 ";
+
+                if (id >= 0)
+                {
+
+                    StrSql += @" and c.CustomerID=" + id;
+                }
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+                Customers cust=new Customers();
+                IList<Customers> listData = new List<Customers>();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = Customers.ToObjectList(dt);
+                    cust=listData[0];
+                   
+                }
+
+
+                return cust;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
         }
 
     }
