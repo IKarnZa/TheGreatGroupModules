@@ -106,11 +106,13 @@ namespace TheGreatGroupModules.Controllers
                 ReportData data = new ReportData();
                 listData = data.GetCustomerDetailOnCard(staffId, CustomerID, ContractID);
 
-
+                IList<LastTransaction> listData1 = new List<LastTransaction>();
+                 listData1=   data.GetTransaction(staffId, CustomerID, ContractID);
+            listData1= listData1.OrderByDescending(c => c.DateAsOf).ToArray();
                 return Json(new
                 {
                     data = listData,
-                    latest_transaction=listData,
+                    latest_transaction = listData1,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }

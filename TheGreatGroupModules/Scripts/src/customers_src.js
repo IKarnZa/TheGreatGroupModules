@@ -19,7 +19,7 @@ $("#gridshow").hide();
 
         })
     .done(function (data) {
-        console.log(data);
+       
         if (data.success == true) {
           
               Load_DataGrid(data.data);

@@ -290,7 +290,7 @@ namespace TheGreatGroupModules.Controllers
             );
             return View();
         }
-        // GET: /Customers/GetStaff/:id
+        // GET: /Customers/GetCustomers/:id
         public JsonResult GetCustomers(int id)
         {
 
@@ -318,7 +318,41 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+        // GET: /Customers/GetDataPurchaseData/:id
+        public JsonResult GetDataPurchaseData(int id)
+        {
 
+
+            try
+            {
+                IList<Customers> listData = new List<Customers>();
+                CustomersData data = new CustomersData();
+                listData = data.Get(id);
+
+                IList<Products> listProduct = new List<Products>();
+                ProductData dataPro = new ProductData();
+                listProduct = dataPro.GetListProduct();
+
+
+                //IList<ProductsSelect> listProductsSelect = new List<ProductsSelect>();
+                return Json(new
+                {
+                    data = listData,
+                    dataProduct= listProduct,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
 
         [HttpPost]
         public JsonResult GetCustomers(Customers item)
@@ -372,5 +406,37 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
+           // GET: /Customers/GetCustomerID/:id
+
+           public JsonResult GetCustomerID(int id)
+           {
+               List<Province> listData = new List<Province>();
+               SettingData data = new SettingData();
+               listData = data.GetProvince();
+
+
+               List<District> listData1 = new List<District>();
+               SettingData data1 = new SettingData();
+               listData1 = data.GetDistrict(0);
+
+
+               List<SubDistrict> listData2 = new List<SubDistrict>();
+               SettingData data2 = new SettingData();
+               listData2 = data.GetSubDistrict(0);
+
+               Customers cus_info= new Customers();
+               CustomersData data3=new CustomersData();
+               cus_info = data3.GetCustomerInfo_ByID(id);
+
+               return Json(new
+               {
+                   dataProvince = listData,
+                   dataDistrict = listData1,
+                   dataSubDistrict = listData2,
+                   dataCustomer=cus_info,
+                   success = true
+               }, JsonRequestBehavior.AllowGet);
+           }
+        
     }
 }

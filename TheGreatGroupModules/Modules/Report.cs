@@ -31,9 +31,12 @@ namespace TheGreatGroupModules.Modules
         public string PriceReceipts_Text { get { return PriceReceipts.ToString("#,##0.00"); } }
         public string Balance_Text { get { return Balance.ToString("#,##0.00"); } }
         public int StaffID { get; set; }
-
+        public string PhoneNumber { get; set; }
+        public decimal TotalBalance { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
+        
+        
         public static List<DailyReceiptsReport> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new DailyReceiptsReport()
@@ -47,9 +50,10 @@ namespace TheGreatGroupModules.Modules
                 ContractAmount = dr.Field<decimal>("ContractAmount"),
                 PriceReceipts = dr.Field<decimal>("PriceReceipts"),
                 Balance = dr.Field<decimal>("Balance"),
+                TotalBalance = dr.Field<decimal>("ContractPayment"),
                 ContractAmountLast = dr.Field<decimal>("ContractAmountLast"),
-              
-            
+                PhoneNumber=dr.Field<string>("CustomerMobile"),
+                StaffID = dr.Field<int>("StaffID"),
             }).ToList();
         }
     }
@@ -69,5 +73,12 @@ namespace TheGreatGroupModules.Modules
         public string Balance_Text { get; set; } // ยอดเงินคงเหลือ
         public string ContractAmount_Text { get; set; } // งวดละ
         public string ContractPayment_Text { get; set; } // จำนวนเงินทั้งหมด
+    }
+
+     public class LastTransaction
+    {
+        public DateTime DateAsOf { get; set; }
+        public string Date { get { return DateAsOf.ToString("dd/MM/yyyy"); } }
+        public decimal Amount { get; set; } // งวดละ
     }
 }
