@@ -128,7 +128,7 @@ namespace TheGreatGroupModules.Controllers
         }
         // GET: /ManagePayment/PostPaymentDailyReceipts
         [HttpPost]
-             public JsonResult PostPaymentDailyReceipts(DailyReceiptsReport item)
+        public JsonResult PostPaymentDailyReceipts(DailyReceiptsReport item)
         {
             try
             {
@@ -154,5 +154,8 @@ namespace TheGreatGroupModules.Controllers
             }
              
              }
+
+
+
     }
 }

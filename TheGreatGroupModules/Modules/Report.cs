@@ -16,9 +16,9 @@ namespace TheGreatGroupModules.Modules
         public int ContractID { get; set; }
         public string ContractNumber { get; set; }
         public string CustomerName { get; set; }
+        public string CustomerNickName { get; set; }
         public DateTime ContractCreateDate { get; set; }
         public DateTime ContractExpDate  { get; set; }
-       
         public decimal ContractAmountLast { get; set; }
         public decimal ContractAmount { get; set; }
         
@@ -32,6 +32,7 @@ namespace TheGreatGroupModules.Modules
         public string Balance_Text { get { return Balance.ToString("#,##0.00"); } }
         public int StaffID { get; set; }
         public string PhoneNumber { get; set; }
+        public string MobileNumber { get; set; }
         public decimal TotalBalance { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
@@ -45,6 +46,7 @@ namespace TheGreatGroupModules.Modules
                 ContractID = dr.Field<int>("ContractID"),
                 ContractNumber = dr.Field<string>("ContractNumber"),
                 CustomerName = dr.Field<string>("CustomerName"),
+                CustomerNickName = dr.Field<string>("CustomerNickName"),
                 ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
                 ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
                 ContractAmount = dr.Field<decimal>("ContractAmount"),
@@ -52,7 +54,8 @@ namespace TheGreatGroupModules.Modules
                 Balance = dr.Field<decimal>("Balance"),
                 TotalBalance = dr.Field<decimal>("ContractPayment"),
                 ContractAmountLast = dr.Field<decimal>("ContractAmountLast"),
-                PhoneNumber=dr.Field<string>("CustomerMobile"),
+                PhoneNumber = dr.Field<string>("CustomerTelephone"),
+                MobileNumber = dr.Field<string>("CustomerMobile"),
                 StaffID = dr.Field<int>("StaffID"),
             }).ToList();
         }

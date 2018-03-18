@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "สั่งซื้อสินค้า";
+    ViewBag.Title = "เปิดออร์เดอร์";
     ViewBag.MainMenu = "ระบบจัดการข้อมูลลูกค้า";
     Layout = "~/Views/Shared/_LayoutPartial.cshtml";
 }
@@ -33,7 +33,7 @@
                     </div>
                     <div class="pull-right text-right">
                         <address>
-                            <p class="m-t-10"><b>วันที่เปิด :</b> <i class="fa fa-calendar"></i> 25 กุมภาพันธ์ 2561</p>                         
+                            @*<p class="m-t-10"><b>วันที่เปิด :</b> <i class="fa fa-calendar"></i> 25 กุมภาพันธ์ 2561</p>*@                         
                             @*<p><b>วันที่ครบกำหนด :</b> <i class="fa fa-calendar"></i>  15 พฤษภาคม 2561</p>*@
                             <p><b> การชำระเงิน :</b>   เงินสด</p>
                         </address>
@@ -97,7 +97,7 @@
                     <div class="text-right">
 
                         <a id="print" class="btn btn-default btn-outline" href="javascript:history.back();"> <span><i class="fa fa-mail-reply"></i> ย้อนกลับ</span> </a>
-                        <a class="btn btn-info" href="\Customers/Contract"> <i class="fa fa-save"></i> บันทึก </a>
+                        <a class="btn btn-info" onclick="Submit_Click()"> <i class="fa fa-save"></i> บันทึก </a>
                     </div>
                 </div>
             </div>
@@ -116,10 +116,20 @@
         var CustomerID = getUrlParameter('CustomerID');
       
 
-        $.get("../Customers/GetDataPurchaseData/" + CustomerID)
+        $.get("../Contract/GetDataPurchaseData/" + CustomerID)
  .done(function (result) {
      console.log(result)
      var response = result.data[0];
+
+     var i = listproducts.length;
+
+     result.dataProductSelect.forEach(function (element) {
+         i++;
+         element.No = i;
+     });
+
+     $('#gridData').dxDataGrid('instance').option('dataSource', result.dataProductSelect);
+     
      if (result.success == true) {
          $("#customerName").html(' <h4> &nbsp;<b>ชื่อลูกค้า : </b>' + response.CustomerName + '</h4>');
          $("#customerAddress").html('  <p class="text-muted m-l-5">ที่อยู่ : '+response.CustomerAddress1+'</p>');
@@ -147,63 +157,73 @@
     var listproducts = new Array();
     var sumPrice = 0;
     function AddProduct() {
+        if ($("#product_name").dxLookup("instance").option("value") != null) {
 
-        var lookup = $("#product_name").data("dxLookup");
-        var selectedValue = lookup.option("value");
+            var lookup = $("#product_name").data("dxLookup");
+            var selectedValue = lookup.option("value");
 
-        
-        $.post("../Products/GetListProductCart?CustomerID=" + getUrlParameter('CustomerID') + "&productID=" + $("#product_name").dxLookup("instance").option("value") + "&unit=" + $("#product_amount").dxTextBox('option', 'value'))
-.done(function (result) {
-    var i = listproducts.length;
-  
-    result.data.forEach(function (element) {
-        i++;
-        element.No = i;
-        listproducts.push(element);
-        sumPrice += (element.Unit * element.ProductPrice);
-       
-      
-    });
-    
 
-    var theGrid = $('#gridData').dxDataGrid('instance');
-    var sumItem = {
-        totalItems: [
-             { column: 'ProductPrice', displayFormat: 'รวมเงิน' },
-             {
+            $.post("../Products/GetListProductCart?CustomerID=" + getUrlParameter('CustomerID') + "&productID=" + $("#product_name").dxLookup("instance").option("value") + "&unit=" + $("#product_amount").dxTextBox('option', 'value'))
+    .done(function (result) {
+        var i = listproducts.length;
 
-                 column: 'ProductPrice',
-                 showInColumn: "TotalPrice",
-                 summaryType: "sum",
-                 customizeText: function(options) {
-                     
-                     return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                     
+        result.data.forEach(function (element) {
+            i++;
+            element.No = i;
+            listproducts.push(element);
+            sumPrice += (element.Unit * element.ProductPrice);
+
+
+        });
+
+
+        var theGrid = $('#gridData').dxDataGrid('instance');
+        var sumItem = {
+            totalItems: [
+                 { column: 'ProductPrice_Text', displayFormat: 'รวมเงิน' },
+                 {
+
+                     column: 'ProductPrice',
+                     showInColumn: "TotalPrice",
+                     summaryType: "sum",
+                     customizeText: function (options) {
+
+                         return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                     }
+
                  }
-             
-             }
-        ],
-        calculateCustomSummary: function (options) {
-            console.log(options);
-            if (options.name === "SelectedRowsSummary") {
-                if (options.summaryProcess === "start") {
-                    options.totalValue = 0;
-                }
-                if (options.summaryProcess === "calculate") {
-                    if (options.component.isRowSelected(options.value.ID)) {
-                        options.totalValue = options.totalValue + options.value.ProductPrice;
-                        options.totalValue = options.totalValue.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ],
+            calculateCustomSummary: function (options) {
+                console.log(options);
+                if (options.name === "SelectedRowsSummary") {
+                    if (options.summaryProcess === "start") {
+                        options.totalValue = 0;
+                    }
+                    if (options.summaryProcess === "calculate") {
+                        if (options.component.isRowSelected(options.value.ID)) {
+                            options.totalValue = options.totalValue + options.value.ProductPrice;
+                            options.totalValue = options.totalValue.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        }
                     }
                 }
-            }}
-    };
-    theGrid.option('summary', sumItem);
-    theGrid.option('dataSource', listproducts);
-    theGrid.option('height', 300);
-  
+            }
+        };
+        theGrid.option('summary', sumItem);
+        theGrid.option('dataSource', listproducts);
+        theGrid.option('height', 300);
 
-  
-});
+
+
+    });
+
+        } else {
+            DevExpress.ui.notify("โปรดเลือกสินค้า !!");
+
+        }
+        
+
+
     }
  
     function LoadDataGrid(productsdatasource,dataSum) {
@@ -213,6 +233,7 @@
             showRowLines: true,
             rowAlternationEnabled: true,
             showBorders: true,
+            height: 300,
             editing: {
                 mode: "row",
                 allowDeleting: true,
@@ -237,26 +258,26 @@
                     caption: "จำนวน(หน่วย)",
                     width: 160,
                     alignment: 'right',
-                    alignment: 'center',
                 },
               {
-                  dataField: "ProductPrice",
+                  dataField: "ProductPrice_Text",
                   caption: "ราคาต่อหน่วย",
                   width: 160,
                   alignment: 'right',
-                  customizeText: function (options) {
-                      if (options.value !== 0) {
-                          return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        
-                      }
-                  }
+                
 
               },
              {
-                 dataField: "TotalPrice",
+                 dataField: "ProductPrice",
                  caption: "จำนวนเงิน",
                  alignment: 'right',
                  width: 160,
+                 customizeText: function (options) {
+                     if (options.value !== 0) {
+                         return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+                     }
+                 }
              }, ],
             summary: {
                
@@ -272,6 +293,35 @@
               
             }
         });
+    }
+
+    function Submit_Click() {
+
+        if (listproducts.length > 0) {
+            listproducts.forEach(function (element) {
+
+                $.ajax({
+                    url: '../Products/PostAddProduct?CustomerID=' + getUrlParameter('CustomerID') + '&ContractID=0',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(element),
+                    success: function (data) {
+                        console.log('success');
+
+                    },
+                    error: function () {
+                        console.log("error");
+                    }
+                });
+
+
+            });
+        } 
+
+       
+        
+        window.location = "../Customers/Contract?CustomerID=" + getUrlParameter('CustomerID') + '&ContractID=0';
+     
     }
     </script>
 }

@@ -12,7 +12,7 @@
             <li class="active">@ViewBag.Title</li>
         </ol>
     </div>
-
+    <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
 </div>
 <div class="row">
 
@@ -22,14 +22,15 @@
             <h3 class="m-b-0 m-t-0"> <i class="fa fa-user-plus"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
             <hr>
             <div id="loadIndicator"></div>
-            <form action="\Customers/AddCustomers" id="form-container" method="post">
+           
                 <div id="form"></div>
                 <br />
-                <div id="button" class="pull-"></div>
-            </form>
+                <div id="button" class="pull-right"></div>
+            
+            <br><br>
         </div>
+
     </div>
-</div>
 </div>
 
 <style>

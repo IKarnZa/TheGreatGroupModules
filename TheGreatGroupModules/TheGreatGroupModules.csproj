@@ -62,6 +62,9 @@
     <Reference Include="Excel">
       <HintPath>D:\KTB\CMKBL\Lib\Excel.dll</HintPath>
     </Reference>
+    <Reference Include="MessagingToolkit.QRCode">
+      <HintPath>..\..\..\..\..\Downloads\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -155,6 +158,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\Downloads\QRCoder-master\QRCoder\UnityEngine.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
@@ -169,6 +175,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagePaymentController.cs" />
@@ -178,8 +185,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Customers.cs" />
     <Compile Include="Models\GoldData.cs" />
+    <Compile Include="Modules\ContractData.cs" />
     <Compile Include="Modules\ProductData.cs" />
     <Compile Include="Models\Province.cs" />
     <Compile Include="Models\Setting.cs" />
@@ -190,9 +199,10 @@
     <Compile Include="Modules\DBHelper.cs" />
     <Compile Include="Modules\ExportFunction.cs" />
     <Compile Include="Modules\Extensions.cs" />
-    <Compile Include="Modules\Products.cs" />
+    <Compile Include="Models\Products.cs" />
     <Compile Include="Modules\Report.cs" />
     <Compile Include="Modules\ReportData.cs" />
+    <Compile Include="Modules\SetProductPrice.cs" />
     <Compile Include="Modules\SettingData.cs" />
     <Compile Include="Modules\StaffData.cs" />
     <Compile Include="Modules\Utility.cs" />
@@ -221,8 +231,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bg.jpg" />
+    <Content Include="Content\bg_1.png" />
     <Content Include="Content\datepicker-th.js" />
     <Content Include="Content\generic.light.custom.css" />
+    <Content Include="Content\qr1.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -285,6 +298,7 @@
     <Content Include="Content\icons\dxiconsios.woff" />
     <None Include="Properties\PublishProfiles\publish_web.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="QRCoderProject.Portable.csproj" />
     <Content Include="Report\ContractBookReport.aspx" />
     <Content Include="Report\DailyReport.aspx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -303,6 +317,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\src\add_contract.js" />
     <Content Include="Scripts\src\add_customer.js" />
     <Content Include="Scripts\src\customers_src.js" />
     <Content Include="Scripts\src\customer_product.js" />
@@ -3283,6 +3298,10 @@
     <Content Include="Views\ManagePayment\CustomerHistory.cshtml" />
     <Content Include="Views\Customers\CustomerProduct.cshtml" />
     <Content Include="Views\Customers\EditCustomer.cshtml" />
+    <Content Include="Views\Customers\ListContract.cshtml" />
+    <Content Include="Views\Customers\ContractSurety.cshtml" />
+    <Content Include="Views\Staffs\ListStaff.cshtml" />
+    <Content Include="Views\Staffs\SettingPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3306,6 +3325,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Photoshop">
+      <Guid>{E891EE9A-D0AE-4CB4-8871-F92C0109F18E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

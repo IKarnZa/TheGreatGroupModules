@@ -231,7 +231,7 @@ function Load_DataGrid(data) {
         summary: {
             totalItems: [
                 { column: 'CustomerName', displayFormat: 'จำนวนลูกค้าทั้งหมด ' + data.countData + ' คน' },
-                 { column: 'ContractAmount_Text', displayFormat: 'ยอดรวม' },
+                 { column: 'ContractExpDate_Text', displayFormat: 'ยอดรวม' },
                    { column: 'PriceReceipts_Text', displayFormat: data.SumData }
             ],
         },
