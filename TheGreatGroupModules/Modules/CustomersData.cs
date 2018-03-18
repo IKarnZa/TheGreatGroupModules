@@ -228,6 +228,112 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+        public void EditCustomer(ref Customers item)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+               
+                string StrSql = @" Update customer Set
+             CustomerTitleName={1},
+             CustomerFirstName={2},
+             CustomerLastName={3},
+             CustomerNickName={4},
+             CustomerIdCard={5},
+             CustomerAddress1={6},
+             CustomerSubDistrictId={7},
+             CustomerDistrictId={8},
+             CustomerProvinceId={9},
+             CustomerZipCode={10},
+             CustomerMobile={11}, 
+             CustomerTelephone={12},
+             CustomerStatus={13},
+             CustomerEmail={14},
+             CustomerCareer={15},
+             CustomerJob={16},
+             CustomerJobYear={17},
+             CustomerSalary={18},
+             CustomerJobAddress={19},
+             CustomerJobSubDistrictId={20},
+             CustomerJobDistrictId={21},
+             CustomerJobProvinceId={22},
+             CustomerJobZipCode={23},
+             CustomerSpouseTitle={24},
+             CustomerSpouseFirstName={25},
+             CustomerSpouseLastName={26},
+             CustomerSpouseNickName={27},
+             CustomerSpouseAddress={28},
+             CustomerSpouseSubDistrictId={29},
+             CustomerSpouseDistrictId={30},
+             CustomerSpouseProvinceId={31},
+             CustomerSpouseZipCode={32},
+             CustomerSpouseMobile={33},
+             CustomerSpouseTelephone={34},
+            CustomerEmergencyTitle={35},
+            CustomerEmergencyFirstName={36},
+            CustomerEmergencyLastName={37},
+            CustomerEmergencyRelation={38},
+            CustomerEmergencyMobile={39},
+            CustomerEmergencyTelephone={40},
+            SaleID={41}
+            where  CustomerId={0} ";
+              StrSql= String.Format(StrSql,
+              item.CustomerID  ,
+              Utility.ReplaceString(item.CustomerTitleName)  ,
+              Utility.ReplaceString(item.CustomerFirstName)  ,
+              Utility.ReplaceString(item.CustomerLastName)  ,
+              Utility.ReplaceString(item.CustomerNickName)  ,
+              Utility.ReplaceString(item.CustomerIdCard)  ,
+              Utility.ReplaceString(item.CustomerAddress1)  ,
+              item.CustomerSubDistrictId  ,
+              item.CustomerDistrictId  ,
+              item.CustomerProvinceId  ,//10
+              Utility.ReplaceString(item.CustomerZipCode)  ,
+              Utility.ReplaceString(item.CustomerMobile)  ,
+               Utility.ReplaceString(item.CustomerTelephone)  ,
+               Utility.ReplaceString(item.CustomerStatus)  ,
+            Utility.ReplaceString(item.CustomerEmail),
+            Utility.ReplaceString(item.CustomerCareer),
+            Utility.ReplaceString(item.CustomerJob),
+             Utility.ReplaceString(item.CustomerJobYear),
+            Utility.ReplaceString(item.CustomerSalary),
+            Utility.ReplaceString(item.CustomerJobAddress),//20
+            item.CustomerJobSubDistrictId,
+            item.CustomerJobDistrictId,
+            item.CustomerJobProvinceId,
+            Utility.ReplaceString(item.CustomerJobZipCode),
+             Utility.ReplaceString(item.CustomerSpouseTitle),
+            Utility.ReplaceString(item.CustomerSpouseFirstName),
+            Utility.ReplaceString(item.CustomerSpouseLastName),
+            Utility.ReplaceString(item.CustomerSpouseNickName),
+            Utility.ReplaceString(item.CustomerSpouseAddress),
+            item.CustomerSpouseSubDistrictId,//30
+            item.CustomerSpouseDistrictId,
+            item.CustomerSpouseProvinceId,
+            Utility.ReplaceString(item.CustomerSpouseZipCode),
+            Utility.ReplaceString(item.CustomerSpouseMobile),
+            Utility.ReplaceString(item.CustomerSpouseTelephone),
+            Utility.ReplaceString(item.CustomerEmergencyTitle),
+            Utility.ReplaceString(item.CustomerEmergencyFirstName),
+            Utility.ReplaceString(item.CustomerEmergencyLastName),
+            Utility.ReplaceString(item.CustomerEmergencyRelation),
+            Utility.ReplaceString(item.CustomerEmergencyMobile),//40
+            Utility.ReplaceString(item.CustomerEmergencyTelephone),
+            item.SaleID
+         );
+
+                DBHelper.Execute(StrSql, ObjConn);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
         public void PaymentDailyReceipts(DailyReceiptsReport item)
         {
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -364,6 +470,34 @@ namespace TheGreatGroupModules.Modules
             {
                 ObjConn.Close();
             }
+        }
+
+        public void GetChangeMobilePhone(Customers item) {
+               MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+               try
+               {
+                   string sqlStr = @"update customer set 
+                    CustomerMobile={0},
+                    CustomerTelephone={1}
+                    where CustomerID={2}";
+
+                   sqlStr = String.Format(sqlStr,
+                       Utility.ReplaceString(item.CustomerMobile),
+                       Utility.ReplaceString(item.CustomerTelephone),
+                      item.CustomerID);
+
+
+                   DBHelper.Execute(sqlStr, ObjConn);
+
+               }
+               catch (Exception ex )
+               {
+
+                   throw new Exception(ex.Message);
+               }
+               finally {
+                   ObjConn.Close();
+               }
         }
 
     }

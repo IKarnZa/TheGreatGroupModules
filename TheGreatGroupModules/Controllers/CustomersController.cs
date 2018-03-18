@@ -12,6 +12,11 @@ using TheGreatGroupModules.Models;
 using CrystalDecisions.Shared;
 using TheGreatGroupModules.Modules;
 using System.Web.Routing;
+using System.Drawing;
+using System.Net;
+using Photoshop;
+using MessagingToolkit.QRCode.Codec;
+using MessagingToolkit.QRCode.Codec.Data;
 namespace TheGreatGroupModules.Controllers
 {
     public class CustomersController : Controller
@@ -27,22 +32,38 @@ namespace TheGreatGroupModules.Controllers
         {
             return View();
         }
+        public ActionResult ListContract(int CustomerID)
+        {
+            return View();
+        }
+
+        public ActionResult Contract(int CustomerID, int ContractID)
+        {
+            return View();
+        }
+
+
+        public ActionResult ContractSurety(int CustomerID, int ContractID)
+        {
+            return View();
+        }
 
         public ActionResult EditCustomer(int CustomerID)
         {
             return View();
+
         }
         public ActionResult AddCustomer()
         {
             return View();
         }
-        public ActionResult Contract()
-        {
-            return View();
-        }
+        //public ActionResult Contract()
+        //{
+        //    return View();
+        //}
         public ActionResult Discount()
         {
-          
+
             return View();
         }
         public ActionResult CustomerProduct(int CustomerID)
@@ -174,7 +195,7 @@ namespace TheGreatGroupModules.Controllers
             row2.CreateCell(9).CellStyle = cellStyleHeader;
             sheet1.AddMergedRegion(new CellRangeAddress(_start, _start + 1, 9, 9));
 
-          
+
             //for (int i = 0; i < datareport.Count; i++)
             //{
             //    IRow row = sheet1.CreateRow((i + 1) + (_start + 1));
@@ -281,7 +302,7 @@ namespace TheGreatGroupModules.Controllers
 
             param.Add("pCondition", listData[0].CustomerFirstName + " " + listData[0].CustomerLastName);
 
-                param.Add("pAddress", "  100 ต.ควนมะพร้าว อ.เมืองพัทลุง จ.พัทลุง 10000 เบอร์โทร 081-476-2091");
+            param.Add("pAddress", "  100 ต.ควนมะพร้าว อ.เมืองพัทลุง จ.พัทลุง 10000 เบอร์โทร 081-476-2091");
             Utility.ExportPDF(
                 "RedemptionReport_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"),
                 "~/Report/CustomerReport.rpt",
@@ -304,41 +325,6 @@ namespace TheGreatGroupModules.Controllers
                 return Json(new
                 {
                     data = listData,
-                    success = true
-                }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new
-                {
-                    success = false,
-                    errMsg = ex.Message
-                }, JsonRequestBehavior.AllowGet);
-
-            }
-
-        }
-        // GET: /Customers/GetDataPurchaseData/:id
-        public JsonResult GetDataPurchaseData(int id)
-        {
-
-
-            try
-            {
-                IList<Customers> listData = new List<Customers>();
-                CustomersData data = new CustomersData();
-                listData = data.Get(id);
-
-                IList<Products> listProduct = new List<Products>();
-                ProductData dataPro = new ProductData();
-                listProduct = dataPro.GetListProduct();
-
-
-                //IList<ProductsSelect> listProductsSelect = new List<ProductsSelect>();
-                return Json(new
-                {
-                    data = listData,
-                    dataProduct= listProduct,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -384,59 +370,179 @@ namespace TheGreatGroupModules.Controllers
 
 
         }
-           [HttpPost]
+        [HttpPost]
         public ActionResult AddCustomers(Customers item)
         {
             try
             {
-                new CustomersData().AddCustomer(ref item );
+                new CustomersData().AddCustomer(ref item);
 
                 return RedirectToAction("CustomerProduct", new RouteValueDictionary(
-    new { controller = "Customers", action = "PurchaseOrder", CustomerID = item.CustomerID }));
-           
+    new { controller = "Customers", action = "ListContract", CustomerID = item.CustomerID }));
+
             }
             catch (Exception ex)
             {
-                
-                return RedirectToAction("AddCustomer");
-            }
 
-           
+              //  return RedirectToAction("AddCustomer");
+                return View();
+            }
+        }
+
+        [HttpPost]
+        // POST: /Customers/EditCustomers
+        public JsonResult EditCustomers(Customers item)
+        {
+
+            try
+            {
+                new CustomersData().EditCustomer(ref item);
+
+                return Json(new
+                {
+                    data = "บันทึกการแก้ไขข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
        
+
+        // GET: /Customers/GetCustomerID/:id
+
+        public JsonResult GetCustomerID(int id)
+        {
+            List<Province> listData = new List<Province>();
+            SettingData data = new SettingData();
+            listData = data.GetProvince();
+
+
+            List<District> listData1 = new List<District>();
+            SettingData data1 = new SettingData();
+            listData1 = data.GetDistrict(0);
+
+
+            List<SubDistrict> listData2 = new List<SubDistrict>();
+            SettingData data2 = new SettingData();
+            listData2 = data.GetSubDistrict(0);
+
+            Customers cus_info = new Customers();
+            CustomersData data3 = new CustomersData();
+            cus_info = data3.GetCustomerInfo_ByID(id);
+
+            return Json(new
+            {
+                dataProvince = listData,
+                dataDistrict = listData1,
+                dataSubDistrict = listData2,
+                dataCustomer = cus_info,
+                success = true
+            }, JsonRequestBehavior.AllowGet);
         }
 
 
-           // GET: /Customers/GetCustomerID/:id
 
-           public JsonResult GetCustomerID(int id)
-           {
-               List<Province> listData = new List<Province>();
-               SettingData data = new SettingData();
-               listData = data.GetProvince();
+        [HttpPost]
+        // POST: /Customers/PostChangeMobilePhone
+        public JsonResult PostChangeMobilePhone(Customers item)
+        {
+
+            try
+            {
+                CustomersData CD = new CustomersData();
+                CD.GetChangeMobilePhone(item);
+
+                return Json(new
+                {
+                    data = "บันทึกการแก้ไขข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
+
+        //  POST: /Customers/ExportCard
+
+        public FileResult ExportCard(int ContractID, int CustomerID)
+        {
+           
+            IList<Customers> listData = new List<Customers>();
+            CustomersData data = new CustomersData();
+            listData = data.Get(CustomerID);
+
+            try
+            {
+
+                string yourcode = CustomerID + ":" + ContractID;
+                string firstText = listData[0].CustomerName;
+                string secondText = "(" + listData[0].CustomerNickName + ")";
+
+                PointF firstLocation = new PointF(550f, 250f);
+                PointF secondLocation = new PointF(550f, 300f);
+
+                string imageFilePath = Server.MapPath("~/Content/bg_1.png");
+
+                Bitmap bitmap = new Bitmap(1800, 1400);
+                bitmap = (Bitmap)Image.FromFile(imageFilePath);//load the image file
+
+                //string imageFilePath1 = Server.MapPath("~/Content/qr1.png");
+                //Bitmap bitmap1 = new Bitmap(400, 400);
+                //bitmap1 = (Bitmap)Image.FromFile(imageFilePath1.ToString());//load the image file
+
+              
+                QRCodeEncoder enc = new QRCodeEncoder();
+                enc.QRCodeScale = 5;
+                Bitmap qrcode = enc.Encode(yourcode);
+           
+
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    using (Font arialFont = new Font("Cordia New", 30))
+                    {
+                        graphics.DrawString(firstText, arialFont, Brushes.White, firstLocation);
+                        graphics.DrawString(secondText, new Font("Cordia New", 30), Brushes.White, secondLocation);
 
 
-               List<District> listData1 = new List<District>();
-               SettingData data1 = new SettingData();
-               listData1 = data.GetDistrict(0);
+                        graphics.DrawImage(qrcode.Clone(new Rectangle(0, 0, qrcode.Width - 1, qrcode.Height - 1), qrcode.PixelFormat), new Point(200, 200));
 
 
-               List<SubDistrict> listData2 = new List<SubDistrict>();
-               SettingData data2 = new SettingData();
-               listData2 = data.GetSubDistrict(0);
 
-               Customers cus_info= new Customers();
-               CustomersData data3=new CustomersData();
-               cus_info = data3.GetCustomerInfo_ByID(id);
+                    }
+                }
+                MemoryStream ms = new MemoryStream();
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
 
-               return Json(new
-               {
-                   dataProvince = listData,
-                   dataDistrict = listData1,
-                   dataSubDistrict = listData2,
-                   dataCustomer=cus_info,
-                   success = true
-               }, JsonRequestBehavior.AllowGet);
-           }
-        
+                bitmap.Save(Server.MapPath("~/Content/img1.jpg"), System.Drawing.Imaging.ImageFormat.Png);
+
+                return File(Server.MapPath("~/Content/img1.jpg"), System.Net.Mime.MediaTypeNames.Application.Octet,
+                                       "MEMBER"+(CustomerID*1000) +ContractID+".png");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
     }
 }

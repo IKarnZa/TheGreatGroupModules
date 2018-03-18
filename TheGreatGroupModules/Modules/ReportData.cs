@@ -102,7 +102,7 @@ namespace TheGreatGroupModules.Modules
             {
             List<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
 
-            string StrSql = @"    SELECT  c.CustomerID, ct.ContractID ,c.CustomerMobile, ct.ContractPayment,
+            string StrSql = @"    SELECT  c.CustomerID, ct.ContractID ,c.CustomerMobile,c.CustomerTelephone, ct.ContractPayment,
                                        CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName 
                                     ,c.CustomerNickName,c.SaleID As StaffID   ,                         
                                      ct.ContractNumber,ct.ContractCreateDate,ct.ContractExpDate ,ct.ContractAmount,
@@ -117,7 +117,7 @@ namespace TheGreatGroupModules.Modules
                                     LEFT JOIN Customer c ON  a.CustomerID= c.CustomerId
                                     LEFT JOIN contract ct ON  a.ContractID= ct.ContractID
                                     WHERE 0=0    
-                                    AND a.Activated=0
+                                    AND a.Activated=1
                                     AND a.Deleted=0
                                    AND  c.SaleID=" + staffId +
                                  "  AND a.ContractID=" + ContractID +

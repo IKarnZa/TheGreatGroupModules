@@ -19,21 +19,21 @@ namespace TheGreatGroupModules.Controllers
             return View();
         }
 
-        // GET: /Products/GetListProductCart?CustomerID:id
         [HttpPost]
         public JsonResult GetListProductCart(int CustomerID, int productID,int unit)
         {
 
             List<ProductSelect> ProductData = new List<ProductSelect>();
+
             try
             { 
-             
                 ProductData product = new ProductData();
                 ProductSelect selectItem = new ProductSelect();
                 selectItem.ProductID = productID;
                 selectItem.Unit = unit;
                 product.GetProductPrice(ref selectItem);
                 ProductData.Add(selectItem);
+
                    return Json(new
                 {
                     data = ProductData,
@@ -45,7 +45,7 @@ namespace TheGreatGroupModules.Controllers
                    return Json(new
                 {
                     data = ProductData,
-                    success = true
+                    success = false
                 }, JsonRequestBehavior.AllowGet);
             }
 
@@ -54,16 +54,22 @@ namespace TheGreatGroupModules.Controllers
          
         }
 
-        //TODO :: AddProductData
-        public JsonResult PostAddProduct(List<ProductSelect> products,
+        [HttpPost]
+        public JsonResult PostAddProduct(ProductSelect product,
             int CustomerID, int ContractID)
         {
             try
             {
-                ProductData pd = new ProductData();
+                List<ProductSelect> products = new List<ProductSelect>();
+                products.Add(product);
 
+
+                ProductData pd = new ProductData();
                 pd.AddProductSelect(products, CustomerID, ContractID);
-         
+
+
+              
+
                 return Json(new
                 {
                     data = "",

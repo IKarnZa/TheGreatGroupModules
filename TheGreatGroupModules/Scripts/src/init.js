@@ -71,22 +71,31 @@ function LoadForm_CustomerInfo(
                     dataField: "CustomerFirstName",
                     label: {
                         text: "ชื่อ"
-                    },
-                    isRequired: true
+                    }, isRequired: true
+                    ,
+                        validationRules: [{
+                            type: "required",
+                            message: "ต้องการชื่อลูกค้า"
+                        }],
+                  
                 }, {
                     dataField: "CustomerLastName",
 
                     label: {
                         text: "นามสกุล"
                     }
-                    , isRequired: true
+                    , isRequired: true,
+                    validationRules: [{
+                        type: "required",
+                        message: "ต้องการนามสกุลลูกค้า"
+                    }],
                 },
                 {
                     dataField: "CustomerNickName",
                     label: {
                         text: "ชื่อเล่น"
                     },
-                    isRequired: true
+                    
                 }, {
                     dataField: "CustomerIdCard",
                     label: {
@@ -114,6 +123,10 @@ function LoadForm_CustomerInfo(
                          text: "เบอร์มือถือ"
                      },
                      isRequired: true,
+                     validationRules: [{
+                         type: "required",
+                         message: "ต้องการเบอร์มือถือลูกค้า"
+                     }],
                  }, {
                      dataField: "CustomerStatus",
                      editorOptions: {
@@ -431,4 +444,25 @@ function LoadForm_CustomerInfo(
         ]
     });
 
+}
+
+function convertDate(inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat);
+  return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+}
+
+function formatDate(date) {
+    var monthNames = [
+      "มกราคม", "กุมภาพันธ์", "มีนาคม",
+      "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม",
+      "สิงหาคม", "กันยายน", "ตุลาคม",
+      "พฤศจิกายน", "ธันวาคม"
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }

@@ -15,7 +15,7 @@
     $.get("../Customers/GetCustomerID/" + CustomerID)
     .done(function (data) {
         if (data.success == true) {
-
+            data.dataCustomer.CustomerID = CustomerID;
             dataProvince = data.dataProvince;
             dataDistrict = data.dataDistrict;
             dataSubDistrict = data.dataSubDistrict;
@@ -31,27 +31,31 @@
 
     
     $("#button").dxButton({
-        text: "เพิ่มข้อมูลลูกค้า",
+        text: "แก้ไขข้อมูลลูกค้า",
         type: "success",
         useSubmitBehavior: true,
         validationGroup: "customerData",
-        onInitialized: function (e) {
+        onClick: function (e) {
+            datasourceCustomer = $("#form").dxForm("instance").option('formData');
+            datasourceCustomer.CustomerID = getUrlParameter('CustomerID');
+            $.ajax({
+                url: '../Customers/EditCustomers',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(datasourceCustomer),
+                success: function (data) {
+                  
+
+                    DevExpress.ui.notify(data.data);
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
 
 
         }
     });
 
 
-    $("#form").on("submit", function (e) {
-        console.log(e);
-        DevExpress.ui.notify({
-            message: "You have submitted the form",
-            position: {
-                my: "center top",
-                at: "center top"
-            }
-        }, "success", 3000);
-
-        e.preventDefault();
-    });
 });

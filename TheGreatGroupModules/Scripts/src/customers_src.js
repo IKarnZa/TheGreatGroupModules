@@ -19,7 +19,7 @@ $("#gridshow").hide();
 
         })
     .done(function (data) {
-       
+        console.log(data);
         if (data.success == true) {
           
               Load_DataGrid(data.data);
@@ -84,31 +84,35 @@ $("#gridshow").hide();
                 enabled: true
             },
             columns: [{
-                dataField: "CustomerCode",
-                caption: "รหัสลูกค้า",
-                width: 140,
+                dataField: "CustomerIdCard",
+                caption: "รหัสประจำตัวประชาชน",
+                width: 150,
+                alignment: 'center',
                 allowFiltering: false
             }, {
                 dataField: "CustomerName",
                 caption: "ชื่อ-นามสกุล",
-                width: 240,
+                width: 200,
             },
               {
                   dataField: "CustomerAddress1",
                   caption: "ที่อยู่",
-                  width: 500,
+                  width: 280,
                      
               },
+                {
+                    dataField: "CustomerTelephone",
+                    caption: "เบอร์โทรศัพท์",
+                    width: 130,
+                    alignment: 'center',
+                },
              {
                  dataField: "CustomerMobile",
-                 caption: "เบอร์ติดต่อ",
-                 width: 160,
+                 caption: "เบอร์มือถือ",
+                 width: 130,
+                 alignment: 'center',
              },
-              {
-                  dataField: "CustomerEmail",
-                  caption: "อีเมลล์",
-                  width: 180,
-              },
+           
               {
                   dataField: "CustomerID",
                   caption: "",
@@ -116,9 +120,8 @@ $("#gridshow").hide();
                   allowFiltering: false,
                   fixed: true,
                   fixedPosition: 'right',
-                  width: 50,
+                  width: 60,
                   cellTemplate: function (container, options) {
-                      console.log(options.key);
                       $("<div>")
                           .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
                           .appendTo(container);
@@ -130,34 +133,19 @@ $("#gridshow").hide();
                   caption: "",
                   alignment: '',
                   allowFiltering: false,
-                  width: 50,
+                  width:60,
                   fixed: true,
                   fixedPosition: 'right',
                   cellTemplate: function (container, options) {
                   
                       $("<div>")
-                          .append("<a href='\PurchaseOrder?CustomerID=" + options.key.CustomerID + "'  title='ซื้อสินค้า'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
+                          .append("<a href='\ListContract?CustomerID=" + options.key.CustomerID + "'  title='ซื้อสินค้า'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-shopping-cart'></i></a>")
                           .appendTo(container);
                   }
 
               }
-              ,
-              {
-                  dataField: "CustomerID",
-                  caption: "",
-                  alignment: 'center',
-                  width: 50,
-                  allowFiltering: false,
-                  fixed: true,
-                  fixedPosition: 'right',
-                  cellTemplate: function (container, options) {
-                      console.log(options.key);
-                      $("<div>")
-                          .append("<a href='\PurchaseOrder?CustomerID=" + options.key.CustomerID + "' title='ประวัติการซื้อ'  class='btn btn-warning btn-circle btn-sm' ><i class='fa fa-user'></i></a>")
-                          .appendTo(container);
-                  }
-
-              }
+              
+            
             ],
             onToolbarPreparing: function(e) {
                 e.toolbarOptions.items.push( {

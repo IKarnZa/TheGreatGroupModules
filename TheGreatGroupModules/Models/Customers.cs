@@ -138,6 +138,7 @@ namespace TheGreatGroupModules.Models
                  +" " + dr.Field<string>("CustomerZipCode"),
                 CustomerEmail = dr.Field<string>("CustomerEmail"),
                 CustomerMobile = dr.Field<string>("CustomerMobile"),
+                CustomerTelephone = dr.Field<string>("CustomerTelephone"),
                 CustomerIdCard = dr.Field<string>("CustomerIdCard"),
                 CustomerCareer = dr.Field<string>("CustomerCareer"),
             }).ToList();

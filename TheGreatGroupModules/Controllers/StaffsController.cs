@@ -19,6 +19,22 @@ namespace TheGreatGroupModules.Controllers
             return View();
         }
 
+        public ActionResult ListStaff()
+        {
+            return View();
+        }
+
+
+        public ActionResult SettingPermission()
+        {
+            return View();
+        }
+        public ActionResult StaffLocation()
+        {
+            return View();
+        }
+        
+
         // GET: /Staffs/GetZone
         public JsonResult GetZone()
         {
