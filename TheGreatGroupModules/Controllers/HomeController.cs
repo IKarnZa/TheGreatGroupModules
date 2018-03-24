@@ -23,9 +23,83 @@ namespace TheGreatGroupModules.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else {
+                return RedirectToAction("Login");
+            }
+          
+        }
+        public ActionResult LogIn(StaffLogin login)
+        {
+            if (!String.IsNullOrEmpty(login.StaffCode) || !String.IsNullOrEmpty(login.StaffPassword) )
+            {
+
+                if (Session["iuser"] == null)
+                {
+                    try
+                    {
+                        CustomersData data = new CustomersData();
+                        login = data.GetStaffLogin(login);
+                        Session["iuser"] = login.StaffID;
+                        Session["iusername"] = login.StaffName;
+                        Session["istaffrole"] = login.StaffRoleID;
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["error"] = ex.Message;
+                        return View();
+                    }
+
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else {
+                if (String.IsNullOrEmpty(login.StaffCode) || String.IsNullOrEmpty(login.StaffPassword))
+                {
+                    TempData["error"] = "กรุณากรอกรหัสพนักงานและรหัสผ่าน";
+                    return View();
+                }
+                else if (String.IsNullOrEmpty(login.StaffCode))
+                {
+                    TempData["error"] = "กรุณากรอกรหัสพนักงาน";
+                    return View();
+                }
+                else if (String.IsNullOrEmpty(login.StaffPassword))
+                {
+                    TempData["error"] = "กรุณากรอกรหัสผ่าน";
+                    return View();
+                }
+                else
+                {
+                    TempData["error"] = "ไม่มีข้อมูลพนักงาน";
+                    return View();
+                }
+
+
+            }
+           
+
+
+
+         
+
         }
 
+        public ActionResult LogOut()
+        {
+                Session.Clear();
+                return RedirectToAction("Login");
+            
+          
+        }
+        
         // GET: /Home/CallGold
         public JsonResult CallGold()
         {
@@ -56,12 +130,9 @@ namespace TheGreatGroupModules.Controllers
          
         }
 
-    
-        
-        public ActionResult LogIn()
-        {
-            return View();
-        }
+
+
+     
         public ActionResult Demo()
         {
             return View();

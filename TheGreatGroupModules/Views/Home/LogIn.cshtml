@@ -21,28 +21,28 @@
         <div class="white-box">
             <h3 class="box-title m-b-0" style="font-weight:700;">ระบบจัดการสินเชื่อ </h3>
             <small>บริษัท เดอะเกรทกรุ๊ป จำกัด</small>
-            <form class="form-horizontal new-lg-form" id="loginform" action="index">
+            <form class="form-horizontal new-lg-form" id="loginform" action="LogIn">
 
                 <div class="form-group  m-t-20">
                     <div class="col-xs-12">
                         <label> รหัสพนักงาน </label>
-                        <input class="form-control" type="text" required="" value="admin" placeholder="">
+                        <input class="form-control" type="text" required=""  name="StaffCode" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label> รหัสผ่าน </label>
-                        <input class="form-control" type="password" required="" value="admin" placeholder="">
+                        <input class="form-control" type="password" required="" name="StaffPassword" placeholder="">
                     </div>
                 </div>
-                
+                <p class="text-danger">@TempData["error"] </p>  
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
-                        <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light"   type="submit">เข้าสู่ระบบ</button>
-                    </div>
+                        <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">เข้าสู่ระบบ</button>
+                   </div>
                 </div>
-              
-                
+
+
             </form>
             <form class="form-horizontal" id="recoverform" action="index.html">
                 

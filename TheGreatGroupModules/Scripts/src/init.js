@@ -434,11 +434,31 @@ function LoadForm_CustomerInfo(
 
                    }, ]
                     },
+                   {
+                           itemType: "group",
+                           caption: "ข้อมูลผู้ขาย",
+                           items: [{
+                               dataField: "SaleID",
+                               editorType: "dxSelectBox",
+                               editorOptions: {
+                                   items: title
+                               },
+
+                               label: {
+                                   text: "พนักงานขาย"
+                               },
+                               isRequired: false
+                           },
+                           ]
+                      
+
+                       
+                   },
 
              ]
          },
 
-
+           
 
 
         ]
@@ -466,3 +486,8 @@ function formatDate(date) {
 
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
+// Load menu
+
+//$("#side-menu").html(' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span></a>' +
+//     '<ul class="nav nav-second-level">  <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>'+
+//                            '<li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li></ul></li>');

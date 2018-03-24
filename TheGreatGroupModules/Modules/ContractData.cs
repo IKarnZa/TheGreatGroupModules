@@ -551,6 +551,60 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             return item.CustomerSuretyID;
 
         }
+
+        public int Update_Surety(CustomerSurety item)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+
+                string StrSql = @" Update customer_surety set
+             CustomerSuretyTitle,
+             CustomerSuretyFirstName,
+             CustomerSuretyLastName,
+             CustomerSuretyAddress,
+             CustomerSuretySubDistrict,
+             CustomerSuretyDistrict,
+             CustomerSuretyProvince,
+             CustomerSuretyZipCode,
+             CustomerSuretyIdCard,
+             CustomerSuretyMobile,
+             CustomerSuretyTelephone
+where CustomerSuretyID= {0};";
+
+
+                StrSql = String.Format(StrSql,
+                        item.CustomerSuretyID,
+               Utility.ReplaceString(item.CustomerSuretyTitle),
+               Utility.ReplaceString(item.CustomerSuretyFirstName),
+               Utility.ReplaceString(item.CustomerSuretyLastName),
+               Utility.ReplaceString(item.CustomerSuretyAddress),
+             item.CustomerSuretySubDistrictId,
+             item.CustomerSuretyDistrictId,
+             item.CustomerSuretyProvinceId,
+               Utility.ReplaceString(item.CustomerSuretyZipCode),
+               Utility.ReplaceString(item.CustomerSuretyIdCard),
+               Utility.ReplaceString(item.CustomerSuretyMobile),
+               Utility.ReplaceString(item.CustomerSuretyTelephone)
+               );
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+            return item.CustomerSuretyID;
+
+        }
         public int Add_Partner(CustomerPartner item)
         {
 
@@ -606,7 +660,59 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             return item.CustomerPartnerID;
 
         }
+        public int Update_Partner(CustomerPartner item)
+        {
 
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+
+                string StrSql = @" Update Set customer_Partner
+             CustomerPartnerTitle={1},
+             CustomerPartnerFirstName={2},
+             CustomerPartnerLastName={3},
+             CustomerPartnerAddress={4},
+             CustomerPartnerSubDistrictId={5},
+             CustomerPartnerDistrictId={6},
+             CustomerPartnerProvinceId={7},
+             CustomerPartnerZipCode={8},
+             CustomerPartnerIdCard={9},
+             CustomerPartnerMobile={10},
+             CustomerPartnerTelephone={11}
+            Where   CustomerPartnerID={12}";
+
+
+                StrSql = String.Format(StrSql,
+                        item.CustomerPartnerID,
+               Utility.ReplaceString(item.CustomerPartnerTitle),
+               Utility.ReplaceString(item.CustomerPartnerFirstName),
+               Utility.ReplaceString(item.CustomerPartnerLastName),
+               Utility.ReplaceString(item.CustomerPartnerAddress),
+             item.CustomerPartnerSubDistrictId,
+             item.CustomerPartnerDistrictId,
+             item.CustomerPartnerProvinceId,
+               Utility.ReplaceString(item.CustomerPartnerZipCode),
+               Utility.ReplaceString(item.CustomerPartnerIdCard),
+               Utility.ReplaceString(item.CustomerPartnerMobile),
+               Utility.ReplaceString(item.CustomerPartnerTelephone)
+               );
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+            return item.CustomerPartnerID;
+
+        }
               public void UpdateSurety_In_Contract(Contract item)
         {
             
@@ -672,6 +778,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
 
 
               }
+
+        
 
     }
 }

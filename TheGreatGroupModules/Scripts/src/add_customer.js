@@ -10,9 +10,7 @@ var dataProvince = [];
 var dataDistrict = [];
 var dataSubDistrict = [];
 
-var dataProvince = [];
-var dataDistrict = [];
-var dataSubDistrict = [];
+
     $.get("../Customers/GetCustomerID/0")
 .done(function (data) {
     if (data.success == true) {
@@ -21,6 +19,7 @@ var dataSubDistrict = [];
         dataDistrict = data.dataDistrict;
         dataSubDistrict = data.dataSubDistrict;
         datasourceCustomer = data.dataCustomer;
+
         LoadForm_CustomerInfo(datasourceCustomer,
         dataProvince,
      dataDistrict,

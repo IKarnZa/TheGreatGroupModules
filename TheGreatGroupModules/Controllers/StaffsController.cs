@@ -23,7 +23,19 @@ namespace TheGreatGroupModules.Controllers
         {
             return View();
         }
+        public ActionResult AddStaff()
+        {
+            return View();
+        }
 
+        public ActionResult ListStaffRole()
+        {
+            return View();
+        }
+        public ActionResult ListStaffBranch()
+        {
+            return View();
+        }
 
         public ActionResult SettingPermission()
         {

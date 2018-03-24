@@ -10,106 +10,169 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/addcustomer.cshtml.4204622.compiled">
-      <publishTime>03/04/2018 11:44:36</publishTime>
+      <publishTime>03/22/2018 10:44:57</publishTime>
+    </File>
+    <File Include="bin/addstaff.cshtml.4417396b.compiled">
+      <publishTime>03/22/2018 10:45:05</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/16/2018 16:42:33</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>03/04/2018 11:44:34</publishTime>
+      <publishTime>03/22/2018 10:44:54</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>03/04/2018 11:44:34</publishTime>
+      <publishTime>03/22/2018 10:44:54</publishTime>
     </File>
     <File Include="bin/App_Web_addcustomer.cshtml.4204622.dll">
-      <publishTime>03/04/2018 11:44:36</publishTime>
+      <publishTime>03/22/2018 10:44:57</publishTime>
+    </File>
+    <File Include="bin/App_Web_addstaff.cshtml.4417396b.dll">
+      <publishTime>03/22/2018 10:45:05</publishTime>
     </File>
     <File Include="bin/App_Web_contract.cshtml.4204622.dll">
-      <publishTime>03/04/2018 11:44:36</publishTime>
+      <publishTime>03/22/2018 10:44:58</publishTime>
+    </File>
+    <File Include="bin/App_Web_contractbookreport.aspx.1933d7c.dll">
+      <publishTime>03/22/2018 10:44:55</publishTime>
+    </File>
+    <File Include="bin/App_Web_contractsurety.cshtml.4204622.dll">
+      <publishTime>03/22/2018 10:44:58</publishTime>
     </File>
     <File Include="bin/App_Web_customerhistory.cshtml.bca8ce2d.dll">
-      <publishTime>03/04/2018 11:44:40</publishTime>
+      <publishTime>03/22/2018 10:45:02</publishTime>
     </File>
     <File Include="bin/App_Web_customerproduct.cshtml.4204622.dll">
-      <publishTime>03/04/2018 11:44:37</publishTime>
+      <publishTime>03/22/2018 10:44:58</publishTime>
+    </File>
+    <File Include="bin/App_Web_dailyreport.aspx.1933d7c.dll">
+      <publishTime>03/22/2018 10:44:55</publishTime>
     </File>
     <File Include="bin/App_Web_demo.cshtml.a8d08dba.dll">
-      <publishTime>03/04/2018 11:44:38</publishTime>
+      <publishTime>03/22/2018 10:45:01</publishTime>
     </File>
     <File Include="bin/App_Web_discount.cshtml.4204622.dll">
-      <publishTime>03/04/2018 11:44:37</publishTime>
+      <publishTime>03/22/2018 10:44:59</publishTime>
+    </File>
+    <File Include="bin/App_Web_editcustomer.cshtml.4204622.dll">
+      <publishTime>03/22/2018 10:44:59</publishTime>
     </File>
     <File Include="bin/App_Web_error.cshtml.639c3968.dll">
-      <publishTime>03/04/2018 11:44:40</publishTime>
+      <publishTime>03/22/2018 10:45:03</publishTime>
     </File>
     <File Include="bin/App_Web_index.cshtml.4204622.dll">
-      <publishTime>03/04/2018 11:44:38</publishTime>
+      <publishTime>03/22/2018 10:45:00</publishTime>
     </File>
     <File Include="bin/App_Web_index.cshtml.4417396b.dll">
-      <publishTime>03/04/2018 11:44:42</publishTime>
+      <publishTime>03/22/2018 10:45:05</publishTime>
     </File>
     <File Include="bin/App_Web_index.cshtml.a8d08dba.dll">
-      <publishTime>03/04/2018 11:44:39</publishTime>
+      <publishTime>03/22/2018 10:45:02</publishTime>
     </File>
     <File Include="bin/App_Web_installment.cshtml.bca8ce2d.dll">
-      <publishTime>03/04/2018 11:44:40</publishTime>
+      <publishTime>03/22/2018 10:45:03</publishTime>
+    </File>
+    <File Include="bin/App_Web_listcontract.cshtml.4204622.dll">
+      <publishTime>03/22/2018 10:45:00</publishTime>
+    </File>
+    <File Include="bin/App_Web_liststaff.cshtml.4417396b.dll">
+      <publishTime>03/22/2018 10:45:06</publishTime>
+    </File>
+    <File Include="bin/App_Web_liststaffbranch.cshtml.4417396b.dll">
+      <publishTime>03/22/2018 10:45:06</publishTime>
+    </File>
+    <File Include="bin/App_Web_liststaffrole.cshtml.4417396b.dll">
+      <publishTime>03/22/2018 10:45:06</publishTime>
     </File>
     <File Include="bin/App_Web_login.cshtml.a8d08dba.dll">
-      <publishTime>03/04/2018 11:44:39</publishTime>
+      <publishTime>03/22/2018 10:45:02</publishTime>
     </File>
     <File Include="bin/App_Web_purchaseorder.cshtml.4204622.dll">
-      <publishTime>03/04/2018 11:44:38</publishTime>
+      <publishTime>03/22/2018 10:45:01</publishTime>
+    </File>
+    <File Include="bin/App_Web_settingpermission.cshtml.4417396b.dll">
+      <publishTime>03/22/2018 10:45:07</publishTime>
     </File>
     <File Include="bin/App_Web__layout.cshtml.639c3968.dll">
-      <publishTime>03/04/2018 11:44:41</publishTime>
+      <publishTime>03/22/2018 10:45:04</publishTime>
     </File>
     <File Include="bin/App_Web__layoutpartial.cshtml.639c3968.dll">
-      <publishTime>03/04/2018 11:44:41</publishTime>
+      <publishTime>03/22/2018 10:45:04</publishTime>
     </File>
     <File Include="bin/App_Web__loginpartial.cshtml.639c3968.dll">
-      <publishTime>03/04/2018 11:44:41</publishTime>
+      <publishTime>03/22/2018 10:45:04</publishTime>
     </File>
     <File Include="bin/App_Web__viewstart.cshtml.65a2d1ee.dll">
-      <publishTime>03/04/2018 11:44:42</publishTime>
+      <publishTime>03/22/2018 10:45:07</publishTime>
     </File>
     <File Include="bin/contract.cshtml.4204622.compiled">
-      <publishTime>03/04/2018 11:44:36</publishTime>
+      <publishTime>03/22/2018 10:44:58</publishTime>
+    </File>
+    <File Include="bin/contractbookreport.aspx.1933d7c.compiled">
+      <publishTime>03/22/2018 10:44:55</publishTime>
+    </File>
+    <File Include="bin/contractsurety.cshtml.4204622.compiled">
+      <publishTime>03/22/2018 10:44:58</publishTime>
     </File>
     <File Include="bin/customerhistory.cshtml.bca8ce2d.compiled">
-      <publishTime>03/04/2018 11:44:40</publishTime>
+      <publishTime>03/22/2018 10:45:02</publishTime>
     </File>
     <File Include="bin/customerproduct.cshtml.4204622.compiled">
-      <publishTime>03/04/2018 11:44:37</publishTime>
+      <publishTime>03/22/2018 10:44:59</publishTime>
+    </File>
+    <File Include="bin/dailyreport.aspx.1933d7c.compiled">
+      <publishTime>03/22/2018 10:44:55</publishTime>
     </File>
     <File Include="bin/demo.cshtml.a8d08dba.compiled">
-      <publishTime>03/04/2018 11:44:38</publishTime>
+      <publishTime>03/22/2018 10:45:01</publishTime>
     </File>
     <File Include="bin/discount.cshtml.4204622.compiled">
-      <publishTime>03/04/2018 11:44:37</publishTime>
+      <publishTime>03/22/2018 10:44:59</publishTime>
+    </File>
+    <File Include="bin/editcustomer.cshtml.4204622.compiled">
+      <publishTime>03/22/2018 10:44:59</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/16/2018 16:42:24</publishTime>
     </File>
     <File Include="bin/error.cshtml.639c3968.compiled">
-      <publishTime>03/04/2018 11:44:40</publishTime>
+      <publishTime>03/22/2018 10:45:03</publishTime>
     </File>
     <File Include="bin/Excel.dll">
       <publishTime>06/21/2017 08:50:04</publishTime>
     </File>
     <File Include="bin/index.cshtml.4204622.compiled">
-      <publishTime>03/04/2018 11:44:38</publishTime>
+      <publishTime>03/22/2018 10:45:00</publishTime>
     </File>
     <File Include="bin/index.cshtml.4417396b.compiled">
-      <publishTime>03/04/2018 11:44:42</publishTime>
+      <publishTime>03/22/2018 10:45:05</publishTime>
     </File>
     <File Include="bin/index.cshtml.a8d08dba.compiled">
-      <publishTime>03/04/2018 11:44:39</publishTime>
+      <publishTime>03/22/2018 10:45:02</publishTime>
     </File>
     <File Include="bin/installment.cshtml.bca8ce2d.compiled">
-      <publishTime>03/04/2018 11:44:40</publishTime>
+      <publishTime>03/22/2018 10:45:03</publishTime>
+    </File>
+    <File Include="bin/listcontract.cshtml.4204622.compiled">
+      <publishTime>03/22/2018 10:45:00</publishTime>
+    </File>
+    <File Include="bin/liststaff.cshtml.4417396b.compiled">
+      <publishTime>03/22/2018 10:45:06</publishTime>
+    </File>
+    <File Include="bin/liststaffbranch.cshtml.4417396b.compiled">
+      <publishTime>03/22/2018 10:45:06</publishTime>
+    </File>
+    <File Include="bin/liststaffrole.cshtml.4417396b.compiled">
+      <publishTime>03/22/2018 10:45:06</publishTime>
     </File>
     <File Include="bin/login.cshtml.a8d08dba.compiled">
-      <publishTime>03/04/2018 11:44:39</publishTime>
+      <publishTime>03/22/2018 10:45:02</publishTime>
+    </File>
+    <File Include="bin/MessagingToolkit.QRCode.dll">
+      <publishTime>03/18/2018 14:07:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Types.dll">
+      <publishTime>03/18/2018 21:15:56</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>02/16/2018 16:42:30</publishTime>
@@ -127,7 +190,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/21/2017 08:50:04</publishTime>
     </File>
     <File Include="bin/purchaseorder.cshtml.4204622.compiled">
-      <publishTime>03/04/2018 11:44:38</publishTime>
+      <publishTime>03/22/2018 10:45:01</publishTime>
+    </File>
+    <File Include="bin/Report/ContractBookReport.aspx">
+      <publishTime>03/04/2018 23:53:38</publishTime>
+    </File>
+    <File Include="bin/Report/ContractBookReport.rdlc">
+      <publishTime>03/18/2018 21:12:49</publishTime>
+    </File>
+    <File Include="bin/Report/DailyReport.aspx">
+      <publishTime>03/22/2018 10:45:07</publishTime>
+    </File>
+    <File Include="bin/Report/DailyReport.rdlc">
+      <publishTime>03/18/2018 21:04:39</publishTime>
+    </File>
+    <File Include="bin/settingpermission.cshtml.4417396b.compiled">
+      <publishTime>03/22/2018 10:45:07</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>02/16/2018 16:42:31</publishTime>
@@ -160,28 +238,49 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/16/2018 16:42:31</publishTime>
     </File>
     <File Include="bin/TheGreatGroupModules.dll">
-      <publishTime>03/04/2018 11:43:34</publishTime>
+      <publishTime>03/22/2018 10:43:50</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>02/16/2018 16:42:33</publishTime>
     </File>
     <File Include="bin/_layout.cshtml.639c3968.compiled">
-      <publishTime>03/04/2018 11:44:41</publishTime>
+      <publishTime>03/22/2018 10:45:04</publishTime>
     </File>
     <File Include="bin/_layoutpartial.cshtml.639c3968.compiled">
-      <publishTime>03/04/2018 11:44:41</publishTime>
+      <publishTime>03/22/2018 10:45:04</publishTime>
     </File>
     <File Include="bin/_loginpartial.cshtml.639c3968.compiled">
-      <publishTime>03/04/2018 11:44:42</publishTime>
+      <publishTime>03/22/2018 10:45:04</publishTime>
     </File>
     <File Include="bin/_viewstart.cshtml.65a2d1ee.compiled">
-      <publishTime>03/04/2018 11:44:42</publishTime>
+      <publishTime>03/22/2018 10:45:07</publishTime>
+    </File>
+    <File Include="Content/bg.jpg">
+      <publishTime>03/13/2018 21:10:57</publishTime>
+    </File>
+    <File Include="Content/bg_1.png">
+      <publishTime>03/18/2018 14:13:50</publishTime>
     </File>
     <File Include="Content/datepicker-th.js">
       <publishTime>03/03/2018 17:16:09</publishTime>
     </File>
     <File Include="Content/generic.light.custom.css">
       <publishTime>03/03/2018 17:51:56</publishTime>
+    </File>
+    <File Include="Content/icons/dxicons.ttf">
+      <publishTime>03/08/2018 20:55:14</publishTime>
+    </File>
+    <File Include="Content/icons/dxicons.woff">
+      <publishTime>03/08/2018 20:55:14</publishTime>
+    </File>
+    <File Include="Content/icons/dxiconsios.ttf">
+      <publishTime>03/08/2018 20:55:15</publishTime>
+    </File>
+    <File Include="Content/icons/dxiconsios.woff">
+      <publishTime>03/08/2018 20:55:15</publishTime>
+    </File>
+    <File Include="Content/qr1.png">
+      <publishTime>03/13/2018 21:20:34</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>02/16/2018 16:42:23</publishTime>
@@ -349,10 +448,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/16/2018 16:42:29</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/16/2018 16:42:34</publishTime>
+      <publishTime>03/18/2018 21:04:39</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>03/04/2018 11:44:29</publishTime>
+      <publishTime>03/22/2018 10:44:50</publishTime>
+    </File>
+    <File Include="QRCoderProject.Portable.csproj">
+      <publishTime>03/18/2018 11:58:40</publishTime>
+    </File>
+    <File Include="Report/ContractBookReport.aspx">
+      <publishTime>03/22/2018 10:45:08</publishTime>
+    </File>
+    <File Include="Report/DailyReport.aspx">
+      <publishTime>03/22/2018 10:45:08</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.js">
       <publishTime>02/16/2018 16:42:28</publishTime>
@@ -393,17 +501,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>02/16/2018 16:42:30</publishTime>
     </File>
+    <File Include="Scripts/src/add_contract.js">
+      <publishTime>03/21/2018 10:55:22</publishTime>
+    </File>
+    <File Include="Scripts/src/add_customer.js">
+      <publishTime>03/22/2018 00:05:53</publishTime>
+    </File>
     <File Include="Scripts/src/customers_src.js">
-      <publishTime>02/24/2018 01:05:29</publishTime>
+      <publishTime>03/18/2018 18:06:31</publishTime>
     </File>
     <File Include="Scripts/src/customer_product.js">
       <publishTime>02/22/2018 22:55:15</publishTime>
     </File>
+    <File Include="Scripts/src/edit_customer.js">
+      <publishTime>03/18/2018 20:23:25</publishTime>
+    </File>
     <File Include="Scripts/src/index.js">
-      <publishTime>02/27/2018 19:37:45</publishTime>
+      <publishTime>03/08/2018 11:19:27</publishTime>
+    </File>
+    <File Include="Scripts/src/init.js">
+      <publishTime>03/22/2018 00:16:46</publishTime>
     </File>
     <File Include="Scripts/src/installment.js">
-      <publishTime>03/03/2018 21:45:27</publishTime>
+      <publishTime>03/21/2018 19:41:28</publishTime>
     </File>
     <File Include="Scripts/src/reports_src.js">
       <publishTime>02/17/2018 14:24:38</publishTime>
@@ -9247,61 +9367,85 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/01/2018 13:59:16</publishTime>
     </File>
     <File Include="Views/Customers/AddCustomer.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Customers/Contract.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Customers/ContractSurety.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Customers/CustomerProduct.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Customers/Discount.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Customers/EditCustomer.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Customers/Index.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Customers/ListContract.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Customers/PurchaseOrder.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Home/Demo.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Home/LogIn.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/ManagePayment/CustomerHistory.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/ManagePayment/Installment.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutPartial.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Staffs/AddStaff.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Staffs/Index.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Staffs/ListStaff.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Staffs/ListStaffBranch.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Staffs/ListStaffRole.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
+    </File>
+    <File Include="Views/Staffs/SettingPermission.cshtml">
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>02/16/2018 16:42:23</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>03/04/2018 11:46:01</publishTime>
+      <publishTime>03/22/2018 10:46:33</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/17/2018 22:13:05</publishTime>
+      <publishTime>03/22/2018 10:44:44</publishTime>
     </File>
   </ItemGroup>
 </Project>
