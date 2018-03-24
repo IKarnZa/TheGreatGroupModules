@@ -20,7 +20,7 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string StrSql = @"  SELECT zoneid ,CONCAT(zonecode,'-',zonename) AS zonename 
+                string StrSql = @"  SELECT zoneid ,zonecode,CONCAT(zonecode,'-',zonename) AS zonename 
                                     FROM zone
                                     WHERE Activated=1 AND Deleted=0 ";
 

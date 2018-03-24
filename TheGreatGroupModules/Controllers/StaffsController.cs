@@ -59,6 +59,7 @@ namespace TheGreatGroupModules.Controllers
                         item = dt.AsEnumerable().Select(dr => new ListItems()
                         {
                             ID = dr.Field<int>("zoneid"),
+                            Code =dr.Field<string>("zonecode"),
                             Value = dr.Field<string>("zonename"),
 
                         }).ToList();
