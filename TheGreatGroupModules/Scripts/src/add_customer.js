@@ -9,7 +9,7 @@ var employee = {
 var dataProvince = [];
 var dataDistrict = [];
 var dataSubDistrict = [];
-
+var dataZone = [];
 
     $.get("../Customers/GetCustomerID/0")
 .done(function (data) {
@@ -19,11 +19,14 @@ var dataSubDistrict = [];
         dataDistrict = data.dataDistrict;
         dataSubDistrict = data.dataSubDistrict;
         datasourceCustomer = data.dataCustomer;
+        dataZone = data.dataZone;
+
 
         LoadForm_CustomerInfo(datasourceCustomer,
         dataProvince,
      dataDistrict,
-    dataSubDistrict);
+    dataSubDistrict,
+    dataZone);
        
 
         $("#loadIndicator").dxLoadIndicator({

@@ -11,6 +11,8 @@
     var dataProvince = [];
     var dataDistrict = [];
     var dataSubDistrict = [];
+    var dataZone = [];
+
     var CustomerID = getUrlParameter('CustomerID');
     $.get("../Customers/GetCustomerID/" + CustomerID)
     .done(function (data) {
@@ -20,7 +22,9 @@
             dataDistrict = data.dataDistrict;
             dataSubDistrict = data.dataSubDistrict;
             datasourceCustomer = data.dataCustomer;
-            LoadForm_CustomerInfo(datasourceCustomer, dataProvince,dataDistrict, dataSubDistrict);
+            dataZone = data.dataZone;
+
+            LoadForm_CustomerInfo(datasourceCustomer, dataProvince, dataDistrict, dataSubDistrict, dataZone);
             $("#loadIndicator").dxLoadIndicator({
                 visible: false
             });

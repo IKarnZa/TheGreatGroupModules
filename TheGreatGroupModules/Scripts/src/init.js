@@ -37,8 +37,8 @@ function LoadForm_CustomerInfo(
     datasourceCustomer,
     dataProvince,
      dataDistrict,
-    dataSubDistrict
- 
+    dataSubDistrict,
+    dataZone
     ) {
 
 
@@ -439,9 +439,11 @@ function LoadForm_CustomerInfo(
                            caption: "ข้อมูลผู้ขาย",
                            items: [{
                                dataField: "SaleID",
-                               editorType: "dxSelectBox",
+                               editorType: "dxLookup",
                                editorOptions: {
-                                   items: title
+                                   items: dataZone,
+                                   valueExpr: 'ID',
+                                   displayExpr: 'Value'
                                },
 
                                label: {
