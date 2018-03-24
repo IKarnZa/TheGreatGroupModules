@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using TheGreatGroupModules.Models;
 
 namespace TheGreatGroupModules.Modules
 {
@@ -19,7 +20,7 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string StrSql = @"  SELECT zoneid ,CONCAT(zonecode,'-',zonename) AS zonename 
+                string StrSql = @"  SELECT zoneid ,zonecode,CONCAT(zonecode,'-',zonename) AS zonename 
                                     FROM zone
                                     WHERE Activated=1 AND Deleted=0 ";
 
@@ -38,6 +39,30 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+        public DataTable GetStaffRole()
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+
+                string StrSql = @" SELECT * FROM staffrole WHERE Deleted=0 ";
+
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
 
         public DataTable GetStaff(int staffroleId, int zoneId)
         {
@@ -70,6 +95,25 @@ namespace TheGreatGroupModules.Modules
             {
                 ObjConn.Close();
             }
+        }
+
+        public void AddStaffRole(StaffRole role) {
+
+
+               MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+                string strSql = @"insert into";
+
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        
         }
     }
 }

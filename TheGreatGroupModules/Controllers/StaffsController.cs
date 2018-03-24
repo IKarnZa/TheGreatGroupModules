@@ -23,7 +23,19 @@ namespace TheGreatGroupModules.Controllers
         {
             return View();
         }
+        public ActionResult AddStaff()
+        {
+            return View();
+        }
 
+        public ActionResult ListStaffRole()
+        {
+            return View();
+        }
+        public ActionResult ListStaffBranch()
+        {
+            return View();
+        }
 
         public ActionResult SettingPermission()
         {
@@ -47,6 +59,7 @@ namespace TheGreatGroupModules.Controllers
                         item = dt.AsEnumerable().Select(dr => new ListItems()
                         {
                             ID = dr.Field<int>("zoneid"),
+                            Code =dr.Field<string>("zonecode"),
                             Value = dr.Field<string>("zonename"),
 
                         }).ToList();

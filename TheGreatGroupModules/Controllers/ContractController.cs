@@ -53,14 +53,27 @@ namespace TheGreatGroupModules.Controllers
         {
             try
             {
+                List<Province> listData4 = new List<Province>();
+                SettingData data = new SettingData();
+                listData4 = data.GetProvince();
+
+
+                List<District> listData1 = new List<District>();
+                SettingData data1 = new SettingData();
+                listData1 = data.GetDistrict(0);
+
+
+                List<SubDistrict> listData2 = new List<SubDistrict>();
+                SettingData data2 = new SettingData();
+                listData2 = data.GetSubDistrict(0);
 
                 IList<Contract> listContract = new List<Contract>();
                 ContractData cd = new ContractData();
                 listContract = cd.GetContract(CustomerID, ContractID);
 
                 IList<Customers> listData = new List<Customers>();
-                CustomersData data = new CustomersData();
-                listData = data.Get(CustomerID);
+                CustomersData dataCus = new CustomersData();
+                listData = dataCus.Get(CustomerID);
 
                 ProductData dataPro = new ProductData();
                 IList<ProductSelect> listProductsSelect = new List<ProductSelect>();
@@ -71,11 +84,15 @@ namespace TheGreatGroupModules.Controllers
                 List<ProductSelect> listProductsSelect1 = new List<ProductSelect>();
                 listProductsSelect1 = dataPro.ProductContractSummary(listProductsSelect);
 
+
                 return Json(new
                 {
                     data = listContract,
                     dataCustomers = listData,
                     dataProductSelect = listProductsSelect1,
+                    dataProvince = listData4,
+                    dataDistrict = listData1,
+                    dataSubDistrict = listData2,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -169,13 +186,33 @@ namespace TheGreatGroupModules.Controllers
         [HttpPost]
         public JsonResult PostEdit_Contract(Contract item)
         {
-
+            int Surety1 = 0;
+            int Surety2 = 0;
+            int parner = 0;
             try
             {
                 ContractData CD = new ContractData();
                 CD.Edit_NewContract(item);
 
+                //check insert Surety1
+
+                if (item.CustomerSurety1 == 0)
+                {
+                    Surety1 = CD.Add_Surety(item.CustomerSuretyData1);
+                }
+                else {
+               //     Surety1 = CD.Edit_Surety(item.CustomerSuretyData1);
+                }
+
+                
                 //check insert Partner
+                  if (item.CustomerPartner == 0)
+                {
+                    parner = CD.Add_Partner(item.CustomerPartnerData);
+                }
+                else {
+                    parner = CD.Update_Partner(item.CustomerPartnerData);
+                }
 
 
                 //check insert Surety1

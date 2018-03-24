@@ -182,12 +182,12 @@
                         </form>
                     </li>*@
                     <li class="dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="~/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="~/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">@Session["iusername"]</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img"><img src="~/Template/plugins/images/users/varun.jpg" alt="user" /></div>
-                                    <div class="u-text"><h4>Steave Jobs</h4><p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                    <div class="u-text"><h4>@Session["iusername"]</h4><p class="text-muted">พนักงานขาย</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
@@ -197,7 +197,7 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="../Home/Login"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a href="../Home/LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
@@ -232,8 +232,8 @@
                     </div>
                 </div>
                 <ul class="nav" id="side-menu">
-                    @*<li><a href="javascript:void(0)" class="waves-effect active"><i data-icon="7" class="linea-icon linea-basic fa-fw"></i><span class="hide-menu">ระบบจัดการสมาชิก </span></a> </li>*@
-                    <li>
+            
+                    <li> 
                         <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span>
                             @*<span class="label label-rouded label-purple pull-right">2</span>*@
                             </span></a>
@@ -274,9 +274,12 @@
                         <ul class="nav nav-second-level">
                             <li> <a href="javascript:void(0)"><i class="fa fa-list-alt"></i><span class="hide-menu"> จัดการข้อมูลสินค้า</span></a> </li>
                             <li> <a href="javascript:void(0)"><i class="fa fa-map-marker"></i><span class="hide-menu"> ระบบติดตามพนักงาน</span></a> </li>
+                            <li> <a href="../Setting/ListZone"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพื้นที่ทำงาน</span></a> </li>
                         </ul>
                     </li>
                 </ul>
+
+             
             </div>
         </div>
         <!-- Left navbar-header end -->

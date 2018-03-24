@@ -162,7 +162,11 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
 
+=======
+    <Reference Include="System.Xml.Linq" />
+>>>>>>> 02381d454b69740040f31aaccdafafca449f224a
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
@@ -176,12 +180,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagePaymentController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,6 +196,7 @@
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Customers.cs" />
     <Compile Include="Models\GoldData.cs" />
+    <Compile Include="Models\ListCustomerOnMobile.cs" />
     <Compile Include="Modules\ContractData.cs" />
     <Compile Include="Modules\ProductData.cs" />
     <Compile Include="Models\Province.cs" />
@@ -225,7 +232,6 @@
       <DependentUpon>DailyReport.aspx</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bg.jpg" />
@@ -322,6 +328,7 @@
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\init.js" />
     <Content Include="Scripts\src\installment.js" />
+    <Content Include="Scripts\src\manage_zone.js" />
     <Content Include="Scripts\src\reports_src.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Sources\EULA\AngularJS License.txt" />
@@ -456,11 +463,6 @@
     <Content Include="Sources\Lib\ts\dx.all.legacy.d.ts" />
     <Content Include="Sources\Lib\ts\jquery.d.ts" />
     <Content Include="Sources\Lib\ts\knockout.d.ts" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="Template\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Template\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Template\bootstrap\dist\css\bootstrap.css" />
@@ -3304,6 +3306,11 @@
     <Content Include="Views\Customers\ContractSurety.cshtml" />
     <Content Include="Views\Staffs\ListStaff.cshtml" />
     <Content Include="Views\Staffs\SettingPermission.cshtml" />
+    <Content Include="Views\Staffs\AddStaff.cshtml" />
+    <Content Include="Views\Staffs\ListStaffRole.cshtml" />
+    <Content Include="Views\Staffs\ListStaffBranch.cshtml" />
+    <Content Include="Views\Report\OpenCloseAccountReport.cshtml" />
+    <Content Include="Views\Setting\ListZone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

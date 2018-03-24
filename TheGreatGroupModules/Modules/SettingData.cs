@@ -14,6 +14,7 @@ namespace TheGreatGroupModules.Modules
     {
 
         private string errMsg = "";
+
         public List<GoldData> GetPriceGold()
         {
 

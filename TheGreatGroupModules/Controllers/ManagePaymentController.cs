@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TheGreatGroupModules.Models;
 using TheGreatGroupModules.Modules;
 
 namespace TheGreatGroupModules.Controllers
@@ -52,6 +53,7 @@ namespace TheGreatGroupModules.Controllers
                 {
                     data = listData,
                     SumData = (listData.Sum(c => c.PriceReceipts)).ToString("#,##0.00"),
+                    SumDataContractAmount = (listData.Sum(c => c.ContractAmount)).ToString("#,##0.00"),
                     countData= listData.Count,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
@@ -156,6 +158,33 @@ namespace TheGreatGroupModules.Controllers
              }
 
 
+        // GET: /ManagePayment/GetListCustomerOnMobile?staffId=1
+        public JsonResult GetListCustomerOnMobile(int staffId)
+        {
+
+            try
+            {
+                CustomersData cus =new CustomersData();
+                IList<ListCustomerOnMobile> listData = new List<ListCustomerOnMobile>();
+                    listData=  cus.GetListCustomerOnMobile( staffId);
+         
+
+                return Json(new
+                {
+                    data = listData,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
     }
 }

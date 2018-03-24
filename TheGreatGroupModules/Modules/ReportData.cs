@@ -117,7 +117,6 @@ namespace TheGreatGroupModules.Modules
                                     LEFT JOIN Customer c ON  a.CustomerID= c.CustomerId
                                     LEFT JOIN contract ct ON  a.ContractID= ct.ContractID
                                     WHERE 0=0    
-                                    AND a.Activated=1
                                     AND a.Deleted=0
                                    AND  c.SaleID=" + staffId +
                                  "  AND a.ContractID=" + ContractID +
@@ -156,10 +155,11 @@ namespace TheGreatGroupModules.Modules
                     FROM daily_receipts dr
                     LEFT JOIN contract c ON dr.ContractID=c.ContractID
                     WHERE dr.Deleted=0 AND
-                    dr.customerID=1 AND 
-                    dr.ContractID=1
+                    dr.customerID={0} AND 
+                    dr.ContractID={1}
                     GROUP BY dr.customerID,dr.ContractID,DATE(dr.DateAsOf)
-                    ) tb ";
+                    ) tb where tb.Amount>0";
+                StrSql = string.Format(StrSql, CustomerID, ContractID);
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
                 if (dt != null && dt.Rows.Count > 0)
                 {

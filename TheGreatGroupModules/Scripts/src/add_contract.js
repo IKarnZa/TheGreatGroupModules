@@ -21,10 +21,16 @@
     var CustomerSuretyData1 = Object();
     var CustomerSuretyData2 = Object();
     var CustomerPartnerData = Object();
+    var dataProvince = [];
+    var dataDistrict = [];
+    var dataSubDistrict = [];
     $.get("../Contract/GetContract?CustomerID=" + getUrlParameter('CustomerID')
        + "&ContractID=" + getUrlParameter('ContractID'))
         .done(function (result) {
            
+            dataProvince = result.dataProvince;
+            dataDistrict = result.dataDistrict;
+            dataSubDistrict = result.dataSubDistrict;
            /* ================= ข้อมูลสัญญา =====================*/
            var ListContract = [];
            if (getUrlParameter('ContractID') != 0) {
@@ -215,18 +221,22 @@
                    label: {
                        text: "ตำบล"
                    },
-                   editorType: "dxSelectBox",
+                   editorType: "dxLookup",
                    editorOptions: {
-                       items: title,
+                       dataSource: dataSubDistrict,
+                       valueExpr: 'SubDistrictID',
+                       displayExpr: 'SubDistrictName'
                    },
                }, {
                    dataField: "CustomerSuretyDistrict",
                    label: {
                        text: "อำเภอ"
                    },
-                   editorType: "dxSelectBox",
+                   editorType: "dxLookup",
                    editorOptions: {
-                       items: title,
+                       dataSource: dataDistrict,
+                       valueExpr: 'DistrictID',
+                       displayExpr: 'DistrictName'
                    },
                },
                 {
@@ -234,9 +244,11 @@
                     label: {
                         text: "จังหวัด"
                     },
-                    editorType: "dxSelectBox",
+                    editorType: "dxLookup",
                     editorOptions: {
-                        items: title,
+                        dataSource: dataProvince,
+                        valueExpr: 'ProvinceID',
+                        displayExpr: 'ProvinceName'
                     },
                 },
              {
@@ -310,18 +322,22 @@
                    label: {
                        text: "ตำบล"
                    },
-                   editorType: "dxSelectBox",
+                   editorType: "dxLookup",
                    editorOptions: {
-                       items: title,
+                       dataSource: dataSubDistrict,
+                       valueExpr: 'SubDistrictID',
+                       displayExpr: 'SubDistrictName'
                    },
                }, {
                    dataField: "CustomerSuretyDistrict",
                    label: {
                        text: "อำเภอ"
                    },
-                   editorType: "dxSelectBox",
+                   editorType: "dxLookup",
                    editorOptions: {
-                       items: title,
+                       dataSource: dataDistrict,
+                       valueExpr: 'DistrictID',
+                       displayExpr: 'DistrictName'
                    },
                },
                 {
@@ -329,9 +345,11 @@
                     label: {
                         text: "จังหวัด"
                     },
-                    editorType: "dxSelectBox",
+                    editorType: "dxLookup",
                     editorOptions: {
-                        items: title,
+                        dataSource: dataProvince,
+                        valueExpr: 'ProvinceID',
+                        displayExpr: 'ProvinceName'
                     },
                 },
              {
@@ -404,18 +422,22 @@
                    label: {
                        text: "ตำบล"
                    },
-                   editorType: "dxSelectBox",
+                   editorType: "dxLookup",
                    editorOptions: {
-                       items: title,
+                       dataSource: dataSubDistrict,
+                       valueExpr: 'SubDistrictID',
+                       displayExpr: 'SubDistrictName'
                    },
                }, {
                    dataField: "CustomerPartnerDistrict",
                    label: {
                        text: "อำเภอ"
                    },
-                   editorType: "dxSelectBox",
+                   editorType: "dxLookup",
                    editorOptions: {
-                       items: title,
+                       dataSource: dataDistrict,
+                       valueExpr: 'DistrictID',
+                       displayExpr: 'DistrictName'
                    },
                },
                 {
@@ -423,9 +445,11 @@
                     label: {
                         text: "จังหวัด"
                     },
-                    editorType: "dxSelectBox",
+                    editorType: "dxLookup",
                     editorOptions: {
-                        items: title,
+                        dataSource: dataProvince,
+                        valueExpr: 'ProvinceID',
+                        displayExpr: 'ProvinceName'
                     },
                 },
              {
@@ -560,9 +584,7 @@ function PrintCard() {
 
     var a = $("<a>").attr("href", "../Customers/ExportCard?ContractID=" + getUrlParameter('ContractID')
         + "&CustomerID=" + getUrlParameter('CustomerID')).attr("download", "img1.png").appendTo("body");
-
     a[0].click();
-
     a.remove();
     
 }
@@ -570,6 +592,7 @@ function PrintCard() {
 function PrintContract() {
     alert("พิมพ์สัญญา");
 
+    //http://localhost:31659/Report/ContractBookReport.aspx?staffID=1&date=12/03/2018
 }
 
 function Submit_Click() {
@@ -577,7 +600,7 @@ function Submit_Click() {
     var Contract = $("#form").dxForm("instance").option('formData');
     Contract.ContractID = getUrlParameter('ContractID');
     Contract.ContractCustomerID = getUrlParameter('CustomerID');
-    Contract.ContractPartnerData = $("#form4").dxForm("instance").option('formData');
+    Contract.CustomerPartnerData = $("#form4").dxForm("instance").option('formData');
     Contract.CustomerSuretyData1 = $("#form1").dxForm("instance").option('formData');
     Contract.CustomerSuretyData2 = $("#form2").dxForm("instance").option('formData');
 
@@ -591,7 +614,7 @@ function Submit_Click() {
             data: JSON.stringify(Contract),
             success: function (data) {
                 if (data.success == true) {
-                    window.location = "../Contract/Contract?CustomerID=" + getUrlParameter('CustomerID') +
+                    window.location = "../Customers/Contract?CustomerID=" + getUrlParameter('CustomerID') +
                "&ContractID=" + data.ContractID;
                 } else {
                     alert(data.data);

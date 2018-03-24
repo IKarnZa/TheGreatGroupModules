@@ -12,6 +12,11 @@ namespace TheGreatGroupModules.Controllers
     public class SettingController : Controller
     {
 
+        public ActionResult ListZone()
+        {
+            return View();
+        }
+
         // GET: /Setting/GetLocation/
         public JsonResult GetLocation()
         {
@@ -153,5 +158,8 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+
+
+
     }
 }

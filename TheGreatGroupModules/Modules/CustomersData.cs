@@ -500,5 +500,79 @@ namespace TheGreatGroupModules.Modules
                }
         }
 
+        public List<ListCustomerOnMobile> GetListCustomerOnMobile(int StaffID)
+        {
+            List<ListCustomerOnMobile> list = new List<ListCustomerOnMobile>(); 
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string sqlStr = @"SELECT  c.CustomerId,CONCAT(c.CustomerTitleName,c.CustomerFirstName,' ',c.CustomerLastName) AS CustomerName
+                ,ct.ContractID,ct.ContractNumber,ct.ContractExpDate,ct.ContractAmount,ct.ContractPayment , (ct.ContractPayment-d.TotalPay ) AS TotalPay,
+                CASE WHEN  PriceReceipts IS NOT NULL THEN 1 ELSE 0 END AS StatusPay
+                 FROM customer c 
+                LEFT JOIN contract ct ON c.CustomerId=ct.contractCustomerID
+                 LEFT JOIN (SELECT SUM(PriceReceipts)AS TotalPay , ContractID ,CustomerID  FROM  daily_receipts
+                 Where   Deleted=0
+                GROUP BY   ContractID ,CustomerID )d ON 
+                d.ContractID=ct.ContractID AND d.CustomerID=ct.ContractCustomerID 
+                LEFT JOIN (
+                SELECT  ContractID ,CustomerID,DateAsOf,PriceReceipts  
+                FROM  daily_receipts 
+                WHERE DATE(DateAsOf)={0}
+                GROUP BY   ContractID ,CustomerID) st ON
+                st.ContractID=ct.ContractID AND st.CustomerID=ct.ContractCustomerID 
+                WHERE c.SaleID={1} AND ct.ContractID IS NOT NULL
+                 AND ct.contractstatus=1
+                ";
+                sqlStr = String.Format(sqlStr,
+                       Utility.FormateDate(DateTime.Now),
+                       StaffID);
+
+              DataTable dt=   DBHelper.List(sqlStr, ObjConn);
+              if (dt != null && dt.Rows.Count > 0)
+              {
+                  list= ListCustomerOnMobile.ToObjectList(dt);
+              }
+
+              return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
+
+        public StaffLogin GetStaffLogin(StaffLogin login)
+        {
+             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+
+                string strSQL = "select * FROM staff Where Staffcode={0} and staffpassword={1} and Deleted=0 and Activated=1 ";
+                strSQL = string.Format(strSQL, Utility.ReplaceString(login.StaffCode), Utility.ReplaceString(Utility.HashPassword(login.StaffPassword)));
+                DataTable dt = DBHelper.List(strSQL, ObjConn);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    login.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
+                    login.StaffName = dt.Rows[0]["StaffFirstName"].ToString();
+                    login.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+                }
+                else {
+                    throw new Exception("รหัสพนักงาน หรือ รหัสผ่านไม่ถูกต้อง,กรุณาตรวจสอบ");
+                }
+                return login;
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
     }
 }
