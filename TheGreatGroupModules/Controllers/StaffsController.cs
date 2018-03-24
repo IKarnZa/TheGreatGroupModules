@@ -16,34 +16,90 @@ namespace TheGreatGroupModules.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
 
         public ActionResult ListStaff()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
         public ActionResult AddStaff()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
 
         public ActionResult ListStaffRole()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
         public ActionResult ListStaffBranch()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
 
         public ActionResult SettingPermission()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
         public ActionResult StaffLocation()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+          
         }
         
 
@@ -71,7 +127,7 @@ namespace TheGreatGroupModules.Controllers
                 success = true
             }, JsonRequestBehavior.AllowGet);
         }
-        // GET: /Staffs/GetZone
+       
         public JsonResult GetStaffs(int staffroleId,int zoneId)
         {
             // รับค่าราคา
@@ -97,5 +153,55 @@ namespace TheGreatGroupModules.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        // GET: /Staffs/GetStaffData?staffID=0&staffroleId=0
+        public JsonResult GetStaffData(int staffID,int staffroleId)
+        {
+            // รับค่าราคา
+            StaffData st = new StaffData();
+            DataTable dt = new DataTable();
+            List<Staffs> staffList=new List<Staffs>();
+
+            try
+            {
+                dt = st.GetStaffRole(staffID, staffroleId);
+                if (dt.Rows.Count > 0)
+                {
+                    staffList = dt.AsEnumerable().Select(dr => new Staffs()
+                    {
+                        StaffID = dr.Field<int>("StaffID"),
+                        StaffCode = dr.Field<string>("StaffCode"),
+                        StaffTitleName = dr.Field<string>("StaffTitleName"),
+                        StaffFirstName = dr.Field<string>("StaffFirstName"),
+                        StaffLastName = dr.Field<string>("StaffLastName"),
+                        StaffRoleID = dr.Field<int>("StaffRoleID"),
+                        StaffRoleName = dr.Field<string>("StaffRoleName"),
+                        StaffName = dr.Field<string>("StaffTitleName") + dr.Field<string>("StaffFirstName") + " "
+                        + dr.Field<string>("StaffLastName"),
+
+                    }).ToList();
+
+                }
+
+
+                return Json(new
+                {
+                    data = staffList,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+         
+
+
+        }
     }
 }

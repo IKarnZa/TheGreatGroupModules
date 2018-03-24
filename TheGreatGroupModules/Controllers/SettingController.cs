@@ -14,7 +14,14 @@ namespace TheGreatGroupModules.Controllers
 
         public ActionResult ListZone()
         {
-            return View();
+             if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else {
+                return RedirectToAction("Login");
+            }
+          
         }
 
         // GET: /Setting/GetLocation/

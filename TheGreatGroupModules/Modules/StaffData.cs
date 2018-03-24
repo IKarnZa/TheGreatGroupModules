@@ -39,7 +39,7 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public DataTable GetStaffRole()
+        public DataTable GetStaffRole(int staffid, int staffroleid)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -47,9 +47,15 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string StrSql = @" SELECT * FROM staffrole WHERE Deleted=0 ";
+                string StrSql = @" SELECT s.*,sr.StaffRoleName FROM  Staff  s
+            LEFT JOIN  staffrole sr ON s.StaffRoleID = sr.StaffRoleID
+            WHERE 0=0 AND s.deleted=0 AND sr.Deleted=0 ";
 
+                if (staffid > 0)
+                    StrSql += " and s.StaffID=" + staffid;
 
+                if (staffroleid > 0)
+                    StrSql += " and s.StaffRoleID=" + staffroleid;
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
                 return dt;
@@ -75,7 +81,7 @@ namespace TheGreatGroupModules.Modules
                 string StrSql = @"  SELECT s.*,z.ZoneName FROM  staff_zone sz 
             LEFT JOIN  Staff s ON sz.StaffID = s.StaffID
             LEFT JOIN  zone z ON sz.ZoneID = z.ZoneID
-            WHERE 0=0 ";
+            WHERE 0=0 and s.StaffRole=5";
 
                 if (staffroleId != 0)
                     StrSql += " AND s.StaffRoleID=" + staffroleId;

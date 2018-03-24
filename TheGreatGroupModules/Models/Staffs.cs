@@ -9,11 +9,13 @@ namespace TheGreatGroupModules.Models
     {
       public int    StaffID { get; set; }
              public int  StaffRoleID { get; set; }
+             public string StaffRoleName { get; set; }
              public string  StaffCode { get; set; }
               public string StaffPassword { get; set; }
               public string StaffTitleName { get; set; }
             public string   StaffFirstName { get; set; }
             public string   StaffLastName { get; set; }
+            public string StaffName { get; set; }
            public string    StaffAddress1 { get; set; }
           public string     StaffAddress2 { get; set; }
              public int  StaffSubDistrictId { get; set; }
