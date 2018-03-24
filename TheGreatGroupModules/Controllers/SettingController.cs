@@ -166,7 +166,108 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
+        #region :: Manage Zone ::
 
 
+        // GET: /Setting/GetZone
+        public JsonResult GetZone()
+        {
+
+            try
+            {
+                // รับค่าราคา
+                StaffData st = new StaffData();
+                DataTable dt = new DataTable();
+                List<ListItems> item = new List<ListItems>();
+                dt = st.GetZone();
+                if (dt.Rows.Count > 0)
+                {
+                    item = dt.AsEnumerable().Select(dr => new ListItems()
+                    {
+                        ID = dr.Field<int>("zoneid"),
+                        Code = dr.Field<string>("zonecode"),
+                        Value = dr.Field<string>("zonename"),
+
+                    }).ToList();
+
+                }
+                return Json(new
+                {
+                    data = item,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+           
+        }
+
+
+      
+
+        // POST: /Setting/GetAddZone
+        [HttpPost]
+        public JsonResult GetAddZone(Zone zone)
+        {
+            try
+            {
+                // รับค่าราคา
+                SettingData st = new SettingData();
+
+                st.AddZone(zone);
+               
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+               }
+        // POST: /Setting/GetEditZone
+        [HttpPost]
+        public JsonResult GetEditZone(Zone zone)
+        {
+
+            try
+            {
+                // รับค่าราคา
+                SettingData st = new SettingData();
+
+                st.AddZone(zone);
+               
+                return Json(new
+                {
+                    data = " บันทึกการแก้ไขข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+
+        #endregion :: Manage Zone ::
     }
 }

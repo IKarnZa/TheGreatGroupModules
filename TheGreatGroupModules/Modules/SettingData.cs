@@ -189,5 +189,82 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
         }
+
+
+        public void AddZone(Zone zone  )
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            zone.ZoneID = Utility.GetMaxID("zone", "ZoneID");
+            try
+            {
+                string strSql = @"
+                    INSERT INTO  zone
+                                (ZoneID,
+                                 ZoneCode,
+                                 ZoneName,
+                                 Activated,
+                                 Deleted)
+                    VALUES ({0},
+                            {1},
+                            {2},
+                            {3},
+                            {4});";
+
+                strSql = string.Format(strSql,
+                    zone.ZoneID, 
+                     Utility.ReplaceString(zone.ZoneCode),
+                     Utility.ReplaceString(zone.ZoneName), 
+                     1,
+                     0);
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally {
+                ObjConn.Close();
+            
+            }
+            }
+
+        public void UpdateZone(Zone zone)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            zone.ZoneID = Utility.GetMaxID("zone", "ZoneID");
+            try
+            {
+                string strSql = @"
+                    Update   zone set
+                                 ZoneCode={1},
+                                 ZoneName={2},
+                                 Activated={3},
+                                 Deleted={4}
+                    where  ZoneID={0} ;";
+
+                strSql = string.Format(strSql,
+                    zone.ZoneID,
+                     Utility.ReplaceString(zone.ZoneCode),
+                     Utility.ReplaceString(zone.ZoneName),
+                     zone.Activated,
+                     0);
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
+        
+
     }
 }

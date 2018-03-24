@@ -15,7 +15,16 @@ namespace TheGreatGroupModules.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
 
 
