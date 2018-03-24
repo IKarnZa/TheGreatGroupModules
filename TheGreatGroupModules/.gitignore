@@ -257,3 +257,5 @@ paket-files/
 *.dll
 *.csproj.user
 *.csproj
+bin/
+packages/
