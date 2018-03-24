@@ -259,5 +259,5 @@ paket-files/
 *.csproj
 
 *.packages
-*.bin
-*.obj
+*.bin/
+*.obj/
