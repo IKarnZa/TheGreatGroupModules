@@ -19,11 +19,45 @@
     <div class="col-lg-12 ">
 
         <div class="white-box">
-
+            <a onclick="NewZone()" class="btn btn-info pull-right"><i class="fa fa-plus"></i> เพิ่มพื้นที่</a>
+            <h3 class="m-b-0 m-t-0"> <i class="fa fa-search"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
+            <hr>
 
             <!-- ใส่ Grid-->
+            <div id="gridListZone"></div>
 
 
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("../Scripts/src/manage_zone.js")
+    <script type="text/javascript">
+
+        $(function () {
+
+            $.ajax({
+                url: '../Staffs/GetZone',
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+
+                    Load_DataGrid(data);
+                    // เรียก data grid เพื่อใส่ข้อมูล
+
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+
+
+    });
+
+
+
+    </script>
+}
+
+
