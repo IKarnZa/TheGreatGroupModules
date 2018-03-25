@@ -247,7 +247,7 @@ namespace TheGreatGroupModules.Controllers
                 // รับค่าราคา
                 SettingData st = new SettingData();
 
-                st.AddZone(zone);
+                st.EditZone(zone);
                
                 return Json(new
                 {

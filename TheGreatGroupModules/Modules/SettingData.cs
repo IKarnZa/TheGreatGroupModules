@@ -230,11 +230,11 @@ namespace TheGreatGroupModules.Modules
             }
             }
 
-        public void UpdateZone(Zone zone)
+        public void EditZone(Zone zone)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-            zone.ZoneID = Utility.GetMaxID("zone", "ZoneID");
+       
             try
             {
                 string strSql = @"
