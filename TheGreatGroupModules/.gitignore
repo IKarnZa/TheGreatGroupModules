@@ -262,3 +262,4 @@ paket-files/
 *.bin/
 *.obj/
 obj/
+../bin/
