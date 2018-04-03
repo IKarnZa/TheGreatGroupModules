@@ -86,30 +86,30 @@ $("#gridshow").hide();
             columns: [{
                 dataField: "CustomerIdCard",
                 caption: "รหัสประจำตัวประชาชน",
-                width: 150,
+                width: 120+"%",
                 alignment: 'center',
                 allowFiltering: false
             }, {
                 dataField: "CustomerName",
                 caption: "ชื่อ-นามสกุล",
-                width: 200,
+                width: 200 + "%",
             },
               {
                   dataField: "CustomerAddress1",
                   caption: "ที่อยู่",
-                  width: 280,
+                  width: 280 + "%",
                      
               },
                 {
                     dataField: "CustomerTelephone",
                     caption: "เบอร์โทรศัพท์",
-                    width: 130,
+                    width: 150,
                     alignment: 'center',
                 },
              {
                  dataField: "CustomerMobile",
                  caption: "เบอร์มือถือ",
-                 width: 130,
+                 width: 150,
                  alignment: 'center',
              },
            
@@ -123,7 +123,7 @@ $("#gridshow").hide();
                   width: 60,
                   cellTemplate: function (container, options) {
                       $("<div>")
-                          .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                          .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
                           .appendTo(container);
                   }
 

@@ -55,7 +55,7 @@
                    }
                    if (ListContract[0].CustomerPartnerData !== null) {
 
-                       CustomerSuretyData1= ListContract[0].CustomerPartnerData;
+                       CustomerPartnerData = ListContract[0].CustomerPartnerData;
                    }
                 
                });
@@ -598,11 +598,14 @@ function PrintContract() {
 function Submit_Click() {
 
     var Contract = $("#form").dxForm("instance").option('formData');
+
     Contract.ContractID = getUrlParameter('ContractID');
     Contract.ContractCustomerID = getUrlParameter('CustomerID');
     Contract.CustomerPartnerData = $("#form4").dxForm("instance").option('formData');
     Contract.CustomerSuretyData1 = $("#form1").dxForm("instance").option('formData');
     Contract.CustomerSuretyData2 = $("#form2").dxForm("instance").option('formData');
+    console.log(Contract);
+
 
     if (getUrlParameter('ContractID') == 0) {
         //Update
@@ -619,8 +622,6 @@ function Submit_Click() {
                 } else {
                     alert(data.data);
                 }
-               
-        
             },
             error: function () {
                 console.log("error");

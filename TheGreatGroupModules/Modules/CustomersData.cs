@@ -336,28 +336,33 @@ namespace TheGreatGroupModules.Modules
         }
         public void PaymentDailyReceipts(DailyReceiptsReport item)
         {
+
+
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
             if (item.PriceReceipts<=0) {
 
                 throw new Exception("จำนวนเงินต้องมากว่า 0 บาท");
             }
+
             try
             {
              
                 decimal totalsales = 0; // ยอดเงินทั้งหมด
                 decimal rate = 0; //ดอกเบี้ย
            
-                // get เงนิ
+                // get เงิน
                 GetContractID(
                    out   totalsales, // ยอดเงินทั้งหมด
                    out rate, //ดอกเบี้ย
-                   item.CustomerID, item.ContractID
+                   item.CustomerID, item.ContractID, ObjConn
                   );
+
 
                 decimal interest = item.PriceReceipts * (rate / 100); //ดอกเบี้ย
                 decimal Priciple = item.PriceReceipts - interest; // เงินต้น
 
-
+              
 
                 // StaffID ,CustomerID ,ContractID,PriceReceipts
               
@@ -393,16 +398,22 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+
+        public void AddDailyReceipts(DailyReceiptsReport item) { 
+        
+        
+        
+        }
         public void GetContractID(  
               out  decimal totalsales, // ยอดเงินทั้งหมด
               out  decimal rate , //ดอกเบี้ย
                int CustomerID ,
-               int ContractID
+               int ContractID,
+             MySqlConnection ObjConn
             ) {
 
                      totalsales = 0;
                     rate = 0;
-                MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
                 string StrSql = @" Select * From contract where Deleted=0 and Activated=1 ";
 
                 if (CustomerID > 0)

@@ -232,7 +232,9 @@ namespace TheGreatGroupModules.Modules
                         data.ProductGroupID = Convert.ToInt32(dt.Rows[i]["ProductGroupID"]);
                         if (data.ProductGroupID == 1 || data.ProductGroupID == 2)
                         {
+                            if (dt.Rows[i]["ContractInterest"]!=DBNull.Value)
                             data.ContractInterest = Convert.ToDouble(dt.Rows[i]["ContractInterest"].ToString());
+                         
                             data.PriceGoldReceipt = Convert.ToDouble(dt.Rows[i]["PriceGoldReceipt"].ToString());
                             data.PriceGold = Convert.ToDouble(dt.Rows[i]["PriceGold"].ToString());
                             data.ProductID = Convert.ToInt32(dt.Rows[i]["ProductID"]);
@@ -242,7 +244,10 @@ namespace TheGreatGroupModules.Modules
                             data.Unit = Convert.ToInt32(dt.Rows[i]["Unit"]);
                             data.ProductPrice = (Convert.ToDouble(dt.Rows[i]["PriceGold"].ToString())
                                 / 15.16) * Convert.ToDouble(dt.Rows[i]["UnitAmount"].ToString());
+
+                            if (dt.Rows[i]["ContractInterest"] != DBNull.Value)
                             data.ContractReward = Convert.ToDouble(dt.Rows[i]["ContractReward"].ToString());
+
                           data.UnitAmount=Convert.ToDouble(dt.Rows[i]["UnitAmount"].ToString());
                         }
                         else {
