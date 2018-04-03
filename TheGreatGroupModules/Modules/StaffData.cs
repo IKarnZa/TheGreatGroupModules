@@ -81,7 +81,7 @@ namespace TheGreatGroupModules.Modules
                 string StrSql = @"  SELECT s.*,z.ZoneName FROM  staff_zone sz 
             LEFT JOIN  Staff s ON sz.StaffID = s.StaffID
             LEFT JOIN  zone z ON sz.ZoneID = z.ZoneID
-            WHERE 0=0 and s.StaffRole=5";
+            WHERE 0=0 ";
 
                 if (staffroleId != 0)
                     StrSql += " AND s.StaffRoleID=" + staffroleId;

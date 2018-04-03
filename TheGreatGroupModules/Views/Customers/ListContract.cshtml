@@ -112,25 +112,25 @@
                      columns: [{
                          dataField: "ContractNumber",
                          caption: "เลขที่สัญญา",
-                         //width: 200,
+                         width: 200 + "%",
                          alignment: 'center',
                          allowFiltering: false
                      }, {
                          dataField: "ContractCreateDate_Text",
                          caption: "วันที่ทำสัญญา",
-                         //  width: 240,
+                         width: 240+"%",
                          alignment: 'center',
                      },
                      {
                          dataField: "ContractExpDate_Text",
                          caption: "วันที่หมดสัญญา",
-                         //    width: 240,
+                         width: 240 + "%",
                          alignment: 'center',
                      },
                         {
                             dataField: "ContractPayment",
                             caption: "มูลค่าสินค้า",
-                            //        width: 240,
+                                width: 240+"%",
                             alignment: 'right',
                             customizeText: function (options) {
                                 if (options.value !== 0) {
@@ -191,7 +191,7 @@
                               cellTemplate: function (container, options) {
                                   console.log(options.key);
                                   $("<div>")
-                                      .append("<a href='\Contract?CustomerID=" + getUrlParameter('CustomerID') + "&ContractID=" + options.key.ContractID + "' title='ข้อมุลสัญญา' class='btn btn-primary btn-circle btn-sm' ><i class='fa fa-book'></i></a>")
+                                      .append("<a href='\Contract?CustomerID=" + getUrlParameter('CustomerID') + "&ContractID=" + options.key.ContractID + "' title='ข้อมุลสัญญา' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-book'></i></a>")
                                       .appendTo(container);
                               }
 

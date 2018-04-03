@@ -30,7 +30,7 @@ namespace TheGreatGroupModules.Models
         public string ContractRemark { get; set; }
 
         public int ContractPayEveryDay { get; set; }
-        public bool CustomerSpecialholiday { get; set; }
+        public bool ContractSpecialholiday { get; set; }
         public int ContractUpdateBy { get; set; }
         public DateTime ContractUpdateDate { get; set; }
         public int Activated { get; set; }

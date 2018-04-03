@@ -242,27 +242,27 @@
                 {
                     dataField: "No",
                     caption: "ลำดับที่",
-                    width: 80,
+                    width: 80 + "%",
                     alignment: 'center',
                     allowFiltering: false
                 },
                 {
                     dataField: "ProductName",
                     caption: "รายการสินค้า",
-                    width: 450,
+                    width: 450 + "%",
                     alignment: 'left',
                     allowFiltering: false
 
                 }, {
                     dataField: "Unit",
                     caption: "จำนวน(หน่วย)",
-                    width: 160,
+                    width: 160 + "%",
                     alignment: 'right',
                 },
               {
                   dataField: "ProductPrice_Text",
                   caption: "ราคาต่อหน่วย",
-                  width: 160,
+                  width: 160 + "%",
                   alignment: 'right',
                 
 
@@ -271,7 +271,7 @@
                  dataField: "ProductPrice",
                  caption: "จำนวนเงิน",
                  alignment: 'right',
-                 width: 160,
+                 width: 160 + "%",
                  customizeText: function (options) {
                      if (options.value !== 0) {
                          return options.value.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

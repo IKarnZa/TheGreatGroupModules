@@ -90,13 +90,14 @@ namespace TheGreatGroupModules.Modules
 
                            if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
                                con.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
-                           if (dt.Rows[i]["CustomerSpecialholiday"] != DBNull.Value)
-                               con.CustomerSpecialholiday = Convert.ToBoolean(dt.Rows[i]["CustomerSpecialholiday"].ToString());
+                           if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
+                               con.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
                            if (dt.Rows[i]["ContractSuretyID1"] != DBNull.Value)
                                con.CustomerSurety1 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID1"].ToString());
                            if (dt.Rows[i]["ContractSuretyID2"] != DBNull.Value)
                                con.CustomerSurety2 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID2"].ToString());
-                        
+                           if (dt.Rows[i]["ContractPartner"] != DBNull.Value)
+                               con.CustomerPartner = Convert.ToInt32(dt.Rows[i]["ContractPartner"].ToString());
                         listData.Add(con);
                     }
 
@@ -180,7 +181,7 @@ namespace TheGreatGroupModules.Modules
 
 
                         #region ::  ข้อมูลผู้ซื้อร่วม   ::
-                        if (listData[i].CustomerPartner> 0)
+                        if (listData[i].CustomerPartner > 0)
                         {
 
                             StrSql = @"select * FROM customer_partner where CustomerPartnerID=" + listData[i].CustomerPartner;
@@ -198,9 +199,9 @@ namespace TheGreatGroupModules.Modules
                                     dataPartner.CustomerPartnerFirstName = dt3.Rows[k]["CustomerPartnerFirstName"].ToString();
                                     dataPartner.CustomerPartnerLastName = dt3.Rows[k]["CustomerPartnerLastName"].ToString();
                                     dataPartner.CustomerPartnerAddress = dt3.Rows[k]["CustomerPartnerAddress"].ToString();
-                                    dataPartner.CustomerPartnerSubDistrictId = Convert.ToInt32(dt3.Rows[k]["CustomerPartnerSubDistrict"].ToString());
-                                    dataPartner.CustomerPartnerDistrictId = Convert.ToInt32(dt3.Rows[k]["CustomerPartnerDistrict"].ToString());
-                                    dataPartner.CustomerPartnerProvinceId = Convert.ToInt32(dt3.Rows[k]["CustomerPartnerProvince"].ToString());
+                                    dataPartner.CustomerPartnerSubDistrictId = Convert.ToInt32(dt3.Rows[k]["CustomerPartnerSubDistrictId"].ToString());
+                                    dataPartner.CustomerPartnerDistrictId = Convert.ToInt32(dt3.Rows[k]["CustomerPartnerDistrictId"].ToString());
+                                    dataPartner.CustomerPartnerProvinceId = Convert.ToInt32(dt3.Rows[k]["CustomerPartnerProvinceId"].ToString());
                                     dataPartner.CustomerPartnerZipCode = dt3.Rows[k]["CustomerPartnerZipCode"].ToString();
                                     dataPartner.CustomerPartnerIdCard = dt3.Rows[k]["CustomerPartnerIdCard"].ToString();
                                     dataPartner.CustomerPartnerMobile = dt3.Rows[k]["CustomerPartnerMobile"].ToString();
@@ -318,8 +319,8 @@ namespace TheGreatGroupModules.Modules
 
                            if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
                                con.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
-                           if (dt.Rows[i]["CustomerSpecialholiday"] != DBNull.Value)
-                               con.CustomerSpecialholiday = Convert.ToBoolean(dt.Rows[i]["CustomerSpecialholiday"].ToString());
+                           if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
+                               con.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
                            if (dt.Rows[i]["ContractSuretyID1"] != DBNull.Value)
                                con.CustomerSurety1 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID1"].ToString());
                            if (dt.Rows[i]["ContractSuretyID2"] != DBNull.Value)
@@ -372,7 +373,7 @@ namespace TheGreatGroupModules.Modules
              ContractType,
              ContractStatus,
              ContractPayEveryDay,
-             CustomerSpecialholiday,
+             ContractSpecialholiday,
              ContractRemark,
              Activated,
              Deleted)
@@ -398,7 +399,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                        Utility.ReplaceString( item.ContractType),
                       1,
                       item.ContractPayEveryDay,
-                      item.CustomerSpecialholiday,
+                      item.ContractSpecialholiday,
                       Utility.ReplaceString(item.ContractRemark),
                       1,
                       0
@@ -448,7 +449,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
              ContractType={15},
              ContractStatus={16},
              ContractPayEveryDay={17},
-             CustomerSpecialholiday={18},
+             ContractSpecialholiday={18},
              ContractRemark={19},
              Activated={20},
              Deleted={21}
@@ -474,7 +475,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                        Utility.ReplaceString(item.ContractType),
                      item.ContractStatus,
                       item.ContractPayEveryDay,
-                      item.CustomerSpecialholiday,
+                      item.ContractSpecialholiday,
                       Utility.ReplaceString(item.ContractRemark),
                       1,
                       0

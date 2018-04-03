@@ -159,7 +159,7 @@ function Load_DataGrid(data) {
           {
             dataField: "ContractNumber",
             caption: "เลขที่สัญญา",
-            width: 120,
+            width: 120 + "%",
             alignment: 'left',
             allowFiltering: false,
             fixed: false,
@@ -168,7 +168,7 @@ function Load_DataGrid(data) {
         {
             dataField: "CustomerName",
             caption: "ชื่อ-นามสกุล",
-            width: 230,
+            width: 230 + "%",
             fixed: false,
             fixedPosition: 'left',
         },
@@ -176,7 +176,7 @@ function Load_DataGrid(data) {
              dataField: "ContractCreateDate_Text",
              caption: "วันที่ทำสัญญา",
              alignment: 'center',
-             width: 120,
+             width: 120 +"%",
 
          },
           {
@@ -190,13 +190,13 @@ function Load_DataGrid(data) {
             dataField: "ContractAmount_Text",
             caption: "งวดละ",
             alignment: 'right',
-            width: 100,
+            width: 100 + "%",
         },
              {
                  dataField: "PriceReceipts_Text",
                  caption: "ยอดที่ชำระ",
                  alignment: 'right',
-                 width: 100,
+                 width: 100 + "%",
                  fixed: false,
                  fixedPosition: 'right',
              
@@ -204,24 +204,29 @@ function Load_DataGrid(data) {
             {
                 dataField: "Balance_Text",
                 caption: "ยอดคงเหลือ",
-                width: 120,
+                width: 120 + "%",
                 alignment: 'right',
                 fixed: false,
                 fixedPosition: 'right',
             },
-        {
-            dataField: "Remark",
-            caption: "หมายเหตุ",
-            alignment: 'center',
-            width: 100,
-            fixed: false,
-            fixedPosition: 'right'
-        },
+        //{
+        //    dataField: "Remark",
+        //    caption: "หมายเหตุ",
+        //    alignment: 'center',
+        //    width: 100 + "%",
+        //    fixed: false,
+        //    fixedPosition: 'right',
+        //    cellTemplate: function (container, options) {
+        //        $("<div>")
+        //            .append("<button  title='ระบุหมายเหตุ' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+        //            .appendTo(container);
+        //    }
+        //},
             {
                 dataField: "Status",
                 caption: "สถานะ",
                 alignment: 'center',
-                width: 100,
+                width: 100 + "%",
                 fixed: true,
                 fixedPosition: 'right'
             },

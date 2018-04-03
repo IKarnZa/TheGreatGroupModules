@@ -26,36 +26,100 @@ namespace TheGreatGroupModules.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
+          
         }
         public ActionResult PurchaseOrder(int CustomerID)
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
         public ActionResult ListContract(int CustomerID)
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
 
         public ActionResult Contract(int CustomerID, int ContractID)
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
 
 
         public ActionResult ContractSurety(int CustomerID, int ContractID)
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
 
         public ActionResult EditCustomer(int CustomerID)
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
 
         }
         public ActionResult AddCustomer()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
         //public ActionResult Contract()
         //{
@@ -64,13 +128,31 @@ namespace TheGreatGroupModules.Controllers
         public ActionResult Discount()
         {
 
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
         public ActionResult CustomerProduct(int CustomerID)
         {
             ViewBag.CustomerID = CustomerID;
 
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
+          
         }
         public ActionResult ExportExcel()
         {
@@ -439,12 +521,27 @@ namespace TheGreatGroupModules.Controllers
             CustomersData data3 = new CustomersData();
             cus_info = data3.GetCustomerInfo_ByID(id);
 
+            StaffData st = new StaffData();
+            DataTable dt = st.GetStaff(5, 0);
+            List<ListItems> item = new List<ListItems>();
+            if (dt.Rows.Count > 0)
+            {
+                item = dt.AsEnumerable().Select(dr => new ListItems()
+                {
+                    ID = dr.Field<int>("StaffID"),
+                    Value = dr.Field<string>("StaffTitleName") + dr.Field<string>("StaffFirstName") + " "
+                    + dr.Field<string>("StaffLastName"),
+
+                }).ToList();
+
+            }
             return Json(new
             {
                 dataProvince = listData,
                 dataDistrict = listData1,
                 dataSubDistrict = listData2,
                 dataCustomer = cus_info,
+                dataZone=item,
                 success = true
             }, JsonRequestBehavior.AllowGet);
         }
