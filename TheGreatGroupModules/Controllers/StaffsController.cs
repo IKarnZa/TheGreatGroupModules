@@ -206,8 +206,97 @@ namespace TheGreatGroupModules.Controllers
                 }, JsonRequestBehavior.AllowGet);
 
             }
-         
+        }
 
+         // POST:  /Staffs/AddStaffRole
+         //  {StaffRoleName:""}
+        [HttpPost]
+        public JsonResult AddStaffRole(StaffRole role) {
+
+
+            StaffData data = new StaffData();
+
+            try
+            {
+
+                data.AddStaffRole(role);
+
+                  return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex) 
+            {
+                
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST:  /Staffs/EditStaffRole
+        //  {StaffRoleID:"",
+        // StaffRoleName:""}
+        [HttpPost]
+        public JsonResult EditStaffRole(StaffRole role)
+        {
+
+
+            StaffData data = new StaffData();
+
+            try
+            {
+
+                data.EditStaffRole(role);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: /Staffs/GetListStaffRole
+        public JsonResult GetListStaffRole()
+        {
+
+            try
+            {
+                
+                StaffData st = new StaffData();
+                DataTable dt = new DataTable();
+                List<StaffRole> item = new List<StaffRole>();
+
+                item = st.GetListStaffRole();
+
+                return Json(new
+                {
+                    data = item,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
 
         }
     }

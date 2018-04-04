@@ -7,7 +7,7 @@
 function Call_Grid() {
 
     $.ajax({
-        url: '../Staffs/GetZone',
+        url: '../Setting/GetZone',
         type: 'GET',
         contentType: 'application/json',
         success: function (data) {

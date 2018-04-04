@@ -179,7 +179,7 @@ namespace TheGreatGroupModules.Controllers
                 StaffData st = new StaffData();
                 DataTable dt = new DataTable();
                 List<ListItems> item = new List<ListItems>();
-                dt = st.GetZone();
+                dt = st.GetZoneName();
                 if (dt.Rows.Count > 0)
                 {
                     item = dt.AsEnumerable().Select(dr => new ListItems()
