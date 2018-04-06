@@ -7,7 +7,7 @@
 function Call_Grid() {
 
     $.ajax({
-        url: '../Setting/GetZone',
+        url: '../Staffs/GetListStaffRole',
         type: 'GET',
         contentType: 'application/json',
         success: function (data) {
@@ -23,15 +23,12 @@ function Call_Grid() {
     });
 }
 
-
 function Load_DataGrid(data) {
 
-
-    $("#gridListZone").dxDataGrid({
+    $("#gridListStaffRole").dxDataGrid({
         dataSource: data.data,
         showColumnLines: true,
         showRowLines: true,
-  
         //  rowAlternationEnabled: true,
         showBorders: true,
         selection: {
@@ -60,91 +57,79 @@ function Load_DataGrid(data) {
         },
         columns: [
             {
-                dataField: "ID",
-                caption: "No.",
+                dataField: "StaffRoleID",
+                caption: "ลำดับ",
                 width: 50,
                 alignment: 'center',
-                allowFiltering: false,
+                allowFiltering: true,
                 fixed: false,
                 fixedPosition: 'left',
             },
             {
-                dataField: "Code",
-                caption: "รหัสพื้นที่",
-                alignment: 'center',
-                width: 100,
-                fixed: false,
-                fixedPosition: 'left',
-            },
-            {
-                dataField: "Value",
-                caption: "ชื่อพื้นที่",
+                dataField: "StaffRoleName",
+                caption: "ชื่อกลุ่มพนักงาน",
                 alignment: 'left',
-                
-
+                fixed: false,
+                fixedPosition: 'left',
             },
             {
-                dataField: "ID",
-                caption: "กำหนดพนักงาน",
+                dataField: "Activated",
+                caption: "สถานะ",
                 alignment: 'center',
-                width: 100,
-                fixed: true,
-                fixedPosition: 'right',
-                verticalAlignment: 'middle',
+                width: 200,
                 cellTemplate: function (container, options) {
-
                     $("<div>")
-                        .append("<a href='\ListContract?CustomerID=" + options.key.ID + "'  title='กำหนดพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-user' aria-hidden='true'></i></a>")
+                        .append(options.value == 1 ? "เปิดใช้งาน" : "ปิดใช้งาน")
                         .appendTo(container);
                 }
+
+
             },
             {
-                dataField: "ID",
+                dataField: "StaffID",
                 caption: "แก้ไข",
                 alignment: 'center',
-                width: 60,
+                width: 50,
                 fixed: true,
                 fixedPosition: 'right',
                 cellTemplate: function (container, options) {
-                    console.log(options.data);
-                    //      Load_Popup(options.data)
-                    var zone = JSON.stringify(options.data);
-                    $("<div>")
-                        .append("<button type='link' onclick='Show_PopupEdit("+zone+")' title='แก้ไขพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></button>")
-                        .appendTo(container);
-                    
 
-                  
-                
+                    var staffRole = JSON.stringify(options.data);
+                    $("<div>")
+                        .append("<button type='link' onclick='Show_PopupEdit(" + staffRole + ")' title='แก้ไขสิทธิ์พนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></button>")
+                        .appendTo(container);
                 }
             },
             {
                 dataField: "ID",
                 caption: "ลบ",
                 alignment: 'center',
-                width: 60,
+                width: 50,
                 fixed: true,
                 fixedPosition: 'right',
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a href='\ListContract?CustomerID=" + options.key.ID + "'  title='ลบพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
+                        .append("<a href='\ListContract?CustomerID=" + options.key.StaffID + "'  title='ลบพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
                         .appendTo(container);
-
-                   
                 }
             },
 
         ],
 
     });
-
 }
-/*function NewZone() {
-    alert("Success");
-}*/
-function Load_Popup(zone) {
-    $("#modalAddEditZone").dxPopup({
+
+function toggleState(item) {
+    if (item.className == "on") {
+        item.className = "off";
+    } else {
+        item.className = "on";
+    }
+}
+
+function Load_Popup(staffRole) {
+    $("#modalAddEditStaffRole").dxPopup({
         title: 'เพิ่มพื้นที่',
         visible: false,
         width: 700,
@@ -156,81 +141,69 @@ function Load_Popup(zone) {
                     //$("<div class='modal-body'>"),
                     $("<div>").append(
                         $("<div class='form-group'>").append(
-                            $("<label for='recipient-name' class='col-form-label'>รหัสพื้นที่</label>"),
-                            $("<input type='text' class='form-control' id='zoneCode'  >")
-                        ),
-                        $("</div>"),
-                        $("<div class='form-group'>").append(
-                            $("<label for='message-text' class='col-form-label'>ชื่อพื้นที่</label>"),
-                            $("<input type='text' class='form-control' id='zoneName'  >"),
+                            $("<label for='recipient-name' class='col-form-label'>ชื่อกลุ่มพนักงาน</label>"),
+                            $("<input type='text' class='form-control' id='StaffRoleName'  >")
                         ),
                         $("</div>"),
                     ),
                     $("</div>"),
                     $("<div class='modal-footer float-lg-left' style='border: hidden !important;'>").append(
-                        $("<button type='link' id='btnAddZone'  class='btn btn-success' onClick='AddZone();'>บันทึก</button>"),
+                        $("<button type='link' id='btnAddStaffRole'  class='btn btn-success' onClick='AddStaffRole();'>บันทึก</button>"),
                         $("<button type='link'onclick='hide_popup()' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>")
                     ),
                     $("</div>"),
                 ),
                 $("</div>"),
 
- //               $("<p class='col-md-30'>รหัสพื้นที่: <span> " + "</+ span></p>"),
- //               $("<p class='col-md-12'>ชื่อพื้นที่: <span>" + "</span></p>"),
- //               $("<div class='text-center'><button type='button' class='btn btn-success '>บันทึก</button></div>")
             );
         },
         showTitle: true,
-        title: "เพิ่มพื้นที่",
+        title: "เพิ่มกลุ่มพนักงาน",
         visible: false,
         dragEnabled: false,
         closeOnOutsideClick: true
     });
 }
 
-function Show_Popup(zone) {
-    $("#modalAddEditZone").dxPopup("instance").show();
-    $('#btnAddZone').data('data-zone', 0);
+function Show_PopupAdd(staffRole) {
+    $("#modalAddEditStaffRole").dxPopup("instance").show();
+    $('#btnAddStaffRole').data('data-zone', 0);
 }
 
-function Show_PopupEdit(zone) {
-    console.log(zone)
+function Show_PopupEdit(staffRole) {
 
     //   set ค่าใน pop up 
-    $("#modalAddEditZone").dxPopup("instance").show();
-    $("#zoneCode").val(zone.Code)
-    $("#zoneName").val(zone.Value)
-    $('#btnAddZone').data('data-zone', zone.ID);
+    $("#modalAddEditStaffRole").dxPopup("instance").show();
+    $("#StaffRoleName").val(staffRole.StaffRoleName)
+    $('#btnAddStaffRole').data('data-zone', staffRole.StaffRoleID);
 }
 
+function AddStaffRole() {
 
-function AddZone() {
-
-    if ($("#zoneCode").val() == null || $("#zoneCode").val()=='') {
-        alert("กรุณากรอกรหัสพื้นที่");
+    if ($("#StaffRoleName").val() == null || $("#StaffRoleName").val() == '') {
+        alert("กรุณากรอกสิทธิ์พนักงาน");
         return;
     }
 
-    var zone = {
-        ZoneID: $("#btnAddZone").data("data-zone"),
-        ZoneCode: $("#zoneCode").val(),
-        ZoneName: $("#zoneName").val(),
-        Activated:1
+    var staffRole = {
+        staffRoleID: $("#btnAddStaffRole").data("data-zone"),
+        StaffRoleName: $("#StaffRoleName").val(),
+        Activated: 1
     };
 
-    if ($("#btnAddZone").data("data-zone") == 0) {
+    if ($("#btnAddStaffRole").data("data-zone") == 0) {
 
         $.ajax({
-            url: '../Setting/GetAddZone',
+            url: '../Staffs/AddStaffRole',
             type: 'POST',
-            data: JSON.stringify(zone),
+            data: JSON.stringify(staffRole),
             contentType: 'application/json',
             success: function (data) {
 
                 //สำเร็จ
                 if (data.success == true) {
 
-                    $("#modalAddEditZone").dxPopup("instance").hide();
+                    $("#modalAddEditStaffRole").dxPopup("instance").hide();
                     //  alert(data.data);
                     Call_Grid();
                 }
@@ -245,16 +218,16 @@ function AddZone() {
         });
     } else {
         $.ajax({
-            url: '../Setting/GetEditZone',
+            url: '../Staffs/EditStaffRole',
             type: 'POST',
-            data: JSON.stringify(zone),
+            data: JSON.stringify(staffRole),
             contentType: 'application/json',
             success: function (data) {
 
                 //สำเร็จ
                 if (data.success == true) {
 
-                    $("#modalAddEditZone").dxPopup("instance").hide();
+                    $("#modalAddEditStaffRole").dxPopup("instance").hide();
                     //  alert(data.data);
                     Call_Grid();
                 }
@@ -270,11 +243,5 @@ function AddZone() {
 
     }
 
-   
-}
 
-
-function hide_popup(zone) {
-    $("#modalAddEditZone").dxPopup("instance").hide();
-    $('#btnAddZone').data('data-zone', 0);
 }
