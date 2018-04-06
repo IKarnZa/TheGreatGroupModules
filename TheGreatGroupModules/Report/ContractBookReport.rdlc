@@ -3702,7 +3702,7 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value> ให้ผู้ค้ำประกันใส่เครื่องหมาย             ลงใน             หน้าข้อความที่มีสาระสำคัญตรงกับเงื่อนไขในสัญญาค้ำประกัน</Value>
+                <Value> ให้ผู้ค้ำประกันใส่เครื่องหมาย             ลงใน            หน้าข้อความที่มีสาระสำคัญตรงกับเงื่อนไขในสัญญาค้ำประกัน</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Angsana New</FontFamily>
@@ -3765,10 +3765,10 @@
         <Source>Embedded</Source>
         <Value>img_137487</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>37.40468in</Top>
+        <Top>37.39006in</Top>
         <Left>0.70708in</Left>
-        <Height>0.23393in</Height>
-        <Width>0.26569in</Width>
+        <Height>0.17266in</Height>
+        <Width>0.1942in</Width>
         <ZIndex>100</ZIndex>
         <Style>
           <Border>
@@ -3780,10 +3780,10 @@
         <Source>Embedded</Source>
         <Value>img_137487</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>38.50176in</Top>
+        <Top>38.4421in</Top>
         <Left>0.70708in</Left>
-        <Height>0.23393in</Height>
-        <Width>0.26569in</Width>
+        <Height>0.17266in</Height>
+        <Width>0.1942in</Width>
         <ZIndex>101</ZIndex>
         <Style>
           <Border>
@@ -3795,10 +3795,10 @@
         <Source>Embedded</Source>
         <Value>img_137487</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>39.03294in</Top>
+        <Top>38.96847in</Top>
         <Left>0.70708in</Left>
-        <Height>0.23393in</Height>
-        <Width>0.26569in</Width>
+        <Height>0.17266in</Height>
+        <Width>0.1942in</Width>
         <ZIndex>102</ZIndex>
         <Style>
           <Border>
@@ -3810,10 +3810,10 @@
         <Source>Embedded</Source>
         <Value>img_137487</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>38.21227in</Top>
+        <Top>38.18961in</Top>
         <Left>0.70708in</Left>
-        <Height>0.23393in</Height>
-        <Width>0.26569in</Width>
+        <Height>0.17266in</Height>
+        <Width>0.1942in</Width>
         <ZIndex>103</ZIndex>
         <Style>
           <Border>
@@ -3825,10 +3825,10 @@
         <Source>Embedded</Source>
         <Value>img_137487</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>37.69416in</Top>
+        <Top>37.65416in</Top>
         <Left>0.70708in</Left>
-        <Height>0.23393in</Height>
-        <Width>0.26569in</Width>
+        <Height>0.17266in</Height>
+        <Width>0.1942in</Width>
         <ZIndex>104</ZIndex>
         <Style>
           <Border>
