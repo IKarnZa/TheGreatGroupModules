@@ -145,7 +145,7 @@ namespace TheGreatGroupModules.Modules
                                         1,
                                         0);";
 
-                string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
+                strSql=    string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
                 DBHelper.Execute(strSql, ObjConn);
             }
             catch (Exception ex)
@@ -171,7 +171,7 @@ namespace TheGreatGroupModules.Modules
                                  StaffRoleName={1}
                                 where  StaffRoleID={0}";
 
-                string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
+                strSql=  string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
                 DBHelper.Execute(strSql, ObjConn);
             }
             catch (Exception ex)
