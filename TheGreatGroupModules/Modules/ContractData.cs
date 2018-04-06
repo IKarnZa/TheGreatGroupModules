@@ -561,17 +561,17 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             {
 
                 string StrSql = @" Update customer_surety set
-             CustomerSuretyTitle,
-             CustomerSuretyFirstName,
-             CustomerSuretyLastName,
-             CustomerSuretyAddress,
-             CustomerSuretySubDistrict,
-             CustomerSuretyDistrict,
-             CustomerSuretyProvince,
-             CustomerSuretyZipCode,
-             CustomerSuretyIdCard,
-             CustomerSuretyMobile,
-             CustomerSuretyTelephone
+             CustomerSuretyTitle={1},
+             CustomerSuretyFirstName={2},
+             CustomerSuretyLastName={3},
+             CustomerSuretyAddress={4},
+             CustomerSuretySubDistrict={5},
+             CustomerSuretyDistrict={6},
+             CustomerSuretyProvince={7},
+             CustomerSuretyZipCode={8},
+             CustomerSuretyIdCard={9},
+             CustomerSuretyMobile={10},
+             CustomerSuretyTelephone={11}
 where CustomerSuretyID= {0};";
 
 
@@ -668,7 +668,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             try
             {
 
-                string StrSql = @" Update Set customer_Partner
+                string StrSql = @" Update customer_Partner  Set
              CustomerPartnerTitle={1},
              CustomerPartnerFirstName={2},
              CustomerPartnerLastName={3},
@@ -680,7 +680,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
              CustomerPartnerIdCard={9},
              CustomerPartnerMobile={10},
              CustomerPartnerTelephone={11}
-            Where   CustomerPartnerID={12}";
+            Where   CustomerPartnerID={0}";
 
 
                 StrSql = String.Format(StrSql,

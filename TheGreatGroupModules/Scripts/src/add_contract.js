@@ -217,7 +217,7 @@
 
                },
                {
-                   dataField: "CustomerSuretySubDistrict",
+                   dataField: "CustomerSuretySubDistrictId",
                    label: {
                        text: "ตำบล"
                    },
@@ -228,7 +228,7 @@
                        displayExpr: 'SubDistrictName'
                    },
                }, {
-                   dataField: "CustomerSuretyDistrict",
+                   dataField: "CustomerSuretyDistrictId",
                    label: {
                        text: "อำเภอ"
                    },
@@ -240,7 +240,7 @@
                    },
                },
                 {
-                    dataField: "CustomerSuretyProvince",
+                    dataField: "CustomerSuretyProvinceId",
                     label: {
                         text: "จังหวัด"
                     },
@@ -318,7 +318,7 @@
 
                },
                {
-                   dataField: "CustomerSuretySubDistrict",
+                   dataField: "CustomerSuretySubDistrictId",
                    label: {
                        text: "ตำบล"
                    },
@@ -329,7 +329,7 @@
                        displayExpr: 'SubDistrictName'
                    },
                }, {
-                   dataField: "CustomerSuretyDistrict",
+                   dataField: "CustomerSuretyDistrictId",
                    label: {
                        text: "อำเภอ"
                    },
@@ -341,7 +341,7 @@
                    },
                },
                 {
-                    dataField: "CustomerSuretyProvince",
+                    dataField: "CustomerSuretyProvinceId",
                     label: {
                         text: "จังหวัด"
                     },
@@ -418,7 +418,7 @@
 
                },
                {
-                   dataField: "CustomerPartnerSubDistrict",
+                   dataField: "CustomerPartnerSubDistrictId",
                    label: {
                        text: "ตำบล"
                    },
@@ -429,7 +429,7 @@
                        displayExpr: 'SubDistrictName'
                    },
                }, {
-                   dataField: "CustomerPartnerDistrict",
+                   dataField: "CustomerPartnerDistrictId",
                    label: {
                        text: "อำเภอ"
                    },
@@ -441,7 +441,7 @@
                    },
                },
                 {
-                    dataField: "CustomerPartnerProvince",
+                    dataField: "CustomerPartnerProvinceId",
                     label: {
                         text: "จังหวัด"
                     },

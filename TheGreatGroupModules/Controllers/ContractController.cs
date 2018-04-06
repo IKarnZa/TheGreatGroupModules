@@ -22,7 +22,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -203,6 +203,17 @@ namespace TheGreatGroupModules.Controllers
                 ContractData CD = new ContractData();
                 CD.Edit_NewContract(item);
 
+                //check insert Partner
+                if (item.CustomerPartner == 0)
+                {
+                    parner = CD.Add_Partner(item.CustomerPartnerData);
+                }
+                else
+                {
+                    parner = CD.Update_Partner(item.CustomerPartnerData);
+                }
+
+
                 //check insert Surety1
 
                 if (item.CustomerSurety1 == 0)
@@ -210,19 +221,22 @@ namespace TheGreatGroupModules.Controllers
                     Surety1 = CD.Add_Surety(item.CustomerSuretyData1);
                 }
                 else {
-               //     Surety1 = CD.Edit_Surety(item.CustomerSuretyData1);
+                    Surety1 = CD.Update_Surety(item.CustomerSuretyData1);
                 }
 
-                
-                //check insert Partner
-                  if (item.CustomerPartner == 0)
+
+                //check insert Surety1
+
+                if (item.CustomerSurety2 == 0)
                 {
-                    parner = CD.Add_Partner(item.CustomerPartnerData);
+                    Surety2 = CD.Add_Surety(item.CustomerSuretyData2);
                 }
-                else {
-                    parner = CD.Update_Partner(item.CustomerPartnerData);
+                else
+                {
+                    Surety2 = CD.Update_Surety(item.CustomerSuretyData2);
                 }
 
+               
 
                 //check insert Surety1
 
