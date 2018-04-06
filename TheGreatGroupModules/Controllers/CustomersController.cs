@@ -33,7 +33,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return   RedirectToAction("Login", "Home");
             }
           
           
@@ -47,7 +47,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -60,7 +60,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -74,7 +74,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -89,7 +89,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -103,7 +103,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
 
@@ -117,7 +117,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -135,7 +135,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
@@ -150,7 +150,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
           
         }
