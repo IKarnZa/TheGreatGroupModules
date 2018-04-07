@@ -20,7 +20,7 @@
             applyFilter: "auto"
         },
         export: {
-            enabled: true,
+            enabled: false,
             fileName: "File",
         },
 
