@@ -328,6 +328,7 @@
     <Content Include="Scripts\src\installment.js" />
     <Content Include="Scripts\src\manage_staff.js" />
     <Content Include="Scripts\src\manage_staff_role.js" />
+    <Content Include="Scripts\src\manage_staff_zone.js" />
     <Content Include="Scripts\src\manage_zone.js" />
     <Content Include="Scripts\src\reports_src.js" />
     <Content Include="Scripts\_references.js" />
@@ -3314,6 +3315,7 @@
     <Content Include="Views\Staffs\StaffLocation.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Setting\ManageStaffZone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

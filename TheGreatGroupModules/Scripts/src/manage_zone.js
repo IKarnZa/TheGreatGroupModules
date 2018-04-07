@@ -94,7 +94,7 @@ function Load_DataGrid(data) {
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a href='\ListContract?CustomerID=" + options.key.ID + "'  title='กำหนดพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-user' aria-hidden='true'></i></a>")
+                        .append("<a href='\ManageStaffZone?zoneId=" + options.key.ID + "'  title='กำหนดพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-user' aria-hidden='true'></i></a>")
                         .appendTo(container);
                 }
             },
