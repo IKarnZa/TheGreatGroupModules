@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -29,9 +30,12 @@ namespace TheGreatGroupModules.Controllers
             //DateTime datetime
             try
             {
+
+                DateTime datefrom1 = DateTime.ParseExact(datefrom, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime dateto1 = DateTime.ParseExact(dateto, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 List<OpenAccountReport> listData = new List<OpenAccountReport>();
                 ReportData data = new ReportData();
-                listData = data.OpenAccountReports(zoneId, datefrom, dateto);
+                listData = data.OpenAccountReports(zoneId, datefrom1.ToString("yyyy-MM-dd"), dateto1.ToString("yyyy-MM-dd"));
 
 
 
