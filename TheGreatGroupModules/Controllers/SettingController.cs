@@ -222,34 +222,8 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-      
 
-        // POST: /Setting/GetAddZone
-        [HttpPost]
-        public JsonResult GetAddZone(Zone zone)
-        {
-            try
-            {
-                // รับค่าราคา
-                SettingData st = new SettingData();
 
-                st.AddZone(zone);
-               
-                return Json(new
-                {
-                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
-                    success = true
-                }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new
-                {
-                    data = ex.Message,
-                    success = false
-                }, JsonRequestBehavior.AllowGet);
-            }
-               }
         // POST: /Setting/GetEditZone
         [HttpPost]
         public JsonResult GetEditZone(Zone zone)
@@ -281,6 +255,89 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
+        // POST: /Setting/GetAddZone
+        [HttpPost]
+        public JsonResult GetAddZone(Zone zone)
+        {
+            try
+            {
+                // รับค่าราคา
+                SettingData st = new SettingData();
+
+                st.AddZone(zone);
+
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+        // POST: /Setting/GetAddStaffZone
+        [HttpPost]
+        public JsonResult GetAddStaffZone(StaffZone staffzone)
+        {
+            try
+            {
+                // รับค่าราคา
+                SettingData st = new SettingData();
+
+                st.AddStaffZone(staffzone);
+
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST: /Setting/GetDeleteStaffZone
+        //   {StaffID:0,ZoneID:2}
+        [HttpPost]
+        public JsonResult GetDeleteStaffZone(StaffZone staffzone)
+        {
+            try
+            {
+                // รับค่าราคา
+                SettingData st = new SettingData();
+
+                st.DeleteStaffZone(staffzone);
+
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion :: Manage Zone ::
     }
 }

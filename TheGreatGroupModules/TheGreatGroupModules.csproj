@@ -3314,6 +3314,7 @@
     <Content Include="Views\Staffs\StaffLocation.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Setting\ManageStaffZone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

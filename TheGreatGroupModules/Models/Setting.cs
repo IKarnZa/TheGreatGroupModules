@@ -26,4 +26,13 @@ namespace TheGreatGroupModules.Models
         public int Deleted { get; set; }
 
     }
+
+    public class StaffZone
+    {
+        public int StaffID { get; set; }
+        public int ZoneID { get; set; }
+        public string ZoneName { get; set; }
+        public string StaffName { get; set; }
+
+    }
 }

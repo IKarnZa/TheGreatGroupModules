@@ -42,7 +42,7 @@
            var ListContract = [];
            if (getUrlParameter('ContractID') != 0) {
                result.data.forEach(function (element) {
-                   console.log(element);
+                 
                    element.ContractCustomerID = getUrlParameter('CustomerID');
                    element.ContractCreateDate = new Date(element.ContractCreateDate_Text);
                    element.ContractStartDate = new Date(element.ContractStartDate_Text);
@@ -69,6 +69,7 @@
 
            } else { ListContract.push({}); }
 
+           console.log(ListContract);
 
            $("#product_name").dxLookup({
                dataSource: products,
@@ -182,7 +183,7 @@
                    },
                },
                 {
-                    dataField: "CustomerSpecialholiday",
+                    dataField: "ContractSpecialholiday",
                     label: {
                         text: "ยกเว้นวันหยุดพิเศษ"
                     },
@@ -665,6 +666,24 @@ function Submit_Click() {
     }
 
 
+
+
+
+}
+
+
+function AddProduct() {
+    if ($("#product_name").dxLookup("instance").option("value") != null) {
+
+        var lookup = $("#product_name").data("dxLookup");
+        var selectedValue = lookup.option("value");
+
+        console.log($("#product_name").dxLookup("instance").option("value"), selectedValue);
+
+    } else {
+        DevExpress.ui.notify("โปรดเลือกสินค้า !!");
+
+    }
 
 
 
