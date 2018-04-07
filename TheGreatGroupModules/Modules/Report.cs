@@ -84,4 +84,43 @@ namespace TheGreatGroupModules.Modules
         public string Date { get { return DateAsOf.ToString("dd/MM/yyyy"); } }
         public decimal Amount { get; set; } // งวดละ
     }
+
+     public class OpenAccountReport
+     {
+
+         public int CustomerID { get; set; }
+         public int ContractID { get; set; }
+         public string ContractNumber { get; set; }
+         public string CustomerName { get; set; }
+         public DateTime ContractCreateDate { get; set; }
+         public string ContractCreateDate_Text { get { return ContractCreateDate.ToString("dd/MM/yyyy"); } }
+         public DateTime ContractExpDate { get; set; }
+         public string ContractExpDate_Text { get { return ContractExpDate.ToString("dd/MM/yyyy"); } }
+       
+         public decimal TotalPayment { get; set; } // ยอดสินเชื่อ
+         public decimal CostAmount { get; set; } // ราคาทุน
+         public string TotalPayment_Text { get { return TotalPayment.ToString("#,##0.00"); } } // ยอดสินเชื่อ
+         public string CostAmount_Text { get { return CostAmount.ToString("#,##0.00"); } } // ราคาทุน
+
+
+         public static List<OpenAccountReport> ToObjectList(DataTable dt)
+         {
+             return dt.AsEnumerable().Select(dr => new OpenAccountReport()
+             {
+                 CustomerID = dr.Field<int>("ContractCustomerID"),
+                 ContractID = dr.Field<int>("ContractID"),
+                 ContractNumber = dr.Field<string>("ContractNumber"),
+                 CustomerName = dr.Field<string>("CustomerName") +
+                                dr.Field<string>("CustomerMobile") +  
+                                " ที่อยู่ "+  dr.Field<string>("CustomerAddress"),
+                 ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
+                 ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
+                 TotalPayment = dr.Field<decimal>("ContractPayment"),
+                 CostAmount = dr.Field<decimal>("PriceCost"),
+              
+             }).ToList();
+         }
+
+     }
+
 }

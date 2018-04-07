@@ -13,6 +13,66 @@ namespace TheGreatGroupModules.Modules
 
         private string errMsg = "";
 
+
+        public List<OpenAccountReport> OpenAccountReports(int zoneId, string datefrom, string dateto)
+        {
+
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+                
+
+
+                List<OpenAccountReport> listData = new List<OpenAccountReport>();
+
+                string StrSql = @"   SELECT ct.ContractID,
+                    ct.ContractCustomerID,
+                    ct.ContractNumber,
+                    ct.ContractCreateDate,
+                    ct.ContractExpDate,
+                    CASE WHEN pc.ProductPrice IS NULL THEN 0 ELSE pc.ProductPrice END AS PriceCost,
+                    ct.ContractPayment ,
+                    ct.ContractPayment-(CASE WHEN pc.ProductPrice IS NULL THEN 0 ELSE pc.ProductPrice END ) AS diff ,
+                     CONCAT(c.CustomerTitleName,c.CustomerFirstName,' ',c.CustomerLastName,' ( ',c.CustomerIdCard,' )') AS CustomerName,
+                     CONCAT( '( โทร ',c.CustomerMobile ,' )') AS CustomerMobile,
+                     CONCAT(c.CustomerAddress1,'  ต.',s.SubDistrictName,'  อ.', d.DistrictName,'  จ.', p.ProvinceName,'  ',c.CustomerZipCode) AS CustomerAddress
+                    FROM contract ct 
+                    LEFT JOIN customer c ON ct.ContractCustomerID=c.CustomerId
+                     LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
+                      LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
+                      LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
+                      LEFT JOIN staff_zone sz ON c.SaleID=sz.StaffID
+                      LEFT JOIN product_customer pc ON pc.ContractID=ct.ContractID AND pc.CustomerID=ct.ContractCustomerID
+                    WHERE   ct.Activated=1 ";
+
+                if (datefrom != null & dateto != null)
+                    StrSql += "  AND ct.ContractCreateDate BETWEEN " + Utility.ReplaceString(datefrom) + " AND " + Utility.ReplaceString(dateto);
+                                    if(zoneId>0 )
+                                        StrSql+= " AND sz.ZoneID="+zoneId;
+
+                                    StrSql += " ORDER BY ct.ContractCreateDate ASC";
+
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = OpenAccountReport.ToObjectList(dt);
+                }
+                return listData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        
+        
+        }
         public void SaveActivateDailyReceipts(int staffId, string date_str)
         {
         
