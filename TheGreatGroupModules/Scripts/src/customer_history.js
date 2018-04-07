@@ -4,7 +4,7 @@ var data = [];
 $("#gridshow").hide();
 
 
-function SearchStaff() {
+function SearchCustomer() {
 
 
     $("#loadIndicator").dxLoadIndicator({
@@ -24,10 +24,10 @@ function SearchStaff() {
         return;
     }
 
-    if ($("#StaffID").val() == '') {
+    if ($("#CustomerID").val() == '') {
 
         $("#toast").dxToast({
-            message: "กรุณาเลือกรายชื่อพนักงาน",
+            message: "กรุณาเลือกรายชื่อลูกค้า",
             type: "error",
             displayTime: 3000
         })
@@ -37,11 +37,11 @@ function SearchStaff() {
         });
         return;
     }
-    var date = $("#DateAsOf").datepicker({ dateFormat: 'dd-mm-yy' }).val();
-    if (date == '' || date == null) {
+    
+    if ($("#ContractID").val() == '') {
 
         $("#toast").dxToast({
-            message: "กรุณาเลือกวันที่",
+            message: "กรุณาเลือกหนังสือสัญญา",
             type: "error",
             displayTime: 3000
         })
@@ -51,45 +51,55 @@ function SearchStaff() {
         });
         return;
     }
-
-
-
-    var url = "../ManagePayment/GetDailyReceiptsReport?staffId=" + $("#StaffID").val() +
-        "&dateAsOf=" + $('#DateAsOf').val();
-
-    $.get(url)
-        .done(function (data) {
-            console.log(data);
-            if (data.success == true) {
-
-                Load_DataGrid(data);
-
-
-                $("#gridshow").show();
-                $("#loadIndicator").dxLoadIndicator({
-                    visible: false
-                });
-
-            } else {
-
-                $("#loadIndicator").dxLoadIndicator({
-                    visible: false
-                });
-
-                DevExpress.ui.notify(data.errMsg);
-            }
-
-
+    setTimeout(function () {
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
         });
+    },2000);
+  
+
+/////////////////////////////////////////////////// Grid View ///////////////////////////////////////////////////////////////
+
+//    var url = "../ManagePayment/GetDailyReceiptsReport?staffId=" + $("#StaffID").val() +
+//        "&dateAsOf=" + $('#DateAsOf').val();
+
+//    $.get(url)
+//        .done(function (data) {
+//            console.log(data);
+//            if (data.success == true) {
+
+//                Load_DataGrid(data);
+
+
+//                $("#gridshow").show();
+//                $("#loadIndicator").dxLoadIndicator({
+//                    visible: false
+//                });
+
+//            } else {
+
+//                $("#loadIndicator").dxLoadIndicator({
+//                    visible: false
+//                });
+
+//                DevExpress.ui.notify(data.errMsg);
+//            }
+
+
+//        });
+
+
 }
 
 
 function btnClear() {
     $("#gridshow").hide();
-    $("#CustomerFirstName").val('');
-    $("#CustomerLastName").val('');
-    $("#CustomerMobile").val('');
-    $("#CustomerIdCard").val('');
+    $("#zoneid").val('');
+    $("#CustomerID").val('');
+    $("#ContractID").val('');
+    $("#loadIndicator").dxLoadIndicator({
+        visible: false
+    });
 }
 
 function btnSaveData() {
@@ -105,7 +115,7 @@ function btnSaveData() {
         .done(function (data) {
 
             if (data.success == true) {
-                SearchStaff();
+                SearchCustomer();
                 DevExpress.ui.notify("บันทึกการตรวจสอบสำเร็จ !!!");
                 $("#loadIndicator").dxLoadIndicator({
                     visible: false
