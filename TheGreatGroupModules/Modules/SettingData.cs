@@ -198,6 +198,7 @@ namespace TheGreatGroupModules.Modules
             zone.ZoneID = Utility.GetMaxID("zone", "ZoneID");
             try
             {
+
                 string strSql = @"
                     INSERT INTO  zone
                                 (ZoneID,
@@ -230,6 +231,61 @@ namespace TheGreatGroupModules.Modules
             }
             }
 
+        public void AddStaffZone(StaffZone staffzone)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+
+                DataTable dt = DBHelper.List(string.Format("Select * FROM staff_zone where StaffID={0} and ZoneID={1} ", staffzone.StaffID, staffzone.ZoneID), ObjConn);
+                if (dt.Rows.Count > 0)
+                    throw new Exception("เลือกพนักงานซ้ำ");
+
+
+                string strSql = @"
+                  INSERT INTO staff_zone
+                (StaffID,
+                 ZoneID)
+                VALUES ({0},
+                        {1});";
+
+                strSql = string.Format(strSql,staffzone.StaffID, staffzone.ZoneID);
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
+
+        public void DeleteStaffZone(StaffZone staffzone)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string strSql = @" Delete from staff_zone where StaffID={0} and ZoneID={1} ;";
+                strSql = string.Format(strSql, staffzone.StaffID, staffzone.ZoneID);
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
         public void EditZone(Zone zone)
         {
 
