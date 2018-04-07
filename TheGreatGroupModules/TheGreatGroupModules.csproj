@@ -320,12 +320,14 @@
     <Content Include="Scripts\src\add_contract.js" />
     <Content Include="Scripts\src\add_customer.js" />
     <Content Include="Scripts\src\customers_src.js" />
+    <Content Include="Scripts\src\customer_history.js" />
     <Content Include="Scripts\src\customer_product.js" />
     <Content Include="Scripts\src\edit_customer.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\init.js" />
     <Content Include="Scripts\src\installment.js" />
     <Content Include="Scripts\src\manage_staff.js" />
+    <Content Include="Scripts\src\manage_staff_role.js" />
     <Content Include="Scripts\src\manage_zone.js" />
     <Content Include="Scripts\src\reports_src.js" />
     <Content Include="Scripts\_references.js" />
