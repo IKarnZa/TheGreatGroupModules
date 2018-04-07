@@ -68,11 +68,11 @@ $("#gridshow").hide();
                 placeholder: "ค้นหา..."
             },
             filterRow: {
-                visible: true,
+                visible: false,
                 applyFilter: "auto"
             },
             export: {
-                enabled: true,
+                enabled: false,
                 fileName: "File",
             },
         
@@ -86,18 +86,18 @@ $("#gridshow").hide();
             columns: [{
                 dataField: "CustomerIdCard",
                 caption: "รหัสประจำตัวประชาชน",
-                width: 120+"%",
+                width: 120,
                 alignment: 'center',
                 allowFiltering: false
             }, {
                 dataField: "CustomerName",
                 caption: "ชื่อ-นามสกุล",
-                width: 200 + "%",
+                width: 200,
             },
               {
                   dataField: "CustomerAddress1",
                   caption: "ที่อยู่",
-                  width: 280 + "%",
+                  //width: 280,
                      
               },
                 {
@@ -115,12 +115,12 @@ $("#gridshow").hide();
            
               {
                   dataField: "CustomerID",
-                  caption: "",
+                  caption: "แก้ไขข้อมูล",
                   alignment: 'center',
                   allowFiltering: false,
                   fixed: true,
                   fixedPosition: 'right',
-                  width: 60,
+                  width: 100,
                   cellTemplate: function (container, options) {
                       $("<div>")
                           .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
@@ -130,10 +130,10 @@ $("#gridshow").hide();
               },
               {
                   dataField: "CustomerID",
-                  caption: "",
-                  alignment: '',
+                  caption: "ซื้อสินค้า",
+                  alignment: 'center',
                   allowFiltering: false,
-                  width:60,
+                  width:100,
                   fixed: true,
                   fixedPosition: 'right',
                   cellTemplate: function (container, options) {
@@ -147,65 +147,6 @@ $("#gridshow").hide();
               
             
             ],
-            onToolbarPreparing: function(e) {
-                e.toolbarOptions.items.push( {
-                    location: "before",
-                    widget: "dxButton",
-                    options: {
-                        icon: "export",
-                        //text: "",
-                        onInitialized: function(e) {
-                            clearFilterButton = e.component;
-                        },
-                        onClick: function (e) {
-                            var params = {
-
-                                CustomerFirstName: $("#CustomerFirstName").val(),
-                                CustomerLastName: $("#CustomerLastName").val(),
-                                CustomerMobile: $("#CustomerMobile").val(),
-                                CustomerIdCard: $("#CustomerIdCard").val()
-
-                            };
-                            var req = new XMLHttpRequest();
-                            req.open("POST", "../Customers/ExportPDF", true);
-                            req.responseType = "blob";
-                            req.send(params);
-                            req.onload = function (event) {
-                                var blob = req.response;
-                                console.log(blob.size);
-                                var link = document.createElement('a');
-                                link.href = window.URL.createObjectURL(blob);
-                                link.download = "ข้อมูลสมาชิกปัจจุบัน.pdf";
-                                link.click();
-                            };
-
-                            //req.send();
-
-                            //var http = new XMLHttpRequest();
-                            //var url = "../Customers/ExportPDF";
-                         
-                            //http.open("POST", url, true);
-
-                            ////Send the proper header information along with the request
-                            //http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-                            //http.onreadystatechange = function () {//Call a function when the state changes.
-                            //    if (http.readyState == 4 && http.status == 200) {
-                            //        alert(http.responseText);
-                            //    }
-                            //}
-                            //http.send(params);
-                            //$.get("../Customers/ExportPDF")
-                            //.done(function (data) {
-
-                            //        DevExpress.ui.notify("Export PDF Successful!");
-                                
-                            //});
-                          
-                        }
-                    }
-                })
-                }
         });
 
     }

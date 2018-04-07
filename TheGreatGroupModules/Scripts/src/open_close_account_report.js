@@ -93,6 +93,7 @@ function btnClear() {
 
 function Load_DataGrid(data) {
 
+    console.log(data);
 
     $("#gridContainer").dxDataGrid({
         dataSource: data.data,
@@ -128,38 +129,45 @@ function Load_DataGrid(data) {
             {
                 dataField: "ContractNumber",
                 caption: "เลขที่สัญญา",
-                width: 120 + "%",
-                alignment: 'left',
+                width: 100,
+                alignment: 'center',
                 allowFiltering: false,
-                fixed: false,
+                fixed: true,
                 fixedPosition: 'left',
             },
             {
                 dataField: "CustomerName",
-                caption: "ชื่อ-นามสกุล",
-                width: 230 + "%",
-                fixed: false,
+                caption: "ข้อมูลผู้เปิดบัญชี",
+                //width: 230,
+                //fixed: true,
                 fixedPosition: 'left',
             },
             {
                 dataField: "ContractCreateDate_Text",
-                caption: "วันที่ทำสัญญา",
+                caption: "วันเริ่มต้นสัญญา",
                 alignment: 'center',
-                width: 120 + "%",
+                width: 120,
 
             },
             {
-                dataField: "TotalPayment",
+                dataField: "ContractExpDate_Text",
+                caption: "วันสิ้นสุดสัญญา",
+                alignment: 'center',
+                width: 120,
+
+            },
+            {
+                dataField: "TotalPayment_Text",
                 caption: "ยอดสินเชื่อ",
                 width: 120,
                 alignment: 'right',
             },
 
             {
-                dataField: "CostAmount",
+                dataField: "CostAmount_Text",
                 caption: "ราคาทุน",
                 alignment: 'right',
-                width: 100 + "%",
+                width: 120,
             },
 
             //{
