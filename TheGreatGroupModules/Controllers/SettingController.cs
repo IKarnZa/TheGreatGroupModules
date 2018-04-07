@@ -12,7 +12,7 @@ namespace TheGreatGroupModules.Controllers
     public class SettingController : Controller
     {
 
-        public ActionResult ManageStaffZone()
+        public ActionResult ManageStaffZone(int zoneId)
         {
             if (Session["iuser"] != null)
             {
