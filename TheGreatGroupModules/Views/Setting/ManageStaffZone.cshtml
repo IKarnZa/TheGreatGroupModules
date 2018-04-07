@@ -14,11 +14,9 @@
         </ol>
     </div>
 
-<!--
     <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">
         <i class="fa fa-mail-reply"></i> ย้อนกลับ
     </a>
--->
 
 </div>
 <div class="row">
@@ -56,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
-                        <div id="loadIndicator"></div> <button type="button" id="btnSearch" class="btn btn-info waves-effect waves-light m-r-10" onclick="SearchCustomer()">
+                        <div id="loadIndicator"></div> <button type="button" id="btnSearch" class="btn btn-info waves-effect waves-light m-r-10" onclick="AddStaffZone()">
                             <!-- <i class="fa fa-search"></i> -->   เพิ่มพนักงาน
                         </button>
                     </div>
@@ -73,134 +71,7 @@
 
 @section Scripts {
 
-@Scripts.Render("../Scripts/src/manage_staff_zone.js")
-    
-    <script>
-
-        $(function () {
-            $.fn.datepicker.defaults.language = 'th';
-
-            SearchCustomer();
-            $.get("../Staffs/GetZone")
-                .done(function (data) {
-                    if (data.success == true) {
-
-                        $.each(data.data, function (key, value) {
-                            if (value.ID == getUrlParameter('zoneId'))
-                                $("#zoneId").html(value.Value);
-                        });
-                    }
-                });
-
-//              $.get("../Staffs/GetStaffs?staffroleid=5&zoneId=" + getUrlParameter('zoneId'))
-                $.get("../Staffs/GetStaffs?staffroleid=5&zoneId=0")
-                .done(function (data) {
-                    console.log(data);
-                    if (data.success == true) {
-
-                        $.each(data.data, function (key, value) {
-                            $("#CustomerID").append('<option value="' + value.ID + '"' + ">" + value.Value + "</option>");
-                        });
-                    }
-                });
-
-         
+    @Scripts.Render("../Scripts/src/manage_staff_zone.js")
 
 
-        })
-
-
-        function SearchCustomer() {
-            var rownum = 0;
-
-             $.get("../Staffs/GetStaffs?staffroleid=5&zoneId=" + getUrlParameter('zoneId'))
-                 .done(function (data) {
-                     if (data.success == true) {
-                         $("#gridContainer").dxDataGrid({
-                             dataSource: data.data,
-                             showColumnLines: true,
-                             showRowLines: true,
-                             //  rowAlternationEnabled: true,
-                             showBorders: true,
-                             selection: {
-                                 mode: "single"
-                             },
-                             searchPanel: {
-                                 visible: true,
-                                 width: 300,
-                                 placeholder: "ค้นหา..."
-                             },
-                             filterRow: {
-                                 visible: false,
-                                 applyFilter: "auto"
-                             },
-                             export: {
-                                 enabled: true,
-                                 fileName: "File",
-                             },
-
-                             allowColumnReordering: true,
-                             allowColumnResizing: true,
-                             columnAutoWidth: true,
-                             height: 500,
-                             columnFixing: {
-                                 enabled: true
-                             },
-                             columns: [
-                                 {
-                                     dataField: "ID",
-                                     caption: "ลำดับ",
-                                     width: 20 + "%",
-                                     alignment: 'center',
-                                     allowFiltering: false,
-                                     fixed: false,
-                                     cellTemplate: function (container, options) {
-                                         rownum = rownum + 1;
-                                         $("<div>")
-                                             .append(rownum)
-                                             .appendTo(container);
-                                     }
-                                 },
-                                 {
-                                     dataField: "Value",
-                                     caption: "ชื่อ-นามสกุล",
-                                     width: 230 + "%",
-                                     fixed: false,
-                                     fixedPosition: 'left',
-                                 },
-                                 {
-                                     dataField: "ID",
-                                     caption: "ลบ",
-                                     alignment: 'center',
-                                     width: 120 + "%",
-                                     cellTemplate: function (container, options) {
-                                         $("<div>")
-                                             .append("<a onclick='DeleteStaffZone(" + options.key.ID +")' title='ลบ' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
-                                             .appendTo(container);
-                                     }
-                                 },
-                             ]
-                         });
-                     }
-                 });
-        }
-
-        function DeleteStaffZone(id) {
-
-            var staffzone = {
-
-                StaffID: id,
-                ZoneID: getUrlParameter('zoneId')
-            };
-            $.post("../Setting/GetDeleteStaffZone", staffzone)
-                .done(function (data) {
-                    console.log(data);
-                    if (data.success == true) {
-
-                        alert(data.data);
-                    }
-                });
-            alert(id)
-        }
-    </script>
 }
