@@ -173,7 +173,7 @@ namespace TheGreatGroupModules.Modules
                                     dataSurety2.CustomerSuretyIdCard = dt2.Rows[k]["CustomerSuretyIdCard"].ToString();
                                     dataSurety2.CustomerSuretyMobile = dt2.Rows[k]["CustomerSuretyMobile"].ToString();
                                     dataSurety2.CustomerSuretyTelephone = dt2.Rows[k]["CustomerSuretyTelephone"].ToString();
-                                    listData[i].CustomerSuretyData1 = dataSurety2;
+                                    listData[i].CustomerSuretyData2 = dataSurety2;
                                 }
                             }
                         }
@@ -725,10 +725,9 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                 ContractSuretyID1={0}
                 ,ContractSuretyID2={1}
                 ,ContractPartner={2}
-                ,ContractPayment={3}
-                Where ContractID={4}";
+                Where ContractID={3}";
 
-                StrSql = String.Format(StrSql, item.CustomerSurety1, item.CustomerSurety2, item.CustomerPartner, item.ContractPayment, item.ContractID);
+                StrSql = String.Format(StrSql, item.CustomerSurety1, item.CustomerSurety2, item.CustomerPartner,  item.ContractID);
 
                 DBHelper.Execute(StrSql, ObjConn);
             }
@@ -747,7 +746,36 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
           
 
         }
+              public void UpdateContractPayment(int ContractID , int CustomerID , decimal ContractPayment)
+              {
 
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  string StrSql = "";
+                  try
+                  {
+                      StrSql = @" Update contract set 
+                ContractPayment={0}
+                Where ContractID={1} and ContractCustomerID={2}";
+
+                      StrSql = String.Format(StrSql, ContractPayment, ContractID, CustomerID);
+
+                      DBHelper.Execute(StrSql, ObjConn);
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+
+
+                      ObjConn.Close();
+
+                  }
+
+
+              }
 
               public void Update_Product_customer(Contract item)
               {

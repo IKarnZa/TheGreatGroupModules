@@ -54,6 +54,9 @@ namespace TheGreatGroupModules.Controllers
          
         }
 
+
+
+        // GET: /Products/PostAddProduct?CustomerID=1&ContractID=1
         [HttpPost]
         public JsonResult PostAddProduct(ProductSelect product,
             int CustomerID, int ContractID)
@@ -67,8 +70,13 @@ namespace TheGreatGroupModules.Controllers
                 ProductData pd = new ProductData();
                 pd.AddProductSelect(products, CustomerID, ContractID);
 
-
-              
+                // getProduct By Contract
+                ProductData dataPro = new ProductData();
+                IList<ProductSelect> listProductsSelect = new List<ProductSelect>();
+                listProductsSelect = dataPro.GetProductCustomer(CustomerID, ContractID);
+                decimal ContractPayment = Convert.ToDecimal(listProductsSelect.Sum(c => c.ProductPrice));
+                ContractData cd = new ContractData();
+                cd.UpdateContractPayment(ContractID, CustomerID, ContractPayment);
 
                 return Json(new
                 {

@@ -183,8 +183,24 @@ namespace TheGreatGroupModules.Modules
                     );
 
                 DBHelper.Execute(StrSql, ObjConn);
-              
 
+                 StrSql = @" INSERT INTO daily_receipts(ID,CustomerID,ContractID,DateAsOf,
+            TotalSales,PriceReceipts,Principle,Interest,StaffID,Activated,Deleted)
+            VALUES("
+
+             + Utility.GetMaxID("daily_receipts", "ID") + ","
+             + CustomerID + ","
+             + ContractID + ","
+             + Utility.FormateDateTime(DateTime.Now) + ","
+             + 0 + ","
+             + 0 + ","
+             + 0 + ","
+             + 0 + ","
+             + 0 + ","
+             + 0 + ","
+             + 0 + ")";
+
+                DBHelper.Execute(StrSql, ObjConn);
             }
             catch (Exception ex)
             {
@@ -294,12 +310,12 @@ namespace TheGreatGroupModules.Modules
                //double
                 int no=0;
                double ProductPrice = 0; // ราคาสินค้า
-               double Vat = 7 / 100 ; // ภาษี 
+               double Vat = 0.07 ; // ภาษี 
                double Reward = 0; // ค่ากำเหน็จ
                double PriceGoldReceipt = 0; // ราคารับซื้อทอง
              //  double TotalPriceip = 0; // ราคารวม
                double interest = 0; // ดอกเบี้ย
-
+               double TotlalVat = 0;
                 if (products.Count > 0) {
 
                      
@@ -336,10 +352,24 @@ namespace TheGreatGroupModules.Modules
                           // ส่วนต่างที่คิดภาษีมูลค่าเพิ่ม
                 
                               product = new ProductSelect();
-                              product = SetProductPrice.Product_VatDiff(ProductPrice,PriceGoldReceipt, products[i].UnitAmount);
-                              listproduct.Add(product);
-                     
+                              product = SetProductPrice.Product_VatDiff(ref TotlalVat,ProductPrice, PriceGoldReceipt, products[i].UnitAmount);
+                             listproduct.Add(product);
 
+                             // รวมเงิน
+                             product = new ProductSelect();
+                             product = SetProductPrice.Product_TotalPrice(ProductPrice);
+                             listproduct.Add(product);
+
+
+                             // ภาษีมูลค่าเพิ่ม
+                             product = new ProductSelect();
+                             product = SetProductPrice.Product_TotalVat(ProductPrice, PriceGoldReceipt, products[i].UnitAmount, Vat);
+                             listproduct.Add(product);
+
+                             // รวมเงินทั้งสิ้น
+                             product = new ProductSelect();
+                             product = SetProductPrice.Product_TotalSale(ProductPrice, PriceGoldReceipt, products[i].UnitAmount, Vat);
+                             listproduct.Add(product);
                          }
                          else if(products[i].ProductGroupID == 1 )
                          {
@@ -347,27 +377,28 @@ namespace TheGreatGroupModules.Modules
                              product = SetProductPrice.ProductNormal(no.ToString(), ProductPrice, products[i].Unit);
                              product.ProductName = products[i].ProductName;
                              listproduct.Add(product);
-                        
+                             // รวมเงิน
+                             product = new ProductSelect();
+                             product = SetProductPrice.Product_TotalPrice(ProductPrice);
+                             listproduct.Add(product);
+
+
+                             //// ภาษีมูลค่าเพิ่ม
+                             //product = new ProductSelect();
+                             //product = SetProductPrice.Product_TotalVat(ProductPrice, PriceGoldReceipt, products[i].UnitAmount, Vat);
+                             //listproduct.Add(product);
+
+                             //// รวมเงินทั้งสิ้น
+                             //product = new ProductSelect();
+                             //product = SetProductPrice.Product_TotalSale(ProductPrice, PriceGoldReceipt, products[i].UnitAmount, Vat);
+                             //listproduct.Add(product);
 
                          }
                         
                      }
                 
                 }
-                // รวมเงิน
-                product = new ProductSelect();
-                product = SetProductPrice.Product_TotalPrice(ProductPrice);
-                listproduct.Add(product);
-
-
-                // ภาษีมูลค่าเพิ่ม
-                product = new ProductSelect();
-                listproduct.Add(product);
-
-                //// รวมเงินทั้งสิ้น
-                //product = new ProductSelect();
-                //product = SetProductPrice.Product_TotalSale(ProductPrice, PriceGoldReceipt, products[i].UnitAmount,Vat);
-                //listproduct.Add(product);
+              
            
 
                 return listproduct;

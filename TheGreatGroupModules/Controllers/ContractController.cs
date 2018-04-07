@@ -212,42 +212,49 @@ namespace TheGreatGroupModules.Controllers
                 ContractData CD = new ContractData();
                 CD.Edit_NewContract(item);
 
-                //check insert Partner
-                if (item.CustomerPartner == 0)
-                {
-                    parner = CD.Add_Partner(item.CustomerPartnerData);
-                    item.CustomerPartner = parner;
+                if (item.CustomerPartnerData != null) {
+                    //check insert Partner
+                    if (item.CustomerPartner == 0)
+                    {
+                        parner = CD.Add_Partner(item.CustomerPartnerData);
+                        item.CustomerPartner = parner;
+                    }
+                    else
+                    {
+                        parner = CD.Update_Partner(item.CustomerPartnerData);
+                    }
+
                 }
-                else
+             
+
+                //check insert Surety1
+                if (item.CustomerSuretyData1 != null)
                 {
-                    parner = CD.Update_Partner(item.CustomerPartnerData);
+                    if (item.CustomerSurety1 == 0 & item.CustomerSuretyData1 != null)
+                    {
+                        Surety1 = CD.Add_Surety(item.CustomerSuretyData1);
+                        item.CustomerSurety1 = Surety1;
+                    }
+                    else
+                    {
+                        Surety1 = CD.Update_Surety(item.CustomerSuretyData1);
+                    }
                 }
 
 
                 //check insert Surety1
-
-                if (item.CustomerSurety1 == 0)
+                if (item.CustomerSuretyData2 != null)
                 {
-                    Surety1 = CD.Add_Surety(item.CustomerSuretyData1);
-                    item.CustomerSurety1 = Surety1;
+                    if (item.CustomerSurety2 == 0 & item.CustomerSuretyData2 != null)
+                    {
+                        Surety2 = CD.Add_Surety(item.CustomerSuretyData2);
+                        item.CustomerSurety2 = Surety2;
+                    }
+                    else
+                    {
+                        Surety2 = CD.Update_Surety(item.CustomerSuretyData2);
+                    }
                 }
-                else {
-                    Surety1 = CD.Update_Surety(item.CustomerSuretyData1);
-                }
-
-
-                //check insert Surety1
-
-                if (item.CustomerSurety2 == 0)
-                {
-                    Surety2 = CD.Add_Surety(item.CustomerSuretyData2);
-                    item.CustomerSurety2 = Surety2;
-                }
-                else
-                {
-                    Surety2 = CD.Update_Surety(item.CustomerSuretyData2);
-                }
-
 
                 //Update Product this Contract
                 CD.Update_Product_customer(item);

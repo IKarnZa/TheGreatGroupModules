@@ -34,10 +34,11 @@ namespace TheGreatGroupModules.Modules
 
       //  ส่วนต่างที่คิดภาษีมูลค่าเพิ่ม
 
-        public static ProductSelect Product_VatDiff(double TotalPrice, double PriceGoldReceipt, double UnitAmount)
+        public static ProductSelect Product_VatDiff(ref double TotalVat,double TotalPrice, double PriceGoldReceipt, double UnitAmount)
         {
             double ReceiptGoldDay = ((PriceGoldReceipt - (1.8 / 100)) / 15.16) * UnitAmount; // ราคารับซื้อทองประจำวัน
             double TotalPrice3 = TotalPrice - ReceiptGoldDay; // ราคาสินค้ารวมค่ากำเหน็จ รวมดอกเบี้ยแล้ว
+            TotalVat += TotalPrice3;
             ProductSelect product = new ProductSelect();
             product.ProductName = "ส่วนต่างที่คิดภาษีมูลค่าเพิ่ม  " + TotalPrice3.ToString("#,##0.00") + " บาท ";
             product.Unit_Text = "";

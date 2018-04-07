@@ -58,7 +58,7 @@
                    }
                    if (ListContract[0].CustomerSuretyData2 !== null) {
 
-                       CustomerSuretyData1= ListContract[0].CustomerSuretyData2;
+                       CustomerSuretyData2= ListContract[0].CustomerSuretyData2;
                    }
                    if (ListContract[0].CustomerPartnerData !== null) {
 
@@ -593,8 +593,7 @@
             }
         });
     }
-    var CustomerID = getUrlParameter('CustomerID');
-
+   
 
 
 });
@@ -609,9 +608,14 @@ function PrintCard() {
 }
 
 function PrintContract() {
-    alert("พิมพ์สัญญา");
+    
 
-    //http://localhost:31659/Report/ContractBookReport.aspx?staffID=1&date=12/03/2018
+
+    window.open('/Report/ContractBookReport.aspx?CustomerID=' + getUrlParameter('CustomerID')
+       + "&ContractID=" + getUrlParameter('ContractID'), '_blank');
+    //window.location.href = '/Report/ReportPage1.aspx?staffID=' + $("#StaffID").val() +
+    //"&date=" + $('#DateAsOf').val();
+    DevExpress.ui.notify("Export PDF Successful!");
 }
 
 function Submit_Click() {
@@ -677,8 +681,25 @@ function AddProduct() {
 
         var lookup = $("#product_name").data("dxLookup");
         var selectedValue = lookup.option("value");
+        var dataProduct = {
+            "Unit": $("#product_amount").dxTextBox('option', 'value'),
+                "ProductID":$("#product_name").dxLookup("instance").option("value")}
+    
 
-        console.log($("#product_name").dxLookup("instance").option("value"), selectedValue);
+        $.ajax({
+            url: '../Products/PostAddProduct?CustomerID=' + getUrlParameter('CustomerID') + '&ContractID=' + getUrlParameter('ContractID'),
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(dataProduct),
+            success: function (data) {
+                console.log('success');
+
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+
 
     } else {
         DevExpress.ui.notify("โปรดเลือกสินค้า !!");

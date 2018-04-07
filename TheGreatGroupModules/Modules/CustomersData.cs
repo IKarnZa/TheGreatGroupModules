@@ -165,7 +165,7 @@ namespace TheGreatGroupModules.Modules
             try
             {
                 item.CustomerCode = "MB" + item.CustomerID.ToString("000000000");
-                string StrSql = @" INSERT INTO db_greatgroup_dev.customer
+                string StrSql = @" INSERT INTO customer
             (CustomerId,
              CustomerCode,
              CustomerTitleName,

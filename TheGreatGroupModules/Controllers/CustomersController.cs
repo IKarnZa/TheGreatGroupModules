@@ -485,8 +485,7 @@ namespace TheGreatGroupModules.Controllers
             {
                 new CustomersData().AddCustomer(ref item);
 
-                return RedirectToAction("CustomerProduct", new RouteValueDictionary(
-    new { controller = "Customers", action = "ListContract", CustomerID = item.CustomerID }));
+                return RedirectToAction("Index");
 
             }
             catch (Exception ex)
