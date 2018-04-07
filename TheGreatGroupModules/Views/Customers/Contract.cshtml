@@ -26,6 +26,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left">
+                        <div id="loadIndicator"></div>    
                         <address>
                             <div id="customerName"></div>
                             <div id="customerAddress"></div>
@@ -57,12 +58,45 @@
                         <a class="btn btn-info" onclick="Submit_Click()"> <i class="fa fa-save"></i> บันทึก </a>
                     </div>
     <hr>
-    <h4 class="m-b-0">  ข้อมูลสินค้า </h4><br>
-    <div id="loadIndicator"></div>    <div id="gridData"></div>
+    <h4 class="m-b-0">  ข้อมูลสินค้า </h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">
+                                <div class="dx-fieldset">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label text-right">เพิ่มสินค้า : </div>
+                                        <div class="dx-field-value"><div class="lookup" id="product_name"></div></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="dx-fieldset">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label text-right">จำนวน : </div>
+                                        <div class="dx-field-value" id="product_amount"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+
+                                <div class="dx-fieldset">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label"></div>
+                                        <div class="dx-field-value"><button class="btn btn-success btn-sm" onclick="AddProduct()"> <i class="fa fa-plus"></i> เพิ่มสินค้า </button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div id="gridData"></div>
 </div>
                 <div id="myPopup"><p>Popup content</p></div>
             </div>
-
+            
             <div class="row">
                 <div class="col-md-12">
 

@@ -1,11 +1,18 @@
 ﻿$(function () {
 
+ 
+
     $("#loadIndicator").dxLoadIndicator({
         visible: true
     });
 
-    
-        LoadDataGrid();
+    LoadDataGrid();
+
+    var products = [];
+    $("#product_amount").dxTextBox({
+        placeholder: 'ใส่จำนวน',
+        value: 1
+    });
 
     var days = [{
         "ID": 1,
@@ -27,7 +34,7 @@
     $.get("../Contract/GetContract?CustomerID=" + getUrlParameter('CustomerID')
        + "&ContractID=" + getUrlParameter('ContractID'))
         .done(function (result) {
-           
+            products = result.dataProduct;
             dataProvince = result.dataProvince;
             dataDistrict = result.dataDistrict;
             dataSubDistrict = result.dataSubDistrict;
@@ -61,6 +68,17 @@
                });
 
            } else { ListContract.push({}); }
+
+
+           $("#product_name").dxLookup({
+               dataSource: products,
+               displayExpr: 'ProductDetail',
+               valueExpr: 'ProductID',
+               title: 'เลือกสินค้า',
+               placeholder: 'เลือกสินค้า',
+               cancelButtonText: "ยกเลิก",
+               seachPlaceholder: 'เลือกสินค้า',
+           });
 
            $("#loadIndicator").dxLoadIndicator({
                visible: false

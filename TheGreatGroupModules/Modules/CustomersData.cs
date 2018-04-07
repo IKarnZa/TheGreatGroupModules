@@ -55,6 +55,50 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+
+        public IList<Customers> GetCustomerByZone(int zoneId)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+
+                string StrSql = @"  	SELECT c.*  ,sz.ZoneID,
+				s.SubDistrictName AS CustomerSubDistrict,
+                                   d.DistrictName AS CustomerDistrict,
+                                   p.ProvinceName AS CustomerProvince
+                                   FROM customer c 
+                                  LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
+                                  LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
+                                  LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
+				LEFT JOIN staff_zone  sz ON  c.SaleID=sz.StaffID
+				WHERE 0=0 ";
+
+                if (zoneId > 0)
+                {
+
+                    StrSql += @" AND sz.ZoneID=" + zoneId;
+                }
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                IList<Customers> listData = new List<Customers>();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = Customers.ToObjectList2(dt);
+                }
+
+                return listData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
         public IList<Customers> Get(Customers item)
         {
 

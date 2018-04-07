@@ -87,17 +87,26 @@ namespace TheGreatGroupModules.Controllers
                 ProductData dataPro = new ProductData();
                 IList<ProductSelect> listProductsSelect = new List<ProductSelect>();
 
+                IList<Products> listProduct = new List<Products>();
+                listProduct = dataPro.GetListProduct();
 
-                if (ContractID > 0)
-                    listProductsSelect = dataPro.GetProductCustomer(CustomerID, ContractID);
+
                 List<ProductSelect> listProductsSelect1 = new List<ProductSelect>();
+              
+                if (ContractID > 0) {
+                    listProductsSelect = dataPro.GetProductCustomer(CustomerID, ContractID);
+                }
+
                 listProductsSelect1 = dataPro.ProductContractSummary(listProductsSelect);
+
+            
 
 
                 return Json(new
                 {
                     data = listContract,
                     dataCustomers = listData,
+                    dataProduct = listProduct,
                     dataProductSelect = listProductsSelect1,
                     dataProvince = listData4,
                     dataDistrict = listData1,
@@ -207,6 +216,7 @@ namespace TheGreatGroupModules.Controllers
                 if (item.CustomerPartner == 0)
                 {
                     parner = CD.Add_Partner(item.CustomerPartnerData);
+                    item.CustomerPartner = parner;
                 }
                 else
                 {
@@ -219,6 +229,7 @@ namespace TheGreatGroupModules.Controllers
                 if (item.CustomerSurety1 == 0)
                 {
                     Surety1 = CD.Add_Surety(item.CustomerSuretyData1);
+                    item.CustomerSurety1 = Surety1;
                 }
                 else {
                     Surety1 = CD.Update_Surety(item.CustomerSuretyData1);
@@ -230,19 +241,25 @@ namespace TheGreatGroupModules.Controllers
                 if (item.CustomerSurety2 == 0)
                 {
                     Surety2 = CD.Add_Surety(item.CustomerSuretyData2);
+                    item.CustomerSurety2 = Surety2;
                 }
                 else
                 {
                     Surety2 = CD.Update_Surety(item.CustomerSuretyData2);
                 }
 
-               
 
-                //check insert Surety1
+                //Update Product this Contract
+                CD.Update_Product_customer(item);
 
 
-                //check insert Surety2
-
+                // getProduct By Contract
+                ProductData dataPro = new ProductData();
+                IList<ProductSelect> listProductsSelect = new List<ProductSelect>();
+                listProductsSelect = dataPro.GetProductCustomer(item.ContractCustomerID, item.ContractID);
+                item.ContractPayment = Convert.ToDecimal(listProductsSelect.Sum(c => c.ProductPrice));
+                // Update Contract Surety
+                CD.UpdateSurety_In_Contract(item);
 
                 return Json(new
                 {

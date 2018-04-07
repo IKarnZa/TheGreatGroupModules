@@ -421,6 +421,32 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+        // GET: /Customers/GetCustomerByZone?zoneId=:zoneId
+        public JsonResult GetCustomerByZone(int zoneId) {
+
+
+            try
+            {
+                IList<Customers> listData = new List<Customers>();
+                CustomersData data = new CustomersData();
+               listData = data.GetCustomerByZone(zoneId);
+
+                return Json(new
+                {
+                    data = listData,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
         [HttpPost]
         public JsonResult GetCustomers(Customers item)
