@@ -12,6 +12,19 @@ namespace TheGreatGroupModules.Controllers
     public class SettingController : Controller
     {
 
+        public ActionResult ManageStaffZone()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+        } 
+
         public ActionResult ListZone()
         {
              if (Session["iuser"] != null)
