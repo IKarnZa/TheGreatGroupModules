@@ -11,114 +11,215 @@
             <li class="active">@ViewBag.Title</li>
         </ol>
     </div>
-
-    <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">
-    <i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
-
 </div>
+
 <div class="row">
 
     <div class="col-lg-12 ">
 
         <div class="white-box">
-       
-            <h3 class="m-b-0 m-t-0"> <i class="fa fa-file-text-o"></i> @ViewBag.Title</h3> 
-            <small class="text-muted db"></small>
 
+            <h3 class="m-b-0 m-t-0"> <i class="fa fa-file-text-o"></i> @ViewBag.Title</h3>
             <hr>
+
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">เลือกสาย : </label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" id="zoneid">
+                                    <option value> === เลือกสาย === </option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">เลือกลูกค้า : </label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" id="CustomerID">
+                                    <option value> === เลือกลูกค้า === </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">เลือกเลขที่สัญญา : </label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" id="ContractID">
+                                    <option value> === เลือกเลขที่สัญญา === </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <div id="loadIndicator"></div> <button type="button" id="btnSearch" class="btn btn-info waves-effect waves-light m-r-10" onclick="SearchCustomer()">
+                            <!-- <i class="fa fa-search"></i> -->   ค้นหาข้อมูล
+                        </button>
+                        <button type="button" class="btn btn-default waves-effect waves-light " onclick="btnClear()">
+                            <!-- <i class="fa fa-search"></i> -->  ล้างข้อมูล
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+            <div id="toast"></div>
         </div>
     </div>
 </div>
-            @section Scripts {
-                @Scripts.Render("../Scripts/src/customers_src.js")
 
-                <script>
-                    $(function () {
-                        $('#accordion').wizard({
-                            step: '[data-toggle="collapse"]',
-                            buttonsAppendTo: '.panel-collapse',
-                            templates: {
-                                buttons: function () {
-                                    var options = {
-                                        buttonLabels: {
-                                            next: 'ถัดไป',
-                                            back: 'ย้อนกลับ',
-                                            finish: 'บันทึก'
-                                        },
-                                    }
-                                    ;
-                                    return '<div class="panel-footer"><ul class="pager">' + '<li class="previous">' + '<a href="#' + this.id + '" data-wizard="back" role="button">' + options.buttonLabels.back + '</a>' + '</li>' + '<li class="next">' + '<a href="#' + this.id + '" data-wizard="next" role="button">' + options.buttonLabels.next + '</a>' + '<a href="#' + this.id + '" data-wizard="finish" role="button">' + options.buttonLabels.finish + '</a>' + '</li>' + '</ul></div>';
-                                }
-                            },
-                            onBeforeShow: function (step) {
-                                step.$pane.collapse('show');
-                            },
-                            onBeforeHide: function (step) {
-                                step.$pane.collapse('hide');
-                            },
-                            onFinish: function () {
-                                AddCustomer();
+@section Scripts {
+
+    <!-- Date Picker Plugin JavaScript -->
+
+    @Scripts.Render("../Scripts/src/customer_history.js")
+    <script>
+        $(function () {
+            $.fn.datepicker.defaults.language = 'th';
+
+            $('#btnSearch').prop('disabled', 'disabled');
+            $.get("../Staffs/GetZone")
+                .done(function (data) {
+                    console.log(data);
+                    if (data.success == true) {
+
+                        $.each(data.data, function (key, value) {
+                            $("#zoneid").append('<option value="' + value.ID + '"' + ">" + value.Value + "</option>");
+                        });
+                    }
+                });
+
+            $.get("../Customers/GetCustomerByZone?zoneId=0")
+                .done(function (data) {
+
+                    if (data.success == true) {
+
+                        $.each(data.data, function (key, value) {
+                            $("#CustomerID").append('<option value="' + value.CustomerID + '"' + ">" + value.CustomerName + "</option>");
+                        });
+                    }
+                });
+
+            $.get("../Contract/GetListContract?CustomerID=0")
+                .done(function (data) {
+
+                    if (data.success == true) {
+
+                        $.each(data.data, function (key, value) {
+                            $("#ContractID").append('<option value="' + value.ContractID + '"' + ">" + value.ContractNumber + "</option>");
+                        });
+                    }
+                });
+
+
+            $("#zoneid").change(function () {
+
+                $.get("../Customers/GetCustomerByZone?zoneId=" + $("#zoneid").val())
+                    .done(function (data) {
+                       
+                        if (data.success == true) {
+                            if (data.data.length > 0) {
+                                $('#CustomerID')
+                                    .find('option')
+                                    .remove()
+                                    .end()
+                                    .append('<option value="" selected>=== เลือกลูกค้า === </option>');
+                     
+
+                                $('#ContractID')
+                                    .find('option')
+                                    .remove()
+                                    .end()
+                                    .append('<option value="" selected>=== เลือกหนังสือสัญญา === </option>');
+                                $('#CustomerID').prop('disabled', false);
+                                $('#ContractID').prop('disabled', false);
+
+                                $.each(data.data, function (key, value) {
+                                    $("#CustomerID").append('<option value="' + value.CustomerID + '"' + ">" + value.CustomerName + "</option>");
+                                });}
+                            else {
+                                $('#CustomerID')
+                                    .find('option')
+                                    .remove()
+                                    .end()
+                                    .append('<option value="" selected>=== ไม่มีข้อมูลลูกค้า === </option>');
+                                $('#CustomerID').prop('disabled', 'disabled');
+                                $('#ContractID')
+                                    .find('option')
+                                    .remove()
+                                    .end()
+                                    .append('<option value="" selected>=== ไม่มีข้อมูลสัญญา === </option>');}
+                                $('#ContractID').prop('disabled', 'disabled');
+                       
+
+                        }
+                    });
+
+            });
+
+            $("#CustomerID").change(function () {
+
+                $.get("../Contract/GetListContract?CustomerID=" + $("#CustomerID").val())
+                    .done(function (data) {
+                        if (data.success == true) {
+                            if (data.data.length > 0) {
+                                $('#ContractID')
+                                    .find('option')
+                                    .remove()
+                                    .end()
+                                    .append('<option value="" selected>=== เลือกหนังสือสัญญา === </option>');
+
+
+
+                                $.each(data.data, function (key, value) {
+                                    $("#ContractID").append('<option value="' + value.ContractID + '"' + ">" + value.ContractNumber + "</option>");
+                                });
+                                $('#ContractID').prop('disabled', false);
+                          
+                            } else {
+                                $('#ContractID')
+                                    .find('option')
+                                    .remove()
+                                    .end()
+                                    .append('<option value="" selected>=== ไม่มีข้อมูลสัญญา === </option>');
+                                $('#ContractID').prop('disabled', 'disabled');
+                               
                             }
-                        });
-                        $(".select2").select2();
+                            $('#btnSearch').prop('disabled', 'disabled');
+                            
+                        }
+                    });
 
-                        $.get("../Setting/GetProvince", function (obj) {
-
-                            $.each(obj.data, function (key, value) {
-                                $("#CustomerProvince").append('<option value="' + value.ProvinceID + '"' + ">" + value.ProvinceName + "</option>");
-                            });
-                        });
+            });
 
 
 
-                        $("#CustomerProvince").change(function () {
+            $("#ContractID").change(function () {
+           
+                if ($("#ContractID").val() == '') {
+                    $('#btnSearch').prop('disabled', 'disabled');
+                } else {
+                    $('#btnSearch').prop('disabled', false);
+                 }
 
-                            // ล้างข้อมูลเดิม
-                            $('#CustomerDistrict')
-                            .find('option')
-                            .remove()
-                            .end()
-                            .append('<option selected>เลือก</option>');
+               
+            });
 
-                            $('#CustomerSubDistrict')
-                           .find('option')
-                           .remove()
-                           .end()
-                           .append('<option selected>เลือก</option>');
-                            ;
-
-                            $.get("../Setting/GetDistrict/" + $('#CustomerProvince').val(), function (obj) {
-                                $.each(obj.data, function (key, value) {
-                                    $("#CustomerDistrict").append('<option value="' + value.DistrictID + '"' + ">" + value.DistrictName + "</option>");
-                                });
-                            });
-                            $("#select2-chosen-2").text('เลือก');
-                            $("#select2-chosen-3").text('เลือก');
-                        });
-
-                        $("#CustomerDistrict").change(function () {
-                            $('#CustomerSubDistrict')
-                            .find('option')
-                            .remove()
-                            .end()
-                            .append('<option selected>เลือก</option>');
+        })
 
 
-                            $.get("../Setting/GetSubDistrict/" + $('#CustomerDistrict').val(), function (obj) {
-                                $.each(obj.data, function (key, value) {
-                                    $("#CustomerSubDistrict").append('<option value="' + value.SubDistrictID + '"' + ">" + value.SubDistrictName + "</option>");
-                                });
-                            });
-                            $("#select2-chosen-3").text('เลือก');
-
-                        });
-                        $("#CustomerSubDistrict").change(function () {
-                            $.get("../Setting/GetZipCode/" + $('#CustomerSubDistrict').val(),
-                                function (obj) {
-                                    console.log(obj.data);
-                                    $('#CustomerZipCode').val(obj.data[0].SubDistrictZipCode);
-                                });
-                        });
-                    })
-                </script>
-            }
+    </script>
+}
