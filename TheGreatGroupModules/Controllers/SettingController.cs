@@ -20,19 +20,22 @@ namespace TheGreatGroupModules.Controllers
             }
             else
             {
-                return RedirectToAction("Login");
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
             }
 
         } 
 
         public ActionResult ListZone()
         {
-             if (Session["iuser"] != null)
+            if (Session["iuser"] != null)
             {
                 return View();
             }
-            else {
-                return RedirectToAction("Login");
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
             }
           
         }

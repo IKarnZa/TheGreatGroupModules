@@ -70,18 +70,19 @@ namespace TheGreatGroupModules.Modules
         }
 
 
-        public static ProductSelect Product_TotalSale(double TotalPrice, double PriceGoldReceipt, double UnitAmount, double Vat)
+        public static ProductSelect Product_TotalSale(ref double ContractPayment,double TotalPrice, double PriceGoldReceipt, double UnitAmount, double Vat)
         {
             double ReceiptGoldDay = ((PriceGoldReceipt - (1.8 / 100)) / 15.16) * UnitAmount; // ราคารับซื้อทองประจำวัน
             double TotalPrice3 = TotalPrice - ReceiptGoldDay; // ราคาสินค้ารวมค่ากำเหน็จ รวมดอกเบี้ยแล้ว
             double totalvat = TotalPrice3 * Vat;
             double TotalSale = TotalPrice + totalvat;
-
+            ContractPayment = TotalSale;
             ProductSelect product = new ProductSelect();
             product.ProductPrice_Text = "รวมเงินทั้งสิ้น  ";
             product.TotalPrice = TotalSale.ToString("#,##0.00");
             product.TotalPrice_Text = TotalSale.ToString("#,##0.00");
             product.Unit_Text = "";
+         
             return product;
         }
     }

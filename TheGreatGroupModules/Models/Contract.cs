@@ -77,4 +77,6 @@ namespace TheGreatGroupModules.Models
         public string CustomerPartnerTelephone { get; set; }
         public string CustomerPartnerIdCard { get; set; }
     }
+
+
 }

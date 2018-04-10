@@ -20,7 +20,19 @@ namespace TheGreatGroupModules.Controllers
     {
         //
         // GET: /Home/
+        public ActionResult Indexs()
+        {
+            if (Session["iuser"] != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login");
+            }
 
+        }
         public ActionResult Index()
         {
             if (Session["iuser"] != null)

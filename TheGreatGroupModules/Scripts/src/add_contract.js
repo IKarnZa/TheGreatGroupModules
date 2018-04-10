@@ -157,7 +157,7 @@
                {
                    dataField: "ContractAmountLast",
                    label: {
-                       text: "งวดสุดท้าย/บาท"
+                       text: "งวดแรก/บาท"
                    },
                    editorOptions: {
                        disabled: true
@@ -640,10 +640,13 @@ function Submit_Click() {
             data: JSON.stringify(Contract),
             success: function (data) {
                 if (data.success == true) {
+                    DevExpress.ui.notify(data.data);
                     window.location = "../Customers/Contract?CustomerID=" + getUrlParameter('CustomerID') +
                "&ContractID=" + data.ContractID;
+
                 } else {
-                    alert(data.data);
+
+                    DevExpress.ui.notify(data.data);
                 }
             },
             error: function () {
@@ -659,8 +662,15 @@ function Submit_Click() {
             contentType: 'application/json',
             data: JSON.stringify(Contract),
             success: function (data) {
-                console.log('success');
-                alert("Update Data Success !!!");
+               
+                if (data.success==true) {
+                    DevExpress.ui.notify("แก้ไขข้อมูลสำเร็จ !!");
+
+                } else {
+                    DevExpress.ui.notify(data.data);
+                }
+              
+              
             },
             error: function () {
                 console.log("error");
@@ -692,8 +702,9 @@ function AddProduct() {
             contentType: 'application/json',
             data: JSON.stringify(dataProduct),
             success: function (data) {
-                console.log('success');
-
+         
+                window.location = "../Customers/Contract?CustomerID=" + getUrlParameter('CustomerID') +
+              "&ContractID=" +getUrlParameter('ContractID') ;
             },
             error: function () {
                 console.log("error");
@@ -707,5 +718,12 @@ function AddProduct() {
     }
 
 
+
+}
+
+
+function back() {
+
+    window.location = "../Customers/ListContract?CustomerID=" + getUrlParameter('CustomerID');
 
 }

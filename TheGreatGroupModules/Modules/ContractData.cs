@@ -746,7 +746,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
           
 
         }
-              public void UpdateContractPayment(int ContractID , int CustomerID , decimal ContractPayment)
+              public void UpdateContractPayment(int ContractID , int CustomerID , double ContractPayment)
               {
 
                   MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -808,7 +808,41 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
 
               }
 
-        
+              public void Deleted_Product_customer(int CustomerID, int ContractID)
+              {
 
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  string StrSql = "";
+                  try
+                  {
+                      StrSql = @" Delete From  product_customer  
+                                  Where CustomerID={1} And  ContractID={0} ;";
+
+
+                      StrSql += @"Update contract set ContractPayment=0
+                               Where ContractID={0} and ContractCustomerID={1};";
+
+                      StrSql = String.Format(StrSql, ContractID, CustomerID);
+
+                      DBHelper.Execute(StrSql, ObjConn);
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+                      ObjConn.Close();
+                  }
+
+
+              }
+              public void UpdateContractAmount_ContractExpDate(int CustomerID, int ContractID)
+              {
+
+
+
+              }
     }
 }

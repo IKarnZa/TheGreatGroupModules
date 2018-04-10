@@ -128,7 +128,7 @@ function Load_DataGrid(data) {
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a href='\ListContract?CustomerID=" + options.key.ID + "'  title='ลบพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
+                        .append("<a  title='ลบพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
                         .appendTo(container);
 
                    

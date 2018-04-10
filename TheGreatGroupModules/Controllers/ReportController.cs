@@ -17,12 +17,68 @@ namespace TheGreatGroupModules.Controllers
         {
             return View();
         }
+
+        public ActionResult CostProfix()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
+        public ActionResult OpenCloseAccountByCustomerReport()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
         public ActionResult OpenCloseAccountReport()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
+        public ActionResult CloseAccountReport()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
         }
 
-
+        public ActionResult NPLReport()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
         // GET: /Report/GetOpenAccountReport?zoneId=1&datefrom=2018-04-01&dateto=2018-04-30
         public JsonResult GetOpenAccountReport(int zoneId, string datefrom, string dateto)
         {

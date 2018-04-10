@@ -26,6 +26,7 @@ namespace TheGreatGroupModules.Controllers
             }
           
         }
+      
 
 
 
@@ -96,8 +97,8 @@ namespace TheGreatGroupModules.Controllers
                 if (ContractID > 0) {
                     listProductsSelect = dataPro.GetProductCustomer(CustomerID, ContractID);
                 }
-
-                listProductsSelect1 = dataPro.ProductContractSummary(listProductsSelect);
+                double ContractPayment = 0;
+                listProductsSelect1 = dataPro.ProductContractSummary(ref ContractPayment, listProductsSelect);
 
             
 

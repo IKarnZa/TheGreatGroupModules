@@ -16,7 +16,15 @@ namespace TheGreatGroupModules.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
         }
 
         [HttpPost]
@@ -74,9 +82,23 @@ namespace TheGreatGroupModules.Controllers
                 ProductData dataPro = new ProductData();
                 IList<ProductSelect> listProductsSelect = new List<ProductSelect>();
                 listProductsSelect = dataPro.GetProductCustomer(CustomerID, ContractID);
-                decimal ContractPayment = Convert.ToDecimal(listProductsSelect.Sum(c => c.ProductPrice));
+                double ContractPayment = 0;
+
+                List<ProductSelect> listProductsSelect1 = new List<ProductSelect>();
+                listProductsSelect1 = dataPro.ProductContractSummary(ref ContractPayment, listProductsSelect);
+
+                
                 ContractData cd = new ContractData();
+
+                // ลบสินค้าเดิมทั้งหมด แก้จำนวนเงินสินค้าทั้งหมดในสัญญา
+                cd.Deleted_Product_customer(CustomerID, ContractID);
+               
+                // update จำนวนเงินสินค้าทั้งหมด 
                 cd.UpdateContractPayment(ContractID, CustomerID, ContractPayment);
+
+
+                // คำนวณ ค่างวด / วันสิ้นสุดสัญญา
+                cd.UpdateContractAmount_ContractExpDate(CustomerID, ContractID);
 
                 return Json(new
                 {

@@ -38,6 +38,20 @@ namespace TheGreatGroupModules.Controllers
           
           
         }
+        public ActionResult SearchListContract()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+
+
+        }
         public ActionResult PurchaseOrder(int CustomerID)
         {
             if (Session["iuser"] != null)
@@ -93,7 +107,19 @@ namespace TheGreatGroupModules.Controllers
             }
           
         }
+        public ActionResult ApproveCloseAccount()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
 
+        }
         public ActionResult EditCustomer(int CustomerID)
         {
             if (Session["iuser"] != null)
@@ -117,7 +143,7 @@ namespace TheGreatGroupModules.Controllers
             else
             {
                 TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login", "Home", new { area = "" });
             }
           
         }
@@ -485,7 +511,7 @@ namespace TheGreatGroupModules.Controllers
             {
                 new CustomersData().AddCustomer(ref item);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Customers");
 
             }
             catch (Exception ex)

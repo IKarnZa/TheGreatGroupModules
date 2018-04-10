@@ -3317,6 +3317,11 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Setting\ManageStaffZone.cshtml" />
+    <Content Include="Views\Report\CloseAccountReport.cshtml" />
+    <Content Include="Views\Report\NPLReport.cshtml" />
+    <Content Include="Views\Report\OpenCloseAccountByCustomerReport.cshtml" />
+    <Content Include="Views\Customers\ApproveCloseAccount.cshtml" />
+    <Content Include="Views\Customers\SearchListContract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

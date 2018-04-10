@@ -150,7 +150,7 @@ function Load_DataGrid(data) {
 
         allowColumnReordering: true,
         allowColumnResizing: true,
-        columnAutoWidth: true,
+   //     columnAutoWidth: true,
         height: 500,
         columnFixing: {
             enabled: true
@@ -209,19 +209,7 @@ function Load_DataGrid(data) {
                 fixed: false,
                 fixedPosition: 'right',
             },
-        //{
-        //    dataField: "Remark",
-        //    caption: "หมายเหตุ",
-        //    alignment: 'center',
-        //    width: 100 + "%",
-        //    fixed: false,
-        //    fixedPosition: 'right',
-        //    cellTemplate: function (container, options) {
-        //        $("<div>")
-        //            .append("<button  title='ระบุหมายเหตุ' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
-        //            .appendTo(container);
-        //    }
-        //},
+      
             {
                 dataField: "Status",
                 caption: "สถานะ",
@@ -230,7 +218,19 @@ function Load_DataGrid(data) {
                 fixed: false,
                 fixedPosition: 'right'
             },
-
+              {
+                  dataField: "Remark",
+                  caption: "หมายเหตุ",
+                  alignment: 'center',
+                  width: 120 + "%",
+                  fixed: false,
+                  fixedPosition: 'right',
+                  //cellTemplate: function (container, options) {
+                  //    $("<div>")
+                  //        .append("<button  title='ระบุหมายเหตุ' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                  //        .appendTo(container);
+                  //}
+              },
         ],
         summary: {
             totalItems: [

@@ -191,7 +191,7 @@ namespace TheGreatGroupModules.Modules
              + Utility.GetMaxID("daily_receipts", "ID") + ","
              + CustomerID + ","
              + ContractID + ","
-             + Utility.FormateDateTime(DateTime.Now) + ","
+             + Utility.FormateDateTime(DateTime.MinValue) + ","
              + 0 + ","
              + 0 + ","
              + 0 + ","
@@ -301,7 +301,7 @@ namespace TheGreatGroupModules.Modules
         }
 
 
-        public List<ProductSelect> ProductContractSummary(IList<ProductSelect>  products)
+        public List<ProductSelect> ProductContractSummary(ref double ContractPayment ,IList<ProductSelect> products)
         {
              List<ProductSelect>  listproduct=new List<ProductSelect>();
             try
@@ -318,7 +318,7 @@ namespace TheGreatGroupModules.Modules
                double TotlalVat = 0;
                 if (products.Count > 0) {
 
-                     
+                 
                      for (int i = 0; i < products.Count; i++)
                      {
                          product = new ProductSelect();
@@ -326,11 +326,12 @@ namespace TheGreatGroupModules.Modules
                          Reward=  products[i].ContractReward;
                          PriceGoldReceipt = products[i].PriceGoldReceipt;
                          interest = products[i].ContractInterest / 100;
+
                          no = (i + 1);
 
                          //ราคาทอง
                          ProductPrice += products[i].ProductPrice + Reward+ (products[i].ProductPrice * interest);
-
+                          
                          if ( products[i].ProductGroupID == 2)
                          {
                                //สินค้าทองรูปพรรณ
@@ -368,7 +369,7 @@ namespace TheGreatGroupModules.Modules
 
                              // รวมเงินทั้งสิ้น
                              product = new ProductSelect();
-                             product = SetProductPrice.Product_TotalSale(ProductPrice, PriceGoldReceipt, products[i].UnitAmount, Vat);
+                             product = SetProductPrice.Product_TotalSale(ref ContractPayment , ProductPrice, PriceGoldReceipt, products[i].UnitAmount, Vat);
                              listproduct.Add(product);
                          }
                          else if(products[i].ProductGroupID == 1 )

@@ -239,8 +239,10 @@
                             </span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>
+                            <li><a href="../Customers/SearchListContract"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาหนังสือสัญญา</span></a></li>
                             <li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li>
-                            
+                            <li><a href="../Customers/ApproveCloseAccount"><i class="fa fa-check-square-o"></i><span class="hide-menu"> ตรวจสอบการเปิด-ปิดบัญชี</span></a></li>
+
                         </ul> 
                     </li>
                     <li>
@@ -255,19 +257,23 @@
                             <i data-icon="/" class="fa fa-bar-chart-o"></i><span class="hide-menu"> 
                                 รายงาน<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-
+                                    
                                     <li> <a href="../Report/OpenCloseAccountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการเปิดบัญชี</span></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการปิดบัญชี</span></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานยอดเปิดออเดอร์ลูกค้า และยอดปิดบัญชี</span></a> </li>
+                                    <li> <a href="../Report/CloseAccountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการปิดบัญชี</span></a> </li>
+                                    <li> <a href="../Report/NPLReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงาน NPL</span></a> </li>
+                                    <li> <a href="../Report/OpenCloseAccountByCustomerReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานยอดเปิดออเดอร์ลูกค้า และยอดปิดบัญชี</span></a> </li>
+                                    
+                                     @*
                                     <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานยอดเก็บประจำวันเดือนปีและช่วงเวลา</span></a> </li>
                                     <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานต้นทุนกำไร</span></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการเก็บเงินตามพนักงาน</span></a> </li>
+                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการเก็บเงินตามพนักงาน</span></a> </li>*@
                                 </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-user" ></i><span class="hide-menu"> ระบบจัดการพนักงาน<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> รายชื่อพนักงานทั้งหมด</span></a> </li>
+                            <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพนักงานเก็บเงินแทน</span></a> </li>
                             <li> <a href="../Staffs/StaffLocation"><i class="fa fa-map-marker"></i><span class="hide-menu"> ระบบติดตามพนักงาน</span></a> </li>
                         </ul>
                     </li>
@@ -294,7 +300,7 @@
             </div>
 
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> @DateTime.Now.Year &copy; ระบบจัดการสินเชื่อ  </footer>
+            <footer class="footer text-center"> @DateTime.Now.Year &copy; เดอะ เกรท กรุ๊ป จำกัด </footer>
         </div>
       
         <!-- /#page-wrapper -->
@@ -352,6 +358,7 @@
     <!-- Date range Plugin JavaScript -->
     <script src="../Template/plugins/bower_components/timepicker/bootstrap-timepicker.min.js"></script>
     <script src="../Template/plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfCaJ061VpqhbpS_77MHTChZE-7EJEsKs"></script>
     <script src="../Content/datepicker-th.js"></script>
     <script src="../Sources/Lib/js/jszip.min.js"></script>
     <script src="../Sources/Lib/js/dx.all.js"></script>

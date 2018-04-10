@@ -1,4 +1,116 @@
 ﻿@{
-    ViewBag.Title = "StaffLocation";
+    ViewBag.Title = "ระบบติดตามพนักงาน";
+    ViewBag.MainMenu = "ระบบจัดการพนักงาน";
     Layout = "~/Views/Shared/_LayoutPartial.cshtml";
+}
+
+<div class="row bg-title">
+    <!-- .page title -->
+    <div class="col-md-5">
+        <ol class="breadcrumb pull-left">
+            <li><a href="#">@ViewBag.MainMenu</a></li>
+            <li class="active">@ViewBag.Title</li>
+        </ol>
+    </div>
+    <!-- /.page title -->
+    <!-- <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fa fa-mail-reply"></i> ย้อนกลับ</a> -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12 ">
+
+        <div class="white-box">
+
+            <h3 class="m-b-0 m-t-0"> <i class="fa fa-map-marker"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
+            <hr>
+
+            <div id="map"></div><br>
+            <div class="options">
+                <div class="caption"></div>
+                <div class="option">
+                    <div id="use-custom-markers"></div>
+                </div>
+                <div class="option">
+                    <div id="show-tooltips"></div>
+                </div>
+            </div>  
+            <br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+
+    <script>
+        DevExpress.viz.currentTheme("generic.light");
+        $(function () {
+            var markerUrl = "https://js.devexpress.com/Demos/RealtorApp/images/map-marker.png",
+                markersData = [
+                 //   {
+                //    location: [13.41149792, 100.0144377],
+                //    tooltip: {
+                //        text: "บริษัท เดอะ เกรท กรุ๊ป จำกัด"
+                //    }
+                //}
+                        //, 
+                   {
+                    location: "13.4257831, 99.9553108",
+                    tooltip: {
+                        text: "คุณธนคุปชำระ 300 บาท เวลา 14.00 น."
+                    }
+                },
+                
+                {
+                    location: "13.4257831, 99.95503185",
+                    tooltip: {
+                        text: "คุณอโณชาชำระ 200 บาท"
+                    }
+                },
+                //{
+                //    location: { lat: 40.753889, lng: -73.981389 },
+                //    tooltip: {
+                //        text: "Fifth Avenue"
+                //    }
+                //}, {
+                //    location: "Brooklyn Bridge,New York,NY",
+                //    tooltip: {
+                //        text: "Brooklyn Bridge"
+                //    }
+                //}
+                ];
+
+            var mapWidget = $("#map").dxMap({
+                zoom: 24,
+                height: 440,
+                width: "100%",
+                controls: false,
+                markerIconSrc: markerUrl,
+                markers: markersData
+            }).dxMap("instance");
+
+            mapWidget.option("markerIconSrc", markerUrl);
+            //$("#use-custom-markers").dxCheckBox({
+            //    value: true,
+            //    text: "Use custom marker icons",
+            //    onValueChanged: function (data) {
+            //        mapWidget.option("markers", markersData);
+            //        mapWidget.option("markerIconSrc", data.value ? markerUrl : null);
+            //    }
+            //});
+
+            $("#show-tooltips").dxButton({
+                text: "แสดงคำอธิบาย",
+                onClick: function () {
+                    var newMarkers = $.map(markersData, function (item) {
+                        return $.extend(true, {}, item, { tooltip: { isShown: true } });
+                    });
+
+                    mapWidget.option("markers", newMarkers);
+                }
+            });
+        });
+
+    </script>
 }

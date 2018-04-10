@@ -110,7 +110,7 @@ function Load_DataGrid(data) {
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a href='\ListContract?CustomerID=" + options.key.StaffID + "'  title='ลบพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
+                        .append("<a  title='ลบพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
                         .appendTo(container);
                 }
             },
@@ -244,4 +244,9 @@ function AddStaffRole() {
     }
 
 
+}
+
+function hide_popup(zone) {
+    $("#modalAddEditStaffRole").dxPopup("instance").hide();
+    $('#btnAddStaffRole').data('data-zone', 0);
 }
