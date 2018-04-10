@@ -12,7 +12,7 @@ namespace TheGreatGroupModules.Modules
     public class DBHelper
     {
         private static string szDbUser = "admin";
-        private static string szDbPassword = "password";
+        private static string szDbPassword = "admin";
 
         public static MySqlConnection ConnectDb(ref string errMsg)
         {

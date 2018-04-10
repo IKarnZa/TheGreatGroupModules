@@ -82,7 +82,7 @@ namespace TheGreatGroupModules.Controllers
           
         }
 
-        public ActionResult SettingPermission()
+        public ActionResult SettingPermission(int id)
         {
             if (Session["iuser"] != null)
             {

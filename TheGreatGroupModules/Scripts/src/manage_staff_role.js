@@ -85,6 +85,21 @@ function Load_DataGrid(data) {
 
 
             },
+               {
+                   dataField: "StaffID",
+                   caption: "กำหนดสิทธิ์พนักงาน",
+                   alignment: 'center',
+                   width: 50,
+                   fixed: true,
+                   fixedPosition: 'right',
+                   cellTemplate: function (container, options) {
+
+                       var staffRole = JSON.stringify(options.data);
+                       $("<div>")
+                           .append("<a href='../Staffs/SettingPermission/"+options.data.StaffRoleID+"' title='กำหนดสิทธิ์พนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-gear'></i></a>")
+                           .appendTo(container);
+                   }
+               },
             {
                 dataField: "StaffID",
                 caption: "แก้ไข",
@@ -136,24 +151,17 @@ function Load_Popup(staffRole) {
         height: 500,
         contentTemplate: function () {
             return $("<div />").append(
-
-                $("<div class='modal-body' role='dialog'>").append(
-                    //$("<div class='modal-body'>"),
-                    $("<div>").append(
-                        $("<div class='form-group'>").append(
-                            $("<label for='recipient-name' class='col-form-label'>ชื่อกลุ่มพนักงาน</label>"),
-                            $("<input type='text' class='form-control' id='StaffRoleName'  >")
-                        ),
-                        $("</div>"),
-                    ),
-                    $("</div>"),
-                    $("<div class='modal-footer float-lg-left' style='border: hidden !important;'>").append(
-                        $("<button type='link' id='btnAddStaffRole'  class='btn btn-success' onClick='AddStaffRole();'>บันทึก</button>"),
-                        $("<button type='link'onclick='hide_popup()' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>")
-                    ),
-                    $("</div>"),
-                ),
-                $("</div>"),
+                "<div class='modal-body' role='dialog'>"+
+               " <div><div class='form-group'>"+
+              " <label for='recipient-name' class='col-form-label'>ชื่อกลุ่มพนักงาน</label>"+
+           " <input type='text' class='form-control' id='StaffRoleName'  >"+
+           "</div>"+
+          "</div>"+
+          "<div class='modal-footer float-lg-left' style='border: hidden !important;'>"+
+         " <button type='link' id='btnAddStaffRole'  class='btn btn-success' onClick='AddStaffRole();'>บันทึก</button>"+
+         "<button type='link'onclick='hide_popup()' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>"+
+         "</div>"+
+          "</div>"
 
             );
         },

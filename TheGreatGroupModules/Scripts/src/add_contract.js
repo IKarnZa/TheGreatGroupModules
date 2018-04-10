@@ -138,7 +138,7 @@
                    editorType: "dxSelectBox",
                    editorOptions: {
                        items: ["P", "G"],
-                       value: "P"
+                       
 
                    },
                },
