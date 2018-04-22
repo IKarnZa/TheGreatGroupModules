@@ -192,7 +192,7 @@ namespace TheGreatGroupModules.Modules
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
             {
-                string strSql = @"DELETE FROM staffrole 
+                string strSql =@"Update staffrole set Deleted=1 
                                 where  StaffRoleID={0}";
 
                 strSql = string.Format(strSql, staffroleId);
@@ -544,9 +544,53 @@ namespace TheGreatGroupModules.Modules
 
 
         }
+        public List<StaffPermissionGroup> GetStaffMenu(int staffroleID)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                List<StaffPermissionGroup> data = new List<StaffPermissionGroup>();
+                string StrSql = @"   SELECT * FROM staffpermissiongroup pg   WHERE pg.Activated=1 AND pg.Deleted=0 ";
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                StaffPermissionGroup sr = new StaffPermissionGroup();
+
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        sr = new StaffPermissionGroup();
+                      
+                        if (dt.Rows[i]["StaffPermissionGroupID"] != DBNull.Value)
+                            sr.StaffPermissionGroupID = Convert.ToInt32(dt.Rows[i]["StaffPermissionGroupID"].ToString());
+                        if (dt.Rows[i]["StaffPermissionGroupName"] != DBNull.Value)
+                            sr.StaffPermissionGroupName = dt.Rows[i]["StaffPermissionGroupName"].ToString();
+                        sr.ListPermission = GetStaffPermissionMenu(ObjConn, staffroleID, sr.StaffPermissionGroupID, 1);
+
+                        if (sr.ListPermission.Count > 0) {
+                            data.Add(sr);
+                        }
+                       
+                    }
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
 
 
-        public List<StaffPermission> GetStaffMenu(MySqlConnection ObjConn , int staffroleID, int staffPermissionGroupID, int isMenu)
+        }
+
+        public List<StaffPermission> GetStaffPermissionMenu(MySqlConnection ObjConn, int staffroleID, int staffPermissionGroupID, int isMenu)
         {
 
          //   MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -559,7 +603,7 @@ namespace TheGreatGroupModules.Modules
         left join staffpermissiongroup  pg on  p.StaffPermissionGroup=pg.StaffPermissionGroupID
         left join staffrolepermission sr on sr.StaffPermissionID=p.StaffPermissionID
         where p.Activated=1 and p.Deleted=0 
-        and sr.StaffRoleID=" + staffroleID + " and p.IsMenu=" + isMenu + "and pg.staffPermissionGroupID=" + staffPermissionGroupID;
+        and sr.StaffRoleID=" + staffroleID + " and p.IsMenu=" + isMenu + " and pg.staffPermissionGroupID=" + staffPermissionGroupID;
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 

@@ -240,10 +240,9 @@ namespace TheGreatGroupModules.Modules
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
             {
-
-                string strSql = @" delete from zone where ZoneID=" + ZoneID;
-
-
+                string strSql = @"Update zone set Deleted=1 
+                                where  ZoneID=" + ZoneID;
+               
                 DBHelper.Execute(strSql, ObjConn);
             }
             catch (Exception ex)

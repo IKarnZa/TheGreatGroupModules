@@ -470,9 +470,36 @@ namespace TheGreatGroupModules.Controllers
 
 
 
+        //api : ../staffs/GetMenu?staffroleID=1
+           public JsonResult GetMenu(int staffroleID)
+        {
 
+            try
+            {
+                StaffData st = new StaffData();
+                List<StaffPermissionGroup>  item = new  List<StaffPermissionGroup> ();
+                item = st.GetStaffMenu(staffroleID);
 
-        //api/staffs/GetStaffPermission?staffroleID=1
+                return Json(new
+                {
+                    data = item,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+      
+    
+
+        //api : ../staffs/GetStaffPermission?staffroleID=1
         public JsonResult GetStaffPermission(int staffroleID)
         {
 
