@@ -1,6 +1,7 @@
-﻿@{
-    ViewBag.Title = "กำหนดสิทธิ์พนักงาน";
-    ViewBag.MainMenu = "ระบบจัดการพนักงาน";
+﻿
+@{
+    ViewBag.Title = "จัดการข้อมูลสินค้า";
+    ViewBag.MainMenu = "ตั้งต่าระบบ";
     Layout = "~/Views/Shared/_LayoutPartial.cshtml";
 }
 
@@ -23,19 +24,21 @@
 
             <h3 class="m-b-0 m-t-0"> <i class="fa fa-line-chart"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
             <hr>
-
-            
-            <div id="toast"></div>
-            <div id="loadIndicator"></div>
-            <div id="gridContainer"></div>
-         
-            <br>
+        </div>
     </div>
 </div>
 
+
 @section Scripts {
-    @Scripts.Render("../Scripts/src/setting_permission.js")
 
+    <!-- Date Picker Plugin JavaScript -->
+    @Scripts.Render("../Scripts/src/open_close_account_report.js")
+
+    <script>
+        $(function () {
+        
+        })
+
+
+    </script>
 }
-
-

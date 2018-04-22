@@ -237,7 +237,8 @@ function Load_DataGrid(data) {
                 { column: 'CustomerName', displayFormat: 'จำนวนลูกค้าทั้งหมด ' + data.countData + ' คน' },
                  { column: 'ContractExpDate_Text', displayFormat: 'ยอดรวม' },
                    { column: 'PriceReceipts_Text', displayFormat: data.SumData },
-                    { column: 'ContractAmount_Text', displayFormat: data.SumDataContractAmount }
+                    { column: 'ContractAmount_Text', displayFormat: data.SumDataContractAmount },
+                    { column: 'Balance_Text', displayFormat: data.SumDataBalance }
             ],
         },
         onToolbarPreparing: function (e) {

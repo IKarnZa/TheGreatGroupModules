@@ -41,7 +41,7 @@ namespace TheGreatGroupModules.Controllers
             }
           
         }
-        public ActionResult AddStaff()
+        public ActionResult AddStaff(int staffID)
         {
             if (Session["iuser"] != null)
             {
@@ -53,6 +53,20 @@ namespace TheGreatGroupModules.Controllers
                 return RedirectToAction("Login", "Home");
             }
           
+        }
+
+        public ActionResult EditStaff(int staffID)
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+
         }
 
         public ActionResult ListStaffRole()
@@ -82,7 +96,7 @@ namespace TheGreatGroupModules.Controllers
           
         }
 
-        public ActionResult SettingPermission(int id)
+        public ActionResult SettingPermission(int staffID)
         {
             if (Session["iuser"] != null)
             {
@@ -208,7 +222,131 @@ namespace TheGreatGroupModules.Controllers
             }
         }
 
-         // POST:  /Staffs/AddStaffRole
+
+        #region ::  Manage Staff ::
+
+        public JsonResult GetListStaffs(int staffID)
+        {
+
+            try
+            {
+                StaffData st = new StaffData();
+                List<Staffs> item = new List<Staffs>();
+                item = st.GetStaff(staffID);
+
+                List<Province> listData4 = new List<Province>();
+                SettingData data = new SettingData();
+                listData4 = data.GetProvince();
+
+
+                List<District> listData1 = new List<District>();
+                SettingData data1 = new SettingData();
+                listData1 = data.GetDistrict(0);
+
+
+                List<SubDistrict> listData2 = new List<SubDistrict>();
+                SettingData data2 = new SettingData();
+                listData2 = data.GetSubDistrict(0);
+
+                List<StaffRole> item2 = new List<StaffRole>();
+                item2 = st.GetListStaffRole();
+
+
+                return Json(new
+                {
+                    data = item,
+                    dataStaffRole=item2,
+                    dataProvince = listData4,
+                    dataDistrict = listData1,
+                    dataSubDistrict = listData2,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+          
+
+        }
+
+        [HttpPost]
+        public JsonResult AddStaffs(Staffs staff)
+        {
+
+
+            StaffData data = new StaffData();
+
+            try
+            {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                staff.InsertBy = (Int32)Session["iuser"];
+
+                data.AddStaff(staff);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+        [HttpPost]
+        public JsonResult EditStaffs(Staffs staff)
+        {
+
+
+            StaffData data = new StaffData();
+
+            try
+            {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                staff.UpdateBy = (Int32)Session["iuser"];
+
+                data.EditStaff(staff);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion  ::  Manage Staff ::
+
+        #region  :: Manage StaffRole  ::
+        // POST:  /Staffs/AddStaffRole
          //  {StaffRoleName:""}
         [HttpPost]
         public JsonResult AddStaffRole(StaffRole role) {
@@ -270,17 +408,47 @@ namespace TheGreatGroupModules.Controllers
             }
         }
 
+
+        // POST:  /Staffs/DeleteStaffRole
+        //  {StaffRoleID:""}
+        [HttpPost]
+        public JsonResult DeleteStaffRole(StaffRole role)
+        {
+
+
+            StaffData data = new StaffData();
+
+            try
+            {
+
+                data.DeletedStaffRole(role);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // GET: /Staffs/GetListStaffRole
         public JsonResult GetListStaffRole()
         {
 
             try
             {
-                
-                StaffData st = new StaffData();
-                DataTable dt = new DataTable();
-                List<StaffRole> item = new List<StaffRole>();
 
+                StaffData st = new StaffData();
+                List<StaffRole> item = new List<StaffRole>();
                 item = st.GetListStaffRole();
 
                 return Json(new
@@ -299,5 +467,39 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+        #endregion  :: Manage StaffRole  ::
+
+
+
+
+
+        //api/staffs/GetStaffPermission
+        public JsonResult GetStaffPermission()
+        {
+
+            try
+            {
+
+                StaffData st = new StaffData();
+                 List<StaffPermission> item = new  List<StaffPermission>();
+                item = st.GetStaffPermission();
+
+                return Json(new
+                {
+                    data = item,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
     }
 }

@@ -21,9 +21,12 @@ namespace TheGreatGroupModules.Models
              public int  StaffSubDistrictId { get; set; }
             public int   StaffDistrictId { get; set; }
             public int   StaffProvinceId { get; set; }
-           public int    StaffZipCodeId { get; set; }
+            public string StaffZipCode { get; set; }
            public string    StaffTelephone { get; set; }
+           public string StaffMobile { get; set; }
             public string   StaffEmail { get; set; }
+            public int InsertBy { get; set; }
+            public int UpdateBy { get; set; }
           public int     Activated { get; set; }
          public int Deleted { get; set; }
     }
@@ -48,5 +51,23 @@ namespace TheGreatGroupModules.Models
         public string ImageUrl { get; set; }
         public int Activated { get; set; }
         public int Deleted { get; set; }
+    }
+
+
+    public class StaffPermissionGroup
+    {
+        public int StaffPermissionGroupID { get; set; }
+        public string StaffPermissionGroupName { get; set; }
+        public List<StaffPermission> ListPermission { get; set; }
+
+    }
+    public class StaffPermission {
+        public int StaffPermissionID { get; set; }
+        public int StaffPermissionGroupID { get; set; }
+        public string StaffPermissionName { get; set; }
+        public string StaffPermissionGroupName { get; set; }
+        public string StaffPermissionUrl { get; set; }
+        public int IsMenu { get; set; }
+    
     }
 }

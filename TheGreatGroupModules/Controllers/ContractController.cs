@@ -140,6 +140,10 @@ namespace TheGreatGroupModules.Controllers
             int parner = 0;
             try
             {
+                if (Session["iuser"]==null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                item.ContractInsertBy = (Int32)Session["iuser"];
 
                 ContractID = CD.Add_NewContract(item);
 
@@ -210,6 +214,12 @@ namespace TheGreatGroupModules.Controllers
             int parner = 0;
             try
             {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                item.ContractInsertBy = (Int32)Session["iuser"];
+
+
                 ContractData CD = new ContractData();
                 CD.Edit_NewContract(item);
 
@@ -327,5 +337,40 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
+
+
+        // GET: /Contract/GetApproveOpen_CloseContract?custpmerIDCard=:id
+        public JsonResult GetApproveOpen_CloseContract(string custpmerIDCard)
+           {
+
+
+            try
+            {
+                List<DailyReceiptsReport> listDataOpen = new List<DailyReceiptsReport>();
+
+                List<DailyReceiptsReport> listDataClose = new List<DailyReceiptsReport>();
+                ContractData data = new ContractData();
+                listDataOpen = data.GetApproveOpen_CloseContract(custpmerIDCard, "1");
+                listDataClose = data.GetApproveOpen_CloseContract(custpmerIDCard, "0");
+
+                return Json(new
+                {
+                    dataOpen = listDataOpen,
+                    dataClose = listDataClose,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
     }
 }

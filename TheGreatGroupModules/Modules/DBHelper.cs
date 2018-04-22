@@ -12,11 +12,11 @@ namespace TheGreatGroupModules.Modules
     public class DBHelper
     {
         private static string szDbUser = "admin";
-        private static string szDbPassword = "admin";
+        private static string szDbPassword = "password";
 
         public static MySqlConnection ConnectDb(ref string errMsg)
         {
-            string connStrFmt = "Data Source={0}; Initial Catalog={1};User ID={2}; Password={3}";
+            string connStrFmt = "Data Source={0}; Initial Catalog={1};User ID={2}; Password={3};";
             string connString = string.Format(connStrFmt, ConfigurationManager.AppSettings["DBServer"], ConfigurationManager.AppSettings["DBName"], szDbUser, szDbPassword);
             try
             {

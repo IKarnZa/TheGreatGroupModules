@@ -5,7 +5,7 @@
    -->
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,8 @@
     <link href="../Template/plugins/bower_components/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <link href="../Template/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
     <link href="../Template/plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
-    <link href="../Template/plugins/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+    <link href="../Template/plugins/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" /> 
+    <link href="../Template/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" />
     <!-- This is a Animation CSS -->
     <link href="../Template/css/animate.css" rel="stylesheet">
     <!-- This is a Custom CSS -->
@@ -182,21 +183,21 @@
                         </form>
                     </li>*@
                     <li class="dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="~/Template/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">@Session["iusername"]</b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="@Session["imageUrl"]" alt=" user-img" width="36" class="img-circle"><b class="hidden-xs">@Session["iusername"]</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="~/Template/plugins/images/users/varun.jpg" alt="user" /></div>
+                                    <div class="u-img"><img src="@Session["imageUrl"]" alt="user" /></div>
                                     <div class="u-text"><h4>@Session["iusername"]</h4><p class="text-muted">พนักงานขาย</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                            @*<li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
+                            <li role="separator" class="divider"></li>*@
                             <li><a href="../Home/LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -261,6 +262,7 @@
                                     <li> <a href="../Report/OpenCloseAccountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการเปิดบัญชี</span></a> </li>
                                     <li> <a href="../Report/CloseAccountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการปิดบัญชี</span></a> </li>
                                     <li> <a href="../Report/NPLReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงาน NPL</span></a> </li>
+                                    <li> <a href="../Report/DiscountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการให้ส่วนลด</span></a> </li>
                                     <li> <a href="../Report/OpenCloseAccountByCustomerReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานยอดเปิดออเดอร์ลูกค้า และยอดปิดบัญชี</span></a> </li>
                                     
                                      @*
@@ -272,7 +274,7 @@
                     <li>
                         <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-user" ></i><span class="hide-menu"> ระบบจัดการพนักงาน<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> รายชื่อพนักงานทั้งหมด</span></a> </li>
+                            <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพนักงาน</span></a> </li>
                             <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพนักงานเก็บเงินแทน</span></a> </li>
                             <li> <a href="../Staffs/StaffLocation"><i class="fa fa-map-marker"></i><span class="hide-menu"> ระบบติดตามพนักงาน</span></a> </li>
                         </ul>
@@ -280,8 +282,8 @@
                     <li>
                         <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-user"></i><span class="hide-menu">  ตั้งค่าระบบ<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="javascript:void(0)"><i class="fa fa-list-alt"></i><span class="hide-menu"> จัดการข้อมูลสินค้า</span></a> </li>
-                            <li> <a href="javascript:void(0)"><i class="fa fa-map-marker"></i><span class="hide-menu"> ระบบติดตามพนักงาน</span></a> </li>
+                            <li> <a href="../Products/Index"><i class="fa fa-list-alt"></i><span class="hide-menu"> จัดการข้อมูลสินค้า</span></a> </li>
+                            <li> <a href="../Setting/Holiday"><i class="fa fa-map-marker"></i><span class="hide-menu"> กำหนดวันหยุดนักขัตฤกษ์</span></a> </li>
                             <li> <a href="../Setting/ListZone"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพื้นที่ทำงาน</span></a> </li>
                             <li> <a href="../Staffs/ListStaffRole"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดกลุ่มพนักงาน</span></a> </li>
                         </ul>
@@ -358,6 +360,9 @@
     <!-- Date range Plugin JavaScript -->
     <script src="../Template/plugins/bower_components/timepicker/bootstrap-timepicker.min.js"></script>
     <script src="../Template/plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../Template/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+    <script src="../Template/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfCaJ061VpqhbpS_77MHTChZE-7EJEsKs"></script>
     <script src="../Content/datepicker-th.js"></script>
     <script src="../Sources/Lib/js/jszip.min.js"></script>

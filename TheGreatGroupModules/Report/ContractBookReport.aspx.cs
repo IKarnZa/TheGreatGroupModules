@@ -35,7 +35,7 @@ namespace TheGreatGroupModules.Report
             string encoding = string.Empty;
             string extension = string.Empty;
             string PDF_FOLDER_FILE = "../PDF/";
-            string PDF_FILE_NAME = "FULLTax";
+            string PDF_FILE_NAME = "ContractBook";
 
             byte[] bytes = ReportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
@@ -62,7 +62,7 @@ namespace TheGreatGroupModules.Report
                 f.Close();
             }
 
-            Response.Redirect((PDF_File + Convert.ToString("?")) + System.DateTime.Now.ToString());
+           Response.Redirect("../Report/PDFContractDocument");
 
         }
     }

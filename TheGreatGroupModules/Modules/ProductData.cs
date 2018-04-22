@@ -77,23 +77,23 @@ namespace TheGreatGroupModules.Modules
                         productgroupId=Convert.ToInt32(dt.Rows[i]["ProductGroupID"].ToString());
                         item.ProductGroupID = productgroupId;
                         if(productgroupId==1){
-                            item.ProductPrice = (Convert.ToDouble(datanew[0].ask) / 15.16) * Convert.ToDouble(dt.Rows[i]["UnitAmount"].ToString());
+                            item.ProductPrice = (Convert.ToDouble(datanew[1].ask) / 15.16) * Convert.ToDouble(dt.Rows[i]["UnitAmount"].ToString());
                             item.ProductPrice_Text = item.ProductPrice.ToString("#,###.00");
                             item.TotalPrice_Text = item.ProductPrice.ToString("#,###.00");
                             item.ProductName = dt.Rows[i]["ProductGroupName"].ToString() + " " + dt.Rows[i]["ProductName"].ToString()+
                                  " (" +  dt.Rows[i]["UnitAmount"].ToString() + " " +  dt.Rows[i]["UnitName"].ToString() + ")";
-                            item.PriceGold = Convert.ToDouble(datanew[0].ask);
-                            item.PriceGoldReceipt = Convert.ToDouble(datanew[0].bid);
+                            item.PriceGold = Convert.ToDouble(datanew[1].ask);
+                            item.PriceGoldReceipt = Convert.ToDouble(datanew[1].bid);
                         }
                         else if (productgroupId == 2)
                         {
-                            item.ProductPrice = (Convert.ToDouble(datanew[0].ask) / 15.16) * Convert.ToDouble(dt.Rows[i]["UnitAmount"].ToString());
+                            item.ProductPrice = (Convert.ToDouble(datanew[1].ask) / 15.16) * Convert.ToDouble(dt.Rows[i]["UnitAmount"].ToString());
                             item.ProductPrice_Text = item.ProductPrice.ToString("#,###.00");
                             item.TotalPrice_Text = item.ProductPrice.ToString("#,###.00");
                             item.ProductName = dt.Rows[i]["ProductGroupName"].ToString() + " " + dt.Rows[i]["ProductName"].ToString() +
                                                            " (" + dt.Rows[i]["UnitAmount"].ToString() + " " + dt.Rows[i]["UnitName"].ToString() + ")";
-                            item.PriceGold = Convert.ToDouble(datanew[0].ask);
-                            item.PriceGoldReceipt = Convert.ToDouble(datanew[0].bid);
+                            item.PriceGold = Convert.ToDouble(datanew[1].ask);
+                            item.PriceGoldReceipt = Convert.ToDouble(datanew[1].bid);
                         }
                         else {
                             item.ProductName = dt.Rows[i]["ProductName"].ToString();

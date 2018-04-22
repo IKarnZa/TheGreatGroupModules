@@ -17,7 +17,30 @@ namespace TheGreatGroupModules.Controllers
         {
             return View();
         }
-
+        public ActionResult PDFContractDocument()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
+        public ActionResult DiscountReport()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
         public ActionResult CostProfix()
         {
             if (Session["iuser"] != null)

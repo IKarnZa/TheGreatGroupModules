@@ -233,6 +233,7 @@
     <Content Include="Content\bg.jpg" />
     <Content Include="Content\bg_1.png" />
     <Content Include="Content\datepicker-th.js" />
+    <Content Include="Content\default-user.png" />
     <Content Include="Content\generic.light.custom.css" />
     <Content Include="Content\qr1.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -317,8 +318,12 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\PDFObject-master\pdfobject.js" />
+    <Content Include="Scripts\PDFObject-master\pdfobject.min.js" />
     <Content Include="Scripts\src\add_contract.js" />
     <Content Include="Scripts\src\add_customer.js" />
+    <Content Include="Scripts\src\add_staff.js" />
+    <Content Include="Scripts\src\approve_close_account.js" />
     <Content Include="Scripts\src\customers_src.js" />
     <Content Include="Scripts\src\customer_history.js" />
     <Content Include="Scripts\src\customer_product.js" />
@@ -332,6 +337,7 @@
     <Content Include="Scripts\src\manage_zone.js" />
     <Content Include="Scripts\src\open_close_account_report.js" />
     <Content Include="Scripts\src\reports_src.js" />
+    <Content Include="Scripts\src\setting_permission.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Sources\EULA\AngularJS License.txt" />
     <Content Include="Sources\EULA\Dexer License.txt" />
@@ -3322,9 +3328,18 @@
     <Content Include="Views\Report\OpenCloseAccountByCustomerReport.cshtml" />
     <Content Include="Views\Customers\ApproveCloseAccount.cshtml" />
     <Content Include="Views\Customers\SearchListContract.cshtml" />
+    <Content Include="Scripts\PDFObject-master\.gitignore" />
+    <Content Include="Scripts\PDFObject-master\bower.json" />
+    <Content Include="Scripts\PDFObject-master\package.json" />
+    <Content Include="Scripts\PDFObject-master\readme.md" />
+    <Content Include="Views\Report\DiscountReport.cshtml" />
+    <Content Include="Views\Report\PDFContractDocument.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Staffs\EditStaff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\user\" />
     <Folder Include="PDF\" />
     <Folder Include="Template\plugins\bower_components\x-editable\dist\jquery-editable\jquery-ui-datepicker\css\" />
   </ItemGroup>

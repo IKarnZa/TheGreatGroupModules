@@ -616,6 +616,7 @@ namespace TheGreatGroupModules.Modules
                 {
                     login.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
                     login.StaffName = dt.Rows[0]["StaffFirstName"].ToString();
+                    login.ImageUrl = dt.Rows[0]["StaffImagePath"].ToString();
                     login.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
                 }
                 else {

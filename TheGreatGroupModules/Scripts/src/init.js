@@ -72,8 +72,7 @@ function LoadForm_CustomerInfo(
                     label: {
                         text: "ชื่อ"
                     }, isRequired: true
-                    ,
-                        validationRules: [{
+                    , validationRules: [{
                             type: "required",
                             message: "ต้องการชื่อลูกค้า"
                         }],
@@ -449,7 +448,11 @@ function LoadForm_CustomerInfo(
                                label: {
                                    text: "พนักงานขาย"
                                },
-                               isRequired: false
+                               isRequired: true,
+                               validationRules: [{
+                                   type: "required",
+                                   message: "ต้องการชื่อลูกค้า"
+                               }],
                            },
                            ]
                       
@@ -488,8 +491,52 @@ function formatDate(date) {
 
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
-// Load menu
 
-//$("#side-menu").html(' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span></a>' +
-//     '<ul class="nav nav-second-level">  <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>'+
-//                            '<li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li></ul></li>');
+function LoadMenu() {
+
+    // Load menu
+
+    //$("#side-menu").html(' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span></a>' +
+    //     '<ul class="nav nav-second-level">  <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>'+
+    //                            '<li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li></ul></li>');
+
+}
+
+
+function alerSuccess(message) {
+
+    swal("สำเร็จ!!", message, "success");
+
+}
+
+function alerError(message) {
+
+    swal("เกิดข้อผิดพลาด!", message, "error");
+}
+
+function alertConfirm(messageQuestion,messageYes,messageNo) {
+
+
+    swal({
+        title: "Are you sure?",
+        text: messageQuestion,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: "ยกเลิก",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+ function (isConfirm) {
+
+     if (isConfirm) {
+         swal("Successful!", messageYes, "success");
+
+     } else {
+         swal("Cancelled", messageNo, "error");
+         e.preventDefault();
+     }
+ });
+
+}

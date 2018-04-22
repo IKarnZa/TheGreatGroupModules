@@ -70,6 +70,7 @@ namespace TheGreatGroupModules.Controllers
                     data = listData,
                     SumData = (listData.Sum(c => c.PriceReceipts)).ToString("#,##0.00"),
                     SumDataContractAmount = (listData.Sum(c => c.ContractAmount)).ToString("#,##0.00"),
+                    SumDataBalance = (listData.Sum(c => c.Balance)).ToString("#,##0.00"),
                     countData= listData.Count,
                     success = true
                 }, JsonRequestBehavior.AllowGet);

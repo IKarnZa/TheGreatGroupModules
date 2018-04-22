@@ -78,9 +78,9 @@
                 fixed: true,
                 fixedPosition: 'right',
                 cellTemplate: function (container, options) {
-
+                    var staffid = options.data;
                     $("<div>")
-                        .append("<a title='แก้ไขพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                        .append("<a href='\EditStaff?staffID=" + staffid.StaffID + "' title='แก้ไขพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
                         .appendTo(container);
                 }
             },
@@ -103,7 +103,4 @@
 
     });
 
-}
-function NewZone() {
-    //alert("Success");
 }

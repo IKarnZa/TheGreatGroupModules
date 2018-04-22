@@ -24,7 +24,7 @@ namespace TheGreatGroupModules.Modules
                                     FROM zone
                                     WHERE Activated=1 AND Deleted=0 ";
 
-                
+
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
                 return dt;
@@ -128,11 +128,12 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-        public void AddStaffRole(StaffRole role) {
+        public void AddStaffRole(StaffRole role)
+        {
 
 
-               MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-             role.StaffRoleID= Utility.GetMaxID("staffrole", "StaffRoleID");
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            role.StaffRoleID = Utility.GetMaxID("staffrole", "StaffRoleID");
             try
             {
                 string strSql = @"INSERT INTO staffrole
@@ -145,7 +146,7 @@ namespace TheGreatGroupModules.Modules
                                         1,
                                         0);";
 
-                strSql=    string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
+                strSql = string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
                 DBHelper.Execute(strSql, ObjConn);
             }
             catch (Exception ex)
@@ -158,7 +159,7 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
 
-        
+
         }
         public void EditStaffRole(StaffRole role)
         {
@@ -171,7 +172,7 @@ namespace TheGreatGroupModules.Modules
                                  StaffRoleName={1}
                                 where  StaffRoleID={0}";
 
-                strSql=  string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
+                strSql = string.Format(strSql, role.StaffRoleID, Utility.ReplaceString(role.StaffRoleName));
                 DBHelper.Execute(strSql, ObjConn);
             }
             catch (Exception ex)
@@ -179,12 +180,206 @@ namespace TheGreatGroupModules.Modules
 
                 throw new Exception(ex.Message);
             }
-            finally {
+            finally
+            {
                 ObjConn.Close();
             }
 
         }
-        public List<StaffRole> GetListStaffRole() {
+
+        public void DeletedStaffRole(StaffRole role)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string strSql = @"DELETE FROM staffrole 
+                                where  StaffRoleID={0}";
+
+                strSql = string.Format(strSql, role.StaffRoleID);
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+        }
+
+
+
+        public void AddStaff(Staffs staff)
+        {
+
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            staff.StaffID = Utility.GetMaxID("staff", "StaffID");
+            staff.StaffPassword = Utility.HashPassword(staff.StaffPassword);
+            try
+            {
+                string strSql = @"INSERT INTO staff
+            (StaffID,
+             StaffRoleID,
+             StaffCode,
+             StaffPassword,
+             StaffTitleName,
+             StaffFirstName,
+             StaffLastName,
+             StaffAddress1,
+             StaffAddress2,
+             StaffSubDistrictId,
+             StaffDistrictId,
+             StaffProvinceId,
+             StaffZipCode,
+             StaffMobile,
+             StaffTelephone,
+             StaffEmail,
+             InsertBy,
+             InsertDate,
+             Activated,
+             Deleted)
+             VALUES ({0},{1}, {2}, {3}, {4}, {5}, {6}, {7},{8},{9},{10}, {11}, {12}, {13}, {14}, {15}, 1, 0);";
+
+                strSql = string.Format(strSql,
+                     staff.StaffID,
+                     staff.StaffRoleID,
+                     Utility.ReplaceString(staff.StaffCode),
+                     Utility.ReplaceString(staff.StaffPassword),
+                     Utility.ReplaceString(staff.StaffTitleName),
+                     Utility.ReplaceString(staff.StaffFirstName),
+                     Utility.ReplaceString(staff.StaffLastName),
+                     Utility.ReplaceString(staff.StaffAddress1),
+                     Utility.ReplaceString(staff.StaffAddress2),
+                     staff.StaffSubDistrictId,
+                     staff.StaffDistrictId,
+                     staff.StaffProvinceId,
+                      Utility.ReplaceString(staff.StaffZipCode),
+                      Utility.ReplaceString(staff.StaffMobile),
+                      Utility.ReplaceString(staff.StaffTelephone),
+                      Utility.ReplaceString(staff.StaffEmail),
+                      staff.InsertBy,
+                      Utility.FormateDateTime(DateTime.Now)
+                    );
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+
+        }
+        public void EditStaff(Staffs staff)
+        {
+
+            List<Staffs> data = GetStaff(staff.StaffID);
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string NEWPOSSWORD = staff.StaffPassword;
+            staff.StaffPassword = Utility.HashPassword(staff.StaffPassword);
+            try
+            {
+                if (data[0].StaffPassword == NEWPOSSWORD)
+                {
+
+
+                }
+                string strSql = @"Update staff Set
+             StaffRoleID={1},
+             StaffCode={2},
+             StaffEmail={3},
+             StaffTitleName={4},
+             StaffFirstName={5},
+             StaffLastName={6},
+             StaffAddress1={7},
+             StaffAddress2={8},
+             StaffSubDistrictId={9},
+             StaffDistrictId={10},
+             StaffProvinceId={11},
+             StaffZipCode={12},
+             StaffMobile={13},
+             StaffTelephone={14},
+             UpdateBy={15},
+             UpdateDate={16}
+";
+
+
+                if (data[0].StaffPassword == staff.StaffPassword)
+                {
+                    strSql += "  Where  StaffID = {0} ";
+
+                    strSql = string.Format(strSql,
+                         staff.StaffID,
+                         staff.StaffRoleID,
+                         Utility.ReplaceString(staff.StaffCode),
+                          Utility.ReplaceString(staff.StaffEmail),
+                         Utility.ReplaceString(staff.StaffTitleName),
+                         Utility.ReplaceString(staff.StaffFirstName),
+                         Utility.ReplaceString(staff.StaffLastName),
+                         Utility.ReplaceString(staff.StaffAddress1),
+                         Utility.ReplaceString(staff.StaffAddress2),
+                         staff.StaffSubDistrictId,
+                         staff.StaffDistrictId,
+                         staff.StaffProvinceId,
+                          Utility.ReplaceString(staff.StaffZipCode),
+                          Utility.ReplaceString(staff.StaffMobile),
+                          Utility.ReplaceString(staff.StaffTelephone),
+                          staff.UpdateBy,
+                          Utility.FormateDateTime(DateTime.Now)
+                        );
+                }
+                else
+                {
+                    strSql += "  ,StaffPassword={17}";
+                    strSql += "  Where   StaffID = {0} ";
+
+                    strSql = string.Format(strSql,
+                         staff.StaffID,
+                         staff.StaffRoleID,
+                         Utility.ReplaceString(staff.StaffCode),
+                          Utility.ReplaceString(staff.StaffEmail),
+                         Utility.ReplaceString(staff.StaffTitleName),
+                         Utility.ReplaceString(staff.StaffFirstName),
+                         Utility.ReplaceString(staff.StaffLastName),
+                         Utility.ReplaceString(staff.StaffAddress1),
+                         Utility.ReplaceString(staff.StaffAddress2),
+                         staff.StaffSubDistrictId,
+                         staff.StaffDistrictId,
+                         staff.StaffProvinceId,
+                          Utility.ReplaceString(staff.StaffZipCode),
+                          Utility.ReplaceString(staff.StaffMobile),
+                          Utility.ReplaceString(staff.StaffTelephone),
+                          staff.UpdateBy,
+                          Utility.FormateDateTime(DateTime.Now),
+                          Utility.ReplaceString(staff.StaffPassword)
+                        );
+
+                }
+
+
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+
+        }
+        public List<StaffRole> GetListStaffRole()
+        {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
@@ -192,26 +387,26 @@ namespace TheGreatGroupModules.Modules
                 List<StaffRole> data = new List<StaffRole>();
                 string StrSql = @"  Select * FROM  staffrole where Activated=1 and deleted=0  ";
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
-                
-                    StaffRole sr = new StaffRole();
-                    if (dt.Rows.Count>0)
-                    {
-                        for (int i = 0; i < dt.Rows.Count; i++)
-                 {
-                     sr = new StaffRole();
-                     sr.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
-                     sr.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
-                     sr.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
-                     sr.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
 
-                     data.Add(sr);
+                StaffRole sr = new StaffRole();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        sr = new StaffRole();
+                        sr.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
+                        sr.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
+                        sr.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
+                        sr.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+
+                        data.Add(sr);
+                    }
                 }
-                }
-                    return data;
+                return data;
             }
             catch (Exception ex)
             {
-                
+
                 throw;
             }
             finally
@@ -219,7 +414,131 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
 
-        
+
+        }
+
+        public List<Staffs> GetStaff(int id)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                List<Staffs> data = new List<Staffs>();
+                string StrSql = @"  Select * FROM  staff where Activated=1 and deleted=0  ";
+
+                StrSql += " and StaffID=" + id;
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                Staffs sr = new Staffs();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        sr = new Staffs();
+                        if (dt.Rows[i]["StaffID"] != DBNull.Value)
+                            sr.StaffID = Convert.ToInt32(dt.Rows[i]["StaffID"].ToString());
+                        if (dt.Rows[i]["StaffRoleID"] != DBNull.Value)
+                            sr.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
+                        if (dt.Rows[i]["StaffCode"] != DBNull.Value)
+                            sr.StaffCode = dt.Rows[i]["StaffCode"].ToString();
+                        if (dt.Rows[i]["StaffPassword"] != DBNull.Value)
+                            sr.StaffPassword = dt.Rows[i]["StaffPassword"].ToString();
+                        if (dt.Rows[i]["StaffTitleName"] != DBNull.Value)
+                            sr.StaffTitleName = dt.Rows[i]["StaffTitleName"].ToString();
+                        if (dt.Rows[i]["StaffFirstName"] != DBNull.Value)
+                            sr.StaffFirstName = dt.Rows[i]["StaffFirstName"].ToString();
+                        if (dt.Rows[i]["StaffLastName"] != DBNull.Value)
+                            sr.StaffLastName = dt.Rows[i]["StaffLastName"].ToString();
+                        if (dt.Rows[i]["StaffAddress1"] != DBNull.Value)
+                            sr.StaffAddress1 = dt.Rows[i]["StaffAddress1"].ToString();
+                        if (dt.Rows[i]["StaffAddress2"] != DBNull.Value)
+                            sr.StaffAddress2 = dt.Rows[i]["StaffAddress2"].ToString();
+                        if (dt.Rows[i]["StaffSubDistrictId"] != DBNull.Value)
+                            sr.StaffSubDistrictId = Convert.ToInt32(dt.Rows[i]["StaffSubDistrictId"].ToString());
+                        if (dt.Rows[i]["StaffDistrictId"] != DBNull.Value)
+                            sr.StaffDistrictId = Convert.ToInt32(dt.Rows[i]["StaffDistrictId"].ToString());
+                        if (dt.Rows[i]["StaffProvinceId"] != DBNull.Value)
+                            sr.StaffProvinceId = Convert.ToInt32(dt.Rows[i]["StaffProvinceId"].ToString());
+                        if (dt.Rows[i]["StaffZipCode"] != DBNull.Value)
+                            sr.StaffZipCode = dt.Rows[i]["StaffZipCode"].ToString();
+                        if (dt.Rows[i]["StaffMobile"] != DBNull.Value)
+                            sr.StaffMobile = dt.Rows[i]["StaffMobile"].ToString();
+                        if (dt.Rows[i]["StaffTelephone"] != DBNull.Value)
+                            sr.StaffTelephone = dt.Rows[i]["StaffTelephone"].ToString();
+                        if (dt.Rows[i]["StaffEmail"] != DBNull.Value)
+                            sr.StaffEmail = dt.Rows[i]["StaffEmail"].ToString();
+                        if (dt.Rows[i]["Activated"] != DBNull.Value)
+                            sr.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
+                        if (dt.Rows[i]["Deleted"] != DBNull.Value)
+                            sr.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+
+                        data.Add(sr);
+                    }
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+
+        }
+
+        public List<StaffPermission> GetStaffPermission()
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                List<StaffPermission> data = new List<StaffPermission>();
+                string StrSql = @"  SELECT p.StaffPermissionID,p.StaffPermissionName ,p.StaffPermissionUrl ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  FROM staffpermission  p 
+      LEFT JOIN staffpermissiongroup  pg ON  p.StaffPermissionGroup=pg.StaffPermissionGroupID
+      WHERE p.Activated=1 AND p.Deleted=0 ";
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                StaffPermission sr = new StaffPermission();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        sr = new StaffPermission();
+                        if (dt.Rows[i]["StaffPermissionID"] != DBNull.Value)
+                            sr.StaffPermissionID = Convert.ToInt32(dt.Rows[i]["StaffPermissionID"].ToString());
+                        if (dt.Rows[i]["StaffPermissionGroupID"] != DBNull.Value)
+                            sr.StaffPermissionGroupID = Convert.ToInt32(dt.Rows[i]["StaffPermissionGroupID"].ToString());
+                        if (dt.Rows[i]["StaffPermissionName"] != DBNull.Value)
+                            sr.StaffPermissionName = dt.Rows[i]["StaffPermissionName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionGroupName"] != DBNull.Value)
+                            sr.StaffPermissionGroupName = dt.Rows[i]["StaffPermissionGroupName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionUrl"] != DBNull.Value)
+                            sr.StaffPermissionUrl = dt.Rows[i]["StaffPermissionUrl"].ToString();
+                        if (dt.Rows[i]["IsMenu"] != DBNull.Value)
+                            sr.IsMenu = Convert.ToInt32(dt.Rows[i]["IsMenu"].ToString());
+
+                        data.Add(sr);
+                    }
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+
         }
     }
 }

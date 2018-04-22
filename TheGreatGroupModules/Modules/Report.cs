@@ -24,12 +24,13 @@ namespace TheGreatGroupModules.Modules
         
         public decimal PriceReceipts { get; set; }
         public decimal Balance { get; set; }
-
+        public decimal TotalSales { get; set; }
         public string ContractCreateDate_Text { get { return ContractCreateDate.ToString("dd/MM/yyyy"); } }
         public string ContractExpDate_Text { get { return ContractExpDate.ToString("dd/MM/yyyy"); } }
         public string ContractAmount_Text { get { return ContractAmount.ToString("#,##0.00"); } }
         public string PriceReceipts_Text { get { return PriceReceipts.ToString("#,##0.00"); } }
         public string Balance_Text { get { return Balance.ToString("#,##0.00"); } }
+        public string TotalSales_Text { get { return TotalSales.ToString("#,##0.00"); } }
         public int StaffID { get; set; }
         public string PhoneNumber { get; set; }
         public string MobileNumber { get; set; }

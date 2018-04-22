@@ -59,6 +59,7 @@ namespace TheGreatGroupModules.Controllers
                         Session["iuser"] = login.StaffID;
                         Session["iusername"] = login.StaffName;
                         Session["istaffrole"] = login.StaffRoleID;
+                        Session["imageUrl"] = login.ImageUrl;
                         return RedirectToAction("Index");
                     }
                     catch (Exception ex)

@@ -11,7 +11,6 @@ $("#gridshow").hide();
         });
 
         $.post("../Customers/GetCustomers", {
-
             CustomerFirstName: $("#CustomerFirstName").val(),
             CustomerLastName: $("#CustomerLastName").val(),
             CustomerMobile: $("#CustomerMobile").val(),
@@ -19,28 +18,23 @@ $("#gridshow").hide();
 
         })
     .done(function (data) {
-        console.log(data);
-        if (data.success == true) {
-          
-              Load_DataGrid(data.data);
-
-          
+      
+        if (data.success == true)
+        {
+            Load_DataGrid(data.data);
             $("#gridshow").show();
             $("#loadIndicator").dxLoadIndicator({
                 visible: false
             });
-
         } else {
-
             $("#loadIndicator").dxLoadIndicator({
                 visible: false
             });
-
             DevExpress.ui.notify(data.errMsg);
         }
-     
-     
+
     });
+
     }
 
 

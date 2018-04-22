@@ -96,7 +96,7 @@ function Load_DataGrid(data) {
 
                        var staffRole = JSON.stringify(options.data);
                        $("<div>")
-                           .append("<a href='../Staffs/SettingPermission/"+options.data.StaffRoleID+"' title='กำหนดสิทธิ์พนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-gear'></i></a>")
+                           .append("<a href='../Staffs/SettingPermission?staffID="+options.data.StaffRoleID+"' title='กำหนดสิทธิ์พนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-gear'></i></a>")
                            .appendTo(container);
                    }
                },

@@ -543,7 +543,7 @@
                 {
                     dataField: "No",
                     caption: "ลำดับที่",
-                    width: 80,
+                    width: 80+"%",
                     alignment: 'center',
                     allowFiltering: false,
                     allowSorting: false
@@ -551,21 +551,21 @@
                 {
                     dataField: "ProductName",
                     caption: "รายการสินค้า",
-                    width: 300,
+                    width: 300 + "%",
                     alignment: 'left',
                     allowFiltering: false,
                     allowSorting:false
                 }, {
                     dataField: "Unit_Text",
                     caption: "จำนวน(หน่วย)",
-                    width: 160,
+                    width: 160 + "%",
                     alignment: 'right',
                     allowSorting: false
                 },
               {
                   dataField: "ProductPrice_Text",
                   caption: "ราคาต่อหน่วย",
-                  width: 160,
+                  width: 160 + "%",
                   alignment: 'right',
                   allowSorting: false
 
@@ -574,7 +574,7 @@
                  dataField: "TotalPrice_Text",
                  caption: "จำนวนเงิน",
                  alignment: 'right',
-                 width: 160,
+                 width: 160 + "%",
                  allowSorting: false
              },
             ],
@@ -663,17 +663,21 @@ function Submit_Click() {
             data: JSON.stringify(Contract),
             success: function (data) {
                
-                if (data.success==true) {
-                    DevExpress.ui.notify("แก้ไขข้อมูลสำเร็จ !!");
+                if (data.success == true) {
+                    swal("สำเร็จ!!", "แก้ไขข้อมูลสำเร็จ !!", "success");
+                   
 
                 } else {
-                    DevExpress.ui.notify(data.data);
+
+                    swal("สำเร็จ!!", data.data, "success");
+                   
                 }
               
               
             },
             error: function () {
                 console.log("error");
+
             }
         });
      

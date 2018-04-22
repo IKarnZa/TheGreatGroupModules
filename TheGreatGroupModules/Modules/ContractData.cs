@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using TheGreatGroupModules.Models;
@@ -375,9 +376,11 @@ namespace TheGreatGroupModules.Modules
              ContractPayEveryDay,
              ContractSpecialholiday,
              ContractRemark,
+             ContractInsertDate,
+             ContractInsertBy,
              Activated,
              Deleted)
-VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14}, {15},{16}, {17}, {18}, {19}, {20}, {21});";
+VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14}, {15},{16}, {17}, {18}, {19}, {20}, {21}, {22}, {23});";
 
 
                 StrSql = String.Format(StrSql,
@@ -401,6 +404,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                       item.ContractPayEveryDay,
                       item.ContractSpecialholiday,
                       Utility.ReplaceString(item.ContractRemark),
+                       Utility.FormateDateTime(DateTime.Now),  //insert Date
+                      item.ContractInsertBy,//insert BY
                       1,
                       0
                          );
@@ -451,8 +456,10 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
              ContractPayEveryDay={17},
              ContractSpecialholiday={18},
              ContractRemark={19},
-             Activated={20},
-             Deleted={21}
+             ContractUpdateDate={20},
+             ContractUpdateBy={21},
+             Activated={22},
+             Deleted={23}
             Where ContractID={0}";
 
 
@@ -477,6 +484,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                       item.ContractPayEveryDay,
                       item.ContractSpecialholiday,
                       Utility.ReplaceString(item.ContractRemark),
+                      Utility.FormateDateTime(DateTime.Now),
+                      item.ContractUpdateBy,
                       1,
                       0
                          );
@@ -840,9 +849,97 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
               }
               public void UpdateContractAmount_ContractExpDate(int CustomerID, int ContractID)
               {
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  try
+                  {
+                         
+                  string StrSql = "";
+                
+                      StrSql = @" Select * From Contract
+                                  Where CustomerID={1} And  ContractID={0} 
+                                  and  Activated=1 and Deleted=0 ;";
+                      StrSql = String.Format(StrSql, ContractID, CustomerID);
+
+                    DataTable dt=  DBHelper.List(StrSql, ObjConn);
+                      if(dt.Rows.Count>0){
+                      
+                      }
 
 
+
+                      
+                  }
+                  catch (Exception ex )
+                  {
+                      
+                      throw;
+                  }
 
               }
+
+              public List<DailyReceiptsReport> GetApproveOpen_CloseContract(string custpmerIDCard, string ContractStatus)
+              {
+                  DateTime dateAsOf = DateTime.Now;
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+                  try
+                  {
+
+                      string StrSql = @"    SELECT c.CustomerID,c.CustomerMobile, ct.ContractID ,CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName ,c.CustomerNickName,                                  
+                                     ct.ContractNumber,ct.ContractCreateDate,ct.ContractExpDate ,ct.ContractAmount,
+                                     ct.ContractPayment,SUM( a.PriceReceipts ) AS PriceReceipts,ct.ContractAmountLast,
+                                    Case When a.Activated>0 then 'ตรวจสอบแล้ว' else 'รอการตรวจสอบ' end as Status, 
+                                    Case When a.Remark  IS NULL then '' else a.Remark end as Remark, 
+                                    ( SELECT  ct.ContractPayment- SUM(d.PriceReceipts)  FROM  daily_receipts d
+                                    WHERE  d.Deleted=0 AND d.ContractID=ct.ContractID
+                                    AND DATE(d.DateAsOf)<='" + dateAsOf.ToString("yyyy-MM-dd") + "')AS Balance " +
+                                         @" FROM daily_receipts a
+                                    LEFT JOIN Customer c ON  a.CustomerID= c.CustomerId
+                                    LEFT JOIN contract ct ON  a.ContractID= ct.ContractID
+                                    WHERE 0=0   
+                                    AND a.Deleted=0 and ct.Deleted=0  ";
+
+                      if (!string.IsNullOrEmpty(custpmerIDCard))
+                          StrSql += "  AND  c.CustomerIdCard=" + Utility.ReplaceString(custpmerIDCard);
+
+                      if (!string.IsNullOrEmpty(ContractStatus))
+                          StrSql += "  AND  ct.ContractStatus=" + ContractStatus;
+
+                      StrSql += @"  GROUP BY  a.CustomerID ORDER BY ct.ContractCreateDate  ";
+
+
+                      DataTable dt = DBHelper.List(StrSql, ObjConn);
+                      List<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
+                      if (dt != null && dt.Rows.Count > 0)
+                      {
+                          listData = dt.AsEnumerable().Select(dr => new DailyReceiptsReport()
+                          {
+                              CustomerID = dr.Field<int>("CustomerID"),
+                              ContractID = dr.Field<int>("ContractID"),
+                              ContractNumber = dr.Field<string>("ContractNumber"),
+                              CustomerName = dr.Field<string>("CustomerName"),
+                              ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
+                              ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
+                              ContractAmount = dr.Field<decimal>("ContractAmount"),
+                              PriceReceipts = dr.Field<decimal>("PriceReceipts"),
+                              Balance = dr.Field<decimal>("Balance"),
+                              TotalSales = dr.Field<decimal>("ContractPayment"),
+                              ContractAmountLast = dr.Field<decimal>("ContractAmountLast"),
+                              Status = dr.Field<string>("Status"),
+                              Remark = dr.Field<string>("Remark"),
+                          }).ToList();
+                      }
+                      return listData;
+                  }
+                  catch (Exception ex)
+                  {
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+                      ObjConn.Close();
+                  }
+              }
+
     }
 }
