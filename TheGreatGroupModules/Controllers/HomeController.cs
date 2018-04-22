@@ -60,6 +60,14 @@ namespace TheGreatGroupModules.Controllers
                         Session["iusername"] = login.StaffName;
                         Session["istaffrole"] = login.StaffRoleID;
                         Session["imageUrl"] = login.ImageUrl;
+
+
+                        StaffData st = new StaffData();
+                        List<StaffPermissionGroup> item = new List<StaffPermissionGroup>();
+                        item = st.GetStaffMenu(login.StaffRoleID);
+                       string menu= st.GetMenu(item);
+
+                       Session["imenu"] = menu;
                         return RedirectToAction("Index");
                     }
                     catch (Exception ex)

@@ -232,65 +232,9 @@
                         </ul>
                     </div>
                 </div>
-                <ul class="nav" id="side-menu">
-            
-                    <li> 
-                        <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span>
-                            @*<span class="label label-rouded label-purple pull-right">2</span>*@
-                            </span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>
-                            <li><a href="../Customers/SearchListContract"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาหนังสือสัญญา</span></a></li>
-                            <li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li>
-                            <li><a href="../Customers/ApproveCloseAccount"><i class="fa fa-check-square-o"></i><span class="hide-menu"> ตรวจสอบการเปิด-ปิดบัญชี</span></a></li>
+                <ul class="nav" id="side-menu" data-menu="@Session["imenu"]"></ul>
 
-                        </ul> 
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect"><i data-icon="" class="fa fa-barcode" ></i><span class="hide-menu"> ระบบจัดการค่างวด<span class="fa arrow"></span></span></a>
-                        <ul class="nav nav-second-level">
-                            <li> <a href="../ManagePayment/Installment"><i data-icon="/" class="fa fa-list-ol"></i><span class="hide-menu"> บันทึกค่างวดรายวัน</span></a> </li>
-                            <li> <a href="../ManagePayment/CustomerHistory"><i data-icon="7" class="fa fa-file-text-o"></i><span class="hide-menu"> ประวัติการชำระค่างวดตามรายชื่อสมาชิก</span></a> </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect">
-                            <i data-icon="/" class="fa fa-bar-chart-o"></i><span class="hide-menu"> 
-                                รายงาน<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    
-                                    <li> <a href="../Report/OpenCloseAccountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการเปิดบัญชี</span></a> </li>
-                                    <li> <a href="../Report/CloseAccountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการปิดบัญชี</span></a> </li>
-                                    <li> <a href="../Report/NPLReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงาน NPL</span></a> </li>
-                                    <li> <a href="../Report/DiscountReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการให้ส่วนลด</span></a> </li>
-                                    <li> <a href="../Report/OpenCloseAccountByCustomerReport"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานยอดเปิดออเดอร์ลูกค้า และยอดปิดบัญชี</span></a> </li>
-                                    
-                                     @*
-                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานยอดเก็บประจำวันเดือนปีและช่วงเวลา</span></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานต้นทุนกำไร</span></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class=" fa  fa-line-chart"></i><span class="hide-menu"> รายงานการเก็บเงินตามพนักงาน</span></a> </li>*@
-                                </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-user" ></i><span class="hide-menu"> ระบบจัดการพนักงาน<span class="fa arrow"></span></span></a>
-                        <ul class="nav nav-second-level">
-                            <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพนักงาน</span></a> </li>
-                            <li> <a href="../Staffs/ListStaff"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพนักงานเก็บเงินแทน</span></a> </li>
-                            <li> <a href="../Staffs/StaffLocation"><i class="fa fa-map-marker"></i><span class="hide-menu"> ระบบติดตามพนักงาน</span></a> </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-user"></i><span class="hide-menu">  ตั้งค่าระบบ<span class="fa arrow"></span></span></a>
-                        <ul class="nav nav-second-level">
-                            <li> <a href="../Products/Index"><i class="fa fa-list-alt"></i><span class="hide-menu"> จัดการข้อมูลสินค้า</span></a> </li>
-                            <li> <a href="../Setting/Holiday"><i class="fa fa-map-marker"></i><span class="hide-menu"> กำหนดวันหยุดนักขัตฤกษ์</span></a> </li>
-                            <li> <a href="../Setting/ListZone"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดพื้นที่ทำงาน</span></a> </li>
-                            <li> <a href="../Staffs/ListStaffRole"><i class="fa fa-list-alt"></i><span class="hide-menu"> กำหนดกลุ่มพนักงาน</span></a> </li>
-                        </ul>
-                    </li>
-                </ul>
-
-             
+              
             </div>
         </div>
         <!-- Left navbar-header end -->

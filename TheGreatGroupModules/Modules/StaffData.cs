@@ -502,9 +502,10 @@ namespace TheGreatGroupModules.Modules
             try
             {
                 List<StaffPermission> data = new List<StaffPermission>();
-                string StrSql = @"  SELECT p.StaffPermissionID,p.StaffPermissionName ,p.StaffPermissionUrl ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  FROM staffpermission  p 
+                string StrSql = @"  SELECT p.StaffPermissionID,p.StaffPermissionName ,p.StaffPermissionIcon,p.StaffPermissionUrl ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  FROM staffpermission  p 
       LEFT JOIN staffpermissiongroup  pg ON  p.StaffPermissionGroup=pg.StaffPermissionGroupID
-      WHERE p.Activated=1 AND p.Deleted=0 ";
+      WHERE p.Activated=1 AND p.Deleted=0 
+      Order by p.Ordering asc ";
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
@@ -520,6 +521,8 @@ namespace TheGreatGroupModules.Modules
                             sr.StaffPermissionGroupID = Convert.ToInt32(dt.Rows[i]["StaffPermissionGroupID"].ToString());
                         if (dt.Rows[i]["StaffPermissionName"] != DBNull.Value)
                             sr.StaffPermissionName = dt.Rows[i]["StaffPermissionName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionIcon"] != DBNull.Value)
+                            sr.StaffPermissionIcon = dt.Rows[i]["StaffPermissionIcon"].ToString();
                         if (dt.Rows[i]["StaffPermissionGroupName"] != DBNull.Value)
                             sr.StaffPermissionGroupName = dt.Rows[i]["StaffPermissionGroupName"].ToString();
                         if (dt.Rows[i]["StaffPermissionUrl"] != DBNull.Value)
@@ -567,6 +570,9 @@ namespace TheGreatGroupModules.Modules
                             sr.StaffPermissionGroupID = Convert.ToInt32(dt.Rows[i]["StaffPermissionGroupID"].ToString());
                         if (dt.Rows[i]["StaffPermissionGroupName"] != DBNull.Value)
                             sr.StaffPermissionGroupName = dt.Rows[i]["StaffPermissionGroupName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionGroupIcon"] != DBNull.Value)
+                            sr.StaffPermissionGroupIcon = dt.Rows[i]["StaffPermissionGroupIcon"].ToString();
+
                         sr.ListPermission = GetStaffPermissionMenu(ObjConn, staffroleID, sr.StaffPermissionGroupID, 1);
 
                         if (sr.ListPermission.Count > 0) {
@@ -597,7 +603,7 @@ namespace TheGreatGroupModules.Modules
             try
             {
                 List<StaffPermission> data = new List<StaffPermission>();
-                string StrSql = @" select sr.StaffPermissionID,p.StaffPermissionID,p.StaffPermissionName,p.StaffPermissionUrl 
+                string StrSql = @" select sr.StaffPermissionID,p.StaffPermissionID,p.StaffPermissionName,p.StaffPermissionUrl ,p.StaffPermissionIcon
         ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  ,sr.StaffRoleID
         from staffpermission  p 
         left join staffpermissiongroup  pg on  p.StaffPermissionGroup=pg.StaffPermissionGroupID
@@ -621,6 +627,8 @@ namespace TheGreatGroupModules.Modules
                             sr.StaffPermissionName = dt.Rows[i]["StaffPermissionName"].ToString();
                         if (dt.Rows[i]["StaffPermissionGroupName"] != DBNull.Value)
                             sr.StaffPermissionGroupName = dt.Rows[i]["StaffPermissionGroupName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionIcon"] != DBNull.Value)
+                            sr.StaffPermissionIcon = dt.Rows[i]["StaffPermissionIcon"].ToString();
                         if (dt.Rows[i]["StaffPermissionUrl"] != DBNull.Value)
                             sr.StaffPermissionUrl = dt.Rows[i]["StaffPermissionUrl"].ToString();
                         if (dt.Rows[i]["IsMenu"] != DBNull.Value)
@@ -642,6 +650,41 @@ namespace TheGreatGroupModules.Modules
             }
 
 
+        }
+
+        public string GetMenu(List<StaffPermissionGroup> permission) {
+
+            try
+            {
+                string menuStr = "";
+
+                foreach (var pg in permission)
+                {
+
+                    menuStr += " <li> <a href='javascript:void(0)' class='waves-effect'><i data-icon='/' class='" + pg.StaffPermissionGroupIcon + "'></i><span class='hide-menu'> " + pg.StaffPermissionGroupName + "<span class='fa arrow'></span></a>";
+                     menuStr += "<ul class='nav nav-second-level'> ";
+                   
+                     
+                   
+                    foreach (var p in pg.ListPermission)
+                    {
+
+                           menuStr += " <li><a href='" + p.StaffPermissionUrl + "'><i class='"+p.StaffPermissionIcon+"'></i><span class='hide-menu'> " + p.StaffPermissionName + "</span></a></li> ";
+                 
+                    }
+                     menuStr += " </ul></li>";
+                }
+
+
+                return menuStr;
+            }
+            catch (Exception ex )
+            {
+                
+                throw;
+            }
+        
+        
         }
     }
 }

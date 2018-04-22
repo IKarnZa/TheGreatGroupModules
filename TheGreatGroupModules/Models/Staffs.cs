@@ -58,6 +58,7 @@ namespace TheGreatGroupModules.Models
     {
         public int StaffPermissionGroupID { get; set; }
         public string StaffPermissionGroupName { get; set; }
+        public string StaffPermissionGroupIcon { get; set; }
         public List<StaffPermission> ListPermission { get; set; }
 
     }
@@ -65,8 +66,10 @@ namespace TheGreatGroupModules.Models
         public int StaffPermissionID { get; set; }
         public int StaffPermissionGroupID { get; set; }
         public string StaffPermissionName { get; set; }
-        public string StaffPermissionGroupName { get; set; }
+        public string StaffPermissionIcon { get; set; }
         public string StaffPermissionUrl { get; set; }
+        public string StaffPermissionGroupName { get; set; }
+      
         public int IsMenu { get; set; }
     
     }

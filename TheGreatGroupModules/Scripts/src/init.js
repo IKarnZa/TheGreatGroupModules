@@ -1,4 +1,10 @@
-﻿var getUrlParameter = function getUrlParameter(sParam) {
+﻿$(function () {
+    //LoadMenu();
+
+    $("#side-menu").html($("#side-menu").attr("data-menu"));
+});
+
+var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
@@ -493,12 +499,53 @@ function formatDate(date) {
 }
 
 function LoadMenu() {
+    //var menuStr = "";
+    //$.ajax({
+    //    url: '../Staffs/GetMenu?staffroleID=1',
+    //    type: 'GET',
+    //    contentType: 'application/json',
+    //    success: function (result) {
+         
+    //        if (result.success) {
+            
+    //            result.data.forEach(function (element) {
+
+    //                menuStr += ' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ' + element.StaffPermissionGroupName + '<span class="fa arrow"></span></a>'
+    //                menuStr += '<ul class="nav nav-second-level"> '
+    //                element.ListPermission.forEach(function (element1) {
+    //                    menuStr += ' <li><a href="' + element1.StaffPermissionUrl + '"><i class="fa fa-user-plus"></i><span class="hide-menu"> ' + element1.StaffPermissionName + '</span></a></li> '
+    //                });
+    //                menuStr += ' </ul></li>';
+              
+
+
+    //            });
+
+    //            console.log(menuStr)
+    //   //         $("#side-menu").html(' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span></a>' +
+    //   //'<ul class="nav nav-second-level">  <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>' +
+    //   //                     '<li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li></ul></li>');
+
+    //            //    $("#side-menu").html(menuStr);
+
+    //  //          $("#side-menu").html(' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการค่างวด<span class="fa arrow"></span></a><ul class="nav nav-second-level">' +
+    //  //'<li><a href="../ManagePayment/Installment"><i class="fa fa-user-plus"></i><span class="hide-menu"> บันทึกค่างวดรายวัน</span></a></li> </ul></li>');
+
+    //        } else {
+    //            DevExpress.ui.notify(data.data);
+
+    //        }
+
+    //    },
+    //    error: function () {
+    //        console.log("error");
+    //    }
+    //});
 
     // Load menu
 
-    //$("#side-menu").html(' <li> <a href="javascript:void(0)" class="waves-effect"><i data-icon="/" class="fa fa-users"></i><span class="hide-menu"> ระบบจัดการข้อมูลลูกค้า<span class="fa arrow"></span></a>' +
-    //     '<ul class="nav nav-second-level">  <li><a href="../Customers/Index"><i class="fa fa-search"></i><span class="hide-menu"> ค้นหาข้อมูลลูกค้า</span></a></li>'+
-    //                            '<li><a href="../Customers/AddCustomer"><i class="fa fa-user-plus"></i><span class="hide-menu"> ลูกค้าใหม่</span></a></li></ul></li>');
+
+  //  $("#side-menu").html(menuStr);
 
 }
 
