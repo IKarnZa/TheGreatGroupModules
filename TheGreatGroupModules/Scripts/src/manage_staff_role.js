@@ -96,7 +96,7 @@ function Load_DataGrid(data) {
 
                        var staffRole = JSON.stringify(options.data);
                        $("<div>")
-                           .append("<a href='../Staffs/SettingPermission?staffID="+options.data.StaffRoleID+"' title='กำหนดสิทธิ์พนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-gear'></i></a>")
+                           .append("<a href='../Staffs/SettingPermission?staffID=" + options.data.StaffRoleID + "' title='กำหนดสิทธิ์พนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-gear'></i></a>")
                            .appendTo(container);
                    }
                },
@@ -125,7 +125,7 @@ function Load_DataGrid(data) {
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a  title='ลบพนักงาน'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
+                        .append("<a  title='ลบกลุ่มพนักงาน'  class='btn btn-info btn-circle btn-sm' onclick='Show_PopupDelete(" + '"' + options.data.StaffRoleID + '","' + options.data.StaffRoleName + '"' + ")'><i class='fa fa-trash'></i></a>")
                         .appendTo(container);
                 }
             },
@@ -257,4 +257,44 @@ function AddStaffRole() {
 function hide_popup(zone) {
     $("#modalAddEditStaffRole").dxPopup("instance").hide();
     $('#btnAddStaffRole').data('data-zone', 0);
+}
+
+function Show_PopupDelete(StaffRoleID, StaffRoleName) {
+
+    swal({
+        title: "",
+        text: "ต้องการลบกลุ่มพนักงาน \"" + StaffRoleName + "\" ใช่หรือไม่ ",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: "ยกเลิก",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+        function (isConfirm) {
+
+            if (isConfirm) {
+                swal("สำเร็จ !", "", "success");
+
+                $.ajax({
+                    url: '../Staffs/DeleteStaffRole?staffroleId=' + StaffRoleID,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        Call_Grid()
+
+                    },
+                    error: function () {
+                        console.log("error");
+                    }
+                });
+
+            } else {
+                swal.close();
+                // swal("ยกเลิก", "", "error");
+                e.preventDefault();
+            }
+        });
+
 }
