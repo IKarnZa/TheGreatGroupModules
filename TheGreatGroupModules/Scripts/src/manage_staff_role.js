@@ -7,7 +7,7 @@
 function Call_Grid() {
 
     $.ajax({
-        url: '../Staffs/GetListStaffRole',
+        url: '../Staffs/GetListStaffRole?staffroleID=0',
         type: 'GET',
         contentType: 'application/json',
         success: function (data) {

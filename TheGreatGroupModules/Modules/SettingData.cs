@@ -231,6 +231,32 @@ namespace TheGreatGroupModules.Modules
             }
             }
 
+
+
+
+        public void DetleteZone(int ZoneID)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+
+                string strSql = @" delete from zone where ZoneID=" + ZoneID;
+
+
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
         public void AddStaffZone(StaffZone staffzone)
         {
 

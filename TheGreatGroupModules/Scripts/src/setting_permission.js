@@ -8,13 +8,15 @@ $(function () {
 function Call_Grid() {
 
     $.ajax({
-        url: '../Staffs/GetStaffPermission',
+        url: '../Staffs/GetStaffPermission?staffroleID=' + getUrlParameter('staffID'),
         type: 'GET',
         contentType: 'application/json',
         success: function (data) {
 
             if (data.success) {
                 Load_DataGrid(data.data);
+                $("#lblStaffRoleName").html("<h4> กลุ่มพนักงาน : "+data.dataStaffRole[0].StaffRoleName+"</h4>");
+                console.log(data.dataStaffRole[0].StaffRoleName);
             } else {
                 DevExpress.ui.notify(data.data);
                 
@@ -78,3 +80,37 @@ function Load_DataGrid(data) {
     });
 
 }
+
+
+
+$("#myButton").dxButton({
+    text: 'บันทึกข้อมูล',
+    type: 'success',
+    useSubmitBehavior: true,
+    onClick: function () {
+       
+            //$.ajax({
+            //    url: '../Staffs/AddStaffs',
+            //    type: 'POST',
+            //    contentType: 'application/json',
+            //    data: JSON.stringify(staff),
+            //    success: function (data) {
+            //        if (data.success == true) {
+
+            //            DevExpress.ui.notify({
+            //                message: "บันทึกข้อมูลพนักงานสำเร็จ !!!",
+            //            }, "success", 3000);
+
+            //            window.location = "\ListStaff";
+            //        } else {
+
+            //            DevExpress.ui.notify(data.data);
+            //        }
+            //    },
+            //    error: function () {
+            //        console.log("error");
+            //    }
+            //});
+        
+    }
+});

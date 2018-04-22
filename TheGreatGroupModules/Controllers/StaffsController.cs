@@ -249,7 +249,7 @@ namespace TheGreatGroupModules.Controllers
                 listData2 = data.GetSubDistrict(0);
 
                 List<StaffRole> item2 = new List<StaffRole>();
-                item2 = st.GetListStaffRole();
+                item2 = st.GetListStaffRole(0);
 
 
                 return Json(new
@@ -440,8 +440,8 @@ namespace TheGreatGroupModules.Controllers
             }
         }
 
-        // GET: /Staffs/GetListStaffRole
-        public JsonResult GetListStaffRole()
+        // GET: /Staffs/GetListStaffRole?staffroleID=0
+        public JsonResult GetListStaffRole(int staffroleID)
         {
 
             try
@@ -449,7 +449,7 @@ namespace TheGreatGroupModules.Controllers
 
                 StaffData st = new StaffData();
                 List<StaffRole> item = new List<StaffRole>();
-                item = st.GetListStaffRole();
+                item = st.GetListStaffRole(staffroleID);
 
                 return Json(new
                 {
@@ -473,20 +473,25 @@ namespace TheGreatGroupModules.Controllers
 
 
 
-        //api/staffs/GetStaffPermission
-        public JsonResult GetStaffPermission()
+        //api/staffs/GetStaffPermission?staffroleID=1
+        public JsonResult GetStaffPermission(int staffroleID)
         {
 
             try
             {
-
+               
                 StaffData st = new StaffData();
                  List<StaffPermission> item = new  List<StaffPermission>();
+                 List<StaffRole> item1 = new List<StaffRole>();
+
+                
                 item = st.GetStaffPermission();
+                item1 =  st.GetListStaffRole(staffroleID);
 
                 return Json(new
                 {
                     data = item,
+                    dataStaffRole = item1,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }

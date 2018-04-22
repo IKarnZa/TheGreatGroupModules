@@ -378,17 +378,21 @@ namespace TheGreatGroupModules.Modules
 
 
         }
-        public List<StaffRole> GetListStaffRole()
+        public List<StaffRole> GetListStaffRole( int id)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
             {
                 List<StaffRole> data = new List<StaffRole>();
+                StaffRole sr = new StaffRole();
                 string StrSql = @"  Select * FROM  staffrole where Activated=1 and deleted=0  ";
+                    
+                    if(id>0)
+                        StrSql+=" and StaffRoleID="+id;
+
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
-                StaffRole sr = new StaffRole();
                 if (dt.Rows.Count > 0)
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
@@ -536,6 +540,61 @@ namespace TheGreatGroupModules.Modules
             finally
             {
                 ObjConn.Close();
+            }
+
+
+        }
+
+
+        public List<StaffPermission> GetStaffMenu(MySqlConnection ObjConn , int staffroleID, int staffPermissionGroupID, int isMenu)
+        {
+
+         //   MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                List<StaffPermission> data = new List<StaffPermission>();
+                string StrSql = @" select sr.StaffPermissionID,p.StaffPermissionID,p.StaffPermissionName,p.StaffPermissionUrl 
+        ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  ,sr.StaffRoleID
+        from staffpermission  p 
+        left join staffpermissiongroup  pg on  p.StaffPermissionGroup=pg.StaffPermissionGroupID
+        left join staffrolepermission sr on sr.StaffPermissionID=p.StaffPermissionID
+        where p.Activated=1 and p.Deleted=0 
+        and sr.StaffRoleID=" + staffroleID + " and p.IsMenu=" + isMenu + "and pg.staffPermissionGroupID=" + staffPermissionGroupID;
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                StaffPermission sr = new StaffPermission();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        sr = new StaffPermission();
+                        if (dt.Rows[i]["StaffPermissionID"] != DBNull.Value)
+                            sr.StaffPermissionID = Convert.ToInt32(dt.Rows[i]["StaffPermissionID"].ToString());
+                        if (dt.Rows[i]["StaffPermissionGroupID"] != DBNull.Value)
+                            sr.StaffPermissionGroupID = Convert.ToInt32(dt.Rows[i]["StaffPermissionGroupID"].ToString());
+                        if (dt.Rows[i]["StaffPermissionName"] != DBNull.Value)
+                            sr.StaffPermissionName = dt.Rows[i]["StaffPermissionName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionGroupName"] != DBNull.Value)
+                            sr.StaffPermissionGroupName = dt.Rows[i]["StaffPermissionGroupName"].ToString();
+                        if (dt.Rows[i]["StaffPermissionUrl"] != DBNull.Value)
+                            sr.StaffPermissionUrl = dt.Rows[i]["StaffPermissionUrl"].ToString();
+                        if (dt.Rows[i]["IsMenu"] != DBNull.Value)
+                            sr.IsMenu = Convert.ToInt32(dt.Rows[i]["IsMenu"].ToString());
+
+                        data.Add(sr);
+                    }
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+     //           ObjConn.Close();
             }
 
 

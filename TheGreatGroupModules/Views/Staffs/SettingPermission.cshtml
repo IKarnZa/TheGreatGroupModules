@@ -13,7 +13,7 @@
         </ol>
     </div>
     <!-- /.page title -->
-    <!-- <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fa fa-mail-reply"></i> ย้อนกลับ</a> -->
+     <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fa fa-mail-reply"></i> ย้อนกลับ</a> 
 </div>
 
 <div class="row">
@@ -21,18 +21,19 @@
 
         <div class="white-box">
 
-            <h3 class="m-b-0 m-t-0"> <i class="fa fa-line-chart"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
+            <h3 class="m-b-0 m-t-0"> <i class="fa fa-check-square"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
             <hr>
 
-            
+
+            <div id="lblStaffRoleName"></div>
             <div id="toast"></div>
             <div id="loadIndicator"></div>
-            <div id="gridContainer"></div>
-         
+            <div id="gridContainer"></div><br>
+            <div id="myButton" class="pull-right"></div>
             <br>
+        </div>
     </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("../Scripts/src/setting_permission.js")
 

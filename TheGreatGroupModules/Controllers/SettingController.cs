@@ -237,8 +237,32 @@ namespace TheGreatGroupModules.Controllers
            
         }
 
+        // POST: /Setting/GetAddZone
+        [HttpPost]
+        public JsonResult GetAddZone(Zone zone)
+        {
+            try
+            {
+                // รับค่าราคา
+                SettingData st = new SettingData();
 
+                st.AddZone(zone);
 
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         // POST: /Setting/GetEditZone
         [HttpPost]
@@ -271,16 +295,16 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        // POST: /Setting/GetAddZone
-        [HttpPost]
-        public JsonResult GetAddZone(Zone zone)
+        // POST: /Setting/GetDeleteZone?zoneID=1
+       
+        public JsonResult GetDeleteZone(int zoneID)
         {
             try
             {
                 // รับค่าราคา
                 SettingData st = new SettingData();
 
-                st.AddZone(zone);
+                st.DetleteZone(zoneID);
 
                 return Json(new
                 {
