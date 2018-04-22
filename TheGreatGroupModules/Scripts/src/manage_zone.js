@@ -128,7 +128,8 @@ function Load_DataGrid(data) {
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a  title='ลบพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
+                        .append("<a  title='ลบพื้นที่'  class='btn btn-info btn-circle btn-sm' onclick='Show_PopupDelete(" + '"' + options.data.ID + '","' + options.data.Code + '","' + options.data.Value + '"' + ")'><i class='fa fa-trash'></i></a>")
+//                        .append("<button type='link' onclick='Show_PopupDelete(" + '"' + options.data.CustomerName + '","' + options.data.Balance_Text + '","' + options.data.ContractID + '"' + ")' title='แก้ไขพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></button>")
                         .appendTo(container);
 
                    
@@ -277,4 +278,44 @@ function AddZone() {
 function hide_popup(zone) {
     $("#modalAddEditZone").dxPopup("instance").hide();
     $('#btnAddZone').data('data-zone', 0);
+}
+
+function Show_PopupDelete(ID, Code, Value) {
+
+    swal({
+        title: "",
+        text: "ต้องการลบพื้นที่ทำงาน รหัส \"" + Code + "\" ชื่อ \"" + Value + "\" ใช่หรือไม่ ",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: "ยกเลิก",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+        function (isConfirm) {
+
+            if (isConfirm) {
+                swal("สำเร็จ !", "", "success");
+
+                $.ajax({
+                    url: '../Setting/GetDeleteZone?zoneID=' + ID,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        Call_Grid()
+
+                    },
+                    error: function () {
+                        console.log("error");
+                    }
+                });
+
+            } else {
+                swal.close();
+                // swal("ยกเลิก", "", "error");
+                e.preventDefault();
+            }
+        });
+
 }
