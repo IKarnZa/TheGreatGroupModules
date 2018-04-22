@@ -409,10 +409,9 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        // POST:  /Staffs/DeleteStaffRole
-        //  {StaffRoleID:""}
-        [HttpPost]
-        public JsonResult DeleteStaffRole(StaffRole role)
+        // Get:  /Staffs/DeleteStaffRole?staffroleId
+       
+        public JsonResult DeleteStaffRole(int staffroleId)
         {
 
 
@@ -421,7 +420,7 @@ namespace TheGreatGroupModules.Controllers
             try
             {
 
-                data.DeletedStaffRole(role);
+                data.DeletedStaffRole(staffroleId);
 
                 return Json(new
                 {

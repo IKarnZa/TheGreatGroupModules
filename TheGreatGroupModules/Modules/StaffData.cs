@@ -187,7 +187,7 @@ namespace TheGreatGroupModules.Modules
 
         }
 
-        public void DeletedStaffRole(StaffRole role)
+        public void DeletedStaffRole(int staffroleId)
         {
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
@@ -195,7 +195,7 @@ namespace TheGreatGroupModules.Modules
                 string strSql = @"DELETE FROM staffrole 
                                 where  StaffRoleID={0}";
 
-                strSql = string.Format(strSql, role.StaffRoleID);
+                strSql = string.Format(strSql, staffroleId);
                 DBHelper.Execute(strSql, ObjConn);
             }
             catch (Exception ex)
