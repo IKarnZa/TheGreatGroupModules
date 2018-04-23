@@ -195,10 +195,43 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
-        #region :: Manage Zone ::
+        #region :: ตั้งค่าวันหยุด ::
+
+        // GET: /Setting/GetListHolidays?HolidayID=0
+                  public JsonResult GetListHolidays(int HolidayID)
+        {
+
+            try
+            {
+                ContractData con = new ContractData();
+                List<Holidays> item = new List<Holidays>();
+
+                item = con.ListHolidays(HolidayID);
+
+                
+                return Json(new
+                {
+                    data = item,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+           
+        }
+
+        #endregion :: ตั้งค่าวันหยุด ::
+
+                  #region :: Manage Zone ::
 
 
-        // GET: /Setting/GetZone
+                  // GET: /Setting/GetZone
         public JsonResult GetZone()
         {
 

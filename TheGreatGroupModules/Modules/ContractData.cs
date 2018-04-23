@@ -848,6 +848,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
               public void UpdateContractAmount_ContractExpDate(int CustomerID, int ContractID)
               {
                   MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+                  DateTime[] HolidaysArr = Holidays(1);
                   try
                   {
                          
@@ -889,11 +891,13 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
 
                               // 1 เว้นวันหยุด  / 0 ไม่เว้นไม่หยุด
                               if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
-                                  cont.ContractSpecialholiday = Convert.ToInt32(dt.Rows[i]["ContractSpecialholiday"].ToString())==1?true:false;
+                                  cont.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
                           }
 
                       }
 
+
+                      cont.ContractStartDate = cont.ContractStartDate.AddDays(-1); 
 
                       if (cont.ContractPeriod > 0)
                       {
@@ -903,25 +907,25 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                           if (cont.ContractSpecialholiday)
                           {
 
-                              if (cont.ContractPayEveryDay == 2) //ทุกวัน =2 
+                              if (cont.ContractPayEveryDay == 1) //ทุกวัน =2 
                               {
                                   while (cont.ContractPeriod > 0)
                                   {
 
                                       cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                      if (!IsHolidays(cont.ContractStartDate))
+                                      if (!IsHolidays(cont.ContractStartDate, HolidaysArr))
                                           cont.ContractPeriod--;
 
                                   }
                                   cont.ContractExpDate = cont.ContractStartDate;
                               }
-                              else if (cont.ContractPayEveryDay == 1) // จ-ศ =1
+                              else if (cont.ContractPayEveryDay == 2) // จ-ศ =1
                               {
                                   while (cont.ContractPeriod > 0)
                                   {
 
                                       cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                      if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !IsHolidays(cont.ContractStartDate))
+                                      if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !IsHolidays(cont.ContractStartDate, HolidaysArr))
                                           cont.ContractPeriod--;
 
                                   }
@@ -931,7 +935,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                           else
                           {
 
-                              if (cont.ContractPayEveryDay == 2) //ทุกวัน =2 
+                              if (cont.ContractPayEveryDay == 1) //ทุกวัน =2 
                               {
                                   while (cont.ContractPeriod > 0)
                                   {
@@ -942,7 +946,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                                   }
                                   cont.ContractExpDate = cont.ContractStartDate;
                               }
-                              else if (cont.ContractPayEveryDay == 1) // จ-ศ =1
+                              else if (cont.ContractPayEveryDay == 2) // จ-ศ =1
                               {
                                   while (cont.ContractPeriod > 0)
                                   {
@@ -981,11 +985,120 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                   }
 
               }
-              private bool IsHolidays(DateTime date)
+              private bool IsHolidays(DateTime date, DateTime[] holidays)
+              {
+                  return holidays.Contains(date.Date);
+
+              }
+
+
+              public DateTime[] Holidays(int activated)
               {
 
-                  DateTime[] holidays = new DateTime[] { new DateTime(2018, 5, 1) };
-                  return holidays.Contains(date.Date);
+
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  string StrSql = "";
+                  try{
+                  
+
+                      
+                      StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
+
+
+                      if (activated > 0) {
+                          StrSql += " and activated=1  ";
+                      }
+
+
+                      DataTable dt=DBHelper.List(StrSql, ObjConn);
+
+                      DateTime[] Holidays = new DateTime[dt.Rows.Count]; ; 
+                      if (dt.Rows.Count > 0) {
+
+                          for (int i = 0; i < dt.Rows.Count; i++)
+                          {
+                              Holidays[i]=Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
+
+                          }
+                      
+                      }
+
+                      return Holidays;
+                      
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+
+
+                      ObjConn.Close();
+
+                  }
+
+              
+              }
+
+
+              public List<Holidays> ListHolidays(int id)
+              {
+
+
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  string StrSql = "";
+                  try
+                  {
+
+
+
+                      StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
+
+                     
+                          StrSql += " and activated=1  ";
+                      
+                      if(id>0)
+                          StrSql += " and ID="+id;
+
+
+                      DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                      List<Holidays> Holidays = new List<Holidays>(); ;
+                      Holidays obj = new Holidays();
+                      if (dt.Rows.Count > 0)
+                      {
+
+                          for (int i = 0; i < dt.Rows.Count; i++)
+                          {
+
+                              obj = new Holidays();
+                              obj.HolidayName = dt.Rows[i]["HolidayName"].ToString();
+                              obj.Date = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
+                              obj.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
+                              obj.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+                              Holidays.Add(obj);
+                          }
+
+                      }
+
+                      return Holidays;
+
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+
+
+                      ObjConn.Close();
+
+                  }
+
 
               }
               public List<DailyReceiptsReport> GetApproveOpen_CloseContract(string custpmerIDCard, string ContractStatus)

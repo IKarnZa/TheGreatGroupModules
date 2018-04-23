@@ -35,4 +35,17 @@ namespace TheGreatGroupModules.Models
         public string StaffName { get; set; }
 
     }
+
+
+    public class Holidays
+    {
+        public int ID { get; set; }
+        public string HolidayName { get; set; }
+        public DateTime Date { get; set; }
+        public string Date_str { get { return Date.ToString(@"dd\/MM\/yyyy"); } }
+        public int Activated { get; set; }
+        public int Deleted { get; set; }
+
+
+    }
 }
