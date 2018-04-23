@@ -332,7 +332,9 @@
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\init.js" />
     <Content Include="Scripts\src\installment.js" />
+    <Content Include="Scripts\src\manage_holiday.js" />
     <Content Include="Scripts\src\manage_staff.js" />
+    <Content Include="Scripts\src\manage_staff_location.js" />
     <Content Include="Scripts\src\manage_staff_role.js" />
     <Content Include="Scripts\src\manage_staff_zone.js" />
     <Content Include="Scripts\src\manage_zone.js" />

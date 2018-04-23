@@ -23,6 +23,42 @@
 
             <h3 class="m-b-0 m-t-0"> <i class="fa fa-map-marker"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
             <hr>
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">เลือกพนักงาน : </label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" id="StaffID">
+                                    <option value> === เลือกพนักงาน === </option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">เลือกวันที่ : </label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input type="text" id="DateAsOf" class="form-control" placeholder="วัน/เดือน/ปี" value="@DateTime.Now.ToString("dd/MM/yyyy")">
+                                    <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10" onclick="SearchLocation()">
+                            <i class="fa fa-search"></i>  เรียกดูข้อมูล
+                        </button>
+                    </div>
+                </div>
+
+            </form>
 
             <div id="map"></div><br>
             <div class="options">
@@ -42,75 +78,7 @@
 
 @section Scripts {
 
+    @Scripts.Render("../Scripts/src/manage_staff_location.js")
 
-    <script>
-        DevExpress.viz.currentTheme("generic.light");
-        $(function () {
-            var markerUrl = "https://js.devexpress.com/Demos/RealtorApp/images/map-marker.png",
-                markersData = [
-                 //   {
-                //    location: [13.41149792, 100.0144377],
-                //    tooltip: {
-                //        text: "บริษัท เดอะ เกรท กรุ๊ป จำกัด"
-                //    }
-                //}
-                        //, 
-                   {
-                    location: "13.4257831, 99.9553108",
-                    tooltip: {
-                        text: "คุณธนคุปชำระ 300 บาท เวลา 14.00 น."
-                    }
-                },
-                
-                {
-                    location: "13.4257831, 99.95503185",
-                    tooltip: {
-                        text: "คุณอโณชาชำระ 200 บาท"
-                    }
-                },
-                //{
-                //    location: { lat: 40.753889, lng: -73.981389 },
-                //    tooltip: {
-                //        text: "Fifth Avenue"
-                //    }
-                //}, {
-                //    location: "Brooklyn Bridge,New York,NY",
-                //    tooltip: {
-                //        text: "Brooklyn Bridge"
-                //    }
-                //}
-                ];
 
-            var mapWidget = $("#map").dxMap({
-                zoom: 24,
-                height: 440,
-                width: "100%",
-                controls: false,
-                markerIconSrc: markerUrl,
-                markers: markersData
-            }).dxMap("instance");
-
-            mapWidget.option("markerIconSrc", markerUrl);
-            //$("#use-custom-markers").dxCheckBox({
-            //    value: true,
-            //    text: "Use custom marker icons",
-            //    onValueChanged: function (data) {
-            //        mapWidget.option("markers", markersData);
-            //        mapWidget.option("markerIconSrc", data.value ? markerUrl : null);
-            //    }
-            //});
-
-            $("#show-tooltips").dxButton({
-                text: "แสดงคำอธิบาย",
-                onClick: function () {
-                    var newMarkers = $.map(markersData, function (item) {
-                        return $.extend(true, {}, item, { tooltip: { isShown: true } });
-                    });
-
-                    mapWidget.option("markers", newMarkers);
-                }
-            });
-        });
-
-    </script>
 }
