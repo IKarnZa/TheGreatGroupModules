@@ -376,11 +376,9 @@ namespace TheGreatGroupModules.Modules
              ContractPayEveryDay,
              ContractSpecialholiday,
              ContractRemark,
-             ContractInsertDate,
-             ContractInsertBy,
              Activated,
              Deleted)
-VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14}, {15},{16}, {17}, {18}, {19}, {20}, {21}, {22}, {23});";
+VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14}, {15},{16}, {17}, {18}, {19}, {20}, {21} );";
 
 
                 StrSql = String.Format(StrSql,
@@ -398,14 +396,12 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                       item.ContractPayment,
                       Utility.ReplaceString(item.ContractRefNumber),
                       item.ContractInsertBy,
-                       Utility.FormateDate(DateTime.Now),
+                       Utility.FormateDateTime(DateTime.Now),
                        Utility.ReplaceString( item.ContractType),
                       1,
                       item.ContractPayEveryDay,
                       item.ContractSpecialholiday,
                       Utility.ReplaceString(item.ContractRemark),
-                       Utility.FormateDateTime(DateTime.Now),  //insert Date
-                      item.ContractInsertBy,//insert BY
                       1,
                       0
                          );
@@ -827,6 +823,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                       StrSql = @" Delete From  product_customer  
                                   Where CustomerID={1} And  ContractID={0} ;";
 
+                      StrSql += @" Delete From  daily_receipts  
+                                  Where CustomerID={1} And  ContractID={0} ;";
 
                       StrSql += @"Update contract set ContractPayment=0
                                Where ContractID={0} and ContractCustomerID={1};";
@@ -856,16 +854,123 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                   string StrSql = "";
                 
                       StrSql = @" Select * From Contract
-                                  Where CustomerID={1} And  ContractID={0} 
+                                  Where ContractCustomerID={1} And  ContractID={0} 
                                   and  Activated=1 and Deleted=0 ;";
                       StrSql = String.Format(StrSql, ContractID, CustomerID);
 
                     DataTable dt=  DBHelper.List(StrSql, ObjConn);
+
+                    Contract cont = new Contract();
                       if(dt.Rows.Count>0){
-                      
+                          for (int i = 0; i < dt.Rows.Count; i++)
+                          {
+                              //วันที่เริ่มจ่าย
+                              if (dt.Rows[i]["ContractStartDate"] != DBNull.Value)
+                                  cont.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
+
+                              // จำนวนงวด
+                              if (dt.Rows[i]["ContractPeriod"] != DBNull.Value)
+                                  cont.ContractPeriod = Convert.ToInt32(dt.Rows[i]["ContractPeriod"].ToString());
+
+
+                              // เงินต้น
+                              if (dt.Rows[i]["ContractPayment"] != DBNull.Value)
+                                  cont.ContractPayment = Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
+
+
+                              // งวดละ
+                              if (dt.Rows[i]["ContractAmount"] != DBNull.Value)
+                                  cont.ContractAmount = Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
+
+                          
+                             // ทุกวัน =2 / จ-ศ =1
+                              if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
+                                  cont.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
+
+                              // 1 เว้นวันหยุด  / 0 ไม่เว้นไม่หยุด
+                              if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
+                                  cont.ContractSpecialholiday = Convert.ToInt32(dt.Rows[i]["ContractSpecialholiday"].ToString())==1?true:false;
+                          }
+
                       }
 
 
+                      if (cont.ContractPeriod > 0)
+                      {
+
+
+                          //  เว้นวันหยุด 
+                          if (cont.ContractSpecialholiday)
+                          {
+
+                              if (cont.ContractPayEveryDay == 2) //ทุกวัน =2 
+                              {
+                                  while (cont.ContractPeriod > 0)
+                                  {
+
+                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                      if (!IsHolidays(cont.ContractStartDate))
+                                          cont.ContractPeriod--;
+
+                                  }
+                                  cont.ContractExpDate = cont.ContractStartDate;
+                              }
+                              else if (cont.ContractPayEveryDay == 1) // จ-ศ =1
+                              {
+                                  while (cont.ContractPeriod > 0)
+                                  {
+
+                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                      if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !IsHolidays(cont.ContractStartDate))
+                                          cont.ContractPeriod--;
+
+                                  }
+                                  cont.ContractExpDate = cont.ContractStartDate;
+                              }
+                          }
+                          else
+                          {
+
+                              if (cont.ContractPayEveryDay == 2) //ทุกวัน =2 
+                              {
+                                  while (cont.ContractPeriod > 0)
+                                  {
+
+                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                      cont.ContractPeriod--;
+
+                                  }
+                                  cont.ContractExpDate = cont.ContractStartDate;
+                              }
+                              else if (cont.ContractPayEveryDay == 1) // จ-ศ =1
+                              {
+                                  while (cont.ContractPeriod > 0)
+                                  {
+
+                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                      if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday)
+                                          cont.ContractPeriod--;
+
+                                  }
+                                  cont.ContractExpDate = cont.ContractStartDate;
+                              }
+
+                          }
+                      }
+                  
+
+
+                      cont.ContractAmountLast = Math.Round(cont.ContractPayment - (cont.ContractPeriod * cont.ContractAmount),2);
+
+
+                       StrSql = @"Update contract set ContractExpDate={2},
+                                ContractAmountLast={3}
+                               Where ContractID={0} and ContractCustomerID={1};";
+
+                       StrSql = String.Format(StrSql, ContractID, CustomerID, Utility.FormateDate(cont.ContractExpDate), cont.ContractAmountLast);
+
+                      DBHelper.Execute(StrSql, ObjConn);
+                      
 
                       
                   }
@@ -876,7 +981,13 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                   }
 
               }
+              private bool IsHolidays(DateTime date)
+              {
 
+                  DateTime[] holidays = new DateTime[] { new DateTime(2018, 5, 1) };
+                  return holidays.Contains(date.Date);
+
+              }
               public List<DailyReceiptsReport> GetApproveOpen_CloseContract(string custpmerIDCard, string ContractStatus)
               {
                   DateTime dateAsOf = DateTime.Now;

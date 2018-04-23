@@ -322,6 +322,7 @@
     <Content Include="Scripts\PDFObject-master\pdfobject.min.js" />
     <Content Include="Scripts\src\add_contract.js" />
     <Content Include="Scripts\src\add_customer.js" />
+    <Content Include="Scripts\src\add_product.js" />
     <Content Include="Scripts\src\add_staff.js" />
     <Content Include="Scripts\src\approve_close_account.js" />
     <Content Include="Scripts\src\customers_src.js" />
@@ -3336,6 +3337,7 @@
     <Content Include="Views\Report\PDFContractDocument.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Staffs\EditStaff.cshtml" />
+    <Content Include="Views\Setting\Holiday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

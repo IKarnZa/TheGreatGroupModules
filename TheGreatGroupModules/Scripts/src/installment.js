@@ -222,7 +222,7 @@ function Load_DataGrid(data) {
                   dataField: "Remark",
                   caption: "หมายเหตุ",
                   alignment: 'center',
-                  width: 120 + "%",
+                  width: 120,
                   fixed: false,
                   fixedPosition: 'right',
                   //cellTemplate: function (container, options) {

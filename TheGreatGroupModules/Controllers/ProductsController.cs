@@ -71,10 +71,18 @@ namespace TheGreatGroupModules.Controllers
         {
             try
             {
+
+
+                ContractData cd = new ContractData();
+
+                // ลบสินค้าเดิมทั้งหมด แก้จำนวนเงินสินค้าทั้งหมดในสัญญา
+                cd.Deleted_Product_customer(CustomerID, ContractID);
+
+
                 List<ProductSelect> products = new List<ProductSelect>();
                 products.Add(product);
 
-
+                // เพิ่มสินค้า
                 ProductData pd = new ProductData();
                 pd.AddProductSelect(products, CustomerID, ContractID);
 
@@ -82,16 +90,12 @@ namespace TheGreatGroupModules.Controllers
                 ProductData dataPro = new ProductData();
                 IList<ProductSelect> listProductsSelect = new List<ProductSelect>();
                 listProductsSelect = dataPro.GetProductCustomer(CustomerID, ContractID);
-                double ContractPayment = 0;
 
+                double ContractPayment = 0;
                 List<ProductSelect> listProductsSelect1 = new List<ProductSelect>();
                 listProductsSelect1 = dataPro.ProductContractSummary(ref ContractPayment, listProductsSelect);
 
-                
-                ContractData cd = new ContractData();
-
-                // ลบสินค้าเดิมทั้งหมด แก้จำนวนเงินสินค้าทั้งหมดในสัญญา
-                cd.Deleted_Product_customer(CustomerID, ContractID);
+               
                
                 // update จำนวนเงินสินค้าทั้งหมด 
                 cd.UpdateContractPayment(ContractID, CustomerID, ContractPayment);

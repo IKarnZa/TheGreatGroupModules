@@ -514,10 +514,13 @@ namespace TheGreatGroupModules.Controllers
                 item = st.GetStaffPermission();
                 item1 =  st.GetListStaffRole(staffroleID);
 
+                List<int> item2 = st.GetListStaffPermissionID(staffroleID);
+
                 return Json(new
                 {
                     data = item,
                     dataStaffRole = item1,
+                    dataSelect=item2, 
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -531,6 +534,40 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+
+
+        //  ../staffs/GetAddStaffPermission
+        [HttpPost]
+        public JsonResult GetAddStaffPermission(List<int> ItemSelect,int staffRoleID)
+        {
+
+            try
+            {
+
+                StaffData st = new StaffData();
+
+                st.AddPermission(ItemSelect, staffRoleID);
+
+                return Json(new
+                {
+                    data="",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+        
+        
 
     }
 }

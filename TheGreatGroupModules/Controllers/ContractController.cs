@@ -279,6 +279,10 @@ namespace TheGreatGroupModules.Controllers
                 // Update Contract Surety
                 CD.UpdateSurety_In_Contract(item);
 
+
+                // คำนวณ ค่างวด / วันสิ้นสุดสัญญา
+                
+                CD.UpdateContractAmount_ContractExpDate(item.ContractCustomerID, item.ContractID);
                 return Json(new
                 {
                     data = "บันทึกการแก้ไขสัญญาสำเร็จ",

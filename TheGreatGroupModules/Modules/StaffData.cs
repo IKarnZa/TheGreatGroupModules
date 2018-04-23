@@ -234,6 +234,7 @@ namespace TheGreatGroupModules.Modules
              StaffDistrictId,
              StaffProvinceId,
              StaffZipCode,
+             StaffImagePath,
              StaffMobile,
              StaffTelephone,
              StaffEmail,
@@ -241,7 +242,7 @@ namespace TheGreatGroupModules.Modules
              InsertDate,
              Activated,
              Deleted)
-             VALUES ({0},{1}, {2}, {3}, {4}, {5}, {6}, {7},{8},{9},{10}, {11}, {12}, {13}, {14}, {15}, 1, 0);";
+             VALUES ({0},{1}, {2}, {3}, {4}, {5}, {6}, {7},{8},{9},{10}, {11}, {12}, {13}, {14}, {15},{16}, 1, 0);";
 
                 strSql = string.Format(strSql,
                      staff.StaffID,
@@ -257,6 +258,7 @@ namespace TheGreatGroupModules.Modules
                      staff.StaffDistrictId,
                      staff.StaffProvinceId,
                       Utility.ReplaceString(staff.StaffZipCode),
+                      Utility.ReplaceString("../Content/default-user.png"),
                       Utility.ReplaceString(staff.StaffMobile),
                       Utility.ReplaceString(staff.StaffTelephone),
                       Utility.ReplaceString(staff.StaffEmail),
@@ -505,7 +507,7 @@ namespace TheGreatGroupModules.Modules
                 string StrSql = @"  SELECT p.StaffPermissionID,p.StaffPermissionName ,p.StaffPermissionIcon,p.StaffPermissionUrl ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  FROM staffpermission  p 
       LEFT JOIN staffpermissiongroup  pg ON  p.StaffPermissionGroup=pg.StaffPermissionGroupID
       WHERE p.Activated=1 AND p.Deleted=0 
-      Order by p.Ordering asc ";
+       Order by pg.Ordering,p.Ordering   asc  ";
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
@@ -554,7 +556,7 @@ namespace TheGreatGroupModules.Modules
             try
             {
                 List<StaffPermissionGroup> data = new List<StaffPermissionGroup>();
-                string StrSql = @"   SELECT * FROM staffpermissiongroup pg   WHERE pg.Activated=1 AND pg.Deleted=0 ";
+                string StrSql = @"   SELECT * FROM staffpermissiongroup pg   WHERE pg.Activated=1 AND pg.Deleted=0   Order by pg.Ordering  asc ";
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
@@ -599,17 +601,26 @@ namespace TheGreatGroupModules.Modules
         public List<StaffPermission> GetStaffPermissionMenu(MySqlConnection ObjConn, int staffroleID, int staffPermissionGroupID, int isMenu)
         {
 
-         //   MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
             {
                 List<StaffPermission> data = new List<StaffPermission>();
                 string StrSql = @" select sr.StaffPermissionID,p.StaffPermissionID,p.StaffPermissionName,p.StaffPermissionUrl ,p.StaffPermissionIcon
-        ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  ,sr.StaffRoleID
-        from staffpermission  p 
-        left join staffpermissiongroup  pg on  p.StaffPermissionGroup=pg.StaffPermissionGroupID
-        left join staffrolepermission sr on sr.StaffPermissionID=p.StaffPermissionID
-        where p.Activated=1 and p.Deleted=0 
-        and sr.StaffRoleID=" + staffroleID + " and p.IsMenu=" + isMenu + " and pg.staffPermissionGroupID=" + staffPermissionGroupID;
+                    ,pg.StaffPermissionGroupID,pg.StaffPermissionGroupName  ,p.IsMenu  ,sr.StaffRoleID
+                    from staffpermission  p 
+                    left join staffpermissiongroup  pg on  p.StaffPermissionGroup=pg.StaffPermissionGroupID
+                    left join staffrolepermission sr on sr.StaffPermissionID=p.StaffPermissionID
+                    where p.Activated=1 and p.Deleted=0 
+                    and sr.StaffRoleID=" + staffroleID  ;
+
+                if (isMenu > 0)
+                    StrSql += " and p.IsMenu=" + isMenu;
+
+
+                if (staffPermissionGroupID>0)
+                StrSql += " and pg.staffPermissionGroupID=" + staffPermissionGroupID;
+
+                StrSql += " Order by pg.Ordering,p.Ordering   asc  ;";
+          
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
@@ -651,7 +662,42 @@ namespace TheGreatGroupModules.Modules
 
 
         }
+        public List<int> GetListStaffPermissionID(int staffroleID) {
 
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            List<int> permissionItem = new List<int>();
+            try
+            {
+
+                List<StaffPermission> item = GetStaffPermissionMenu(ObjConn, staffroleID, 0, 0);
+
+                StaffPermission sr = new StaffPermission();
+
+
+                if (item.Count > 0)
+                {
+                    for (int i = 0; i < item.Count; i++)
+                    {
+                        sr = new StaffPermission();
+                        if (item[i].StaffPermissionID !=0)
+                            sr.StaffPermissionID = item[i].StaffPermissionID;
+
+                            permissionItem.Add(sr.StaffPermissionID);
+                    }
+                }
+                return permissionItem;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                          ObjConn.Close();
+            }
+        }
         public string GetMenu(List<StaffPermissionGroup> permission) {
 
             try
@@ -685,6 +731,40 @@ namespace TheGreatGroupModules.Modules
             }
         
         
+        }
+
+
+        public void AddPermission(List<int> ItemSelect, int staffRoleID)
+        {
+
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string strSql = @"delete From staffrolepermission where StaffRoleID="+staffRoleID+";";
+                strSql += @"INSERT INTO staffrolepermission
+            (StaffRoleID,  StaffPermissionID) VALUES ";
+                    
+                  for (int i = 0; i < ItemSelect.Count; i++)
+			    {
+                       if(i!=0)
+                          strSql +=",";
+
+                      strSql += "(" + staffRoleID + "," + ItemSelect [i]+ ")";
+			    }
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+
         }
     }
 }
