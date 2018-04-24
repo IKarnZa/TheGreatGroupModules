@@ -137,7 +137,22 @@ $("#gridshow").hide();
                           .appendTo(container);
                   }
 
-              }
+              },
+              {
+                  dataField: "CustomerID",
+                  caption: "ลบข้อมูล",
+                  alignment: 'center',
+                  allowFiltering: false,
+                  fixed: true,
+                  fixedPosition: 'right',
+                  width: 100,
+                  cellTemplate: function (container, options) {
+                      $("<div>")
+                          .append("<a onclick='DeletedCustomer(" + '"' + options.data.CustomerID + '","' + options.data.CustomerName + '"' + ")' title='ลบข้อมูลลูกค้า' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-trash'></i></a>")
+                          .appendTo(container);
+                  }
+
+              },
               
             
             ],
@@ -188,4 +203,56 @@ $("#gridshow").hide();
 
 
     });
+    }
+
+
+    function DeletedCustomer(id,Name) {
+
+        swal({
+            title: "",
+            text: "ต้องการลบข้อมูลลูกค้า " + Name + " ใช่หรือไม่ ",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: "ยกเลิก",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+       function (isConfirm) {
+
+           if (isConfirm) {
+             
+
+               $.post("../Customers/DeleteCustomers?CustomerID=" + id)
+            .done(function (data) {
+
+                if (data.success == true) {
+
+                    swal("ลบข้อมูลลูกค้าเรียบร้อยแล้ว !", "", "success");
+                    $("#loadIndicator").dxLoadIndicator({
+                        visible: false
+                    });
+                    SearchCustomer();
+                } else {
+
+                    $("#loadIndicator").dxLoadIndicator({
+                        visible: false
+                    });
+
+                    DevExpress.ui.notify(data.errMsg);
+                }
+
+
+            });
+
+
+           } else {
+               swal.close();
+               e.preventDefault();
+           }
+       });
+
+      
+
     }

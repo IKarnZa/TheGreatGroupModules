@@ -134,7 +134,13 @@ function Load_DataGrid1(data) {
                 verticalAlignment: 'middle',
                 cellTemplate: function (container, options) {
                     $("<div>")
-                         .append("<button type='link' onclick='Show_PopupEdit(" + '"' + options.data.CustomerName + '","' + options.data.Balance_Text + '","' + options.data.ContractID + '"' + ")' title='แก้ไขพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-money'></i></button>")
+                         .append("<button type='link' onclick='Show_PopupEdit("
+                         + '"' + options.data.CustomerName
+                         + '","' + options.data.Balance_Text
+                         + '","' + options.data.ContractID
+                         + '","' + options.data.CustomerID
+
+                         + '"' + ")' title='แก้ไขพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-money'></i></button>")
                          .appendTo(container);
                 }
             },
@@ -269,9 +275,18 @@ function (isConfirm) {
     if (isConfirm) {
         swal("สำเร็จ !", "", "success");
 
+
+        var data = {
+            CustomerID: 1,
+            ContractID: 1,
+            PriceReceipts:1000,
+        }
+
+
+     ///   /Contract/PostAddDiscount
+
     } else {
         swal.close();
-       // swal("ยกเลิก", "", "error");
         e.preventDefault();
     }
 });

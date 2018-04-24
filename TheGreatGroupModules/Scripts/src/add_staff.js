@@ -16,14 +16,14 @@ dataStaffRole ;
 
 
 if (getUrlParameter('staffID') !=0) {
-
+    $("#loadIndicator").dxLoadIndicator({
+        visible: true
+    });
     $.get("../Staffs/GetListStaffs?staffID=" + getUrlParameter('staffID'))
     .done(function (result) {
-
+      
         if (result.success) {
 
-          
-           
             dataProvince = result.dataProvince;
             dataDistrict = result.dataDistrict;
             dataSubDistrict = result.dataSubDistrict;
@@ -31,33 +31,40 @@ if (getUrlParameter('staffID') !=0) {
 
             if (getUrlParameter('staffID') != 0) {
                 staffs = result.data[0];
-                console.log(staffs, result.data[0]);
                 LoadForm(staffs, dataProvince, dataDistrict, dataSubDistrict, dataStaffRole);
 
-            } else { staffs.push({}); }
-
+            } else {
+                staffs.push({});
+               
+            }
+           
         } else {
             alertError(result.data);
 
         }
-
+        $("#loadIndicator").dxLoadIndicator({
+            visible: false
+        });
     });
 } else {
 
-
+    $("#loadIndicator").dxLoadIndicator({
+        visible: true
+    });
     $.get("../Staffs/GetListStaffs?staffID=0")
       .done(function (result) {
 
           if (result.success) {
-
-              
+             
+              staffs = { "StaffID": 0, "StaffRoleID": 0, "StaffRoleName": null, "StaffCode": "", "StaffPassword": "", "StaffTitleName": "นาย", "StaffFirstName": "", "StaffLastName": "", "StaffName": null, "StaffAddress1": "", "StaffAddress2": "", "StaffSubDistrictId": 0, "StaffDistrictId": 0, "StaffProvinceId":0, "StaffZipCode": "", "StaffTelephone": "", "StaffMobile": "", "StaffEmail": ""};
               dataProvince = result.dataProvince;
               dataDistrict = result.dataDistrict;
               dataSubDistrict = result.dataSubDistrict;
               dataStaffRole = result.dataStaffRole;
-
               LoadForm(staffs, dataProvince, dataDistrict, dataSubDistrict, dataStaffRole);
-
+              $("#loadIndicator").dxLoadIndicator({
+                  visible: false
+              });
           } else {
               alertError(result.data);
 
@@ -68,9 +75,6 @@ if (getUrlParameter('staffID') !=0) {
 function LoadForm(staffs, dataProvince, dataDistrict, dataSubDistrict,dataStaffRole) {
 
  
-         
-    console.log(staffs)
-         
     // ==================== ข้อมูลพนักงาน =====================
     $("#form").dxForm({
         colCount: 3,

@@ -22,8 +22,15 @@
 
         <div class="white-box">
 
-            <h3 class="m-b-0 m-t-0"> <i class="fa fa-line-chart"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
+            <h3 class="m-b-0 m-t-0"> <i class="fa fa-cart-plus"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
             <hr>
+
+            <div id="toast"></div>
+            <div id="loadIndicator"></div>
+            <div id="gridContainer"></div><br>
+
+
+
         </div>
     </div>
 </div>
@@ -32,13 +39,7 @@
 @section Scripts {
 
     <!-- Date Picker Plugin JavaScript -->
-    @Scripts.Render("../Scripts/src/open_close_account_report.js")
+    @Scripts.Render("../Scripts/src/add_product.js")
 
-    <script>
-        $(function () {
-        
-        })
-
-
-    </script>
+  
 }
