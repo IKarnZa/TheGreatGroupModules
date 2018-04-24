@@ -793,7 +793,7 @@ namespace TheGreatGroupModules.Modules
         }
 
 
-        public List<StaffLocation> GetStaffLocation(string dateTime, int staffId)
+        public List<MarkersData> GetStaffLocation(string dateTime, int staffId)
         {
             DateTime dateAsOf = DateTime.ParseExact(dateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
@@ -802,12 +802,10 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-
-
-                StrSql = @" SELECT c.CustomerFirstName ,SUM(d.PriceReceipts) AS PriceReceipts  ,TIME(DateAsOf) AS TimePay ,d.Latitude,d.Logitude
+                StrSql = @" SELECT c.CustomerFirstName ,SUM(d.PriceReceipts) AS PriceReceipts  ,TIME(DateAsOf) AS TimePay ,d.Latitude,d.Longitude
                  FROM daily_receipts d
                  LEFT JOIN customer c ON d.CustomerID=c.CustomerId
-                  WHERE staffid="+staffId+
+                  WHERE staffid=" +staffId+
                 @" AND DATE(DateAsOf) ="+Utility.FormateDate(dateAsOf)+
                 @"    GROUP BY c.CustomerFirstName 
                 ORDER BY TIME(DateAsOf) ASC ";
@@ -816,22 +814,23 @@ namespace TheGreatGroupModules.Modules
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
-                List<StaffLocation> StaffLocation = new List<StaffLocation>(); ;
-                StaffLocation obj = new StaffLocation();
+                List<MarkersData> StaffLocation = new List<MarkersData>(); ;
+                MarkersData obj = new MarkersData();
                 if (dt.Rows.Count > 0)
                 {
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
 
-                        obj = new StaffLocation();
-                        obj.CustomerFirstName = dt.Rows[i]["CustomerFirstName"].ToString();
-                        obj.TimePay = dt.Rows[i]["TimePay"].ToString();
-                        obj.PriceReceipts = Convert.ToDecimal(dt.Rows[i]["PriceReceipts"].ToString());
-                        if (dt.Rows[i]["Latitude"] !=DBNull.Value)
-                        obj.Latitude = Convert.ToDouble(dt.Rows[i]["Latitude"].ToString());
-                        if (dt.Rows[i]["Logitude"] != DBNull.Value)
-                        obj.Logitude = Convert.ToDouble(dt.Rows[i]["Logitude"].ToString());
+                        obj = new MarkersData();
+                        obj.location = new List<double>();
+                        obj.location.Add(dt.Rows[i]["Latitude"] != DBNull.Value ? Convert.ToDouble(dt.Rows[i]["Latitude"].ToString()) : 13.4257831);
+                        obj.location.Add(dt.Rows[i]["Longitude"] != DBNull.Value ? Convert.ToDouble(dt.Rows[i]["Longitude"].ToString()) : 99.9553108);
+
+                        obj.tooltip = new Tooltip();
+                        if (dt.Rows[i]["PriceReceipts"] != DBNull.Value & dt.Rows[i]["CustomerFirstName"] != DBNull.Value)
+                        obj.tooltip.text = "คุณ" + dt.Rows[i]["CustomerFirstName"].ToString() + " ชำระ " + Convert.ToDecimal(dt.Rows[i]["PriceReceipts"].ToString()) + " บาท เวลา " + dt.Rows[i]["TimePay"].ToString() + " น.";
+                    
                         StaffLocation.Add(obj);
                     }
 

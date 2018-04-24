@@ -510,7 +510,7 @@ namespace TheGreatGroupModules.Controllers
             {
 
                 StaffData st = new StaffData();
-                List<StaffLocation> item = new List<StaffLocation>();
+                List<MarkersData> item = new List<MarkersData>();
                 item = st.GetStaffLocation(dateTime, staffId);
 
                 return Json(new

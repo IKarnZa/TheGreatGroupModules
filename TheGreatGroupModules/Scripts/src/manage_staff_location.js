@@ -87,7 +87,38 @@ function SearchLocation() {
             console.log(data);
             if (data.success == true) {
 
-                Load_DataGrid(data);
+                var markerUrl = "https://js.devexpress.com/Demos/RealtorApp/images/map-marker.png",
+             markersData = data.data;
+
+                var mapWidget = $("#map").dxMap({
+                    zoom: 24,
+                    height: 440,
+                    width: "100%",
+                    controls: false,
+                    markerIconSrc: markerUrl,
+                    markers: markersData
+                }).dxMap("instance");
+
+                mapWidget.option("markerIconSrc", markerUrl);
+                //$("#use-custom-markers").dxCheckBox({
+                //    value: true,
+                //    text: "Use custom marker icons",
+                //    onValueChanged: function (data) {
+                //        mapWidget.option("markers", markersData);
+                //        mapWidget.option("markerIconSrc", data.value ? markerUrl : null);
+                //    }
+                //});
+
+                $("#show-tooltips").dxButton({
+                    text: "แสดงคำอธิบาย",
+                    onClick: function () {
+                        var newMarkers = $.map(markersData, function (item) {
+                            return $.extend(true, {}, item, { tooltip: { isShown: true } });
+                        });
+
+                        mapWidget.option("markers", newMarkers);
+                    }
+                });
 
 
                 $("#gridshow").show();
@@ -110,68 +141,5 @@ function SearchLocation() {
 
 
 $(function () {
-    var markerUrl = "https://js.devexpress.com/Demos/RealtorApp/images/map-marker.png",
-        markersData = [
-            //   {
-            //    location: [13.41149792, 100.0144377],
-            //    tooltip: {
-            //        text: "บริษัท เดอะ เกรท กรุ๊ป จำกัด"
-            //    }
-            //}
-            //, 
-            {
-                location: "13.4257831, 99.9553108",
-                tooltip: {
-                    text: "คุณธนคุปชำระ 300 บาท เวลา 14.00 น."
-                }
-            },
-
-            {
-                location: "13.4257831, 99.95503185",
-                tooltip: {
-                    text: "คุณอโณชาชำระ 200 บาท"
-                }
-            },
-            //{
-            //    location: { lat: 40.753889, lng: -73.981389 },
-            //    tooltip: {
-            //        text: "Fifth Avenue"
-            //    }
-            //}, {
-            //    location: "Brooklyn Bridge,New York,NY",
-            //    tooltip: {
-            //        text: "Brooklyn Bridge"
-            //    }
-            //}
-        ];
-
-    var mapWidget = $("#map").dxMap({
-        zoom: 24,
-        height: 440,
-        width: "100%",
-        controls: false,
-        markerIconSrc: markerUrl,
-        markers: markersData
-    }).dxMap("instance");
-
-    mapWidget.option("markerIconSrc", markerUrl);
-    //$("#use-custom-markers").dxCheckBox({
-    //    value: true,
-    //    text: "Use custom marker icons",
-    //    onValueChanged: function (data) {
-    //        mapWidget.option("markers", markersData);
-    //        mapWidget.option("markerIconSrc", data.value ? markerUrl : null);
-    //    }
-    //});
-
-    $("#show-tooltips").dxButton({
-        text: "แสดงคำอธิบาย",
-        onClick: function () {
-            var newMarkers = $.map(markersData, function (item) {
-                return $.extend(true, {}, item, { tooltip: { isShown: true } });
-            });
-
-            mapWidget.option("markers", newMarkers);
-        }
-    });
+  
 });

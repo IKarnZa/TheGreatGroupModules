@@ -1201,7 +1201,56 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
 
               }
 
+              public List<DailyRemark> GetListDailyRemark(int CustomerID, int ContractID)
+              {
 
+
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  string StrSql = "";
+                  try
+                  {
+
+
+
+                      StrSql = @" SELECT * FROM daily_remark where  CustomerID=" + CustomerID + " and ContractID=" + ContractID;
+
+                   
+
+                      DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                      List<DailyRemark> list = new List<DailyRemark>(); ;
+                      DailyRemark obj = new DailyRemark();
+                      if (dt.Rows.Count > 0)
+                      {
+
+                          for (int i = 0; i < dt.Rows.Count; i++)
+                          {
+
+                              obj = new DailyRemark();
+                              obj.ID = Convert.ToInt32(dt.Rows[i]["ID"].ToString());
+                              obj.Remark = dt.Rows[i]["Remark"].ToString();
+                              obj.DateAsOf = Convert.ToDateTime(dt.Rows[i]["DateAsOf"].ToString());
+                              list.Add(obj);
+                          }
+
+                      }
+
+                      return list;
+
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+
+
+                      ObjConn.Close();
+
+                  }
+              }
 
               public void AddDiscount(DailyReceiptsReport item) {
 

@@ -84,4 +84,15 @@ namespace TheGreatGroupModules.Models
         public double Latitude { get; set; }
         public double Logitude { get; set; }
     }
+
+
+    public class MarkersData {
+        public List<double> location { get; set; }
+        public Tooltip tooltip { get; set; }
+    
+    
+    }
+    public class Tooltip {
+        public string text { get; set; }
+    }
 }

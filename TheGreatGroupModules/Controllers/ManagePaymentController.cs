@@ -200,6 +200,39 @@ namespace TheGreatGroupModules.Controllers
             }
            }
 
+         // GET: /ManagePayment/GetListDailyRemark?CustomerID=1&ContractID=1
+
+         public JsonResult GetListDailyRemark(int CustomerID, int ContractID)
+         {
+
+
+             try
+             {
+                 ContractData data = new ContractData();
+                 List<DailyRemark> items = new List<DailyRemark>(); 
+                 
+                 
+              items=   data.GetListDailyRemark(CustomerID, ContractID);
+
+
+                 return Json(new
+                 {
+                     data = items,
+                     success = true
+                 }, JsonRequestBehavior.AllowGet);
+             }
+             catch (Exception ex)
+             {
+                 return Json(new
+                 {
+                     success = false,
+                     data = ex.Message
+                 }, JsonRequestBehavior.AllowGet);
+
+             }
+         
+         }
+
 
          // Post: /ManagePayment/PostStaffLoginOnMobile
          [HttpPost]
