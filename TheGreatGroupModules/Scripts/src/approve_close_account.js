@@ -137,10 +137,10 @@ function Load_DataGrid1(data) {
                          .append("<button type='link' onclick='Show_PopupEdit("
                          + '"' + options.data.CustomerName
                          + '","' + options.data.Balance_Text
-                         + '","' + options.data.ContractID
-                         + '","' + options.data.CustomerID
-
-                         + '"' + ")' title='แก้ไขพื้นที่'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-money'></i></button>")
+                         + '",' + options.data.ContractID
+                         + ',' + options.data.CustomerID
+                           + ',' + options.data.Balance
+                          + ")' title='ให้ส่วนลด'  class='btn btn-info btn-circle btn-sm' ><i class='fa fa-money'></i></button>")
                          .appendTo(container);
                 }
             },
@@ -256,7 +256,7 @@ function Load_DataGrid2(data) {
 
 }
 
-function Show_PopupEdit(CustomerName,Discount,ID) {
+function Show_PopupEdit(CustomerName,Discount,contractId,customerId,balance) {
   
     //alertConfirm("ต้องการให้ส่วนลดคุณ ธิดา ชัยชา  จำนวน " + data + " บาท ใช่หรือไม่ ? ", "ให้ส่วนลดสำเร็จ", "ยกเลิกการให้ส่วนลด");
     swal({
@@ -273,17 +273,34 @@ function Show_PopupEdit(CustomerName,Discount,ID) {
 function (isConfirm) {
 
     if (isConfirm) {
-        swal("สำเร็จ !", "", "success");
+       
 
 
         var data = {
-            CustomerID: 1,
-            ContractID: 1,
-            PriceReceipts:1000,
+            CustomerID: customerId,
+            ContractID: contractId,
+            PriceReceipts: balance,
         }
 
 
-     ///   /Contract/PostAddDiscount
+        $.post("../Contract/PostAddDiscount", data)
+    .done(function (data) {
+
+        if (data.success == true) {
+            swal("สำเร็จ !", "", "success");
+           
+            $("#loadIndicator").dxLoadIndicator({
+                visible: false
+            });
+        } else {
+            $("#loadIndicator").dxLoadIndicator({
+                visible: false
+            });
+            swal("เกิดข้อผิดพลาด !", "", "error");
+        }
+        SearchStaff();
+    });
+  
 
     } else {
         swal.close();

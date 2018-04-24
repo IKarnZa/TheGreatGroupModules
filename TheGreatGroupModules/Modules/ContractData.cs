@@ -1225,8 +1225,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                         VALUES ({0},{1},{2},{3},{4},{5},{6});";
                       StrSql = string.Format(StrSql,
 
-                          item.ID, item.ContractID, item.CustomerID,item.PriceReceipts,item.StaffID,
-                          Utility.FormateDate(DateTime.Now),
+                          item.ID, item.CustomerID, item.ContractID, Math.Round(item.PriceReceipts, 2), item.StaffID,
+                          Utility.FormateDateTime(DateTime.Now),
                            0);
                       DBHelper.Execute(StrSql, ObjConn);
                   }
