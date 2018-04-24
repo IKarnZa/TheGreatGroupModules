@@ -127,7 +127,7 @@ function Load_DataGrid(data) {
                 cellTemplate: function (container, options) {
 
                     $("<div>")
-                        .append("<a  title='ลบกลุ่มพนักงาน'  class='btn btn-info btn-circle btn-sm' onclick='Show_PopupDelete(" + '"' + options.data.StaffRoleID + '","' + options.data.StaffRoleName + '"' + ")'><i class='fa fa-trash'></i></a>")
+                        .append("<a  title='ลบวันหยุดนักขัตฤกษ์'  class='btn btn-info btn-circle btn-sm' onclick='Show_PopupDelete(" + '"' + options.data.ID + '","' + options.data.HolidayName + '"' + ")'><i class='fa fa-trash'></i></a>")
                         .appendTo(container);
                 }
             },
@@ -146,29 +146,33 @@ function toggleState(item) {
 }
 
 function Load_Popup(staffRole) {
-    $("#modalAddEditStaffRole").dxPopup({
+    $("#modalAddEditHoliday").dxPopup({
         title: 'เพิ่มพื้นที่',
         visible: false,
         width: 700,
         height: 500,
         contentTemplate: function () {
             return $("<div />").append(
-                "<div class='modal-body' role='dialog'>"+
-               " <div><div class='form-group'>"+
-              " <label for='recipient-name' class='col-form-label'>ชื่อกลุ่มพนักงาน</label>"+
-           " <input type='text' class='form-control' id='StaffRoleName'  >"+
-           "</div>"+
-          "</div>"+
-          "<div class='modal-footer float-lg-left' style='border: hidden !important;'>"+
-         " <button type='link' id='btnAddStaffRole'  class='btn btn-success' onClick='AddStaffRole();'>บันทึก</button>"+
-         "<button type='link'onclick='hide_popup()' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>"+
-         "</div>"+
-          "</div>"
+                "<div class='modal-body' role='dialog'>" +
+                " <div><div class='form-group'>" +
+                " <label for='recipient-name' class='col-form-label'>ชื่อวันหยุดนักขัตฤกษ์</label>" +
+                " <input type='text' class='form-control' id='HolidayName'  >" +
+                " <br />" +
+                " <label for='recipient-name' class='col-form-label'>วัน/เดือน/ปี</label>" +
+                " <input type='text' id='DateAsOf' class='form-control' placeholder='วัน/เดือน/ปี' value=''>" +
+
+                "</div>" +
+                "</div>" +
+                "<div class='modal-footer float-lg-left' style='border: hidden !important;'>" +
+                " <button type='link' id='btnAddHoliday'  class='btn btn-success' onClick='AddHoliday();'>บันทึก</button>" +
+                "<button type='link'onclick='hide_popup()' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+                "</div>" +
+                "</div>"
 
             );
         },
         showTitle: true,
-        title: "เพิ่มกลุ่มพนักงาน",
+        title: "เพิ่มวันหยุดนักขัตฤกษ์",
         visible: false,
         dragEnabled: false,
         closeOnOutsideClick: true
@@ -176,44 +180,53 @@ function Load_Popup(staffRole) {
 }
 
 function Show_PopupAdd(staffRole) {
-    $("#modalAddEditStaffRole").dxPopup("instance").show();
-    $('#btnAddStaffRole').data('data-zone', 0);
+    $("#modalAddEditHoliday").dxPopup("instance").show();
+    $('#btnAddHoliday').data('data-zone', 0);
+
+
+
 }
 
 function Show_PopupEdit(staffRole) {
 
     //   set ค่าใน pop up 
-    $("#modalAddEditStaffRole").dxPopup("instance").show();
+    $("#modalAddEditHoliday").dxPopup("instance").show();
     $("#StaffRoleName").val(staffRole.StaffRoleName)
-    $('#btnAddStaffRole').data('data-zone', staffRole.StaffRoleID);
+    $('#btnAddHoliday').data('data-zone', staffRole.StaffRoleID);
 }
 
-function AddStaffRole() {
+function AddHoliday() {
 
-    if ($("#StaffRoleName").val() == null || $("#StaffRoleName").val() == '') {
-        alert("กรุณากรอกสิทธิ์พนักงาน");
+    if ($("#HolidayName").val() == null || $("#HolidayName").val() == '') {
+        alert("กรุณากรอกวันหยุดนักขัตฤกษ์");
         return;
     }
 
-    var staffRole = {
-        staffRoleID: $("#btnAddStaffRole").data("data-zone"),
-        StaffRoleName: $("#StaffRoleName").val(),
+    if ($("#DateAsOf").val() == null || $("#DateAsOf").val() == '') {
+        alert("กรุณาเลือก วันที่/เดือน/ปี");
+        return;
+    }
+
+    var holiday = {
+        ID: $("#btnAddHoliday").data("data-zone"),
+        HolidayName: $("#HolidayName").val(),
+        Date: $("#DateAsOf").val(),
         Activated: 1
     };
 
-    if ($("#btnAddStaffRole").data("data-zone") == 0) {
+    if ($("#btnAddHoliday").data("data-zone") == 0) {
 
         $.ajax({
-            url: '../Staffs/AddStaffRole',
+            url: '../Setting/AddHoliday',
             type: 'POST',
-            data: JSON.stringify(staffRole),
+            data: JSON.stringify(holiday),
             contentType: 'application/json',
             success: function (data) {
 
                 //สำเร็จ
                 if (data.success == true) {
 
-                    $("#modalAddEditStaffRole").dxPopup("instance").hide();
+                    $("#modalAddEditHoliday").dxPopup("instance").hide();
                     //  alert(data.data);
                     Call_Grid();
                 }
@@ -228,7 +241,7 @@ function AddStaffRole() {
         });
     } else {
         $.ajax({
-            url: '../Staffs/EditStaffRole',
+            url: '../Setting/EditHoliday',
             type: 'POST',
             data: JSON.stringify(staffRole),
             contentType: 'application/json',
@@ -237,7 +250,7 @@ function AddStaffRole() {
                 //สำเร็จ
                 if (data.success == true) {
 
-                    $("#modalAddEditStaffRole").dxPopup("instance").hide();
+                    $("#modalAddEditHoliday").dxPopup("instance").hide();
                     //  alert(data.data);
                     Call_Grid();
                 }
@@ -257,15 +270,16 @@ function AddStaffRole() {
 }
 
 function hide_popup(zone) {
-    $("#modalAddEditStaffRole").dxPopup("instance").hide();
-    $('#btnAddStaffRole').data('data-zone', 0);
+    $("#modalAddEditHoliday").dxPopup("instance").hide();
+    $('#btnAddHoliday').data('data-zone', 0);
 }
 
-function Show_PopupDelete(StaffRoleID, StaffRoleName) {
+function Show_PopupDelete(ID, HolidayName) {
 
+    console.log(ID);
     swal({
         title: "",
-        text: "ต้องการลบกลุ่มพนักงาน \"" + StaffRoleName + "\" ใช่หรือไม่ ",
+        text: "ต้องการลบ \"" + HolidayName + "\" ใช่หรือไม่ ",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: '#DD6B55',
@@ -280,7 +294,7 @@ function Show_PopupDelete(StaffRoleID, StaffRoleName) {
                 swal("สำเร็จ !", "", "success");
 
                 $.ajax({
-                    url: '../Staffs/DeleteStaffRole?staffroleId=' + StaffRoleID,
+                    url: '../Setting/DeleteHoliday?holidayId=' + ID,
                     type: 'GET',
                     contentType: 'application/json',
                     success: function (data) {

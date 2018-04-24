@@ -62,6 +62,7 @@ function SearchLocation() {
         return;
     }
     var date = $("#DateAsOf").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+
     if (date == '' || date == null) {
 
         $("#toast").dxToast({
@@ -77,9 +78,9 @@ function SearchLocation() {
     }
 
 
+    var url = "../Staffs/GetLocationStaff?dateTime=" + $('#DateAsOf').val() + "&staffId=" + $("#StaffID").val();
 
-    var url = "../ManagePayment/GetDailyReceiptsReport?staffId=" + $("#StaffID").val() +
-        "&dateAsOf=" + $('#DateAsOf').val();
+    console.log("url ==> " + url);
 
     $.get(url)
         .done(function (data) {
