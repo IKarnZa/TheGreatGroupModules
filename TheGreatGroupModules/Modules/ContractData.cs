@@ -1074,6 +1074,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                           {
 
                               obj = new Holidays();
+                              obj.ID = Convert.ToInt32(dt.Rows[i]["ID"].ToString());
                               obj.HolidayName = dt.Rows[i]["HolidayName"].ToString();
                               obj.Date = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
                               obj.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
