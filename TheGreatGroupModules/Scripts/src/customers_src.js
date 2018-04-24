@@ -107,21 +107,7 @@ $("#gridshow").hide();
                  alignment: 'center',
              },
            
-              {
-                  dataField: "CustomerID",
-                  caption: "แก้ไขข้อมูล",
-                  alignment: 'center',
-                  allowFiltering: false,
-                  fixed: true,
-                  fixedPosition: 'right',
-                  width: 100,
-                  cellTemplate: function (container, options) {
-                      $("<div>")
-                          .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
-                          .appendTo(container);
-                  }
-
-              },
+           
               {
                   dataField: "CustomerID",
                   caption: "ซื้อสินค้า",
@@ -138,6 +124,21 @@ $("#gridshow").hide();
                   }
 
               },
+                 {
+                     dataField: "CustomerID",
+                     caption: "แก้ไขข้อมูล",
+                     alignment: 'center',
+                     allowFiltering: false,
+                     fixed: true,
+                     fixedPosition: 'right',
+                     width: 100,
+                     cellTemplate: function (container, options) {
+                         $("<div>")
+                             .append("<a href='\EditCustomer?CustomerID=" + options.key.CustomerID + "' title='แก้ไขข้อมูลลูกค้า' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
+                             .appendTo(container);
+                     }
+
+                 },
               {
                   dataField: "CustomerID",
                   caption: "ลบข้อมูล",

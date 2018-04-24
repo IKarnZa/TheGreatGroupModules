@@ -13,7 +13,7 @@
             <li class="active">@ViewBag.Title</li>
         </ol>
     </div>
-    <a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fa fa-mail-reply"></i> ย้อนกลับ</a>
+    @*<a href="javascript:history.back();" class="btn btn-default pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fa fa-mail-reply"></i> ย้อนกลับ</a>*@
 
 </div>
 <div class="row">
@@ -226,16 +226,7 @@
 
                 });
             }
-            $.get("../Contract/GetDataPurchaseData/" + getUrlParameter('CustomerID'))
-      .done(function (result) {
-
-          var response = result.data[0];
-          if (result.success == true) {
-              $("#customerName").html(' <h4> &nbsp;<b>ชื่อลูกค้า : </b>' + response.CustomerName + '</h4>');
-              $("#customerAddress").html('  <p class="text-muted m-l-5">ที่อยู่ : ' + response.CustomerAddress1 + '</p>');
-          }
-
-      });
+        
 
         });
         function NewContract() {

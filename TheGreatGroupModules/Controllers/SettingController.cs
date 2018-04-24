@@ -282,7 +282,31 @@ namespace TheGreatGroupModules.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
+        // Post: /Setting/EditHoliday
+        [HttpPost]
+        public JsonResult DeleteHoliday(int holidayId)
+        {
+            try
+            {
 
+                SettingData st = new SettingData();
+                st.DeleteHoliday(holidayId);
+
+                return Json(new
+                {
+                    data = " ลบข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion :: ตั้งค่าวันหยุด ::
 
                   #region :: Manage Zone ::

@@ -426,5 +426,35 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+
+        public void DeleteHoliday(int holidayId)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+           
+            try
+            {
+
+                string strSql = @"  Update   holidays  Set   Deleted=1
+                                    Where ID={0}";
+                   
+
+                strSql = string.Format(strSql,holidayId);
+                
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
+
+        
+
     }
 }
