@@ -52,7 +52,7 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        // GET: /ManagePayment/DailyReceiptsReport?staffId=1
+        // GET: /ManagePayment/DailyReceiptsReport?staffId=1?dateAsOf=2018-04-08
         public JsonResult GetDailyReceiptsReport(int staffId, string dateAsOf)
         {
 
@@ -87,8 +87,6 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
-
-    
         public JsonResult SaveActivateDailyReceipts(int staffId, string dateAsOf)
         {
             try
@@ -145,8 +143,8 @@ namespace TheGreatGroupModules.Controllers
 
             }
         }
-        // GET: /ManagePayment/PostPaymentDailyReceipts
-        [HttpPost]
+
+        [HttpPost] // Post: /ManagePayment/PostPaymentDailyReceipts
         public JsonResult PostPaymentDailyReceipts(DailyReceiptsReport item)
         {
             try
@@ -175,6 +173,84 @@ namespace TheGreatGroupModules.Controllers
              }
 
 
+        // Post: /ManagePayment/PostAdd_DailyRemark
+         [HttpPost]
+        public JsonResult PostAdd_DailyRemark(DailyRemark item)
+        {
+            try
+            {
+                ContractData data = new ContractData();
+                data.Add_DailyRemark(item);
+
+
+                return Json(new
+                {
+                    data = "บันทึกรายการสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    data = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+           }
+
+
+         // Post: /ManagePayment/PostStaffLoginOnMobile
+         [HttpPost]
+         public JsonResult PostStaffLoginOnMobile(StaffLogin item)
+         {
+             try
+             {
+                 string hostname = "203.154.41.217/";
+                CustomersData data = new CustomersData();
+                item=  data.GetStaffLoginOnMobile(item);
+
+
+                if (String.IsNullOrEmpty(item.StaffCode) || String.IsNullOrEmpty(item.StaffPassword))
+                {
+                   
+                    throw new Exception("กรุณากรอกรหัสพนักงานและรหัสผ่าน");
+                }
+                else if (String.IsNullOrEmpty(item.StaffCode))
+                {
+                    throw new Exception("กรุณากรอกรหัสพนักงาน");
+                }
+                else if (String.IsNullOrEmpty(item.StaffPassword))
+                {
+
+                    throw new Exception( "กรุณากรอกรหัสผ่าน");
+                }
+                else
+                {
+                    throw new Exception("ไม่มีข้อมูลพนักงาน");
+                }
+
+
+                 return Json(new
+                 {   success = true,
+                     iuser = item.StaffID,
+                     iusername= item.StaffName,
+                     istaffrole= item.StaffRoleID,
+                     imageUrl = hostname +item.ImageUrl
+                 }, JsonRequestBehavior.AllowGet);
+             }
+             catch (Exception ex)
+             {
+                 return Json(new
+                 {
+                     success = false,
+                     errorMessage = ex.Message
+                 }, JsonRequestBehavior.AllowGet);
+
+             }
+         }
+
         // GET: /ManagePayment/GetListCustomerOnMobile?staffId=1
         public JsonResult GetListCustomerOnMobile(int staffId)
         {
@@ -183,7 +259,7 @@ namespace TheGreatGroupModules.Controllers
             {
                 CustomersData cus =new CustomersData();
                 IList<ListCustomerOnMobile> listData = new List<ListCustomerOnMobile>();
-                    listData=  cus.GetListCustomerOnMobile( staffId);
+                listData=  cus.GetListCustomerOnMobile( staffId);
          
 
                 return Json(new

@@ -548,8 +548,34 @@ namespace TheGreatGroupModules.Controllers
 
             }
         }
-       
 
+        [HttpPost]
+        // POST: /Customers/DeleteCustomers?CustomerID=
+        public JsonResult DeleteCustomers(int CustomerID)
+        {
+
+            try
+            {
+                new CustomersData().DeleteCustomer(CustomerID);
+
+                return Json(new
+                {
+                    data = "ลบข้อมูลลูกค้าสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+       
         // GET: /Customers/GetCustomerID/:id
 
         public JsonResult GetCustomerID(int id)

@@ -271,7 +271,7 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
         }
-
+        
         public void EditCustomer(ref Customers item)
         {
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -378,6 +378,31 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
         }
+
+        public void DeleteCustomer(int CustomerID)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+               
+                string StrSql = @" Update customer Set
+                Deleted=1
+                where  CustomerId={0} ";
+
+                  StrSql= String.Format(StrSql, CustomerID   );
+
+                DBHelper.Execute(StrSql, ObjConn);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
         public void PaymentDailyReceipts(DailyReceiptsReport item)
         {
 
@@ -410,11 +435,9 @@ namespace TheGreatGroupModules.Modules
 
                 // StaffID ,CustomerID ,ContractID,PriceReceipts
               
-
-
                 item.ID = Utility.GetMaxID("daily_receipts", "ID");
                 string StrSql = @" INSERT INTO daily_receipts(ID,CustomerID,ContractID,DateAsOf,
-            TotalSales,PriceReceipts,Principle,Interest,StaffID,Activated,Deleted)
+            TotalSales,PriceReceipts,Principle,Interest,StaffID,Latitude,Longtitude,Activated,Deleted)
             VALUES("
 
              + item.ID + ","
@@ -426,6 +449,8 @@ namespace TheGreatGroupModules.Modules
              + Priciple + ","
              + interest + ","
              + item.StaffID+ ","
+             + item.Latitude + ","
+             + item.Longtitude + ","
              + 0 + ","
              + 0 + ")";
 
@@ -627,6 +652,35 @@ namespace TheGreatGroupModules.Modules
             catch (Exception ex)
             {
                 
+                throw;
+            }
+        }
+
+        public StaffLogin GetStaffLoginOnMobile(StaffLogin login)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+
+                string strSQL = "select * FROM staff Where Staffcode={0} and staffpassword={1} and Deleted=0 and Activated=1 ";
+                strSQL = string.Format(strSQL, Utility.ReplaceString(login.StaffCode), Utility.ReplaceString(Utility.HashPassword(login.StaffPassword)));
+                DataTable dt = DBHelper.List(strSQL, ObjConn);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    login.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
+                    login.StaffName = dt.Rows[0]["StaffFirstName"].ToString();
+                    login.ImageUrl = dt.Rows[0]["StaffImagePath"].ToString();
+                    login.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+                }
+                else
+                {
+                    throw new Exception("รหัสพนักงาน หรือ รหัสผ่านไม่ถูกต้อง,กรุณาตรวจสอบ");
+                }
+                return login;
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
         }

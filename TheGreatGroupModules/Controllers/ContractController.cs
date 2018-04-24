@@ -376,5 +376,41 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+
+
+        // POST: /Contract/PostAddDiscount
+        public JsonResult PostAddDiscount(DailyReceiptsReport item) {
+
+
+            try
+            {
+
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                item.StaffID = (Int32)Session["iuser"];
+
+                ContractData data = new ContractData();
+                data.AddDiscount(item);
+
+
+                return Json(new
+                {
+                    data = "บันทึกรายการสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    data = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+
     }
 }

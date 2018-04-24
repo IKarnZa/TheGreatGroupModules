@@ -73,4 +73,15 @@ namespace TheGreatGroupModules.Models
         public int IsMenu { get; set; }
     
     }
+
+
+    public class StaffLocation {
+
+        public string CustomerFirstName { get; set; }
+        public decimal PriceReceipts { get; set; }
+        public string PriceReceipts_str { get { return PriceReceipts.ToString("#,##0.00"); } }
+        public string TimePay { get; set; }
+        public double Latitude { get; set; }
+        public double Logitude { get; set; }
+    }
 }

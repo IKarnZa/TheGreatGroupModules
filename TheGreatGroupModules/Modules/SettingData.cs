@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -345,7 +346,85 @@ namespace TheGreatGroupModules.Modules
 
             }
         }
-        
+
+
+        public void AddHoliday(Holidays item)
+        {
+            DateTime dateAsOf = DateTime.ParseExact(item.Date_str, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            item.ID = Utility.GetMaxID("holidays", "ID");
+            try
+            {
+
+                string strSql = @"
+                    INSERT INTO  holidays
+                                (ID,
+                                 Date,
+                                 HolidayName,
+                                 Activated,
+                                 Deleted)
+                    VALUES ({0},
+                            {1},
+                            {2},
+                            {3},
+                            {4});";
+
+                strSql = string.Format(strSql,
+                    item.ID,
+                     Utility.FormateDate(dateAsOf),
+                     Utility.ReplaceString(item.HolidayName),
+                     1,
+                     0);
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
+
+
+        public void EditHoliday(Holidays item)
+        {
+            DateTime dateAsOf = DateTime.ParseExact(item.Date_str, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+           
+            try
+            {
+
+                string strSql = @"
+                    Update   holidays Set 
+                                 Date= {1},
+                                 HolidayName= {2}
+                    Where ID={0}";
+                   
+
+                strSql = string.Format(strSql,
+                    item.ID,
+                     Utility.FormateDate(dateAsOf),
+                     Utility.ReplaceString(item.HolidayName)
+                 );
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+
+            }
+        }
 
     }
 }

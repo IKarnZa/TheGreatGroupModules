@@ -195,10 +195,12 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
+
+
         #region :: ตั้งค่าวันหยุด ::
 
         // GET: /Setting/GetListHolidays?HolidayID=0
-                  public JsonResult GetListHolidays(int HolidayID)
+        public JsonResult GetListHolidays(int HolidayID)
         {
 
             try
@@ -224,6 +226,61 @@ namespace TheGreatGroupModules.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
            
+        }
+
+
+        // Post: /Setting/AddHoliday
+        [HttpPost]
+        public JsonResult AddHoliday(Holidays item)
+        {
+            try
+            {
+
+                SettingData st = new SettingData();
+
+                st.AddHoliday(item);
+
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        // Post: /Setting/EditHoliday
+        [HttpPost]
+        public JsonResult EditHoliday(Holidays item)
+        {
+            try
+            {
+              
+                SettingData st = new SettingData();
+                st.EditHoliday(item);
+
+                return Json(new
+                {
+                    data = " บันทึกการเพิ่มข้อมูลสำเร็จ ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         #endregion :: ตั้งค่าวันหยุด ::

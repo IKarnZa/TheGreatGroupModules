@@ -343,6 +343,40 @@ namespace TheGreatGroupModules.Controllers
             }
         }
 
+
+        [HttpPost]
+        public JsonResult DeletedStaffs(int StaffID)
+        {
+
+
+            StaffData data = new StaffData();
+
+            try
+            {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                int UpdateBy = (Int32)Session["iuser"];
+
+                data.DeletedStaff(StaffID, UpdateBy);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion  ::  Manage Staff ::
 
         #region  :: Manage StaffRole  ::
@@ -468,7 +502,36 @@ namespace TheGreatGroupModules.Controllers
         }
         #endregion  :: Manage StaffRole  ::
 
+        //api : ../staffs/GetLocationStaff?staffId=1?dateTime=2018-04-08
+        public JsonResult GetLocationStaff(string dateTime, int staffId)
+        {
 
+            try
+            {
+
+                StaffData st = new StaffData();
+                List<StaffLocation> item = new List<StaffLocation>();
+                item = st.GetStaffLocation(dateTime, staffId);
+
+                return Json(new
+                {
+                    data = item,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        
+      
 
         //api : ../staffs/GetMenu?staffroleID=1
            public JsonResult GetMenu(int staffroleID)

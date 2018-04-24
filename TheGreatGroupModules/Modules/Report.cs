@@ -37,8 +37,8 @@ namespace TheGreatGroupModules.Modules
         public decimal TotalBalance { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
-        
-        
+        public double Latitude { get; set; }
+        public double Longtitude { get; set; }
         public static List<DailyReceiptsReport> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new DailyReceiptsReport()
@@ -62,6 +62,14 @@ namespace TheGreatGroupModules.Modules
         }
     }
 
+    public class DailyRemark {
+        public int ID { get; set; }
+        public int CustomerID { get; set; }
+        public int ContractID { get; set; }
+        public string Remark { get; set; }
+        public DateTime DateAsOf { get; set; }
+        public string Date { get { return DateAsOf.ToString("dd/MM/yyyy"); } }
+    }
     public class Transaction
     {
     

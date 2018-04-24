@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using TheGreatGroupModules.Models;
@@ -128,6 +129,7 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+
         public void AddStaffRole(StaffRole role)
         {
 
@@ -242,7 +244,7 @@ namespace TheGreatGroupModules.Modules
              InsertDate,
              Activated,
              Deleted)
-             VALUES ({0},{1}, {2}, {3}, {4}, {5}, {6}, {7},{8},{9},{10}, {11}, {12}, {13}, {14}, {15},{16}, 1, 0);";
+             VALUES ({0},{1}, {2}, {3}, {4}, {5}, {6}, {7},{8},{9},{10}, {11}, {12}, {13}, {14}, {15},{16}, {17},{18},1, 0);";
 
                 strSql = string.Format(strSql,
                      staff.StaffID,
@@ -258,7 +260,7 @@ namespace TheGreatGroupModules.Modules
                      staff.StaffDistrictId,
                      staff.StaffProvinceId,
                       Utility.ReplaceString(staff.StaffZipCode),
-                      Utility.ReplaceString("../Content/default-user.png"),
+                      Utility.ReplaceString("Content/default-user.png"),
                       Utility.ReplaceString(staff.StaffMobile),
                       Utility.ReplaceString(staff.StaffTelephone),
                       Utility.ReplaceString(staff.StaffEmail),
@@ -378,6 +380,29 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
 
+
+        }
+
+        
+        public void DeletedStaff(int StaffID,int UpdateBy)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string strSql =@"Update staffrole set Deleted=1,UpdateBy={1},UpdateBy={2}
+                                where  StaffRoleID={0}";
+
+                strSql = string.Format(strSql, StaffID,UpdateBy,Utility.FormateDateTime(DateTime.Now));
+                DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
 
         }
         public List<StaffRole> GetListStaffRole( int id)
@@ -766,5 +791,70 @@ namespace TheGreatGroupModules.Modules
 
 
         }
+
+
+        public List<StaffLocation> GetStaffLocation(string dateTime, int staffId)
+        {
+            DateTime dateAsOf = DateTime.ParseExact(dateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
+
+
+
+                StrSql = @" SELECT c.CustomerFirstName ,SUM(d.PriceReceipts) AS PriceReceipts  ,TIME(DateAsOf) AS TimePay ,d.Latitude,d.Logitude
+                 FROM daily_receipts d
+                 LEFT JOIN customer c ON d.CustomerID=c.CustomerId
+                  WHERE staffid="+staffId+
+                @" AND DATE(DateAsOf) ="+Utility.FormateDate(dateAsOf)+
+                @"    GROUP BY c.CustomerFirstName 
+                ORDER BY TIME(DateAsOf) ASC ";
+
+
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                List<StaffLocation> StaffLocation = new List<StaffLocation>(); ;
+                StaffLocation obj = new StaffLocation();
+                if (dt.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+
+                        obj = new StaffLocation();
+                        obj.CustomerFirstName = dt.Rows[i]["CustomerFirstName"].ToString();
+                        obj.TimePay = dt.Rows[i]["TimePay"].ToString();
+                        obj.PriceReceipts = Convert.ToDecimal(dt.Rows[i]["PriceReceipts"].ToString());
+                        if (dt.Rows[i]["Latitude"] !=DBNull.Value)
+                        obj.Latitude = Convert.ToDouble(dt.Rows[i]["Latitude"].ToString());
+                        if (dt.Rows[i]["Logitude"] != DBNull.Value)
+                        obj.Logitude = Convert.ToDouble(dt.Rows[i]["Logitude"].ToString());
+                        StaffLocation.Add(obj);
+                    }
+
+                }
+
+                return StaffLocation;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+
+
+        }
+
     }
 }

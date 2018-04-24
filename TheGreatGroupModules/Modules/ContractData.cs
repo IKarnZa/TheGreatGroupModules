@@ -1165,5 +1165,84 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                   }
               }
 
+              public int Add_DailyRemark(DailyRemark item)
+              {
+
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  item.ID = Utility.GetMaxID("daily_remark", "ID");
+                  try
+                  {
+
+                      string StrSql = @"INSERT INTO daily_remark
+                        (ID,
+                         DateAsOf,
+                         ContractID,
+                         CustomerID,
+                         Remark)
+                        VALUES ({0},{1},{2},{3},{4})";
+                      StrSql = string.Format(StrSql, item.ID, Utility.FormateDate(DateTime.Now),
+                          item.ContractID, item.CustomerID, item.Remark);
+                      DBHelper.Execute(StrSql, ObjConn);
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+
+
+                      ObjConn.Close();
+
+                  }
+                  return item.ID;
+
+              }
+
+
+
+              public void AddDiscount(DailyReceiptsReport item) {
+
+
+
+                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+                  item.ID = Utility.GetMaxID("discount", "ID");
+                  try
+                  {
+
+                      string StrSql = @"UPDATE contract SET ContractStatus=0 
+                    WHERE ContractCustomerID={1} AND ContractID={2} ;
+
+                    INSERT INTO discount
+                                (ID,
+                                 CustomerID,
+                                 ContractID,
+                                 Discount,
+                                 ApproveBy,
+                                 ApproveDate,
+                                 Deleted)
+                        VALUES ({0},{1},{2},{3},{4},{5},{6});";
+                      StrSql = string.Format(StrSql,
+
+                          item.ID, item.ContractID, item.CustomerID,item.PriceReceipts,item.StaffID,
+                          Utility.FormateDate(DateTime.Now),
+                           0);
+                      DBHelper.Execute(StrSql, ObjConn);
+                  }
+                  catch (Exception ex)
+                  {
+
+                      throw new Exception(ex.Message);
+                  }
+                  finally
+                  {
+
+
+                      ObjConn.Close();
+
+                  }
+               
+              }
     }
 }
