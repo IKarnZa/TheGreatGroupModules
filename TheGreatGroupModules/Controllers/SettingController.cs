@@ -282,8 +282,8 @@ namespace TheGreatGroupModules.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-        // Post: /Setting/EditHoliday
-        [HttpPost]
+        // Get: /Setting/DeleteHoliday?holidayId=1
+       
         public JsonResult DeleteHoliday(int holidayId)
         {
             try
