@@ -39,6 +39,63 @@ var Career = [
       "อื่นๆ",
 ];
 
+
+var Months = [
+            {
+                ID: 1,
+                Name: "มกราคม"
+
+            },
+            {
+                ID: 2,
+                Name: "กุมภาพันธ์"
+            },
+            {
+                ID: 3,
+                Name: "มีนาคม "
+            },
+            {
+                ID: 4,
+                Name: "เมษายน "
+            },
+             {
+                 ID: 5,
+                 Name: "พฤษภาคม "
+
+             },
+            {
+                ID: 6,
+                Name: "มิถุนายน"
+            },
+            {
+                ID: 7,
+                Name: "กรกฏาคม"
+            },
+            {
+                ID: 8,
+                Name: "สิงหาคม"
+            },
+            {
+                ID: 9,
+                Name: "กันยายน"
+            },
+            {
+                ID: 10,
+                Name: "ตุลาคม"
+            },
+            {
+            ID: 11,
+            Name: "พฤศจิกายน"
+            },
+            {
+                ID: 12,
+                Name: "ธันวาคม"
+            }
+
+];
+
+var Years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+
 function LoadForm_CustomerInfo(
     datasourceCustomer,
     dataProvince,

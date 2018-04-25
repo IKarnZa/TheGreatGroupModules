@@ -136,5 +136,36 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
+
+        public JsonResult GetDiscountReport(string StartDate_Str, string EndDate_Str, int type)
+        {
+
+
+            try
+            {
+                ReportData rt = new ReportData();
+                IList<DailyReceiptsReport> data = new List<DailyReceiptsReport>();
+                data = rt.GetDiscountReport(StartDate_Str, EndDate_Str, type);
+
+                return Json(new
+                {
+                    data = data,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
     }
 }

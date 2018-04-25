@@ -240,31 +240,35 @@ namespace TheGreatGroupModules.Controllers
          {
              try
              {
-                 string hostname = "203.154.41.217/";
-                CustomersData data = new CustomersData();
-                item=  data.GetStaffLoginOnMobile(item);
+                 string hostname = "http://203.154.41.217/";
+                
+                 if (!String.IsNullOrEmpty(item.StaffCode) || !String.IsNullOrEmpty(item.StaffPassword))
+                 {
 
+                     CustomersData data = new CustomersData();
+                    item=  data.GetStaffLoginOnMobile(item);
 
-                if (String.IsNullOrEmpty(item.StaffCode) || String.IsNullOrEmpty(item.StaffPassword))
-                {
-                   
-                    throw new Exception("กรุณากรอกรหัสพนักงานและรหัสผ่าน");
+                 }else{
+                    if (String.IsNullOrEmpty(item.StaffCode) || String.IsNullOrEmpty(item.StaffPassword))
+                    {
+
+                        throw new Exception("กรุณากรอกรหัสพนักงานและรหัสผ่าน");
+                    }
+                    else if (String.IsNullOrEmpty(item.StaffCode))
+                    {
+                        throw new Exception("กรุณากรอกรหัสพนักงาน");
+                    }
+                    else if (String.IsNullOrEmpty(item.StaffPassword))
+                    {
+
+                        throw new Exception("กรุณากรอกรหัสผ่าน");
+                    }
+                    else
+                    {
+                        throw new Exception("ไม่มีข้อมูลพนักงาน");
+                    }
+
                 }
-                else if (String.IsNullOrEmpty(item.StaffCode))
-                {
-                    throw new Exception("กรุณากรอกรหัสพนักงาน");
-                }
-                else if (String.IsNullOrEmpty(item.StaffPassword))
-                {
-
-                    throw new Exception( "กรุณากรอกรหัสผ่าน");
-                }
-                else
-                {
-                    throw new Exception("ไม่มีข้อมูลพนักงาน");
-                }
-
-
                  return Json(new
                  {   success = true,
                      iuser = item.StaffID,

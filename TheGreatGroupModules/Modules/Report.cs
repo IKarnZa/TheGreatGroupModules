@@ -21,7 +21,7 @@ namespace TheGreatGroupModules.Modules
         public DateTime ContractExpDate  { get; set; }
         public decimal ContractAmountLast { get; set; }
         public decimal ContractAmount { get; set; }
-        
+        public decimal ContractDiscount { get; set; }
         public decimal PriceReceipts { get; set; }
         public decimal Balance { get; set; }
         public decimal TotalSales { get; set; }
@@ -37,8 +37,9 @@ namespace TheGreatGroupModules.Modules
         public decimal TotalBalance { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
+        public string StaffName { get; set; }
         public double Latitude { get; set; }
-        public double Longtitude { get; set; }
+        public double Longitude { get; set; }
         public static List<DailyReceiptsReport> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new DailyReceiptsReport()

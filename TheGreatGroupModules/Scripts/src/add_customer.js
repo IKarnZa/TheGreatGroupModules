@@ -24,9 +24,9 @@ var dataZone = [];
 
         LoadForm_CustomerInfo(datasourceCustomer,
         dataProvince,
-     dataDistrict,
-    dataSubDistrict,
-    dataZone);
+        dataDistrict,
+        dataSubDistrict,
+        dataZone);
        
 
         $("#loadIndicator").dxLoadIndicator({

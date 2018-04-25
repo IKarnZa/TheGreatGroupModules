@@ -437,7 +437,7 @@ namespace TheGreatGroupModules.Modules
               
                 item.ID = Utility.GetMaxID("daily_receipts", "ID");
                 string StrSql = @" INSERT INTO daily_receipts(ID,CustomerID,ContractID,DateAsOf,
-            TotalSales,PriceReceipts,Principle,Interest,StaffID,Latitude,Longtitude,Activated,Deleted)
+            TotalSales,PriceReceipts,Principle,Interest,StaffID,Latitude,Longitude,Activated,Deleted)
             VALUES("
 
              + item.ID + ","
@@ -450,7 +450,7 @@ namespace TheGreatGroupModules.Modules
              + interest + ","
              + item.StaffID+ ","
              + item.Latitude + ","
-             + item.Longtitude + ","
+             + item.Longitude + ","
              + 0 + ","
              + 0 + ")";
 

@@ -176,7 +176,7 @@ namespace TheGreatGroupModules.Modules
                                     FROM daily_receipts a
                                     LEFT JOIN Customer c ON  a.CustomerID= c.CustomerId
                                     LEFT JOIN contract ct ON  a.ContractID= ct.ContractID
-                                    WHERE 0=0    
+                                    WHERE 0=0     and ct.ContractStatus=1
                                     AND a.Deleted=0
                                    AND  c.SaleID=" + staffId +
                                  "  AND a.ContractID=" + ContractID +
@@ -245,5 +245,61 @@ namespace TheGreatGroupModules.Modules
 
         
         }
+
+
+        public IList<DailyReceiptsReport> GetDiscountReport(string StartDate_Str, string EndDate_Str, int type)
+        {
+
+
+
+            DateTime StartDate = DateTime.ParseExact(StartDate_Str, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime EndDate = DateTime.ParseExact(EndDate_Str, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            IList<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                string StrSql = @" SELECT d.ContractID,d.CustomerID,ct.ContractNumber,d.ApproveDate ,d.ApproveBy,s.StaffFirstName,
+                CONCAT(c.CustomerTitleName,c.CustomerFirstName, ' ',c.CustomerLastName) AS CustomerName
+                ,ct.ContractPayment,(ct.ContractPayment-d.Discount) AS PriceReceipts,d.Discount
+                FROM discount d
+                LEFT JOIN customer c ON d.CustomerID=c .CustomerID
+                LEFT JOIN contract ct ON d.ContractID=ct.ContractID AND ct.ContractCustomerID=d.CustomerID
+                LEFT JOIN staff s ON d.ApproveBy=s.StaffID
+                WHERE   ct.Deleted=0 AND ct.ContractStatus=0 AND DATE(d.ApproveDate) Between {0}  and {1} 
+                ";
+                StrSql = string.Format(StrSql, Utility.FormateDate(StartDate), Utility.FormateDate(EndDate));
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = dt.AsEnumerable().Select(dr => new DailyReceiptsReport()
+                    {
+                        ContractCreateDate = dr.Field<DateTime>("ApproveDate"), //วันที่ให้ส่วนลด
+                        StaffID = dr.Field<int>("ApproveBy"), //ให้โดย
+                        StaffName = dr.Field<string>("StaffFirstName"),
+                        ContractNumber = dr.Field<string>("ContractNumber"),
+                        CustomerName = dr.Field<string>("CustomerName"),
+                        TotalSales = dr.Field<decimal>("ContractPayment"),
+                        PriceReceipts = dr.Field<decimal>("PriceReceipts"),
+                        ContractDiscount = dr.Field<decimal>("Discount"),
+                    }).ToList();
+                }
+
+                return listData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+
+
+        }
+   
+    
     }
 }

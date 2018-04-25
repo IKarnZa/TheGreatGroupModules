@@ -340,6 +340,7 @@
     <Content Include="Scripts\src\manage_zone.js" />
     <Content Include="Scripts\src\open_close_account_report.js" />
     <Content Include="Scripts\src\reports_src.js" />
+    <Content Include="Scripts\src\report_discount.js" />
     <Content Include="Scripts\src\setting_permission.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Sources\EULA\AngularJS License.txt" />

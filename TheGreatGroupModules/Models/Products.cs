@@ -10,6 +10,7 @@ namespace TheGreatGroupModules.Modules
     {
         public int No { get; set; }
         public int ProductID { get; set; }
+        public int ProductGroupID { get; set; }
         public string ProductDetail { get; set; }
         public string ProductName { get; set; }
         public string ProductGroupName { get; set; }
@@ -27,7 +28,6 @@ namespace TheGreatGroupModules.Modules
             get
             {
                 return ProductPrice.ToString("#,##0.00");
-
             }
         }
         public static IList<Products> ToObjectList(DataTable dt)
