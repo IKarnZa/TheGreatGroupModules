@@ -389,8 +389,8 @@ namespace TheGreatGroupModules.Modules
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
             {
-                string strSql =@"Update staffrole set Deleted=1,UpdateBy={1},UpdateBy={2}
-                                where  StaffRoleID={0}";
+                string strSql =@"Update staff  set Deleted=1,UpdateBy={1},UpdateDate={2}
+                                where  StaffID={0}";
 
                 strSql = string.Format(strSql, StaffID,UpdateBy,Utility.FormateDateTime(DateTime.Now));
                 DBHelper.Execute(strSql, ObjConn);
