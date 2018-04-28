@@ -14,7 +14,7 @@ namespace TheGreatGroupModules.Modules
         private string errMsg = "";
 
 
-        public List<OpenAccountReport> OpenAccountReports(int zoneId, string datefrom, string dateto)
+        public List<OpenAccountReport> OpenAccountReports(SearchCriteria search)
         {
 
 
@@ -22,7 +22,22 @@ namespace TheGreatGroupModules.Modules
 
             try
             {
-                
+
+                DateTime StartDate = DateTime.ParseExact(search.FromDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime EndDate = DateTime.ParseExact(search.ToDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                if (search.TypeDate == 2)
+                {
+                    StartDate = new DateTime(search.Year, search.Month, 1);
+
+                    EndDate = new DateTime(search.Year, search.Month, DateTime.DaysInMonth(search.Year, search.Month));
+                }
+                else if (search.TypeDate == 3)
+                {
+                    StartDate = new DateTime(search.Year, 1, 1);
+
+                    EndDate = new DateTime(search.Year, 12, 31);
+
+                }
 
 
                 List<OpenAccountReport> listData = new List<OpenAccountReport>();
@@ -47,10 +62,9 @@ namespace TheGreatGroupModules.Modules
                       LEFT JOIN product_customer pc ON pc.ContractID=ct.ContractID AND pc.CustomerID=ct.ContractCustomerID
                     WHERE   ct.Activated=1 ";
 
-                if (datefrom != null & dateto != null)
-                    StrSql += "  AND ct.ContractCreateDate BETWEEN " + Utility.ReplaceString(datefrom) + " AND " + Utility.ReplaceString(dateto);
-                                    if(zoneId>0 )
-                                        StrSql+= " AND sz.ZoneID="+zoneId;
+                if (StartDate != null & EndDate != null)
+                    StrSql += " AND Date(ct.ContractCreateDate) BETWEEN " + Utility.FormateDate(StartDate) + " AND " + Utility.FormateDate(EndDate);
+                                  
 
                                     StrSql += " ORDER BY ct.ContractCreateDate ASC";
 
@@ -247,13 +261,29 @@ namespace TheGreatGroupModules.Modules
         }
 
 
-        public IList<DailyReceiptsReport> GetDiscountReport(string StartDate_Str, string EndDate_Str, int type)
+        public IList<DailyReceiptsReport> GetDiscountReport(SearchCriteria search )
         {
 
 
 
-            DateTime StartDate = DateTime.ParseExact(StartDate_Str, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime EndDate = DateTime.ParseExact(EndDate_Str, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime StartDate = DateTime.ParseExact(search.FromDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime EndDate = DateTime.ParseExact(search.ToDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            if (search.TypeDate == 2)
+            {
+                StartDate = new DateTime(search.Year, search.Month, 1);
+
+                EndDate = new DateTime(search.Year, search.Month, DateTime.DaysInMonth(search.Year, search.Month));
+            }
+            else if (search.TypeDate == 3)
+            {
+                StartDate = new DateTime(search.Year, 1, 1);
+
+                EndDate = new DateTime(search.Year,12,31);
+
+            }
+
+
+
 
             IList<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -266,8 +296,18 @@ namespace TheGreatGroupModules.Modules
                 LEFT JOIN customer c ON d.CustomerID=c .CustomerID
                 LEFT JOIN contract ct ON d.ContractID=ct.ContractID AND ct.ContractCustomerID=d.CustomerID
                 LEFT JOIN staff s ON d.ApproveBy=s.StaffID
-                WHERE   ct.Deleted=0 AND ct.ContractStatus=0 AND DATE(d.ApproveDate) Between {0}  and {1} 
-                ";
+                WHERE   ct.Deleted=0 AND ct.ContractStatus=0  ";
+
+                if (search.TypeDate == 1)
+                    StrSql+=" AND DATE(d.ApproveDate) = {0}" ;
+                if (search.TypeDate == 2)
+                    StrSql += " AND DATE(d.ApproveDate) Between {0}  and {1} ";
+                if (search.TypeDate == 3)
+                    StrSql += " AND DATE(d.ApproveDate) Between {0}  and {1} ";
+                if (search.TypeDate == 4)
+                    StrSql += " AND DATE(d.ApproveDate) Between {0}  and {1} ";
+
+
                 StrSql = string.Format(StrSql, Utility.FormateDate(StartDate), Utility.FormateDate(EndDate));
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
                 if (dt != null && dt.Rows.Count > 0)
@@ -295,8 +335,6 @@ namespace TheGreatGroupModules.Modules
             {
                 ObjConn.Close();
             }
-
-
 
         }
    

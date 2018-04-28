@@ -228,6 +228,13 @@
       <DependentUpon>DailyReport.aspx</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Report\ReceiptReport.aspx.cs">
+      <DependentUpon>ReceiptReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ReceiptReport.aspx.designer.cs">
+      <DependentUpon>ReceiptReport.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bg.jpg" />
@@ -304,6 +311,7 @@
     <Content Include="Report\DailyReport.aspx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Report\ReceiptReport.aspx" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -3341,6 +3349,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Staffs\EditStaff.cshtml" />
     <Content Include="Views\Setting\Holiday.cshtml" />
+    <Content Include="Views\Report\PDFReceipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3358,6 +3367,7 @@
     <EmbeddedResource Include="Report\DailyReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Receipt.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

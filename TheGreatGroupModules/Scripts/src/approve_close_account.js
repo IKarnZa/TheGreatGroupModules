@@ -8,12 +8,14 @@ $(function () {
 })
 function SearchStaff() {
 
-   
+
     Call_Grid($("#CustomerIdCard").val());
 }
 function Call_Grid(data) {
+    $("#loadIndicator").dxLoadIndicator({
+        visible: true
+    });
 
-   
     $.ajax({
         url: '../Contract/GetApproveOpen_CloseContract?custpmerIDCard=' + data,
         type: 'GET',
@@ -24,11 +26,14 @@ function Call_Grid(data) {
 
                 Load_DataGrid1(data.dataOpen);
                 Load_DataGrid2(data.dataClose);
+                $("#loadIndicator").dxLoadIndicator({
+                    visible: false
+                });
             } else {
                 alertError(data.errMsg);
 
             }
-        
+
 
         },
         error: function () {
@@ -47,7 +52,7 @@ function Load_DataGrid1(data) {
 
 
     $("#gridContainer").dxDataGrid({
-       dataSource: data,
+        dataSource: data,
         showColumnLines: true,
         showRowLines: true,
 
@@ -78,7 +83,7 @@ function Load_DataGrid1(data) {
             enabled: true
         },
         columns: [
-           
+
             {
                 dataField: "ContractNumber",
                 caption: "เลขที่สัญญา",
@@ -123,7 +128,7 @@ function Load_DataGrid1(data) {
                       alignment: 'right',
                   },
 
-                  
+
             {
                 dataField: "ContractID",
                 caption: "ให้ส่วนลด",
@@ -144,8 +149,8 @@ function Load_DataGrid1(data) {
                          .appendTo(container);
                 }
             },
-          
-          
+
+
 
         ],
 
@@ -157,7 +162,7 @@ function Load_DataGrid2(data) {
 
 
     $("#gridContainer2").dxDataGrid({
-      dataSource: data,
+        dataSource: data,
         showColumnLines: true,
         showRowLines: true,
 
@@ -229,38 +234,42 @@ function Load_DataGrid2(data) {
                },
                 {
                     dataField: "Balance_Text",
-                    caption: "คงเหลือ",
+                    caption: "ให้ส่วนลด",
                     alignment: 'right',
                 },
-
-
-          {
-              dataField: "Balance_Text",
-              caption: "ให้ส่วนลด",
-              alignment: 'center',
-              width: 100,
-              fixed: true,
-              fixedPosition: 'right',
-              verticalAlignment: 'middle',
-              cellTemplate: function (container, options) {
-                  $("<div>")
-                       .append("<lable class='label label-warning' >" + options.data.Balance_Text + "</label>")
-                       .appendTo(container);
-              }
-          },
-
-
-
+                {
+                    dataField: "Balance_Text",
+                    caption: "ยกเลิกการให้ส่วนลด",
+                    alignment: 'center',
+                    width: 100,
+                    fixed: true,
+                    fixedPosition: 'right',
+                    verticalAlignment: 'middle',
+                    cellTemplate: function (container, options) {
+                        $("<div>")
+                          .append("<button type='link' onclick='Show_PopupEdit("
+                          + '"' + options.data.CustomerName
+                          + '","' + options.data.Balance_Text
+                          + '",' + options.data.ContractID
+                          + ',' + options.data.CustomerID
+                          + ',' + options.data.Balance
+                          + ")' title='ยกเลิกการให้ส่วนลด' "+
+                          +" class='btn btn-warning btn-circle btn-sm'>"
+                          + "<i class='fa fa-close'></i>"
+                          + "</button>")
+                          .appendTo(container);
+                    }
+                },
         ],
     });
 
 }
 
-function Show_PopupEdit(CustomerName,Discount,contractId,customerId,balance) {
-  
+function Show_PopupEdit(CustomerName, Discount, contractId, customerId, balance) {
+
     //alertConfirm("ต้องการให้ส่วนลดคุณ ธิดา ชัยชา  จำนวน " + data + " บาท ใช่หรือไม่ ? ", "ให้ส่วนลดสำเร็จ", "ยกเลิกการให้ส่วนลด");
     swal({
-        title:"",
+        title: "",
         text: "ต้องการให้ส่วนลด " + CustomerName + "  จำนวน " + Discount + " บาท ใช่หรือไม่ ",
         type: "warning",
         showCancelButton: true,
@@ -273,7 +282,7 @@ function Show_PopupEdit(CustomerName,Discount,contractId,customerId,balance) {
 function (isConfirm) {
 
     if (isConfirm) {
-       
+
 
 
         var data = {
@@ -288,7 +297,7 @@ function (isConfirm) {
 
         if (data.success == true) {
             swal("สำเร็จ !", "", "success");
-           
+
             $("#loadIndicator").dxLoadIndicator({
                 visible: false
             });
@@ -300,12 +309,12 @@ function (isConfirm) {
         }
         SearchStaff();
     });
-  
+
 
     } else {
         swal.close();
         e.preventDefault();
     }
 });
-    
+
 }

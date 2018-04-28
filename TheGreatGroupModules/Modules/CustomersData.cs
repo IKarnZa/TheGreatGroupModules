@@ -586,27 +586,25 @@ namespace TheGreatGroupModules.Modules
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
             {
-                string sqlStr = @"SELECT  c.CustomerId,CONCAT(c.CustomerTitleName,c.CustomerFirstName,' ',c.CustomerLastName) AS CustomerName
-                ,ct.ContractID,ct.ContractNumber,ct.ContractExpDate,ct.ContractAmount,ct.ContractPayment , (ct.ContractPayment-d.TotalPay ) AS TotalPay,
-                CASE WHEN  PriceReceipts IS NOT NULL THEN 1 ELSE 0 END AS StatusPay
+                string sqlStr = @"  SELECT  c.CustomerId,ct.ContractID,CONCAT(c.CustomerTitleName,c.CustomerFirstName,' ',c.CustomerLastName) AS CustomerName
+                ,ct.ContractNumber,ct.ContractExpDate,ct.ContractAmount,ct.ContractPayment,
+                 (ct.ContractPayment-d.TotalPay ) AS TotalPay
+                 ,(       SELECT  DATE(DateAsOf) 
+                 FROM  daily_receipts  WHERE ContractID=ct.ContractID AND CustomerID=c.CustomerId
+                 ORDER BY DateAsOf DESC LIMIT 1) AS lastDate
+                 
                  FROM customer c 
                 LEFT JOIN contract ct ON c.CustomerId=ct.contractCustomerID
-                 LEFT JOIN (SELECT SUM(PriceReceipts)AS TotalPay , ContractID ,CustomerID  FROM  daily_receipts
-                 Where   Deleted=0
+                 LEFT JOIN (SELECT SUM(PriceReceipts)AS TotalPay , ContractID ,CustomerID  
+                 FROM  daily_receipts
+                 WHERE   Deleted=0
                 GROUP BY   ContractID ,CustomerID )d ON 
                 d.ContractID=ct.ContractID AND d.CustomerID=ct.ContractCustomerID 
-                LEFT JOIN (
-                SELECT  ContractID ,CustomerID,DateAsOf,PriceReceipts  
-                FROM  daily_receipts 
-                WHERE DATE(DateAsOf)={0}
-                GROUP BY   ContractID ,CustomerID) st ON
-                st.ContractID=ct.ContractID AND st.CustomerID=ct.ContractCustomerID 
-                WHERE c.SaleID={1} AND ct.ContractID IS NOT NULL
-                 AND ct.contractstatus=1
-                ";
-                sqlStr = String.Format(sqlStr,
-                       Utility.FormateDate(DateTime.Now),
-                       StaffID);
+                WHERE c.SaleID={0} AND ct.ContractID IS NOT NULL
+                 AND ct.contractstatus=1 ;
+                 ";
+
+                sqlStr = String.Format(sqlStr,StaffID);
 
               DataTable dt=   DBHelper.List(sqlStr, ObjConn);
               if (dt != null && dt.Rows.Count > 0)

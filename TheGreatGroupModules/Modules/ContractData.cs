@@ -27,7 +27,8 @@ namespace TheGreatGroupModules.Modules
                                     and Activated=1
                                    
                                 ";
-                if (CustomerID > 0) {
+                if (CustomerID > 0)
+                {
 
                     StrSql += "  and ContractCustomerID=" + CustomerID;
                 }
@@ -42,70 +43,70 @@ namespace TheGreatGroupModules.Modules
                 IList<Contract> listData = new List<Contract>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    Contract con=new Contract();
+                    Contract con = new Contract();
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        con=new Contract();
+                        con = new Contract();
 
-                        if (dt.Rows[i]["ContractID"]!=DBNull.Value)
-                        con.ContractID =  Convert.ToInt32(dt.Rows[i]["ContractID"].ToString());
+                        if (dt.Rows[i]["ContractID"] != DBNull.Value)
+                            con.ContractID = Convert.ToInt32(dt.Rows[i]["ContractID"].ToString());
                         if (dt.Rows[i]["ContractCustomerID"] != DBNull.Value)
-                        con.ContractCustomerID =  Convert.ToInt32(dt.Rows[i]["ContractCustomerID"].ToString());
+                            con.ContractCustomerID = Convert.ToInt32(dt.Rows[i]["ContractCustomerID"].ToString());
                         if (dt.Rows[i]["ContractCreateDate"] != DBNull.Value)
-                          con.ContractCreateDate = Convert.ToDateTime(dt.Rows[i]["ContractCreateDate"].ToString());
+                            con.ContractCreateDate = Convert.ToDateTime(dt.Rows[i]["ContractCreateDate"].ToString());
                         if (dt.Rows[i]["ContractStartDate"] != DBNull.Value)
-                          con.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
+                            con.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
                         if (dt.Rows[i]["ContractExpDate"] != DBNull.Value)
-                          con.ContractExpDate = Convert.ToDateTime(dt.Rows[i]["ContractExpDate"].ToString());
+                            con.ContractExpDate = Convert.ToDateTime(dt.Rows[i]["ContractExpDate"].ToString());
                         if (dt.Rows[i]["ContractNumber"] != DBNull.Value)
                             con.ContractNumber = dt.Rows[i]["ContractNumber"].ToString();
                         if (dt.Rows[i]["ContractReward"] != DBNull.Value)
                             con.ContractReward = Convert.ToDecimal(dt.Rows[i]["ContractReward"].ToString());
                         if (dt.Rows[i]["ContractInterest"] != DBNull.Value)
-                          con.ContractInterest =Convert.ToDecimal(dt.Rows[i]["ContractInterest"].ToString());
+                            con.ContractInterest = Convert.ToDecimal(dt.Rows[i]["ContractInterest"].ToString());
                         if (dt.Rows[i]["ContractAmount"] != DBNull.Value)
-                          con.ContractAmount =Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
+                            con.ContractAmount = Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
                         if (dt.Rows[i]["ContractAmountLast"] != DBNull.Value)
-                          con.ContractAmountLast =Convert.ToDecimal(dt.Rows[i]["ContractAmountLast"].ToString());
+                            con.ContractAmountLast = Convert.ToDecimal(dt.Rows[i]["ContractAmountLast"].ToString());
                         if (dt.Rows[i]["ContractPeriod"] != DBNull.Value)
                             con.ContractPeriod = Convert.ToInt32(dt.Rows[i]["ContractPeriod"].ToString());
                         if (dt.Rows[i]["ContractPayment"] != DBNull.Value)
-                          con.ContractPayment =Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
+                            con.ContractPayment = Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
                         if (dt.Rows[i]["ContractRefNumber"] != DBNull.Value)
-                          con.ContractRefNumber=  dt.Rows[i]["ContractRefNumber"].ToString();
+                            con.ContractRefNumber = dt.Rows[i]["ContractRefNumber"].ToString();
                         if (dt.Rows[i]["ContractInsertBy"] != DBNull.Value)
-                        con.ContractInsertBy=  Convert.ToInt32(dt.Rows[i]["ContractInsertBy"].ToString());
+                            con.ContractInsertBy = Convert.ToInt32(dt.Rows[i]["ContractInsertBy"].ToString());
                         if (dt.Rows[i]["ContractInsertDate"] != DBNull.Value)
-                        con.ContractInsertDate=  Convert.ToDateTime(dt.Rows[i]["ContractInsertDate"].ToString());
+                            con.ContractInsertDate = Convert.ToDateTime(dt.Rows[i]["ContractInsertDate"].ToString());
 
-                        if (dt.Rows[i]["ContractType"] != DBNull.Value) 
+                        if (dt.Rows[i]["ContractType"] != DBNull.Value)
                             con.ContractType = dt.Rows[i]["ContractType"].ToString();
-                        if (dt.Rows[i]["ContractStatus"] != DBNull.Value) 
+                        if (dt.Rows[i]["ContractStatus"] != DBNull.Value)
                             con.ContractStatus = Convert.ToInt32(dt.Rows[i]["ContractStatus"].ToString());
-                        if (dt.Rows[i]["ContractRemark"] != DBNull.Value) 
+                        if (dt.Rows[i]["ContractRemark"] != DBNull.Value)
                             con.ContractRemark = dt.Rows[i]["ContractRemark"].ToString();
                         if (dt.Rows[i]["Activated"] != DBNull.Value)
-                          con.Activated=  Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
+                            con.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
                         if (dt.Rows[i]["Deleted"] != DBNull.Value)
-                          con.Deleted=  Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+                            con.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
 
-                           if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
-                               con.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
-                           if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
-                               con.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
-                           if (dt.Rows[i]["ContractSuretyID1"] != DBNull.Value)
-                               con.CustomerSurety1 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID1"].ToString());
-                           if (dt.Rows[i]["ContractSuretyID2"] != DBNull.Value)
-                               con.CustomerSurety2 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID2"].ToString());
-                           if (dt.Rows[i]["ContractPartner"] != DBNull.Value)
-                               con.CustomerPartner = Convert.ToInt32(dt.Rows[i]["ContractPartner"].ToString());
+                        if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
+                            con.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
+                        if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
+                            con.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
+                        if (dt.Rows[i]["ContractSuretyID1"] != DBNull.Value)
+                            con.CustomerSurety1 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID1"].ToString());
+                        if (dt.Rows[i]["ContractSuretyID2"] != DBNull.Value)
+                            con.CustomerSurety2 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID2"].ToString());
+                        if (dt.Rows[i]["ContractPartner"] != DBNull.Value)
+                            con.CustomerPartner = Convert.ToInt32(dt.Rows[i]["ContractPartner"].ToString());
                         listData.Add(con);
                     }
 
 
 
-                  
-                  
+
+
                 }
 
                 //หาส่วนของผู้ค้ำประกัน
@@ -215,20 +216,21 @@ namespace TheGreatGroupModules.Modules
                     }
 
                 }
-                else { 
-                   Contract con=new Contract();
-                   var dataSurety = new CustomerSurety();
-                   dataSurety.CustomerSuretyID = con.CustomerSurety1 ;
-                   con.CustomerSuretyData1 = dataSurety;
-                   dataSurety = new CustomerSurety();
-                   dataSurety.CustomerSuretyID = con.CustomerSurety2;
-                   con.CustomerSuretyData2 = dataSurety;
-                   var  dataPartner1 = new CustomerPartner();
-                   con.CustomerPartner =con.CustomerPartner;
-                   con.CustomerPartnerData = dataPartner1;
+                else
+                {
+                    Contract con = new Contract();
+                    var dataSurety = new CustomerSurety();
+                    dataSurety.CustomerSuretyID = con.CustomerSurety1;
+                    con.CustomerSuretyData1 = dataSurety;
+                    dataSurety = new CustomerSurety();
+                    dataSurety.CustomerSuretyID = con.CustomerSurety2;
+                    con.CustomerSuretyData2 = dataSurety;
+                    var dataPartner1 = new CustomerPartner();
+                    con.CustomerPartner = con.CustomerPartner;
+                    con.CustomerPartnerData = dataPartner1;
 
-                
-                 listData.Add(con);
+
+                    listData.Add(con);
                 }
                 return listData;
 
@@ -243,7 +245,7 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-           public IList<Contract> GetListContract(int CustomerID, int ContractID)
+        public IList<Contract> GetListContract(int CustomerID, int ContractID)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
@@ -256,7 +258,8 @@ namespace TheGreatGroupModules.Modules
                                     and Activated=1
                                    
                                 ";
-                if (CustomerID > 0) {
+                if (CustomerID > 0)
+                {
 
                     StrSql += "  and ContractCustomerID=" + CustomerID;
                 }
@@ -271,62 +274,62 @@ namespace TheGreatGroupModules.Modules
                 IList<Contract> listData = new List<Contract>();
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    Contract con=new Contract();
+                    Contract con = new Contract();
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        con=new Contract();
+                        con = new Contract();
 
-                        if (dt.Rows[i]["ContractID"]!=DBNull.Value)
-                        con.ContractID =  Convert.ToInt32(dt.Rows[i]["ContractID"].ToString());
+                        if (dt.Rows[i]["ContractID"] != DBNull.Value)
+                            con.ContractID = Convert.ToInt32(dt.Rows[i]["ContractID"].ToString());
                         if (dt.Rows[i]["ContractCustomerID"] != DBNull.Value)
-                        con.ContractCustomerID =  Convert.ToInt32(dt.Rows[i]["ContractCustomerID"].ToString());
+                            con.ContractCustomerID = Convert.ToInt32(dt.Rows[i]["ContractCustomerID"].ToString());
                         if (dt.Rows[i]["ContractCreateDate"] != DBNull.Value)
-                          con.ContractCreateDate = Convert.ToDateTime(dt.Rows[i]["ContractCreateDate"].ToString());
+                            con.ContractCreateDate = Convert.ToDateTime(dt.Rows[i]["ContractCreateDate"].ToString());
                         if (dt.Rows[i]["ContractStartDate"] != DBNull.Value)
-                          con.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
+                            con.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
                         if (dt.Rows[i]["ContractExpDate"] != DBNull.Value)
-                          con.ContractExpDate = Convert.ToDateTime(dt.Rows[i]["ContractExpDate"].ToString());
+                            con.ContractExpDate = Convert.ToDateTime(dt.Rows[i]["ContractExpDate"].ToString());
                         if (dt.Rows[i]["ContractNumber"] != DBNull.Value)
                             con.ContractNumber = dt.Rows[i]["ContractNumber"].ToString();
                         if (dt.Rows[i]["ContractReward"] != DBNull.Value)
                             con.ContractReward = Convert.ToDecimal(dt.Rows[i]["ContractReward"].ToString());
                         if (dt.Rows[i]["ContractInterest"] != DBNull.Value)
-                          con.ContractInterest =Convert.ToDecimal(dt.Rows[i]["ContractInterest"].ToString());
+                            con.ContractInterest = Convert.ToDecimal(dt.Rows[i]["ContractInterest"].ToString());
                         if (dt.Rows[i]["ContractAmount"] != DBNull.Value)
-                          con.ContractAmount =Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
+                            con.ContractAmount = Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
                         if (dt.Rows[i]["ContractAmountLast"] != DBNull.Value)
-                          con.ContractAmountLast =Convert.ToDecimal(dt.Rows[i]["ContractAmountLast"].ToString());
+                            con.ContractAmountLast = Convert.ToDecimal(dt.Rows[i]["ContractAmountLast"].ToString());
                         if (dt.Rows[i]["ContractPeriod"] != DBNull.Value)
                             con.ContractPeriod = Convert.ToInt32(dt.Rows[i]["ContractPeriod"].ToString());
                         if (dt.Rows[i]["ContractPayment"] != DBNull.Value)
-                          con.ContractPayment =Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
+                            con.ContractPayment = Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
                         if (dt.Rows[i]["ContractRefNumber"] != DBNull.Value)
-                          con.ContractRefNumber=  dt.Rows[i]["ContractRefNumber"].ToString();
+                            con.ContractRefNumber = dt.Rows[i]["ContractRefNumber"].ToString();
                         if (dt.Rows[i]["ContractInsertBy"] != DBNull.Value)
-                        con.ContractInsertBy=  Convert.ToInt32(dt.Rows[i]["ContractInsertBy"].ToString());
+                            con.ContractInsertBy = Convert.ToInt32(dt.Rows[i]["ContractInsertBy"].ToString());
                         if (dt.Rows[i]["ContractInsertDate"] != DBNull.Value)
-                        con.ContractInsertDate=  Convert.ToDateTime(dt.Rows[i]["ContractInsertDate"].ToString());
+                            con.ContractInsertDate = Convert.ToDateTime(dt.Rows[i]["ContractInsertDate"].ToString());
 
-                        if (dt.Rows[i]["ContractType"] != DBNull.Value) 
+                        if (dt.Rows[i]["ContractType"] != DBNull.Value)
                             con.ContractType = dt.Rows[i]["ContractType"].ToString();
-                        if (dt.Rows[i]["ContractStatus"] != DBNull.Value) 
+                        if (dt.Rows[i]["ContractStatus"] != DBNull.Value)
                             con.ContractStatus = Convert.ToInt32(dt.Rows[i]["ContractStatus"].ToString());
-                        if (dt.Rows[i]["ContractRemark"] != DBNull.Value) 
+                        if (dt.Rows[i]["ContractRemark"] != DBNull.Value)
                             con.ContractRemark = dt.Rows[i]["ContractRemark"].ToString();
                         if (dt.Rows[i]["Activated"] != DBNull.Value)
-                          con.Activated=  Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
+                            con.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
                         if (dt.Rows[i]["Deleted"] != DBNull.Value)
-                          con.Deleted=  Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+                            con.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
 
-                           if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
-                               con.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
-                           if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
-                               con.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
-                           if (dt.Rows[i]["ContractSuretyID1"] != DBNull.Value)
-                               con.CustomerSurety1 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID1"].ToString());
-                           if (dt.Rows[i]["ContractSuretyID2"] != DBNull.Value)
-                               con.CustomerSurety2 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID2"].ToString());
-                        
+                        if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
+                            con.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
+                        if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
+                            con.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
+                        if (dt.Rows[i]["ContractSuretyID1"] != DBNull.Value)
+                            con.CustomerSurety1 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID1"].ToString());
+                        if (dt.Rows[i]["ContractSuretyID2"] != DBNull.Value)
+                            con.CustomerSurety2 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID2"].ToString());
+
                         listData.Add(con);
                     }
 
@@ -343,11 +346,12 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
-                  
-                  
-          
 
-        public int Add_NewContract(Contract item) {
+
+
+
+        public int Add_NewContract(Contract item)
+        {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             int ConT_ID = 0;
@@ -397,7 +401,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                       Utility.ReplaceString(item.ContractRefNumber),
                       item.ContractInsertBy,
                        Utility.FormateDateTime(DateTime.Now),
-                       Utility.ReplaceString( item.ContractType),
+                       Utility.ReplaceString(item.ContractType),
                       1,
                       item.ContractPayEveryDay,
                       item.ContractSpecialholiday,
@@ -405,8 +409,8 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
                       1,
                       0
                          );
-                
-                DBHelper.Execute(StrSql,ObjConn);
+
+                DBHelper.Execute(StrSql, ObjConn);
                 ConT_ID = item.ContractID;
             }
             catch (Exception ex)
@@ -414,24 +418,25 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
 
                 throw new Exception(ex.Message);
             }
-            finally {
+            finally
+            {
 
 
                 ObjConn.Close();
-             
+
             }
             return ConT_ID;
-          
+
         }
 
         public void Edit_NewContract(Contract item)
         {
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-           
+
             try
             {
-               
+
                 string StrSql = @" Update contract Set
              ContractCustomerID={1},
              ContractCreateDate={2},
@@ -497,19 +502,19 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
             {
                 ObjConn.Close();
             }
-        
+
 
         }
 
 
         public int Add_Surety(CustomerSurety item)
         {
-            
+
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             item.CustomerSuretyID = Utility.GetMaxID("customer_surety", "CustomerSuretyID");
             try
             {
-              
+
                 string StrSql = @" INSERT INTO  customer_surety
             ( CustomerSuretyID,
              CustomerSuretyTitle,
@@ -524,7 +529,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11},{12}, {13}, {14},
              CustomerSuretyMobile,
              CustomerSuretyTelephone)
 VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
-           
+
 
                 StrSql = String.Format(StrSql,
                         item.CustomerSuretyID,
@@ -719,9 +724,9 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             return item.CustomerPartnerID;
 
         }
-              public void UpdateSurety_In_Contract(Contract item)
+        public void UpdateSurety_In_Contract(Contract item)
         {
-            
+
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             string StrSql = "";
             try
@@ -732,7 +737,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                 ,ContractPartner={2}
                 Where ContractID={3}";
 
-                StrSql = String.Format(StrSql, item.CustomerSurety1, item.CustomerSurety2, item.CustomerPartner,  item.ContractID);
+                StrSql = String.Format(StrSql, item.CustomerSurety1, item.CustomerSurety2, item.CustomerPartner, item.ContractID);
 
                 DBHelper.Execute(StrSql, ObjConn);
             }
@@ -748,369 +753,370 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                 ObjConn.Close();
 
             }
-          
+
 
         }
-              public void UpdateContractPayment(int ContractID , int CustomerID , double ContractPayment)
-              {
+        public void UpdateContractPayment(int ContractID, int CustomerID, double ContractPayment)
+        {
 
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  string StrSql = "";
-                  try
-                  {
-                      StrSql = @" Update contract set 
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
+                StrSql = @" Update contract set 
                 ContractPayment={0}
                 Where ContractID={1} and ContractCustomerID={2}";
 
-                      StrSql = String.Format(StrSql, ContractPayment, ContractID, CustomerID);
+                StrSql = String.Format(StrSql, ContractPayment, ContractID, CustomerID);
 
-                      DBHelper.Execute(StrSql, ObjConn);
-                  }
-                  catch (Exception ex)
-                  {
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
 
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-
-
-                      ObjConn.Close();
-
-                  }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
 
 
-              }
+                ObjConn.Close();
 
-              public void Update_Product_customer(Contract item)
-              {
+            }
 
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  string StrSql = "";
-                  try
-                  {
-                      StrSql = @" Update product_customer set 
+
+        }
+
+        public void Update_Product_customer(Contract item)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
+                StrSql = @" Update product_customer set 
                         ContractID={0}
                         Where CustomerID={1} And  ContractID=0";
 
-                      StrSql = String.Format(StrSql, item.ContractID, item.ContractCustomerID);
+                StrSql = String.Format(StrSql, item.ContractID, item.ContractCustomerID);
 
-                      DBHelper.Execute(StrSql, ObjConn);
-                  }
-                  catch (Exception ex)
-                  {
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
 
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-
-
-                      ObjConn.Close();
-
-                  }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
 
 
-              }
+                ObjConn.Close();
 
-              public void Deleted_Product_customer(int CustomerID, int ContractID)
-              {
+            }
 
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  string StrSql = "";
-                  try
-                  {
-                      StrSql = @" Delete From  product_customer  
+
+        }
+
+        public void Deleted_Product_customer(int CustomerID, int ContractID)
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
+                StrSql = @" Delete From  product_customer  
                                   Where CustomerID={1} And  ContractID={0} ;";
 
-                      StrSql += @" Delete From  daily_receipts  
+                StrSql += @" Delete From  daily_receipts  
                                   Where CustomerID={1} And  ContractID={0} ;";
 
-                      StrSql += @"Update contract set ContractPayment=0
+                StrSql += @"Update contract set ContractPayment=0
                                Where ContractID={0} and ContractCustomerID={1};";
 
-                      StrSql = String.Format(StrSql, ContractID, CustomerID);
+                StrSql = String.Format(StrSql, ContractID, CustomerID);
 
-                      DBHelper.Execute(StrSql, ObjConn);
-                  }
-                  catch (Exception ex)
-                  {
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
 
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-                      ObjConn.Close();
-                  }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
 
 
-              }
-              public void UpdateContractAmount_ContractExpDate(int CustomerID, int ContractID)
-              {
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+        }
+        public void UpdateContractAmount_ContractExpDate(int CustomerID, int ContractID)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
 
-                  DateTime[] HolidaysArr = Holidays(1);
-                  try
-                  {
-                         
-                  string StrSql = "";
-                
-                      StrSql = @" Select * From Contract
+            DateTime[] HolidaysArr = Holidays(1);
+            try
+            {
+
+                string StrSql = "";
+
+                StrSql = @" Select * From Contract
                                   Where ContractCustomerID={1} And  ContractID={0} 
                                   and  Activated=1 and Deleted=0 ;";
-                      StrSql = String.Format(StrSql, ContractID, CustomerID);
+                StrSql = String.Format(StrSql, ContractID, CustomerID);
 
-                    DataTable dt=  DBHelper.List(StrSql, ObjConn);
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
 
-                    Contract cont = new Contract();
-                      if(dt.Rows.Count>0){
-                          for (int i = 0; i < dt.Rows.Count; i++)
-                          {
-                              //วันที่เริ่มจ่าย
-                              if (dt.Rows[i]["ContractStartDate"] != DBNull.Value)
-                                  cont.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
+                Contract cont = new Contract();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        //วันที่เริ่มจ่าย
+                        if (dt.Rows[i]["ContractStartDate"] != DBNull.Value)
+                            cont.ContractStartDate = Convert.ToDateTime(dt.Rows[i]["ContractStartDate"].ToString());
 
-                              // จำนวนงวด
-                              if (dt.Rows[i]["ContractPeriod"] != DBNull.Value)
-                                  cont.ContractPeriod = Convert.ToInt32(dt.Rows[i]["ContractPeriod"].ToString());
+                        // จำนวนงวด
+                        if (dt.Rows[i]["ContractPeriod"] != DBNull.Value)
+                            cont.ContractPeriod = Convert.ToInt32(dt.Rows[i]["ContractPeriod"].ToString());
 
+                        // เงินต้น
+                        if (dt.Rows[i]["ContractPayment"] != DBNull.Value)
+                            cont.ContractPayment = Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
 
-                              // เงินต้น
-                              if (dt.Rows[i]["ContractPayment"] != DBNull.Value)
-                                  cont.ContractPayment = Convert.ToDecimal(dt.Rows[i]["ContractPayment"].ToString());
+                        // งวดละ
+                        if (dt.Rows[i]["ContractAmount"] != DBNull.Value)
+                            cont.ContractAmount = Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
 
+                        // ทุกวัน =2 / จ-ศ =1
+                        if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
+                            cont.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
 
-                              // งวดละ
-                              if (dt.Rows[i]["ContractAmount"] != DBNull.Value)
-                                  cont.ContractAmount = Convert.ToDecimal(dt.Rows[i]["ContractAmount"].ToString());
+                        // 1 เว้นวันหยุด  / 0 ไม่เว้นไม่หยุด
+                        if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
+                            cont.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
+                    }
 
-                          
-                             // ทุกวัน =2 / จ-ศ =1
-                              if (dt.Rows[i]["ContractPayEveryDay"] != DBNull.Value)
-                                  cont.ContractPayEveryDay = Convert.ToInt32(dt.Rows[i]["ContractPayEveryDay"].ToString());
-
-                              // 1 เว้นวันหยุด  / 0 ไม่เว้นไม่หยุด
-                              if (dt.Rows[i]["ContractSpecialholiday"] != DBNull.Value)
-                                  cont.ContractSpecialholiday = Convert.ToBoolean(dt.Rows[i]["ContractSpecialholiday"].ToString());
-                          }
-
-                      }
+                }
 
 
-                      cont.ContractStartDate = cont.ContractStartDate.AddDays(-1); 
+                cont.ContractAmountLast = Math.Round(cont.ContractPayment - (cont.ContractPeriod * cont.ContractAmount), 2);
+                cont.ContractStartDate = cont.ContractStartDate.AddDays(-1);
 
-                      if (cont.ContractPeriod > 0)
-                      {
-
-
-                          //  เว้นวันหยุด 
-                          if (cont.ContractSpecialholiday)
-                          {
-
-                              if (cont.ContractPayEveryDay == 1) //ทุกวัน =2 
-                              {
-                                  while (cont.ContractPeriod > 0)
-                                  {
-
-                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                      if (!IsHolidays(cont.ContractStartDate, HolidaysArr))
-                                          cont.ContractPeriod--;
-
-                                  }
-                                  cont.ContractExpDate = cont.ContractStartDate;
-                              }
-                              else if (cont.ContractPayEveryDay == 2) // จ-ศ =1
-                              {
-                                  while (cont.ContractPeriod > 0)
-                                  {
-
-                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                      if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !IsHolidays(cont.ContractStartDate, HolidaysArr))
-                                          cont.ContractPeriod--;
-
-                                  }
-                                  cont.ContractExpDate = cont.ContractStartDate;
-                              }
-                          }
-                          else
-                          {
-
-                              if (cont.ContractPayEveryDay == 1) //ทุกวัน =2 
-                              {
-                                  while (cont.ContractPeriod > 0)
-                                  {
-
-                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                      cont.ContractPeriod--;
-
-                                  }
-                                  cont.ContractExpDate = cont.ContractStartDate;
-                              }
-                              else if (cont.ContractPayEveryDay == 2) // จ-ศ =1
-                              {
-                                  while (cont.ContractPeriod > 0)
-                                  {
-
-                                      cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                      if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday)
-                                          cont.ContractPeriod--;
-
-                                  }
-                                  cont.ContractExpDate = cont.ContractStartDate;
-                              }
-
-                          }
-                      }
-                  
+                if (cont.ContractPeriod > 0)
+                {
 
 
-                      cont.ContractAmountLast = Math.Round(cont.ContractPayment - (cont.ContractPeriod * cont.ContractAmount),2);
+                    //  เว้นวันหยุด 
+                    if (cont.ContractSpecialholiday)
+                    {
+
+                        if (cont.ContractPayEveryDay == 1) //ทุกวัน =2 
+                        {
+                            while (cont.ContractPeriod > 0)
+                            {
+
+                                cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                if (!IsHolidays(cont.ContractStartDate, HolidaysArr))
+                                    cont.ContractPeriod--;
+
+                            }
+                            cont.ContractExpDate = cont.ContractStartDate;
+                        }
+                        else if (cont.ContractPayEveryDay == 2) // จ-ศ =1
+                        {
+                            while (cont.ContractPeriod > 0)
+                            {
+
+                                cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !IsHolidays(cont.ContractStartDate, HolidaysArr))
+                                    cont.ContractPeriod--;
+
+                            }
+                            cont.ContractExpDate = cont.ContractStartDate;
+                        }
+                    }
+                    else
+                    {
+
+                        if (cont.ContractPayEveryDay == 1) //ทุกวัน =2 
+                        {
+                            while (cont.ContractPeriod > 0)
+                            {
+
+                                cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                cont.ContractPeriod--;
+
+                            }
+                            cont.ContractExpDate = cont.ContractStartDate;
+                        }
+                        else if (cont.ContractPayEveryDay == 2) // จ-ศ =1
+                        {
+                            while (cont.ContractPeriod > 0)
+                            {
+
+                                cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
+                                if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday)
+                                    cont.ContractPeriod--;
+
+                            }
+                            cont.ContractExpDate = cont.ContractStartDate;
+                        }
+
+                    }
+                }
 
 
-                       StrSql = @"Update contract set ContractExpDate={2},
+
+
+
+                StrSql = @"Update contract set ContractExpDate={2},
                                 ContractAmountLast={3}
                                Where ContractID={0} and ContractCustomerID={1};";
 
-                       StrSql = String.Format(StrSql, ContractID, CustomerID, Utility.FormateDate(cont.ContractExpDate), cont.ContractAmountLast);
+                StrSql = String.Format(StrSql, ContractID, CustomerID, Utility.FormateDate(cont.ContractExpDate), cont.ContractAmountLast);
 
-                      DBHelper.Execute(StrSql, ObjConn);
-                      
-
-                      
-                  }
-                  catch (Exception ex )
-                  {
-                      
-                      throw;
-                  }
-
-              }
-              private bool IsHolidays(DateTime date, DateTime[] holidays)
-              {
-                  return holidays.Contains(date.Date);
-
-              }
-
-
-              public DateTime[] Holidays(int activated)
-              {
-
-
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  string StrSql = "";
-                  try{
-                  
-
-                      
-                      StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
-
-
-                      if (activated > 0) {
-                          StrSql += " and activated=1  ";
-                      }
-
-
-                      DataTable dt=DBHelper.List(StrSql, ObjConn);
-
-                      DateTime[] Holidays = new DateTime[dt.Rows.Count]; ; 
-                      if (dt.Rows.Count > 0) {
-
-                          for (int i = 0; i < dt.Rows.Count; i++)
-                          {
-                              Holidays[i]=Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
-
-                          }
-                      
-                      }
-
-                      return Holidays;
-                      
-                  }
-                  catch (Exception ex)
-                  {
-
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-
-
-                      ObjConn.Close();
-
-                  }
-
-              
-              }
-
-
-              public List<Holidays> ListHolidays(int id)
-              {
-
-
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  string StrSql = "";
-                  try
-                  {
+                DBHelper.Execute(StrSql, ObjConn);
 
 
 
-                      StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
+            }
+            catch (Exception ex)
+            {
 
-                     
-                          StrSql += " and activated=1  ";
-                      
-                      if(id>0)
-                          StrSql += " and ID="+id;
+                throw;
+            }
 
+        }
+        private bool IsHolidays(DateTime date, DateTime[] holidays)
+        {
+            return holidays.Contains(date.Date);
 
-                      DataTable dt = DBHelper.List(StrSql, ObjConn);
-
-                      List<Holidays> Holidays = new List<Holidays>(); ;
-                      Holidays obj = new Holidays();
-                      if (dt.Rows.Count > 0)
-                      {
-
-                          for (int i = 0; i < dt.Rows.Count; i++)
-                          {
-
-                              obj = new Holidays();
-                              obj.ID = Convert.ToInt32(dt.Rows[i]["ID"].ToString());
-                              obj.HolidayName = dt.Rows[i]["HolidayName"].ToString();
-                              obj.Date = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
-                              obj.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
-                              obj.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
-                              Holidays.Add(obj);
-                          }
-
-                      }
-
-                      return Holidays;
-
-                  }
-                  catch (Exception ex)
-                  {
-
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
+        }
 
 
-                      ObjConn.Close();
+        public DateTime[] Holidays(int activated)
+        {
 
-                  }
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
 
 
-              }
-              public List<DailyReceiptsReport> GetApproveOpen_CloseContract(string custpmerIDCard, string ContractStatus)
-              {
-                  DateTime dateAsOf = DateTime.Now;
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
 
-                  try
-                  {
+                StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
 
-                      string StrSql = @"    SELECT c.CustomerID,c.CustomerMobile, ct.ContractID ,CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName ,c.CustomerNickName,                                  
+
+                if (activated > 0)
+                {
+                    StrSql += " and activated=1  ";
+                }
+
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                DateTime[] Holidays = new DateTime[dt.Rows.Count]; ;
+                if (dt.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Holidays[i] = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
+
+                    }
+
+                }
+
+                return Holidays;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+
+
+        }
+
+
+        public List<Holidays> ListHolidays(int id)
+        {
+
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
+
+
+
+                StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
+
+
+                StrSql += " and activated=1  ";
+
+                if (id > 0)
+                    StrSql += " and ID=" + id;
+
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                List<Holidays> Holidays = new List<Holidays>(); ;
+                Holidays obj = new Holidays();
+                if (dt.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+
+                        obj = new Holidays();
+                        obj.ID = Convert.ToInt32(dt.Rows[i]["ID"].ToString());
+                        obj.HolidayName = dt.Rows[i]["HolidayName"].ToString();
+                        obj.Date = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
+                        obj.Activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
+                        obj.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+                        Holidays.Add(obj);
+                    }
+
+                }
+
+                return Holidays;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+
+
+        }
+        public List<DailyReceiptsReport> GetApproveOpen_CloseContract(string custpmerIDCard, string ContractStatus)
+        {
+            DateTime dateAsOf = DateTime.Now;
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+
+                string StrSql = @"    SELECT c.CustomerID,c.CustomerMobile, ct.ContractID ,CONCAT(c.CustomerTitleName,c.CustomerFirstName, '  ', c.CustomerLastName)AS  CustomerName ,c.CustomerNickName,                                  
                                      ct.ContractNumber,ct.ContractCreateDate,ct.ContractExpDate ,ct.ContractAmount,
                                      ct.ContractPayment,SUM( a.PriceReceipts ) AS PriceReceipts,ct.ContractAmountLast,
                                     Case When a.Activated>0 then 'ตรวจสอบแล้ว' else 'รอการตรวจสอบ' end as Status, 
@@ -1118,150 +1124,151 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                                     ( SELECT  ct.ContractPayment- SUM(d.PriceReceipts)  FROM  daily_receipts d
                                     WHERE  d.Deleted=0 AND d.ContractID=ct.ContractID
                                     AND DATE(d.DateAsOf)<='" + dateAsOf.ToString("yyyy-MM-dd") + "')AS Balance " +
-                                         @" FROM daily_receipts a
+                                   @" FROM daily_receipts a
                                     LEFT JOIN Customer c ON  a.CustomerID= c.CustomerId
                                     LEFT JOIN contract ct ON  a.ContractID= ct.ContractID
                                     WHERE 0=0   
                                     AND a.Deleted=0 and ct.Deleted=0  ";
 
-                      if (!string.IsNullOrEmpty(custpmerIDCard))
-                          StrSql += "  AND  c.CustomerIdCard=" + Utility.ReplaceString(custpmerIDCard);
+                if (!string.IsNullOrEmpty(custpmerIDCard))
+                    StrSql += "  AND  c.CustomerIdCard=" + Utility.ReplaceString(custpmerIDCard);
 
-                      if (!string.IsNullOrEmpty(ContractStatus))
-                          StrSql += "  AND  ct.ContractStatus=" + ContractStatus;
+                if (!string.IsNullOrEmpty(ContractStatus))
+                    StrSql += "  AND  ct.ContractStatus=" + ContractStatus;
 
-                      StrSql += @"  GROUP BY  a.CustomerID ORDER BY ct.ContractCreateDate  ";
+                StrSql += @"  GROUP BY  a.CustomerID ORDER BY ct.ContractCreateDate  ";
 
 
-                      DataTable dt = DBHelper.List(StrSql, ObjConn);
-                      List<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
-                      if (dt != null && dt.Rows.Count > 0)
-                      {
-                          listData = dt.AsEnumerable().Select(dr => new DailyReceiptsReport()
-                          {
-                              CustomerID = dr.Field<int>("CustomerID"),
-                              ContractID = dr.Field<int>("ContractID"),
-                              ContractNumber = dr.Field<string>("ContractNumber"),
-                              CustomerName = dr.Field<string>("CustomerName"),
-                              ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
-                              ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
-                              ContractAmount = dr.Field<decimal>("ContractAmount"),
-                              PriceReceipts = dr.Field<decimal>("PriceReceipts"),
-                              Balance = dr.Field<decimal>("Balance"),
-                              TotalSales = dr.Field<decimal>("ContractPayment"),
-                              ContractAmountLast = dr.Field<decimal>("ContractAmountLast"),
-                              Status = dr.Field<string>("Status"),
-                              Remark = dr.Field<string>("Remark"),
-                          }).ToList();
-                      }
-                      return listData;
-                  }
-                  catch (Exception ex)
-                  {
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-                      ObjConn.Close();
-                  }
-              }
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+                List<DailyReceiptsReport> listData = new List<DailyReceiptsReport>();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = dt.AsEnumerable().Select(dr => new DailyReceiptsReport()
+                    {
+                        CustomerID = dr.Field<int>("CustomerID"),
+                        ContractID = dr.Field<int>("ContractID"),
+                        ContractNumber = dr.Field<string>("ContractNumber"),
+                        CustomerName = dr.Field<string>("CustomerName"),
+                        ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
+                        ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
+                        ContractAmount = dr.Field<decimal>("ContractAmount"),
+                        PriceReceipts = dr.Field<decimal>("PriceReceipts"),
+                        Balance = dr.Field<decimal>("Balance"),
+                        TotalSales = dr.Field<decimal>("ContractPayment"),
+                        ContractAmountLast = dr.Field<decimal>("ContractAmountLast"),
+                        Status = dr.Field<string>("Status"),
+                        Remark = dr.Field<string>("Remark"),
+                    }).ToList();
+                }
+                return listData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
 
-              public int Add_DailyRemark(DailyRemark item)
-              {
+        public int Add_DailyRemark(DailyRemark item)
+        {
 
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  item.ID = Utility.GetMaxID("daily_remark", "ID");
-                  try
-                  {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            item.ID = Utility.GetMaxID("daily_remark", "ID");
+            try
+            {
 
-                      string StrSql = @"INSERT INTO daily_remark
+                string StrSql = @"INSERT INTO daily_remark
                         (ID,
                          DateAsOf,
                          ContractID,
                          CustomerID,
                          Remark)
                         VALUES ({0},{1},{2},{3},{4})";
-                      StrSql = string.Format(StrSql, item.ID, Utility.FormateDate(DateTime.Now),
-                          item.ContractID, item.CustomerID, item.Remark);
-                      DBHelper.Execute(StrSql, ObjConn);
-                  }
-                  catch (Exception ex)
-                  {
+                StrSql = string.Format(StrSql, item.ID, Utility.FormateDate(DateTime.Now),
+                    item.ContractID, item.CustomerID, item.Remark);
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
 
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-
-
-                      ObjConn.Close();
-
-                  }
-                  return item.ID;
-
-              }
-
-              public List<DailyRemark> GetListDailyRemark(int CustomerID, int ContractID)
-              {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
 
 
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  string StrSql = "";
-                  try
-                  {
+                ObjConn.Close();
+
+            }
+            return item.ID;
+
+        }
+
+        public List<DailyRemark> GetListDailyRemark(int CustomerID, int ContractID)
+        {
 
 
-
-                      StrSql = @" SELECT * FROM daily_remark where  CustomerID=" + CustomerID + " and ContractID=" + ContractID;
-
-                   
-
-                      DataTable dt = DBHelper.List(StrSql, ObjConn);
-
-                      List<DailyRemark> list = new List<DailyRemark>(); ;
-                      DailyRemark obj = new DailyRemark();
-                      if (dt.Rows.Count > 0)
-                      {
-
-                          for (int i = 0; i < dt.Rows.Count; i++)
-                          {
-
-                              obj = new DailyRemark();
-                              obj.ID = Convert.ToInt32(dt.Rows[i]["ID"].ToString());
-                              obj.Remark = dt.Rows[i]["Remark"].ToString();
-                              obj.DateAsOf = Convert.ToDateTime(dt.Rows[i]["DateAsOf"].ToString());
-                              list.Add(obj);
-                          }
-
-                      }
-
-                      return list;
-
-                  }
-                  catch (Exception ex)
-                  {
-
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
-
-
-                      ObjConn.Close();
-
-                  }
-              }
-
-              public void AddDiscount(DailyReceiptsReport item) {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
 
 
 
-                  MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-                  item.ID = Utility.GetMaxID("discount", "ID");
-                  try
-                  {
+                StrSql = @" SELECT * FROM daily_remark where  CustomerID=" + CustomerID + " and ContractID=" + ContractID;
+                StrSql += " Order By DateAsOf DESC";
 
-                      string StrSql = @"UPDATE contract SET ContractStatus=0 
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                List<DailyRemark> list = new List<DailyRemark>(); ;
+                DailyRemark obj = new DailyRemark();
+                if (dt.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+
+                        obj = new DailyRemark();
+                        obj.ID = Convert.ToInt32(dt.Rows[i]["ID"].ToString());
+                        obj.Remark = dt.Rows[i]["Remark"].ToString();
+                        obj.DateAsOf = Convert.ToDateTime(dt.Rows[i]["DateAsOf"].ToString());
+                        list.Add(obj);
+                    }
+
+                }
+
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+        }
+
+        public void AddDiscount(DailyReceiptsReport item)
+        {
+
+
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            item.ID = Utility.GetMaxID("discount", "ID");
+            try
+            {
+
+                string StrSql = @"UPDATE contract SET ContractStatus=0 
                     WHERE ContractCustomerID={1} AND ContractID={2} ;
 
                     INSERT INTO discount
@@ -1273,26 +1280,28 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                                  ApproveDate,
                                  Deleted)
                         VALUES ({0},{1},{2},{3},{4},{5},{6});";
-                      StrSql = string.Format(StrSql,
+                StrSql = string.Format(StrSql,
 
-                          item.ID, item.CustomerID, item.ContractID, Math.Round(item.PriceReceipts, 2), item.StaffID,
-                          Utility.FormateDateTime(DateTime.Now),
-                           0);
-                      DBHelper.Execute(StrSql, ObjConn);
-                  }
-                  catch (Exception ex)
-                  {
+                    item.ID, item.CustomerID, item.ContractID, Math.Round(item.PriceReceipts, 2), item.StaffID,
+                    Utility.FormateDateTime(DateTime.Now),
+                     0);
+                DBHelper.Execute(StrSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
 
-                      throw new Exception(ex.Message);
-                  }
-                  finally
-                  {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
 
 
-                      ObjConn.Close();
+                ObjConn.Close();
 
-                  }
-               
-              }
+            }
+
+        }
+
+
     }
 }

@@ -6,7 +6,7 @@ $(function () {
 
 });
 var formdata = {
-    ContractPayEveryDay: 1,
+    TypeDate: 1,
     FromDate: new Date(),
     ToDate: new Date(),
     Month: 1,
@@ -15,33 +15,35 @@ var formdata = {
 var TypeDate = [
             {
                 ID: 1,
-                Name: "เลือกวัน เดือน ปี"
+                Name: "เลือก วัน เดือน ปี"
 
             },
             {
                 ID: 2,
-                Name: "เลือกเดือน ปี"
+                Name: "เลือก เดือน ปี"
             },
             {
                   ID: 3,
-                  Name: "เลือกปี "
+                  Name: "เลือก ปี "
             },
             {
                   ID: 4,
-                  Name: "เลือกช่วงวันที่ "
+                  Name: "เลือก ช่วงวันที่ "
             }
 ];
 
 function LoadFormSearch() {
+
+    $("#gridshow").show();
     var formInstance = $("#form").dxForm({
         colCount: 1,
         formData: formdata,
         showColonAfterLabel: true,
         showValidationSummary: false,
-        width:450,
+        width:30+"%",
         items: [
              {
-                 dataField: "ContractPayEveryDay",
+                 dataField: "TypeDate",
                  label: {
                      text: "เงื่อนไขวันที่"
                  },
@@ -141,13 +143,137 @@ function LoadFormSearch() {
 }
 
 
-$("#myButton").dxButton({
-    text: 'บันทึก',
-    type: 'success',
-    useSubmitBehavior: true,
-    onClick: function () {
-        console.log($("#form").dxForm("instance").option('formData'));
+function SearchData() {
+    $("#gridshow").show();
+    $("#loadIndicator").dxLoadIndicator({
+        visible: true
+    });
+    var DataSearch = $("#form").dxForm("instance").option('formData');
+
+    $.ajax({
+        url: '../Report/GetDiscountReport',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(DataSearch),
+        success: function (data) {
+
+            if (data.success == true) {
+               
+                Load_DataGrid(data.data);
+                $("#loadIndicator").dxLoadIndicator({
+                    visible: false
+                });
+
+            } else {
+
+                swal("ผิดพลาด!!", data.data, "error");
+                $("#loadIndicator").dxLoadIndicator({
+                    visible: false
+                });
+            }
 
 
-    }
-});
+        },
+        error: function () {
+            console.log("error");
+
+        }
+    });
+}
+
+
+function Load_DataGrid(data) {
+ 
+    $("#gridContainer").dxDataGrid({
+        dataSource: data,
+        showColumnLines: true,
+        showRowLines: true,
+        rowAlternationEnabled: true,
+        showBorders: true,
+        selection: {
+            mode: "single"
+        },
+        searchPanel: {
+            visible: true,
+            width: 300,
+            placeholder: "ค้นหา..."
+        },
+        filterRow: {
+            visible: false,
+            applyFilter: "auto"
+        },
+        export: {
+            enabled: true,
+            fileName: "รายงานส่วนลด",
+        },
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        columnAutoWidth: true,
+        height: 300,
+        columnFixing: {
+            enabled: true
+        },
+        columns: [
+
+            {
+                dataField: "ContractNumber",
+                caption: "เลขที่สัญญา",
+                alignment: 'left',
+               
+            },
+            {
+                dataField: "CustomerName",
+                caption: "ชื่อ-นามสกุล ลูกค้า",
+                alignment: 'left',
+                
+            },
+                 {
+                     dataField: "TotalSales_Text",
+                     caption: "จำนวนเงินทั้งหมด",
+                     alignment: 'right',
+                 },
+                 {
+                     dataField: "PriceReceipts_Text",
+                     caption: "ชำระแล้ว",
+                     alignment: 'right',
+                 },
+                  {
+                      dataField: "ContractDiscount_Text",
+                      caption: "ส่วนลด",
+                      alignment: 'right',
+                  },
+
+                      {
+                          dataField: "StaffName",
+                          caption: "อนุมัติโดย",
+                          alignment: 'center',
+                      },
+                  {
+                      dataField: "ContractCreateDate_Text",
+                      caption: "วันที่อนุมัติ",
+                      alignment: 'center',
+                  },
+
+
+
+
+        ],
+
+    });
+
+}
+
+
+function ClearData() {
+
+
+    $("#gridshow").hide();
+    var formInstance = $("#form").dxForm("instance");
+    formInstance.option('formData.TypeDate', 1);
+    formInstance.option('formData.FromDate', new Date());
+    formInstance.itemOption('FromDate', 'visible', true);
+    formInstance.itemOption('ToDate', 'visible', false);
+    formInstance.itemOption('Month', 'visible', false);
+    formInstance.itemOption('Year', 'visible', false);
+}

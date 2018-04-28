@@ -1,102 +1,191 @@
 ﻿
-var data = [];
+$(function () {
 
-$("#gridshow").hide();
+    $("#gridshow").hide();
+    LoadFormSearch();
+
+});
+var formdata = {
+    TypeDate: 1,
+    FromDate: new Date(),
+    ToDate: new Date(),
+    Month: 1,
+    Year: new Date().getFullYear()
+};
+var TypeDate = [
+            {
+                ID: 1,
+                Name: "เลือก วัน เดือน ปี"
+
+            },
+            {
+                ID: 2,
+                Name: "เลือก เดือน ปี"
+            },
+            {
+                ID: 3,
+                Name: "เลือก ปี "
+            },
+            {
+                ID: 4,
+                Name: "เลือก ช่วงวันที่ "
+            }
+];
+
+function LoadFormSearch() {
+
+    $("#gridshow").show();
+    var formInstance = $("#form").dxForm({
+        colCount: 1,
+        formData: formdata,
+        showColonAfterLabel: true,
+        showValidationSummary: false,
+        width: 30 + "%",
+        items: [
+             {
+                 dataField: "TypeDate",
+                 label: {
+                     text: "เงื่อนไขวันที่"
+                 },
+                 editorType: "dxSelectBox",
+                 editorOptions: {
+                     items: TypeDate,
+                     displayExpr: "Name",
+                     valueExpr: "ID",
+                     onValueChanged: function (e) {
+
+                         if (e.value == 1) {
+                             formInstance.itemOption('FromDate', 'visible', true);
+                             formInstance.itemOption('ToDate', 'visible', false);
+                             formInstance.itemOption('Month', 'visible', false);
+                             formInstance.itemOption('Year', 'visible', false);
+                         } else if (e.value == 2) {
+                             formInstance.itemOption('FromDate', 'visible', false);
+                             formInstance.itemOption('ToDate', 'visible', false);
+                             formInstance.itemOption('Month', 'visible', true);
+                             formInstance.itemOption('Year', 'visible', true);
+                         }
+                         else if (e.value == 3) {
+                             formInstance.itemOption('FromDate', 'visible', false);
+                             formInstance.itemOption('ToDate', 'visible', false);
+                             formInstance.itemOption('Month', 'visible', false);
+                             formInstance.itemOption('Year', 'visible', true);
+                         }
+                         else if (e.value == 4) {
+                             formInstance.itemOption('FromDate', 'visible', true);
+                             formInstance.itemOption('ToDate', 'visible', true);
+                             formInstance.itemOption('Month', 'visible', false);
+                             formInstance.itemOption('Year', 'visible', false);
+                         }
+                         //alert(e.value)
+                     }
+                 },
+             },
+            {
+                dataField: "FromDate",
+                editorType: "dxDateBox",
+                label: {
+                    text: "วันที่"
+                },
+                editorOptions: {
+                    width: "100%",
+                    displayFormat: "dd/MM/yyyy"
+                },
+
+            },
+            {
+                dataField: "ToDate",
+                editorType: "dxDateBox",
+                label: {
+                    text: "ถึงวันที่"
+                },
+                visible: false,
+                editorOptions: {
+                    width: "100%",
+                    displayFormat: "dd/MM/yyyy",
+
+                },
+            },
+
+        {
+            dataField: "Month",
+            label: {
+                text: "เลือกเดือน "
+            },
+            visible: false,
+            editorType: "dxSelectBox",
+            editorOptions: {
+                items: Months,
+                displayExpr: "Name",
+                valueExpr: "ID",
+
+            },
+        },
+
+        {
+            dataField: "Year",
+            label: {
+                text: "เลือกปี "
+            },
+            visible: false,
+            editorType: "dxSelectBox",
+            editorOptions: {
+                items: Years,
 
 
-function SearchStaff() {
+            },
+        },
+        ]
+    }).dxForm("instance");
 
 
+
+}
+
+
+function SearchData() {
+    $("#gridshow").show();
     $("#loadIndicator").dxLoadIndicator({
         visible: true
     });
-    if ($("#zoneid").val() == '') {
+    var DataSearch = $("#form").dxForm("instance").option('formData');
 
-        $("#toast").dxToast({
-            message: "กรุณาเลือกสาย",
-            type: "error",
-            displayTime: 3000
-        })
-        $("#toast").dxToast("show");
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-        return;
-    }
+    $.ajax({
+        url: '../Report/GetOpenAccountReport',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(DataSearch),
+        success: function (data) {
 
-    var dateFrom = $("#dateFrom").datepicker({ dateFormat: 'dd-mm-yyyy' }).val();
-    if (dateFrom == '' || dateFrom == null) {
-
-        $("#toast").dxToast({
-            message: "กรุณาเลือกวันที่",
-            type: "error",
-            displayTime: 3000
-        })
-        $("#toast").dxToast("show");
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-        return;
-    }
-
-    var dateTo = $("#dateTo").datepicker({ dateFormat: 'dd-mm-yy' }).val();
-    if (dateTo == '' || dateTo == null) {
-
-        $("#toast").dxToast({
-            message: "กรุณาเลือกวันที่",
-            type: "error",
-            displayTime: 3000
-        })
-        $("#toast").dxToast("show");
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-        return;
-    }
-
-    var url = "../Report/GetOpenAccountReport?zoneId=" + $("#zoneid").val() +
-        "&datefrom=" + $('#dateFrom').val() + "&dateto=" + $('#dateTo').val();
-
-    $.get(url)
-        .done(function (data) {
-            console.log(data);
             if (data.success == true) {
 
-                Load_DataGrid(data);
-
-
-                $("#gridshow").show();
+                Load_DataGrid(data.data);
                 $("#loadIndicator").dxLoadIndicator({
                     visible: false
                 });
 
             } else {
 
+                swal("ผิดพลาด!!", data.data, "error");
                 $("#loadIndicator").dxLoadIndicator({
                     visible: false
                 });
-
-                DevExpress.ui.notify(data.errMsg);
             }
 
 
-        });
-}
+        },
+        error: function () {
+            console.log("error");
 
-function btnClear() {
-    $("#gridshow").hide();
-    $("#zoneid").val('');
-    $("#dateFrom").val('');
-    $("#dateTo").val('');
+        }
+    });
 }
 
 
 function Load_DataGrid(data) {
 
-    console.log(data);
-
     $("#gridContainer").dxDataGrid({
-        dataSource: data.data,
+        dataSource: data,
         showColumnLines: true,
         showRowLines: true,
         //  rowAlternationEnabled: true,
@@ -170,26 +259,24 @@ function Load_DataGrid(data) {
                 width: 120,
             },
 
-            //{
-            //    dataField: "Remark",
-            //    caption: "หมายเหตุ",
-            //    alignment: 'center',
-            //    width: 100 + "%",
-            //    fixed: false,
-            //    fixedPosition: 'right',
-            //    cellTemplate: function (container, options) {
-            //        $("<div>")
-            //            .append("<button  title='ระบุหมายเหตุ' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
-            //            .appendTo(container);
-            //    }
-            //},
-         
+
+
         ],
-       
+
     });
 
 }
 
 
+function ClearData() {
 
 
+    $("#gridshow").hide();
+    var formInstance = $("#form").dxForm("instance");
+    formInstance.option('formData.TypeDate', 1);
+    formInstance.option('formData.FromDate', new Date());
+    formInstance.itemOption('FromDate', 'visible', true);
+    formInstance.itemOption('ToDate', 'visible', false);
+    formInstance.itemOption('Month', 'visible', false);
+    formInstance.itemOption('Year', 'visible', false);
+}

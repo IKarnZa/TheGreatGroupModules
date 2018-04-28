@@ -29,6 +29,19 @@ namespace TheGreatGroupModules.Controllers
                 return RedirectToAction("Login", "Home");
             }
         }
+        public ActionResult PDFReceipt()
+        {
+            if (Session["iuser"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["error"] = "Session หมดอายุ , กรูณาเข้าสู่ระบบใหม่อีกครั้ง";
+                return RedirectToAction("Login", "Home");
+            }
+        }
+        
         public ActionResult DiscountReport()
         {
             if (Session["iuser"] != null)
@@ -102,19 +115,21 @@ namespace TheGreatGroupModules.Controllers
                 return RedirectToAction("Login", "Home");
             }
         }
-        // GET: /Report/GetOpenAccountReport?zoneId=1&datefrom=2018-04-01&dateto=2018-04-30
-        public JsonResult GetOpenAccountReport(int zoneId, string datefrom, string dateto)
+
+
+        // POST: /Report/GetOpenAccountReport?zoneId=1&datefrom=2018-04-01&dateto=2018-04-30
+        [HttpPost]
+        public JsonResult GetOpenAccountReport(SearchCriteria search)
         {
 
             //DateTime datetime
             try
             {
 
-                DateTime datefrom1 = DateTime.ParseExact(datefrom, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                DateTime dateto1 = DateTime.ParseExact(dateto, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            
                 List<OpenAccountReport> listData = new List<OpenAccountReport>();
                 ReportData data = new ReportData();
-                listData = data.OpenAccountReports(zoneId, datefrom1.ToString("yyyy-MM-dd"), dateto1.ToString("yyyy-MM-dd"));
+                listData = data.OpenAccountReports(search);
 
 
 
@@ -137,7 +152,9 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        public JsonResult GetDiscountReport(string StartDate_Str, string EndDate_Str, int type)
+        // Post: /Report/GetDiscountReport
+        [HttpPost]
+        public JsonResult GetDiscountReport(SearchCriteria search)
         {
 
 
@@ -145,7 +162,7 @@ namespace TheGreatGroupModules.Controllers
             {
                 ReportData rt = new ReportData();
                 IList<DailyReceiptsReport> data = new List<DailyReceiptsReport>();
-                data = rt.GetDiscountReport(StartDate_Str, EndDate_Str, type);
+                data = rt.GetDiscountReport(search);
 
                 return Json(new
                 {

@@ -6,10 +6,10 @@ using System.Web;
 
 namespace TheGreatGroupModules.Modules
 {
-    
+
 
     /*  บันทึกค่างวดรายวัน */
-    public class DailyReceiptsReport 
+    public class DailyReceiptsReport
     {
         public int ID { get; set; }
         public int CustomerID { get; set; }
@@ -18,7 +18,7 @@ namespace TheGreatGroupModules.Modules
         public string CustomerName { get; set; }
         public string CustomerNickName { get; set; }
         public DateTime ContractCreateDate { get; set; }
-        public DateTime ContractExpDate  { get; set; }
+        public DateTime ContractExpDate { get; set; }
         public decimal ContractAmountLast { get; set; }
         public decimal ContractAmount { get; set; }
         public decimal ContractDiscount { get; set; }
@@ -31,6 +31,7 @@ namespace TheGreatGroupModules.Modules
         public string PriceReceipts_Text { get { return PriceReceipts.ToString("#,##0.00"); } }
         public string Balance_Text { get { return Balance.ToString("#,##0.00"); } }
         public string TotalSales_Text { get { return TotalSales.ToString("#,##0.00"); } }
+        public string ContractDiscount_Text { get { return ContractDiscount.ToString("#,##0.00"); } }
         public int StaffID { get; set; }
         public string PhoneNumber { get; set; }
         public string MobileNumber { get; set; }
@@ -63,7 +64,8 @@ namespace TheGreatGroupModules.Modules
         }
     }
 
-    public class DailyRemark {
+    public class DailyRemark
+    {
         public int ID { get; set; }
         public int CustomerID { get; set; }
         public int ContractID { get; set; }
@@ -73,7 +75,7 @@ namespace TheGreatGroupModules.Modules
     }
     public class Transaction
     {
-    
+
         public int CustomerID { get; set; }
         public int ContractID { get; set; }
         public DateTime DateAsOf { get; set; }
@@ -88,49 +90,64 @@ namespace TheGreatGroupModules.Modules
         public string ContractPayment_Text { get; set; } // จำนวนเงินทั้งหมด
     }
 
-     public class LastTransaction
+    public class LastTransaction
     {
         public DateTime DateAsOf { get; set; }
         public string Date { get { return DateAsOf.ToString("dd/MM/yyyy"); } }
         public decimal Amount { get; set; } // งวดละ
     }
 
-     public class OpenAccountReport
-     {
+    public class OpenAccountReport
+    {
 
-         public int CustomerID { get; set; }
-         public int ContractID { get; set; }
-         public string ContractNumber { get; set; }
-         public string CustomerName { get; set; }
-         public DateTime ContractCreateDate { get; set; }
-         public string ContractCreateDate_Text { get { return ContractCreateDate.ToString("dd/MM/yyyy"); } }
-         public DateTime ContractExpDate { get; set; }
-         public string ContractExpDate_Text { get { return ContractExpDate.ToString("dd/MM/yyyy"); } }
-       
-         public decimal TotalPayment { get; set; } // ยอดสินเชื่อ
-         public decimal CostAmount { get; set; } // ราคาทุน
-         public string TotalPayment_Text { get { return TotalPayment.ToString("#,##0.00"); } } // ยอดสินเชื่อ
-         public string CostAmount_Text { get { return CostAmount.ToString("#,##0.00"); } } // ราคาทุน
+        public int CustomerID { get; set; }
+        public int ContractID { get; set; }
+        public string ContractNumber { get; set; }
+        public string CustomerName { get; set; }
+        public DateTime ContractCreateDate { get; set; }
+        public string ContractCreateDate_Text { get { return ContractCreateDate.ToString("dd/MM/yyyy"); } }
+        public DateTime ContractExpDate { get; set; }
+        public string ContractExpDate_Text { get { return ContractExpDate.ToString("dd/MM/yyyy"); } }
+
+        public decimal TotalPayment { get; set; } // ยอดสินเชื่อ
+        public decimal CostAmount { get; set; } // ราคาทุน
+        public string TotalPayment_Text { get { return TotalPayment.ToString("#,##0.00"); } } // ยอดสินเชื่อ
+        public string CostAmount_Text { get { return CostAmount.ToString("#,##0.00"); } } // ราคาทุน
 
 
-         public static List<OpenAccountReport> ToObjectList(DataTable dt)
-         {
-             return dt.AsEnumerable().Select(dr => new OpenAccountReport()
-             {
-                 CustomerID = dr.Field<int>("ContractCustomerID"),
-                 ContractID = dr.Field<int>("ContractID"),
-                 ContractNumber = dr.Field<string>("ContractNumber"),
-                 CustomerName = dr.Field<string>("CustomerName") +
-                                dr.Field<string>("CustomerMobile") +  
-                                " ที่อยู่ "+  dr.Field<string>("CustomerAddress"),
-                 ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
-                 ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
-                 TotalPayment = dr.Field<decimal>("ContractPayment"),
-                 CostAmount = dr.Field<decimal>("PriceCost"),
-              
-             }).ToList();
-         }
+        public static List<OpenAccountReport> ToObjectList(DataTable dt)
+        {
+            return dt.AsEnumerable().Select(dr => new OpenAccountReport()
+            {
+                CustomerID = dr.Field<int>("ContractCustomerID"),
+                ContractID = dr.Field<int>("ContractID"),
+                ContractNumber = dr.Field<string>("ContractNumber"),
+                CustomerName = dr.Field<string>("CustomerName") +
+                               dr.Field<string>("CustomerMobile") +
+                               " ที่อยู่ " + dr.Field<string>("CustomerAddress"),
+                ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
+                ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
+                TotalPayment = dr.Field<decimal>("ContractPayment"),
+                CostAmount = dr.Field<decimal>("PriceCost"),
 
-     }
+            }).ToList();
+        }
 
+    }
+
+
+    public class SearchCriteria
+    {
+
+        public int TypeDate { get; set; }
+        public string CustomerName { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+        public string FromDateStr { get { return FromDate.ToString("dd/MM/yyyy"); } }
+        public string ToDateStr { get { return ToDate.ToString("dd/MM/yyyy"); } }
+        public int Month { get; set; }
+        public int Year { get; set; }
+
+
+    }
 }

@@ -23,11 +23,14 @@
 
             <h3 class="m-b-0 m-t-0"> <i class="fa fa-line-chart"></i> @ViewBag.Title</h3> <small class="text-muted db"></small>
             <hr>
-
+            
             <div id="form"></div><br>
-            <a class="btn btn-info" id="myButton"> <i class="fa fa-search"></i> ค้นหา </a>
-           
-             <div id="toast"></div>
+            <div class="row">
+                <div class="col-md-2 "> </div>
+                    <button type="button" class="btn btn-info waves-effect waves-light m-r-10" id="btnSearch" onclick="SearchData()">  ค้นหา </button>
+                <button type="button" class="btn btn-default waves-effect waves-light m-r-10" id="btnClear" onclick="ClearData()">  ล้างข้อมูล </button>
+                </div>
+            <div id="toast"></div>
             <div id="loadIndicator"></div>
             <div class="demo-container" id="gridshow">
                 <div id="gridContainer"></div>

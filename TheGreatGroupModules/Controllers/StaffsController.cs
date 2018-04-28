@@ -629,7 +629,52 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        
+    //    ./staffs/DiffLastTransaction
+        public JsonResult DiffLastTransaction()
+        {
+
+            DateTime dateTransaction = new DateTime(2018, 04, 23).Date;
+            DateTime dateNow = DateTime.Now.Date;
+            double result = 0;
+            result = (dateNow - dateTransaction).TotalDays;
+
+            int dddd = Convert.ToInt32(Math.Floor(result));
+
+            if (dateNow > dateTransaction) 
+            {
+                if (dddd == 1)// วันปัจจุบันยังไม่จ่าย
+                {
+                    dddd = -1;
+
+                    return Json(new
+                    {
+                        data = dddd,
+                        success = true
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {// ไม่ได้จ่ายแล้วหลายวัน
+                    return Json(new
+                    {
+                        data = Math.Abs(dddd - 1),
+                        success = true
+                    }, JsonRequestBehavior.AllowGet);
+                
+                }
+                
+              
+            }
+            else // จ่ายแล้ว
+            {
+
+                return Json(new
+                {
+                    data = dddd,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+         
+        }
         
 
     }
