@@ -20,7 +20,7 @@ namespace TheGreatGroupModules.Report
             string date = "04/03/2018";
             listData = data.GetDailyReceiptsReport(staffID, date);
 
-            string sourceViewReport = @"\Report\ContractBookReport.rdlc";
+            string sourceViewReport = @"\Report\Receipt.rdlc";
             ReportViewer ReportViewer1 = new ReportViewer();
             ReportViewer1.LocalReport.ReportPath = Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~/")) + sourceViewReport;
             ReportDataSource rpt = new ReportDataSource("ClosedAccReport", listData);
