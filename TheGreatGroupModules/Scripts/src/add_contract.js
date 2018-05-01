@@ -639,7 +639,14 @@ function LoadDataGrid() {
     });
 }
 
+function PrintReceipt() {
 
+
+    window.open('/Report/ReceiptReport.aspx?CustomerID=' + getUrlParameter('CustomerID')
+       + "&ContractID=" + getUrlParameter('ContractID'), '_blank');
+    DevExpress.ui.notify("Export PDF Successful!");
+
+}
 function PrintCard() {
 
     var a = $("<a>").attr("href", "../Customers/ExportCard?ContractID=" + getUrlParameter('ContractID')
@@ -663,7 +670,7 @@ function PrintContract() {
 function Submit_Click() {
 
    
-
+    
 
 
 
