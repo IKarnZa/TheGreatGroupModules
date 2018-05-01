@@ -43,6 +43,68 @@ namespace TheGreatGroupModules.Modules
             }
         }
 
+
+
+        public static bool IsHolidays(DateTime date, DateTime[] holidays)
+        {
+            return holidays.Contains(date.Date);
+
+        }
+
+
+        public static DateTime[] Holidays(int activated)
+        {
+
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            string StrSql = "";
+            try
+            {
+
+
+
+                StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
+
+
+                if (activated > 0)
+                {
+                    StrSql += " and activated=1  ";
+                }
+
+
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                DateTime[] Holidays = new DateTime[dt.Rows.Count]; ;
+                if (dt.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Holidays[i] = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
+
+                    }
+
+                }
+
+                return Holidays;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+
+                ObjConn.Close();
+
+            }
+
+
+        }
+
         //Convert จำนวนเงิน  Example: Utility.numConvertChar("2321.89");
         public static string numConvertChar(string txt)
         {

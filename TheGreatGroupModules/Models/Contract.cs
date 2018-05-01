@@ -9,6 +9,7 @@ namespace TheGreatGroupModules.Models
     {
         public int ContractID { get; set; }
         public int ContractCustomerID { get; set; }
+        public string ContractCustomerName { get; set; }
         public DateTime ContractCreateDate { get; set; }
         public DateTime ContractStartDate { get; set; }
         public DateTime ContractExpDate { get; set; }
@@ -50,10 +51,31 @@ namespace TheGreatGroupModules.Models
         public string  CustomerSuretyTitle { get; set; }
         public string CustomerSuretyFirstName { get; set; }
         public string CustomerSuretyLastName { get; set; }
+
+        public string CustomerSuretyName {
+            get
+            {
+                return CustomerSuretyTitle + CustomerSuretyFirstName + " " + CustomerSuretyLastName;
+            }
+        }
+        public string CustomerSuretyAddress1
+        {
+            get
+            {
+                return CustomerSuretyAddress + " ตำบล/แขวง" + CustomerSuretySubDistrictName
+                 + " อำเภอ/เขต" + CustomerSuretyDistrictName
+                 + " จังหวัด" + CustomerSuretyProvinceName
+                 + " " + CustomerSuretyZipCode;
+            }
+        }
         public string CustomerSuretyAddress { get; set; }
         public int CustomerSuretySubDistrictId { get; set; }
+        public string CustomerSuretySubDistrictName { get; set; }
         public int CustomerSuretyDistrictId { get; set; }
+
+        public string CustomerSuretyDistrictName { get; set; }
         public int CustomerSuretyProvinceId { get; set; }
+        public string CustomerSuretyProvinceName { get; set; }
         public string CustomerSuretyZipCode { get; set; }
         public string CustomerSuretyMobile { get; set; }
         public string CustomerSuretyTelephone { get; set; }
@@ -68,6 +90,14 @@ namespace TheGreatGroupModules.Models
         public string CustomerPartnerTitle { get; set; }
         public string CustomerPartnerFirstName { get; set; }
         public string CustomerPartnerLastName { get; set; }
+        public string CustomerPartnerName
+        {
+            get
+            {
+                return CustomerPartnerTitle + CustomerPartnerFirstName + " " + CustomerPartnerLastName;
+            }
+        }
+        
         public string CustomerPartnerAddress { get; set; }
         public int CustomerPartnerSubDistrictId { get; set; }
         public int CustomerPartnerDistrictId { get; set; }

@@ -854,7 +854,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
         {
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
 
-            DateTime[] HolidaysArr = Holidays(1);
+            DateTime[] HolidaysArr = Utility.Holidays(1);
             try
             {
 
@@ -898,7 +898,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                     }
 
                 }
-
+                
 
                 cont.ContractAmountLast = Math.Round(cont.ContractPayment - (cont.ContractPeriod * cont.ContractAmount), 2);
                 cont.ContractStartDate = cont.ContractStartDate.AddDays(-1);
@@ -917,7 +917,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                             {
 
                                 cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                if (!IsHolidays(cont.ContractStartDate, HolidaysArr))
+                                if (!Utility.IsHolidays(cont.ContractStartDate, HolidaysArr))
                                     cont.ContractPeriod--;
 
                             }
@@ -929,7 +929,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                             {
 
                                 cont.ContractStartDate = cont.ContractStartDate.AddDays(1);
-                                if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !IsHolidays(cont.ContractStartDate, HolidaysArr))
+                                if (cont.ContractStartDate.DayOfWeek < DayOfWeek.Saturday && cont.ContractStartDate.DayOfWeek > DayOfWeek.Sunday && !Utility.IsHolidays(cont.ContractStartDate, HolidaysArr))
                                     cont.ContractPeriod--;
 
                             }
@@ -988,66 +988,7 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             }
 
         }
-        private bool IsHolidays(DateTime date, DateTime[] holidays)
-        {
-            return holidays.Contains(date.Date);
-
-        }
-
-
-        public DateTime[] Holidays(int activated)
-        {
-
-
-            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
-            string StrSql = "";
-            try
-            {
-
-
-
-                StrSql = @" SELECT * FROM holidays WHERE  deleted=0 ";
-
-
-                if (activated > 0)
-                {
-                    StrSql += " and activated=1  ";
-                }
-
-
-                DataTable dt = DBHelper.List(StrSql, ObjConn);
-
-                DateTime[] Holidays = new DateTime[dt.Rows.Count]; ;
-                if (dt.Rows.Count > 0)
-                {
-
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        Holidays[i] = Convert.ToDateTime(dt.Rows[i]["Date"].ToString());
-
-                    }
-
-                }
-
-                return Holidays;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-
-
-                ObjConn.Close();
-
-            }
-
-
-        }
-
+ 
 
         public List<Holidays> ListHolidays(int id)
         {
@@ -1301,6 +1242,128 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
             }
 
         }
+
+
+        public List<ReportCustomer> GetPaymentReportByCustomer(int CustomerID, int ContractID) 
+        {
+
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                List<ReportCustomer> list = new List<ReportCustomer>();
+
+                string StrSql = @" SELECT CustomerID,CustomerID,DateAsOf,DAY(DateAsOf) AS days ,
+                        MONTH(DateAsOf) AS months ,YEAR(DateAsOf) AS years,PriceReceipts FROM daily_receipts 
+                        WHERE CustomerID ={0}
+                        AND ContractID={1}
+                        AND DateAsOf>'0001-01-01'
+                        ORDER BY DateAsOf ASC";
+
+                StrSql = string.Format(StrSql, CustomerID, ContractID);
+                DataTable dt1 = DBHelper.List(StrSql, ObjConn);
+                DataTable dt = new DataTable();
+                int days = 0;
+                for (int i = 0; i < 13; i++)
+                {
+
+                    if (i == 0)
+                        dt.Columns.Add(("Day").ToString(), typeof(int));
+                    else
+                        dt.Columns.Add("Month"+(i).ToString(), typeof(int));
+
+
+                    days = DateTime.DaysInMonth(DateTime.Now.Year, 1);
+
+                    for (int j = 1; j <= days; j++)
+                    {
+                        if (i == 0)
+                        {
+                            dt.Rows.Add(j);
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+
+
+                if (dt1.Rows.Count>0) {
+
+
+                    ReportCustomer obj = new ReportCustomer();
+
+                    for (int j = 0; j< dt1.Rows.Count; j++)
+                    {
+
+                        dt.Rows[Convert.ToInt32(dt1.Rows[j]["days"].ToString()) - 1][Convert.ToInt32(dt1.Rows[j]["months"].ToString())] = Convert.ToDecimal(dt1.Rows[j]["PriceReceipts"].ToString());
+                   
+                    }
+
+                
+                }
+
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    ReportCustomer obj = new ReportCustomer();
+
+                    for (int j = 0; j < dt.Rows.Count; j++)
+                    {
+                        obj = new ReportCustomer();
+                        obj.Day = Convert.ToInt32(dt.Rows[j]["Day"].ToString());
+                        if (dt.Rows[j]["Month1"]!=DBNull.Value)
+                        obj.Month1 = Convert.ToDecimal(dt.Rows[j]["Month1"].ToString());
+                        if (dt.Rows[j]["Month2"] != DBNull.Value)
+                        obj.Month2 = Convert.ToDecimal(dt.Rows[j]["Month2"].ToString());
+                        if (dt.Rows[j]["Month3"] != DBNull.Value)
+                        obj.Month3 = Convert.ToDecimal(dt.Rows[j]["Month3"].ToString());
+                        if (dt.Rows[j]["Month4"] != DBNull.Value)
+                        obj.Month4 = Convert.ToDecimal(dt.Rows[j]["Month4"].ToString());
+                        if (dt.Rows[j]["Month5"] != DBNull.Value)
+                        obj.Month5 = Convert.ToDecimal(dt.Rows[j]["Month5"].ToString());
+                        if (dt.Rows[j]["Month6"] != DBNull.Value)
+                        obj.Month6 = Convert.ToDecimal(dt.Rows[j]["Month6"].ToString());
+                        if (dt.Rows[j]["Month7"] != DBNull.Value)
+                        obj.Month7 = Convert.ToDecimal(dt.Rows[j]["Month7"].ToString());
+                        if (dt.Rows[j]["Month8"] != DBNull.Value)
+                        obj.Month8 = Convert.ToDecimal(dt.Rows[j]["Month8"].ToString());
+                        if (dt.Rows[j]["Month9"] != DBNull.Value)
+                        obj.Month9 = Convert.ToDecimal(dt.Rows[j]["Month9"].ToString());
+                        if (dt.Rows[j]["Month10"] != DBNull.Value)
+                        obj.Month10 = Convert.ToDecimal(dt.Rows[j]["Month10"].ToString());
+                        if (dt.Rows[j]["Month11"] != DBNull.Value)
+                        obj.Month11 = Convert.ToDecimal(dt.Rows[j]["Month11"].ToString());
+                        if (dt.Rows[j]["Month12"] != DBNull.Value)
+                        obj.Month12 = Convert.ToDecimal(dt.Rows[j]["Month12"].ToString());
+                        list.Add(obj);
+
+                    }
+
+                }
+
+
+
+
+
+                return list;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally {
+
+                ObjConn.Close();
+            
+            }
+        
+        }
+
 
 
     }

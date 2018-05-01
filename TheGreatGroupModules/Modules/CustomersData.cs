@@ -587,6 +587,7 @@ namespace TheGreatGroupModules.Modules
             try
             {
                 string sqlStr = @"  SELECT  c.CustomerId,ct.ContractID,CONCAT(c.CustomerTitleName,c.CustomerFirstName,' ',c.CustomerLastName) AS CustomerName
+                ,ct.ContractStartDate,ct.ContractPeriod,ct.ContractPayEveryDay,ct.ContractSpecialholiday
                 ,ct.ContractNumber,ct.ContractExpDate,ct.ContractAmount,ct.ContractPayment,
                  (ct.ContractPayment-d.TotalPay ) AS TotalPay
                  ,(       SELECT  DATE(DateAsOf) 

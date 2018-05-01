@@ -184,5 +184,37 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
+
+        // Report/GetPaymentReportByCustomer?CustomerID=1&ContractID=1
+        [HttpGet]
+        public JsonResult GetPaymentReportByCustomer(int CustomerID, int ContractID) 
+        {
+
+
+            try
+            {
+                ContractData rt = new ContractData();
+                IList<ReportCustomer> data = new List<ReportCustomer>();
+                data = rt.GetPaymentReportByCustomer(CustomerID, ContractID);
+
+                return Json(new
+                {
+                    data = data,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
     }
 }

@@ -1,145 +1,210 @@
 ﻿
-var data = [];
+$(function () {
 
-$("#gridshow").hide();
-
-
-function SearchCustomer() {
-
-
-    $("#loadIndicator").dxLoadIndicator({
-        visible: true
-    });
-    if ($("#zoneid").val() == '') {
-
-        $("#toast").dxToast({
-            message: "กรุณาเลือกสาย",
-            type: "error",
-            displayTime: 3000
-        })
-        $("#toast").dxToast("show");
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-        return;
-    }
-
-    if ($("#CustomerID").val() == '') {
-
-        $("#toast").dxToast({
-            message: "กรุณาเลือกรายชื่อลูกค้า",
-            type: "error",
-            displayTime: 3000
-        })
-        $("#toast").dxToast("show");
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-        return;
-    }
-    
-    if ($("#ContractID").val() == '') {
-
-        $("#toast").dxToast({
-            message: "กรุณาเลือกหนังสือสัญญา",
-            type: "error",
-            displayTime: 3000
-        })
-        $("#toast").dxToast("show");
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-        return;
-    }
-    setTimeout(function () {
-        $("#loadIndicator").dxLoadIndicator({
-            visible: false
-        });
-    },2000);
-  
-
-/////////////////////////////////////////////////// Grid View ///////////////////////////////////////////////////////////////
-
-//    var url = "../ManagePayment/GetDailyReceiptsReport?staffId=" + $("#StaffID").val() +
-//        "&dateAsOf=" + $('#DateAsOf').val();
-
-//    $.get(url)
-//        .done(function (data) {
-//            console.log(data);
-//            if (data.success == true) {
-
-//                Load_DataGrid(data);
-
-
-//                $("#gridshow").show();
-//                $("#loadIndicator").dxLoadIndicator({
-//                    visible: false
-//                });
-
-//            } else {
-
-//                $("#loadIndicator").dxLoadIndicator({
-//                    visible: false
-//                });
-
-//                DevExpress.ui.notify(data.errMsg);
-//            }
-
-
-//        });
-
-
-}
-
-
-function btnClear() {
     $("#gridshow").hide();
-    $("#zoneid").val('');
-    $("#CustomerID").val('');
-    $("#ContractID").val('');
-    $("#loadIndicator").dxLoadIndicator({
-        visible: false
-    });
+    LoadFormSearch();
+
+});
+var formdata = {
+    TypeDate: 1,
+    FromDate: new Date(),
+    ToDate: new Date(),
+    Month: new Date().getMonth(),
+    Year: new Date().getFullYear(),
+    CustomerID: 1,
+};
+var TypeDate = [
+            {
+                ID: 1,
+                Name: "เลือก วัน เดือน ปี"
+
+            },
+            {
+                ID: 2,
+                Name: "เลือก เดือน ปี"
+            },
+            {
+                ID: 3,
+                Name: "เลือก ปี "
+            },
+            {
+                ID: 4,
+                Name: "เลือก ช่วงวันที่ "
+            }
+];
+
+function LoadFormSearch() {
+
+    $("#gridshow").show();
+    var formInstance = $("#form").dxForm({
+        colCount: 2,
+        formData: formdata,
+        showColonAfterLabel: true,
+        showValidationSummary: false,
+        width: 60 + "%",
+        items: [
+              
+             {
+                 dataField: "TypeDate",
+                 label: {
+                     text: "เงื่อนไขวันที่"
+                 },
+                 editorType: "dxSelectBox",
+                 editorOptions: {
+                     items: TypeDate,
+                     displayExpr: "Name",
+                     valueExpr: "ID",
+                     onValueChanged: function (e) {
+
+                         if (e.value == 1) {
+                             formInstance.itemOption('FromDate', 'visible', true);
+                             formInstance.itemOption('ToDate', 'visible', false);
+                             formInstance.itemOption('Month', 'visible', false);
+                             formInstance.itemOption('Year', 'visible', false);
+                         } else if (e.value == 2) {
+                             formInstance.itemOption('FromDate', 'visible', false);
+                             formInstance.itemOption('ToDate', 'visible', false);
+                             formInstance.itemOption('Month', 'visible', true);
+                             formInstance.itemOption('Year', 'visible', true);
+                         }
+                         else if (e.value == 3) {
+                             formInstance.itemOption('FromDate', 'visible', false);
+                             formInstance.itemOption('ToDate', 'visible', false);
+                             formInstance.itemOption('Month', 'visible', false);
+                             formInstance.itemOption('Year', 'visible', true);
+                         }
+                         else if (e.value == 4) {
+                             formInstance.itemOption('FromDate', 'visible', true);
+                             formInstance.itemOption('ToDate', 'visible', true);
+                             formInstance.itemOption('Month', 'visible', false);
+                             formInstance.itemOption('Year', 'visible', false);
+                         }
+                         //alert(e.value)
+                     }
+                 },
+             },
+              {
+                  dataField: "CustomerID",
+                  label: {
+                      text: "เลือกชื่อลูกค้า "
+                  },
+                  visible: true,
+                  editorType: "dxSelectBox",
+                  editorOptions: {
+                      items: Months,
+                      displayExpr: "Name",
+                      valueExpr: "ID",
+
+                  },
+              },
+            {
+                dataField: "FromDate",
+                editorType: "dxDateBox",
+                label: {
+                    text: "วันที่"
+                },
+                editorOptions: {
+                    width: "100%",
+                    displayFormat: "dd/MM/yyyy"
+                },
+
+            },
+            {
+                dataField: "ToDate",
+                editorType: "dxDateBox",
+                label: {
+                    text: "ถึงวันที่"
+                },
+                visible: false,
+                editorOptions: {
+                    width: "100%",
+                    displayFormat: "dd/MM/yyyy",
+
+                },
+            },
+
+        {
+            dataField: "Month",
+            label: {
+                text: "เลือกเดือน "
+            },
+            visible: false,
+            editorType: "dxSelectBox",
+            editorOptions: {
+                items: Months,
+                displayExpr: "Name",
+                valueExpr: "ID",
+
+            },
+        },
+
+        {
+            dataField: "Year",
+            label: {
+                text: "เลือกปี "
+            },
+            visible: false,
+            editorType: "dxSelectBox",
+            editorOptions: {
+                items: Years,
+
+
+            },
+        },
+        ]
+    }).dxForm("instance");
+
+
+
 }
 
-function btnSaveData() {
 
+function SearchData() {
+    $("#gridshow").show();
     $("#loadIndicator").dxLoadIndicator({
         visible: true
     });
+    var DataSearch = $("#form").dxForm("instance").option('formData');
 
-    var url = "../ManagePayment/SaveActivateDailyReceipts?staffId=" + $("#StaffID").val() +
-        "&dateAsOf=" + $('#DateAsOf').val();
-
-    $.get(url)
-        .done(function (data) {
+    $.ajax({
+        url: '../Report/GetPaymentReportByCustomer?CustomerID=1&ContractID=1',
+        type: 'GET',
+        contentType: 'application/json',
+       // data: JSON.stringify(DataSearch),
+        success: function (data) {
 
             if (data.success == true) {
-                SearchCustomer();
-                DevExpress.ui.notify("บันทึกการตรวจสอบสำเร็จ !!!");
+
+                Load_DataGrid(data.data);
                 $("#loadIndicator").dxLoadIndicator({
                     visible: false
                 });
 
             } else {
-                DevExpress.ui.notify(data.errMsg);
+
+                swal("ผิดพลาด!!", data.data, "error");
                 $("#loadIndicator").dxLoadIndicator({
                     visible: false
                 });
-
             }
 
-        });
+
+        },
+        error: function () {
+            console.log("error");
+
+        }
+    });
 }
+
 
 function Load_DataGrid(data) {
 
-
     $("#gridContainer").dxDataGrid({
-        dataSource: data.data,
+        dataSource: data,
         showColumnLines: true,
         showRowLines: true,
-        //  rowAlternationEnabled: true,
+        rowAlternationEnabled: true,
         showBorders: true,
         selection: {
             mode: "single"
@@ -155,125 +220,113 @@ function Load_DataGrid(data) {
         },
         export: {
             enabled: true,
-            fileName: "File",
+            fileName: "รายงานส่วนลด",
         },
-
+        paging: {
+            enabled: false,
+        },
+        pager: {
+            enabled: false,
+        },
         allowColumnReordering: true,
         allowColumnResizing: true,
         columnAutoWidth: true,
-        height: 500,
+        height: 530,
         columnFixing: {
             enabled: true
         },
         columns: [
+
             {
-                dataField: "ContractNumber",
-                caption: "เลขที่สัญญา",
-                width: 120 + "%",
-                alignment: 'left',
-                allowFiltering: false,
-                fixed: false,
-                fixedPosition: 'left',
-            },
-            {
-                dataField: "CustomerName",
-                caption: "ชื่อ-นามสกุล",
-                width: 230 + "%",
-                fixed: false,
-                fixedPosition: 'left',
-            },
-            {
-                dataField: "ContractCreateDate_Text",
-                caption: "วันที่ทำสัญญา",
+                dataField: "Day",
+                caption: "วันที่",
                 alignment: 'center',
-                width: 120 + "%",
 
             },
             {
-                dataField: "ContractExpDate_Text",
-                caption: "วันที่หมดสัญญา",
-                width: 120,
-                alignment: 'right',
-            },
-
-            {
-                dataField: "ContractAmount_Text",
-                caption: "งวดละ",
-                alignment: 'right',
-                width: 100 + "%",
-            },
-            {
-                dataField: "PriceReceipts_Text",
-                caption: "ยอดที่ชำระ",
-                alignment: 'right',
-                width: 100 + "%",
-                fixed: false,
-                fixedPosition: 'right',
-
-            },
-            {
-                dataField: "Balance_Text",
-                caption: "ยอดคงเหลือ",
-                width: 120 + "%",
-                alignment: 'right',
-                fixed: false,
-                fixedPosition: 'right',
-            },
-            //{
-            //    dataField: "Remark",
-            //    caption: "หมายเหตุ",
-            //    alignment: 'center',
-            //    width: 100 + "%",
-            //    fixed: false,
-            //    fixedPosition: 'right',
-            //    cellTemplate: function (container, options) {
-            //        $("<div>")
-            //            .append("<button  title='ระบุหมายเหตุ' class='btn btn-info btn-circle btn-sm' ><i class='fa fa-pencil'></i></a>")
-            //            .appendTo(container);
-            //    }
-            //},
-            {
-                dataField: "Status",
-                caption: "สถานะ",
+                dataField: "Month1_Str",
+                caption: "มกราคม",
                 alignment: 'center',
-                width: 100 + "%",
-                fixed: true,
-                fixedPosition: 'right'
-            },
 
+            },
+                 {
+                     dataField: "Month2_Str",
+                     caption: "กุมภาพันธ์",
+                     alignment: 'right',
+                 },
+                 {
+                     dataField: "Month3_Str",
+                     caption: "มีนาคม",
+                     alignment: 'right',
+                 },
+                  {
+                      dataField: "Month4_Str",
+                      caption: "เมษายน",
+                      alignment: 'right',
+                  },
+
+                  {
+                          dataField: "Month5_Str",
+                          caption: "พฤษภาคม",
+                          alignment: 'center',
+                  },
+                  {
+                      dataField: "Month6_Str",
+                      caption: "มิถุนายน",
+                      alignment: 'center',
+                  },
+
+                       {
+                           dataField: "Month7_Str",
+                           caption: "กรกฎาคม",
+                           alignment: 'center',
+                       },
+
+                            {
+                                dataField: "Month8_Str",
+                                caption: "สิงหาคม",
+                                alignment: 'center',
+                            },
+
+                       {
+                           dataField: "Month9_Str",
+                           caption: "กันยายน",
+                           alignment: 'center',
+                       },
+
+                        {
+                            dataField: "Month7_Str",
+                            caption: "ตุลาคม",
+                            alignment: 'center',
+                        },
+
+                            {
+                                dataField: "Month8_Str",
+                                caption: "พฤศจิกายน",
+                                alignment: 'center',
+                            },
+
+                       {
+                           dataField: "Month9_Str",
+                           caption: "ธันวาคม",
+                           alignment: 'center',
+                       },
         ],
-        summary: {
-            totalItems: [
-                { column: 'CustomerName', displayFormat: 'จำนวนลูกค้าทั้งหมด ' + data.countData + ' คน' },
-                { column: 'ContractExpDate_Text', displayFormat: 'ยอดรวม' },
-                { column: 'PriceReceipts_Text', displayFormat: data.SumData },
-                { column: 'ContractAmount_Text', displayFormat: data.SumDataContractAmount }
-            ],
-        },
-        onToolbarPreparing: function (e) {
-            e.toolbarOptions.items.push({
-                location: "before",
-                widget: "dxButton",
-                options: {
-                    icon: "export",
-                    //text: "",
-                    onInitialized: function (e) {
-                        clearFilterButton = e.component;
-                    },
-                    onClick: function (e) {
-                        window.open('/Report/DailyReport.aspx?staffID=' + $("#StaffID").val() +
-                            "&date=" + $('#DateAsOf').val(), '_blank');
-                        //window.location.href = '/Report/ReportPage1.aspx?staffID=' + $("#StaffID").val() +
-                        //"&date=" + $('#DateAsOf').val();
-                        DevExpress.ui.notify("Export PDF Successful!");
-                    }
-                }
-            })
-        }
+
     });
 
 }
 
 
+function ClearData() {
 
 
+    $("#gridshow").hide();
+    var formInstance = $("#form").dxForm("instance");
+    formInstance.option('formData.TypeDate', 1);
+    formInstance.option('formData.FromDate', new Date());
+    formInstance.itemOption('FromDate', 'visible', true);
+    formInstance.itemOption('ToDate', 'visible', false);
+    formInstance.itemOption('Month', 'visible', false);
+    formInstance.itemOption('Year', 'visible', false);
+}

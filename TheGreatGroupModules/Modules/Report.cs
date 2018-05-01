@@ -150,4 +150,40 @@ namespace TheGreatGroupModules.Modules
 
 
     }
+
+
+
+    public class ReportCustomer {
+
+            public int Day { get; set; }
+            public decimal Month1 { get; set; }
+            public decimal Month2 { get; set; }
+            public decimal Month3 { get; set; }
+            public decimal Month4 { get; set; }
+            public decimal Month5 { get; set; }
+            public decimal Month6 { get; set; }
+            public decimal Month7 { get; set; }
+            public decimal Month8 { get; set; }
+            public decimal Month9 { get; set; }
+            public decimal Month10 { get; set; }
+            public decimal Month11 { get; set; }
+            public decimal Month12 { get; set; }
+
+            public string Month1_Str { get { return Month1.ToString("#,##0.00"); } } 
+            public string Month2_Str { get { return Month2.ToString("#,##0.00"); } } 
+            public string Month3_Str { get { return Month3.ToString("#,##0.00"); } } 
+            public string Month4_Str { get { return Month4.ToString("#,##0.00"); } } 
+            public string Month5_Str { get { return Month5.ToString("#,##0.00"); } } 
+            public string Month6_Str { get { return Month6.ToString("#,##0.00"); } } 
+            public string Month7_Str { get { return Month7.ToString("#,##0.00"); } } 
+            public string Month8_Str { get { return Month8.ToString("#,##0.00"); } } 
+            public string Month9_Str { get { return Month9.ToString("#,##0.00"); } } 
+            public string Month10_Str { get { return Month10.ToString("#,##0.00"); } } 
+            public string Month11_Str { get { return Month11.ToString("#,##0.00"); } } 
+            public string Month12_Str { get { return Month12.ToString("#,##0.00"); } } 
+
+    
+    
+    
+    }
 }
