@@ -66,11 +66,16 @@ namespace TheGreatGroupModules.Report
             param[11] = new ReportParameter("paramContractSurety2", contract.CustomerSuretyData2!= null ?contract.CustomerSuretyData2.CustomerSuretyName:"");
             param[12] = new ReportParameter("paramContractPartner", contract.CustomerPartnerData != null ? contract.CustomerPartnerData.CustomerPartnerName : "");
             param[13] = new ReportParameter("paramContractCreateDate", contract.ContractCreateDate.ToString("d  MMMM  yyyy", CultureInfo.GetCultureInfo("th-TH")));
-            param[14] = new ReportParameter("paramContractSurety", (contract.CustomerSuretyData1 != null ? contract.CustomerSuretyData1.CustomerSuretyName : "") + (contract.CustomerSuretyData2 != null && !string.IsNullOrEmpty(contract.CustomerSuretyData2.CustomerSuretyName) ? " และ " + contract.CustomerSuretyData2.CustomerSuretyName : ""));
-            param[15] = new ReportParameter("paramContractNumber", contract.ContractNumber);
+            if (contract.CustomerSuretyData2 != null)
+            {
+                param[14] = new ReportParameter("paramContractSurety", (contract.CustomerSuretyData1 != null ? contract.CustomerSuretyData1.CustomerSuretyName : "") + ((string.IsNullOrEmpty(contract.CustomerSuretyData2.CustomerSuretyName.TrimEnd())) ? "" : " และ " + contract.CustomerSuretyData2.CustomerSuretyName));
+            }
+            else {
+                param[14] = new ReportParameter("paramContractSurety", contract.CustomerSuretyData1 != null ? contract.CustomerSuretyData1.CustomerSuretyName : "");
+            }
+           param[15] = new ReportParameter("paramContractNumber", contract.ContractNumber);
             param[16] = new ReportParameter("paramContractSuretyIDCard", contract.CustomerSuretyData1 != null ? Convert.ToInt64(contract.CustomerSuretyData1.CustomerSuretyIdCard).ToString("#-####-#####-##-#") : "");
             param[17] = new ReportParameter("paramContractSuretyAddress1", contract.CustomerSuretyData1 != null ? contract.CustomerSuretyData1.CustomerSuretyAddress1 : "");
-            
 
 
             string sourceViewReport = @"\Report\ContractBookReport.rdlc";

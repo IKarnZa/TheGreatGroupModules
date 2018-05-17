@@ -857,7 +857,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>A0000001</Value>
+                <Value>=Parameters!paramRef.Value</Value>
                 <Style>
                   <FontFamily>Angsana New</FontFamily>
                   <FontSize>14pt</FontSize>
@@ -2678,6 +2678,11 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramTotalPriceThai">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramRef">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>

@@ -54,7 +54,48 @@ namespace TheGreatGroupModules.Modules
                 ObjConn.Close();
             }
         }
+        public IList<Customers> GetListCustomers(int id)
+        {
 
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+
+            try
+            {
+
+                string StrSql = @" SELECT c.* , ct.ContractNumber,ct.ContractID,
+                                   s.SubDistrictName as CustomerSubDistrict,
+                                   d.DistrictName as CustomerDistrict,
+                                   p.ProvinceName as CustomerProvince
+                                   FROM contract ct 
+                                  LEFT OUTER JOIN customer c ON ct.ContractCustomerID =  c.CustomerID
+                                  LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
+                                  LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
+                                  LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
+                                  where c.Deleted=0  and ct.Deleted=0 ";
+
+                if (id > 0) { 
+                
+                   StrSql +=  @" and c.CustomerID="+id ;
+                }
+                DataTable dt = DBHelper.List(StrSql, ObjConn);
+
+                IList<Customers> listData = new List<Customers>();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    listData = Customers.ToObjectList3(dt);
+                }
+
+                return listData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+        }
 
         public IList<Customers> GetCustomerByZone(int zoneId)
         {
@@ -138,6 +179,9 @@ namespace TheGreatGroupModules.Modules
 
                     StrSql += @" and c.CustomerIdCard like '%" + item.CustomerIdCard + "%' ";
                 }
+
+                StrSql += " Order By c.InsertDate,c.UpdateDate DESC";
+
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
 
                 IList<Customers> listData = new List<Customers>();
@@ -210,6 +254,8 @@ namespace TheGreatGroupModules.Modules
             CustomerEmergencyTelephone,
              SaleID,
             CustomerPartner,
+            InsertDate,
+            InsertBy,
              Activated,
              Deleted)values("
              + item.CustomerID+ ","
@@ -256,6 +302,8 @@ namespace TheGreatGroupModules.Modules
            + Utility.ReplaceString(item.CustomerEmergencyTelephone) + ","
            + item.SaleID + ","
            + item.CustomerPartner + ","
+           + Utility.FormateDateTime(DateTime.Now) + ","
+           + item.CustomerInsertBy + ","
            + 1 + ","
            +  0+ ")";
 
@@ -319,7 +367,9 @@ namespace TheGreatGroupModules.Modules
             CustomerEmergencyRelation={38},
             CustomerEmergencyMobile={39},
             CustomerEmergencyTelephone={40},
-            SaleID={41}
+            SaleID={41},
+            UpdateBy={42},
+            UpdateDate={43}
             where  CustomerId={0} ";
               StrSql= String.Format(StrSql,
               item.CustomerID  ,
@@ -363,7 +413,9 @@ namespace TheGreatGroupModules.Modules
             Utility.ReplaceString(item.CustomerEmergencyRelation),
             Utility.ReplaceString(item.CustomerEmergencyMobile),//40
             Utility.ReplaceString(item.CustomerEmergencyTelephone),
-            item.SaleID
+            item.SaleID,
+            item.CustomerUpdateBy,
+            Utility.FormateDateTime(DateTime.Now)
          );
 
                 DBHelper.Execute(StrSql, ObjConn);
@@ -593,19 +645,19 @@ namespace TheGreatGroupModules.Modules
                  ,(       SELECT  DATE(DateAsOf) 
                  FROM  daily_receipts  WHERE ContractID=ct.ContractID AND CustomerID=c.CustomerId
                  ORDER BY DateAsOf DESC LIMIT 1) AS lastDate
-                 
                  FROM customer c 
                 LEFT JOIN contract ct ON c.CustomerId=ct.contractCustomerID
                  LEFT JOIN (SELECT SUM(PriceReceipts)AS TotalPay , ContractID ,CustomerID  
                  FROM  daily_receipts
                  WHERE   Deleted=0
-                GROUP BY   ContractID ,CustomerID )d ON 
+                GROUP BY   ContractID ,CustomerID ) d ON 
                 d.ContractID=ct.ContractID AND d.CustomerID=ct.ContractCustomerID 
-                WHERE c.SaleID={0} AND ct.ContractID IS NOT NULL
-                 AND ct.contractstatus=1 ;
+                WHERE  ct.ContractID IS NOT NULL
+                 AND ct.contractstatus=1  
                  ";
+                
+                sqlStr += "AND c.SaleID=" + StaffID;
 
-                sqlStr = String.Format(sqlStr,StaffID);
 
               DataTable dt=   DBHelper.List(sqlStr, ObjConn);
               if (dt != null && dt.Rows.Count > 0)
@@ -661,15 +713,33 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string strSQL = "select * FROM staff Where Staffcode={0} and staffpassword={1} and Deleted=0 and Activated=1 ";
+               
+
+                string strSQL = @"SELECT * FROM staff s 
+                                WHERE s.Staffcode={0}
+                                AND s.staffpassword={1} 
+                                AND s.Deleted=0 
+                                AND s.Activated=1  ";
                 strSQL = string.Format(strSQL, Utility.ReplaceString(login.StaffCode), Utility.ReplaceString(Utility.HashPassword(login.StaffPassword)));
                 DataTable dt = DBHelper.List(strSQL, ObjConn);
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    login.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
-                    login.StaffName = dt.Rows[0]["StaffFirstName"].ToString();
-                    login.ImageUrl = dt.Rows[0]["StaffImagePath"].ToString();
-                    login.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+                    string strSQL1 = @"   SELECT * FROM staffrolepermission  sp
+                                    WHERE sp.StaffPermissionID=22
+                                    AND staffRoleID=" + Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+
+                    DataTable dt1 = DBHelper.List(strSQL1, ObjConn);
+                    if (dt1.Rows.Count > 0)
+                    {
+                        login.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
+                        login.StaffName = dt.Rows[0]["StaffFirstName"].ToString();
+                        login.ImageUrl = dt.Rows[0]["StaffImagePath"].ToString();
+                        login.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+                    }
+                    else {
+                        throw new Exception("รหัสพนักงาน หรือ รหัสผ่าน ไม่สิทธิ์เข้าใช้งานแอพพลิเคชั่นนี้ ,กรุณาตรวจสอบ");
+                    }
+                 
                 }
                 else
                 {

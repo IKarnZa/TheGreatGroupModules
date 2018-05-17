@@ -23,7 +23,8 @@ namespace TheGreatGroupModules.Modules
 
                 string StrSql = @"  SELECT zoneid ,zonecode,CONCAT(zonecode,'-',zonename) AS zonename 
                                     FROM zone
-                                    WHERE Activated=1 AND Deleted=0 ";
+                                    WHERE Activated=1 AND Deleted=0 
+                                    Order By zonecode ASC";
 
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
@@ -49,7 +50,8 @@ namespace TheGreatGroupModules.Modules
 
                 string StrSql = @"  SELECT zoneid ,zonecode,zonename
                                     FROM zone
-                                    WHERE Activated=1 AND Deleted=0 ";
+                                    WHERE Activated=1 AND Deleted=0 
+                                    Order By zonecode ASC ";
 
 
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
@@ -287,14 +289,10 @@ namespace TheGreatGroupModules.Modules
             List<Staffs> data = GetStaff(staff.StaffID);
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             string NEWPOSSWORD = staff.StaffPassword;
-            staff.StaffPassword = Utility.HashPassword(staff.StaffPassword);
+          
             try
             {
-                if (data[0].StaffPassword == NEWPOSSWORD)
-                {
-
-
-                }
+                
                 string strSql = @"Update staff Set
              StaffRoleID={1},
              StaffCode={2},
@@ -311,11 +309,10 @@ namespace TheGreatGroupModules.Modules
              StaffMobile={13},
              StaffTelephone={14},
              UpdateBy={15},
-             UpdateDate={16}
-";
+             UpdateDate={16}";
 
-
-                if (data[0].StaffPassword == staff.StaffPassword)
+                 // ไม่เปลี่ยน password
+                if (data[0].StaffPassword == Utility.HashPassword(staff.StaffPassword))
                 {
                     strSql += "  Where  StaffID = {0} ";
 
@@ -341,6 +338,7 @@ namespace TheGreatGroupModules.Modules
                 }
                 else
                 {
+                    staff.StaffPassword = Utility.HashPassword(staff.StaffPassword);
                     strSql += "  ,StaffPassword={17}";
                     strSql += "  Where   StaffID = {0} ";
 
@@ -394,6 +392,43 @@ namespace TheGreatGroupModules.Modules
 
                 strSql = string.Format(strSql, StaffID,UpdateBy,Utility.FormateDateTime(DateTime.Now));
                 DBHelper.Execute(strSql, ObjConn);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+        }
+
+        public void ActivatedStaffs(int StaffID, int UpdateBy)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+           
+            try
+            {
+                DataTable dt = DBHelper.List("select Activated From staff Where StaffID=" + StaffID, ObjConn);
+                string strSql =@"Update staff  set Activated={3},UpdateBy={1},UpdateDate={2}
+                                where  StaffID={0}";
+
+                if (Convert.ToInt32(dt.Rows[0]["Activated"].ToString()) == 1)
+                {
+                    strSql = string.Format(strSql, StaffID, UpdateBy, Utility.FormateDateTime(DateTime.Now), 0);
+
+                    DBHelper.Execute(strSql, ObjConn);
+                }
+                else if (Convert.ToInt32(dt.Rows[0]["Activated"].ToString()) == 0)
+                {
+
+                    strSql = string.Format(strSql, StaffID, UpdateBy, Utility.FormateDateTime(DateTime.Now), 1);
+
+                    DBHelper.Execute(strSql, ObjConn);
+
+                }
+
             }
             catch (Exception ex)
             {

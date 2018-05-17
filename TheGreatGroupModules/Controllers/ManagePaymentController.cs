@@ -52,7 +52,7 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        // GET: /ManagePayment/DailyReceiptsReport?staffId=1?dateAsOf=2018-04-08
+        // GET: /ManagePayment/DailyReceiptsReport?staffId=1&dateAsOf=2018-04-08
         public JsonResult GetDailyReceiptsReport(int staffId, string dateAsOf)
         {
 

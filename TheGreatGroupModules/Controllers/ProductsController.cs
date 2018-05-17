@@ -95,7 +95,7 @@ namespace TheGreatGroupModules.Controllers
                 List<ProductSelect> listProductsSelect1 = new List<ProductSelect>();
                 listProductsSelect1 = dataPro.ProductContractSummary(ref ContractPayment, listProductsSelect);
 
-               
+          
                
                 // update จำนวนเงินสินค้าทั้งหมด 
                 cd.UpdateContractPayment(ContractID, CustomerID, ContractPayment);

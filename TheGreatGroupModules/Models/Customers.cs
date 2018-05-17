@@ -64,9 +64,11 @@ namespace TheGreatGroupModules.Models
              public string CustomerEmergencyMobile{ get; set; }
              public string CustomerEmergencyTelephone { get; set; }
            public int    SaleID{ get; set; }
+           public int ContractID { get; set; }
         public int Activated { get; set; }
         public int Deleted { get; set; }
-
+        public int CustomerInsertBy { get; set; }
+        public int CustomerUpdateBy { get; set; }
         public static IList<Customers> ToObjectList(DataTable dt)
         {
             return dt.AsEnumerable().Select(dr => new Customers()
@@ -136,6 +138,30 @@ namespace TheGreatGroupModules.Models
                  + " อำเภอ/เขต" + dr.Field<string>("CustomerDistrict")
                  + " จังหวัด" + dr.Field<string>("CustomerProvince")
                  +" " + dr.Field<string>("CustomerZipCode"),
+                CustomerEmail = dr.Field<string>("CustomerEmail"),
+                CustomerMobile = dr.Field<string>("CustomerMobile"),
+                CustomerTelephone = dr.Field<string>("CustomerTelephone"),
+                CustomerIdCard = dr.Field<string>("CustomerIdCard"),
+                CustomerCareer = dr.Field<string>("CustomerCareer"),
+            }).ToList();
+        }
+
+        public static IList<Customers> ToObjectList3(DataTable dt)
+        {
+            return dt.AsEnumerable().Select(dr => new Customers()
+            {
+                ContractID = dr.Field<int>("ContractID"),
+                CustomerID = dr.Field<int>("CustomerId"),
+                CustomerTitleName = dr.Field<string>("CustomerTitleName"),
+                CustomerCode = dr.Field<string>("CustomerCode"),
+                CustomerNickName =dr.Field<string>("CustomerNickName"),
+                CustomerFirstName = dr.Field<string>("CustomerFirstname"),
+                CustomerLastName = dr.Field<string>("CustomerLastname") + " (" + dr.Field<string>("ContractNumber") + ") ",
+                CustomerAddress1 = dr.Field<string>("CustomerAddress1")
+                 + " ตำบล/แขวง" + dr.Field<string>("CustomerSubDistrict")
+                 + " อำเภอ/เขต" + dr.Field<string>("CustomerDistrict")
+                 + " จังหวัด" + dr.Field<string>("CustomerProvince")
+                 + " " + dr.Field<string>("CustomerZipCode"),
                 CustomerEmail = dr.Field<string>("CustomerEmail"),
                 CustomerMobile = dr.Field<string>("CustomerMobile"),
                 CustomerTelephone = dr.Field<string>("CustomerTelephone"),

@@ -100,6 +100,9 @@ namespace TheGreatGroupModules.Modules
                             con.CustomerSurety2 = Convert.ToInt32(dt.Rows[i]["ContractSuretyID2"].ToString());
                         if (dt.Rows[i]["ContractPartner"] != DBNull.Value)
                             con.CustomerPartner = Convert.ToInt32(dt.Rows[i]["ContractPartner"].ToString());
+                        if (dt.Rows[i]["IsContractAmountLast"] != DBNull.Value)
+                            con.IsContractAmountLast = Convert.ToInt32(dt.Rows[i]["IsContractAmountLast"].ToString());
+
                         listData.Add(con);
                     }
 
@@ -253,23 +256,24 @@ namespace TheGreatGroupModules.Modules
             try
             {
 
-                string StrSql = @" select * FROM Contract 
-                                    where 0=0
-                                    and Activated=1
-                                   
+                string StrSql = @" SELECT ct.* ,CONCAT(c.CustomerTitleName,c.CustomerFirstName,' ',c.CustomerLastName) AS CustomerName ,c.CustomerIdCard
+                                    FROM Contract ct
+                                    LEFT JOIN customer c ON ct.ContractCustomerID=c.CustomerId 
+                                    WHERE 0=0
+                                    AND ct.Activated=1 
                                 ";
                 if (CustomerID > 0)
                 {
 
-                    StrSql += "  and ContractCustomerID=" + CustomerID;
+                    StrSql += "  and ct.ContractCustomerID=" + CustomerID;
                 }
                 if (ContractID > 0)
                 {
 
-                    StrSql += "  and ContractID=" + ContractID;
+                    StrSql += "  and ct.ContractID=" + ContractID;
                 }
 
-                StrSql += @" Order by ContractCreateDate ASC";
+                StrSql += @" Order by ct.ContractCreateDate ASC";
                 DataTable dt = DBHelper.List(StrSql, ObjConn);
                 IList<Contract> listData = new List<Contract>();
                 if (dt != null && dt.Rows.Count > 0)
@@ -278,7 +282,8 @@ namespace TheGreatGroupModules.Modules
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         con = new Contract();
-
+                        if (dt.Rows[i]["CustomerName"] != DBNull.Value)
+                            con.ContractCustomerName = dt.Rows[i]["CustomerName"].ToString() + " ( " + dt.Rows[i]["CustomerIdCard"].ToString() + " )";
                         if (dt.Rows[i]["ContractID"] != DBNull.Value)
                             con.ContractID = Convert.ToInt32(dt.Rows[i]["ContractID"].ToString());
                         if (dt.Rows[i]["ContractCustomerID"] != DBNull.Value)
@@ -309,7 +314,7 @@ namespace TheGreatGroupModules.Modules
                             con.ContractInsertBy = Convert.ToInt32(dt.Rows[i]["ContractInsertBy"].ToString());
                         if (dt.Rows[i]["ContractInsertDate"] != DBNull.Value)
                             con.ContractInsertDate = Convert.ToDateTime(dt.Rows[i]["ContractInsertDate"].ToString());
-
+                      
                         if (dt.Rows[i]["ContractType"] != DBNull.Value)
                             con.ContractType = dt.Rows[i]["ContractType"].ToString();
                         if (dt.Rows[i]["ContractStatus"] != DBNull.Value)
@@ -347,7 +352,42 @@ namespace TheGreatGroupModules.Modules
         }
 
 
+        public void ActivatedContract(int ContractID, int UpdateBy)
+        {
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
 
+            try
+            {
+                DataTable dt = DBHelper.List("select Activated From Contract Where ContractID=" + ContractID, ObjConn);
+                string strSql = @"Update Contract  set Activated={3},ContractUpdateBy={1},ContractUpdateDate={2}
+                                where  ContractID={0}";
+
+                if (Convert.ToInt32(dt.Rows[0]["Activated"].ToString()) == 1)
+                {
+                    strSql = string.Format(strSql, ContractID, UpdateBy, Utility.FormateDateTime(DateTime.Now), 0);
+
+                    DBHelper.Execute(strSql, ObjConn);
+                }
+                else if (Convert.ToInt32(dt.Rows[0]["Activated"].ToString()) == 0)
+                {
+
+                    strSql = string.Format(strSql, ContractID, UpdateBy, Utility.FormateDateTime(DateTime.Now), 1);
+
+                    DBHelper.Execute(strSql, ObjConn);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                ObjConn.Close();
+            }
+
+        }
 
 
         public int Add_NewContract(Contract item)
@@ -898,9 +938,9 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                     }
 
                 }
-                
 
-                cont.ContractAmountLast = Math.Round(cont.ContractPayment - (cont.ContractPeriod * cont.ContractAmount), 2);
+                cont.ContractPeriod = Convert.ToInt32(cont.ContractPayment/cont.ContractAmount);
+                cont.ContractAmountLast = Convert.ToDecimal(cont.ContractPayment % cont.ContractAmount);
                 cont.ContractStartDate = cont.ContractStartDate.AddDays(-1);
 
                 if (cont.ContractPeriod > 0)
@@ -1244,8 +1284,24 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
         }
 
 
-        public List<ReportCustomer> GetPaymentReportByCustomer(int CustomerID, int ContractID) 
+        public List<ReportCustomer> GetPaymentReportByCustomer(SearchCriteria search) 
         {
+            DateTime StartDate = DateTime.ParseExact(search.FromDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime EndDate = DateTime.ParseExact(search.ToDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            if (search.TypeDate == 2)
+            {
+                StartDate = new DateTime(search.Year, search.Month, 1);
+
+                EndDate = new DateTime(search.Year, search.Month, DateTime.DaysInMonth(search.Year, search.Month));
+            }
+            else if (search.TypeDate == 3)
+            {
+                StartDate = new DateTime(search.Year, 1, 1);
+
+                EndDate = new DateTime(search.Year, 12, 31);
+
+            }
+
 
             MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
             try
@@ -1253,13 +1309,18 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
                 List<ReportCustomer> list = new List<ReportCustomer>();
 
                 string StrSql = @" SELECT CustomerID,CustomerID,DateAsOf,DAY(DateAsOf) AS days ,
-                        MONTH(DateAsOf) AS months ,YEAR(DateAsOf) AS years,PriceReceipts FROM daily_receipts 
-                        WHERE CustomerID ={0}
-                        AND ContractID={1}
-                        AND DateAsOf>'0001-01-01'
-                        ORDER BY DateAsOf ASC";
+                        MONTH(DateAsOf) AS months ,YEAR(DateAsOf) AS years,PriceReceipts 
+                        FROM daily_receipts 
+                        WHERE  ContractID=" +search.ContractID+" AND DateAsOf > '0001-01-01' ";
 
-                StrSql = string.Format(StrSql, CustomerID, ContractID);
+                if (search.TypeDate == 1)
+                    StrSql += " AND Date(DateAsOf) =" + Utility.FormateDate(search.FromDate);
+                else
+                    StrSql += " AND Date(DateAsOf) Between " + Utility.FormateDate(StartDate) + " and " + Utility.FormateDate(EndDate);
+
+
+                      StrSql+=  " ORDER BY DateAsOf ASC";
+
                 DataTable dt1 = DBHelper.List(StrSql, ObjConn);
                 DataTable dt = new DataTable();
                 int days = 0;
@@ -1364,7 +1425,133 @@ VALUES ({0},{1},{2}, {3}, {4},{5}, {6},{7}, {8}, {9},{10},{11});";
         
         }
 
+        public List<ReportCustomerOnCard> GetPayment_OnCard(int ContractID)
+        {
+      
 
+            MySqlConnection ObjConn = DBHelper.ConnectDb(ref errMsg);
+            try
+            {
+                List<ReportCustomerOnCard> list = new List<ReportCustomerOnCard>();
+
+                string StrSql = @" SELECT ContractCustomerID,ContractID,ContractStartDate,
+                        DAY(ContractStartDate) AS days ,
+                        MONTH(ContractStartDate) AS months ,
+                        YEAR(ContractStartDate) AS years,
+                        DAY(ContractExpDate) AS Expdays ,
+                        MONTH(ContractExpDate) AS Expmonths ,
+                        YEAR(ContractExpDate) AS Expyears,
+                        ContractExpDate 
+                        FROM contract 
+                        WHERE  ContractID=" + ContractID;
+
+                StrSql += " ORDER BY ContractStartDate ASC";
+
+                DataTable dt1 = DBHelper.List(StrSql, ObjConn);
+                DataTable dt = new DataTable();
+                int days = 0;
+                for (int i = 0; i < 13; i++)
+                {
+
+                    if (i == 0)
+                        dt.Columns.Add(("Day").ToString(), typeof(int));
+                    else
+                        dt.Columns.Add("Month" + (i).ToString(), typeof(int));
+
+
+                    days = DateTime.DaysInMonth(DateTime.Now.Year, 1);
+
+                    for (int j = 1; j <= days; j++)
+                    {
+                        if (i == 0)
+                        {
+                            dt.Rows.Add(j);
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+
+
+                if (dt1.Rows.Count > 0)
+                {
+
+
+                    ReportCustomerOnCard obj = new ReportCustomerOnCard();
+
+                    for (int j = 0; j < dt1.Rows.Count; j++)
+                    {
+
+                        dt.Rows[Convert.ToInt32(dt1.Rows[j]["days"].ToString()) - 1][Convert.ToInt32(dt1.Rows[j]["months"].ToString())] = "Start";
+                        dt.Rows[Convert.ToInt32(dt1.Rows[j]["Expdays"].ToString()) - 1][Convert.ToInt32(dt1.Rows[j]["Expmonths"].ToString())] = "End";
+                    }
+
+
+                }
+
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    ReportCustomerOnCard obj = new ReportCustomerOnCard();
+
+                    for (int j = 0; j < dt.Rows.Count; j++)
+                    {
+                        obj = new ReportCustomerOnCard();
+                        obj.Day = Convert.ToInt32(dt.Rows[j]["Day"].ToString());
+                        if (dt.Rows[j]["Month1"] != DBNull.Value)
+                            obj.Month1 = dt.Rows[j]["Month1"].ToString();
+                        if (dt.Rows[j]["Month2"] != DBNull.Value)
+                            obj.Month2 = dt.Rows[j]["Month2"].ToString();
+                        if (dt.Rows[j]["Month3"] != DBNull.Value)
+                            obj.Month3 = dt.Rows[j]["Month3"].ToString();
+                        if (dt.Rows[j]["Month4"] != DBNull.Value)
+                            obj.Month4 = dt.Rows[j]["Month4"].ToString();
+                        if (dt.Rows[j]["Month5"] != DBNull.Value)
+                            obj.Month5 = dt.Rows[j]["Month5"].ToString();
+                        if (dt.Rows[j]["Month6"] != DBNull.Value)
+                            obj.Month6 = dt.Rows[j]["Month6"].ToString();
+                        if (dt.Rows[j]["Month7"] != DBNull.Value)
+                            obj.Month7 =dt.Rows[j]["Month7"].ToString();
+                        if (dt.Rows[j]["Month8"] != DBNull.Value)
+                            obj.Month8 = dt.Rows[j]["Month8"].ToString();
+                        if (dt.Rows[j]["Month9"] != DBNull.Value)
+                            obj.Month9 =dt.Rows[j]["Month9"].ToString();
+                        if (dt.Rows[j]["Month10"] != DBNull.Value)
+                            obj.Month10 = dt.Rows[j]["Month10"].ToString();
+                        if (dt.Rows[j]["Month11"] != DBNull.Value)
+                            obj.Month11 = dt.Rows[j]["Month11"].ToString();
+                        if (dt.Rows[j]["Month12"] != DBNull.Value)
+                            obj.Month12 = dt.Rows[j]["Month12"].ToString();
+                        list.Add(obj);
+
+                    }
+
+                }
+
+
+
+
+
+                return list;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+
+                ObjConn.Close();
+
+            }
+
+        }
 
     }
 }

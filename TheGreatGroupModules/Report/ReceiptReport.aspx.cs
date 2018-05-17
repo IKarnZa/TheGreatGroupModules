@@ -61,7 +61,7 @@ namespace TheGreatGroupModules.Report
             string price5 = listProductsSelect1[6].TotalPrice_Text;// รวมเงินทั้งสิ้น
 
 
-            var param = new ReportParameter[29];
+            var param = new ReportParameter[30];
             param[0] = new ReportParameter("paramDate", contract.ContractCreateDate.Day + "");
             param[1] = new ReportParameter("paramMonth", contract.ContractCreateDate.ToString("MMMM", CultureInfo.GetCultureInfo("th-TH")));
             param[2] = new ReportParameter("paramYear", contract.ContractCreateDate.ToString("yyyy", CultureInfo.GetCultureInfo("th-TH")));
@@ -91,7 +91,8 @@ namespace TheGreatGroupModules.Report
             param[26] = new ReportParameter("paramPrice4", price4);
             param[27] = new ReportParameter("paramPrice5", price5);
             param[28] = new ReportParameter("paramTotalPriceThai","(  "+ Utility.numConvertChar(contract.ContractPayment.ToString())+"  )" );
-            
+
+            param[29] = new ReportParameter("paramRef",  "GT" + 10000 + ContractID );
 
             string sourceViewReport = @"\Report\Receipt.rdlc";
             ReportViewer ReportViewer1 = new ReportViewer();

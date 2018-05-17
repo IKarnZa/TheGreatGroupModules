@@ -447,6 +447,36 @@ namespace TheGreatGroupModules.Controllers
             }
 
         }
+
+        // GET: /Customers/GetListCustomers/:id
+        public JsonResult GetListCustomers(int id)
+        {
+
+
+            try
+            {
+                IList<Customers> listData = new List<Customers>();
+                CustomersData data = new CustomersData();
+                listData = data.GetListCustomers(id);
+
+                return Json(new
+                {
+                    data = listData,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    errMsg = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
+
         // GET: /Customers/GetCustomerByZone?zoneId=:zoneId
         public JsonResult GetCustomerByZone(int zoneId) {
 
@@ -509,6 +539,13 @@ namespace TheGreatGroupModules.Controllers
         {
             try
             {
+
+
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                item.CustomerInsertBy = (Int32)Session["iuser"];
+
                 new CustomersData().AddCustomer(ref item);
 
                 return RedirectToAction("Index", "Customers");
@@ -529,6 +566,12 @@ namespace TheGreatGroupModules.Controllers
 
             try
             {
+
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                item.CustomerUpdateBy = (Int32)Session["iuser"];
+
                 new CustomersData().EditCustomer(ref item);
 
                 return Json(new
@@ -599,14 +642,21 @@ namespace TheGreatGroupModules.Controllers
             cus_info = data3.GetCustomerInfo_ByID(id);
 
             StaffData st = new StaffData();
-            DataTable dt = st.GetStaff(5, 0);
-            List<ListItems> item = new List<ListItems>();
+            DataTable dt = new DataTable();
+            List<Staffs> staffList=new List<Staffs>();
+            dt = st.GetStaffRole(0, 5);
             if (dt.Rows.Count > 0)
             {
-                item = dt.AsEnumerable().Select(dr => new ListItems()
+                staffList = dt.AsEnumerable().Select(dr => new Staffs()
                 {
-                    ID = dr.Field<int>("StaffID"),
-                    Value = dr.Field<string>("StaffTitleName") + dr.Field<string>("StaffFirstName") + " "
+                    StaffID = dr.Field<int>("StaffID"),
+                    StaffCode = dr.Field<string>("StaffCode"),
+                    StaffTitleName = dr.Field<string>("StaffTitleName"),
+                    StaffFirstName = dr.Field<string>("StaffFirstName"),
+                    StaffLastName = dr.Field<string>("StaffLastName"),
+                    StaffRoleID = dr.Field<int>("StaffRoleID"),
+                    StaffRoleName = dr.Field<string>("StaffRoleName"),
+                    StaffName = dr.Field<string>("StaffTitleName") + dr.Field<string>("StaffFirstName") + " "
                     + dr.Field<string>("StaffLastName"),
 
                 }).ToList();
@@ -618,7 +668,7 @@ namespace TheGreatGroupModules.Controllers
                 dataDistrict = listData1,
                 dataSubDistrict = listData2,
                 dataCustomer = cus_info,
-                dataZone=item,
+                dataZone = staffList,
                 success = true
             }, JsonRequestBehavior.AllowGet);
         }

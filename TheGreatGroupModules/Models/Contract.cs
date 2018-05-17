@@ -36,6 +36,7 @@ namespace TheGreatGroupModules.Models
         public DateTime ContractUpdateDate { get; set; }
         public int Activated { get; set; }
         public int Deleted { get; set; }
+        public int IsContractAmountLast { get; set; }
         public int CustomerSurety1 { get; set; }
         public int CustomerSurety2 { get; set; }
         public int CustomerPartner { get; set; }

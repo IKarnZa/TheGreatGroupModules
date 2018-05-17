@@ -186,8 +186,8 @@ namespace TheGreatGroupModules.Controllers
 
 
         // Report/GetPaymentReportByCustomer?CustomerID=1&ContractID=1
-        [HttpGet]
-        public JsonResult GetPaymentReportByCustomer(int CustomerID, int ContractID) 
+        [HttpPost]
+        public JsonResult GetPaymentReportByCustomer(SearchCriteria item) 
         {
 
 
@@ -195,7 +195,7 @@ namespace TheGreatGroupModules.Controllers
             {
                 ContractData rt = new ContractData();
                 IList<ReportCustomer> data = new List<ReportCustomer>();
-                data = rt.GetPaymentReportByCustomer(CustomerID, ContractID);
+                data = rt.GetPaymentReportByCustomer(item);
 
                 return Json(new
                 {

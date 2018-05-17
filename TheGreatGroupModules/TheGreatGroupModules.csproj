@@ -88,6 +88,7 @@
     <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\AmazonOnline\Source\Repos\VTECSystem\VTECSystem\VTECSystem\bin\MySql.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>D:\KTB\CMKBL\Lib\NPOI.dll</HintPath>
@@ -219,6 +220,13 @@
     <Compile Include="Report\ContractBookReport.aspx.designer.cs">
       <DependentUpon>ContractBookReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Report\CustomerCard.aspx.cs">
+      <DependentUpon>CustomerCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\CustomerCard.aspx.designer.cs">
+      <DependentUpon>CustomerCard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Report\DailyReport.aspx.cs">
       <DependentUpon>DailyReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -308,6 +316,7 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="QRCoderProject.Portable.csproj" />
     <Content Include="Report\ContractBookReport.aspx" />
+    <Content Include="Report\CustomerCard.aspx" />
     <Content Include="Report\DailyReport.aspx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -3350,6 +3359,7 @@
     <Content Include="Views\Staffs\EditStaff.cshtml" />
     <Content Include="Views\Setting\Holiday.cshtml" />
     <Content Include="Views\Report\PDFReceipt.cshtml" />
+    <Content Include="Views\Home\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3364,6 +3374,7 @@
     <EmbeddedResource Include="Report\ContractBookReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\CustomerCard.rdlc" />
     <EmbeddedResource Include="Report\DailyReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

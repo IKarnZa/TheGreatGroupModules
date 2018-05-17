@@ -33,7 +33,6 @@ namespace TheGreatGroupModules.Controllers
         // GET: /Customers/GetListContract/:id
         public JsonResult GetListContract(int CustomerID)
         {
-
             try
             {
 
@@ -301,6 +300,39 @@ namespace TheGreatGroupModules.Controllers
 
         }
 
+
+        
+
+        [HttpGet]
+        public JsonResult ActivatedContract(int ContractID)
+        {
+            ContractData data = new ContractData();
+
+            try
+            {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                int UpdateBy = (Int32)Session["iuser"];
+
+                data.ActivatedContract(ContractID, UpdateBy);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
         // GET: /Customers/GetDataPurchaseData/:id
         public JsonResult GetDataPurchaseData(int id)
         {
@@ -412,5 +444,43 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
+
+        [HttpPost]
+        public JsonResult PostAddContractAmountLast(Contract item)
+        {
+            try
+            {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                item.ContractInsertBy = (Int32)Session["iuser"];
+
+                IList<Contract> listContract = new List<Contract>();
+                ContractData cd = new ContractData();
+                listContract = cd.GetContract(item.ContractCustomerID, item.ContractID);
+                item = new Contract();
+                item = listContract[0];
+                ProductData pd = new ProductData();
+                pd.AddDailyReceipt(item.ContractPayment,item.ContractAmountLast,item.ContractCustomerID,item.ContractID);
+
+
+                return Json(new
+                {
+                    data = "บันทึกค่างวดแรกสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
+        
     }
 }

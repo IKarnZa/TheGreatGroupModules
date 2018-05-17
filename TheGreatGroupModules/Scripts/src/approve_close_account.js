@@ -237,29 +237,29 @@ function Load_DataGrid2(data) {
                     caption: "ให้ส่วนลด",
                     alignment: 'right',
                 },
-                {
-                    dataField: "Balance_Text",
-                    caption: "ยกเลิกการให้ส่วนลด",
-                    alignment: 'center',
-                    width: 100,
-                    fixed: true,
-                    fixedPosition: 'right',
-                    verticalAlignment: 'middle',
-                    cellTemplate: function (container, options) {
-                        $("<div>")
-                          .append("<button type='link' onclick='Show_PopupEdit("
-                          + '"' + options.data.CustomerName
-                          + '","' + options.data.Balance_Text
-                          + '",' + options.data.ContractID
-                          + ',' + options.data.CustomerID
-                          + ',' + options.data.Balance
-                          + ")' title='ยกเลิกการให้ส่วนลด' "+
-                          +" class='btn btn-warning btn-circle btn-sm'>"
-                          + "<i class='fa fa-close'></i>"
-                          + "</button>")
-                          .appendTo(container);
-                    }
-                },
+                //{
+                //    dataField: "Balance_Text",
+                //    caption: "ยกเลิกการให้ส่วนลด",
+                //    alignment: 'center',
+                //    width: 100,
+                //    fixed: true,
+                //    fixedPosition: 'right',
+                //    verticalAlignment: 'middle',
+                //    cellTemplate: function (container, options) {
+                //        $("<div>")
+                //          .append("<button type='link' onclick='Show_PopupEdit("
+                //          + '"' + options.data.CustomerName
+                //          + '","' + options.data.Balance_Text
+                //          + '",' + options.data.ContractID
+                //          + ',' + options.data.CustomerID
+                //          + ',' + options.data.Balance
+                //          + ")' title='ยกเลิกการให้ส่วนลด' "+
+                //          +" class='btn btn-warning btn-circle btn-sm'>"
+                //          + "<i class='fa fa-close'></i>"
+                //          + "</button>")
+                //          .appendTo(container);
+                //    }
+                //},
         ],
     });
 

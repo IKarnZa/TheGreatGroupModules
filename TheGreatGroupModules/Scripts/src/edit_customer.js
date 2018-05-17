@@ -42,21 +42,25 @@
         onClick: function (e) {
             datasourceCustomer = $("#form").dxForm("instance").option('formData');
             datasourceCustomer.CustomerID = getUrlParameter('CustomerID');
-            $.ajax({
-                url: '../Customers/EditCustomers',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(datasourceCustomer),
-                success: function (data) {
-                  
 
-                    DevExpress.ui.notify(data.data);
-                },
-                error: function () {
-                    console.log("error");
-                }
-            });
+            var result = $("#form").dxForm("instance").validate();
+            if (result.isValid) {
 
+                $.ajax({
+                    url: '../Customers/EditCustomers',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(datasourceCustomer),
+                    success: function (data) {
+
+                        DevExpress.ui.notify(data.data);
+                     
+                    },
+                    error: function () {
+                        console.log("error");
+                    }
+                });
+            }
 
         }
     });

@@ -33,6 +33,7 @@ namespace TheGreatGroupModules.Models
             DateTime[] HolidaysArr = Utility.Holidays(1);
             List<ListCustomerOnMobile> list = new List<ListCustomerOnMobile>();
             ListCustomerOnMobile obj = new ListCustomerOnMobile();
+            DateTime lastpay = new DateTime();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 obj = new ListCustomerOnMobile();
@@ -69,21 +70,25 @@ namespace TheGreatGroupModules.Models
                 else
                     obj.TotalPay = 0;
 
+                 lastpay=Convert.ToDateTime(dt.Rows[i]["lastDate"].ToString())== DateTime.MinValue ? obj.ContractStartDate:Convert.ToDateTime(dt.Rows[i]["lastDate"].ToString());
+
+
                 if (dt.Rows[i]["lastDate"]!=DBNull.Value)
-                    obj.StatusPay = DiffLastTransaction(Convert.ToDateTime(dt.Rows[i]["lastDate"].ToString()), obj.ContractPayEveryDay, obj.ContractSpecialholiday, HolidaysArr);
+                    obj.StatusPay = DiffLastTransaction(lastpay , obj.ContractPayEveryDay, obj.ContractSpecialholiday, HolidaysArr);
 
                 list.Add(obj);
             }
             return list;
         }
 
+  
+
         public static int DiffLastTransaction(DateTime dateTransaction, int ContractPayEveryDay, bool ContractSpecialholiday, DateTime[] HolidaysArr)
         {
-
             DateTime dateNow = DateTime.Now.Date;
             double result = 0;
-            result = (dateNow - dateTransaction).TotalDays;
-            int diffdate = Convert.ToInt32(Math.Floor(result));                                                               
+            result = (dateNow - dateTransaction.Date).TotalDays;
+            int diffdate = Convert.ToInt32(Math.Floor(result)) - 1;
             int totaldate = 0;
 
             DateTime startDate = dateTransaction;
@@ -92,28 +97,29 @@ namespace TheGreatGroupModules.Models
             // เว้นวันหยุด
             if (ContractSpecialholiday)
             {
-               
+
                 if (ContractPayEveryDay == 1) // ทุกวัน ยกเว้นวันหยุดนขตฤกษ์
                 {
                     while (diffdate > 0)
                     {
 
                         EndDate = EndDate.AddDays(-1);
+
                         if (Utility.IsHolidays(EndDate, HolidaysArr))
-                            totaldate = totaldate- 1;
+                            totaldate = totaldate - 1;
 
                         diffdate--;
                     }
 
                 }
-                else if (ContractPayEveryDay == 2) 
+                else if (ContractPayEveryDay == 2)
                 {// จัน-ศุก ยกเว้นวันหยุดนขตฤกษ์
                     while (diffdate > 0)
                     {
-
                         EndDate = EndDate.AddDays(-1);
                         if (EndDate.DayOfWeek == DayOfWeek.Saturday || EndDate.DayOfWeek == DayOfWeek.Sunday || Utility.IsHolidays(EndDate, HolidaysArr))
                             totaldate = totaldate - 1;
+
 
                         diffdate--;
                     }
@@ -121,62 +127,65 @@ namespace TheGreatGroupModules.Models
             }
             else  // จ-ศ =1
             {
-                   if (ContractPayEveryDay == 1) // ทุกวัน ไม่เว้นวันหยุดนขตฤกษ์
+                if (ContractPayEveryDay == 1) // ทุกวัน ไม่เว้นวันหยุดนขตฤกษ์
                 {
                     totaldate = diffdate;
                 }
-                   else if (ContractPayEveryDay == 2) 
-                   {
+                else if (ContractPayEveryDay == 2) // จัน-ศุก ไม่เว้นวันหยุดนขตฤกษ์
+                {
 
 
-                       while (diffdate > 0)
-                       {
+                    while (diffdate > 0)
+                    {
+                        EndDate = EndDate.AddDays(-1);
 
-                           EndDate = EndDate.AddDays(-1);
-                           if (EndDate.DayOfWeek == DayOfWeek.Saturday || EndDate.DayOfWeek == DayOfWeek.Sunday)
-                               totaldate = totaldate - 1;
+                        if (EndDate.DayOfWeek == DayOfWeek.Saturday || EndDate.DayOfWeek == DayOfWeek.Sunday)
+                            totaldate = totaldate - 1;
 
-                           diffdate--;
-                       }
-                   
-                   }
+
+                        diffdate--;
+                    }
+
+                }
             }
 
             if (dateTransaction != DateTime.MinValue)
             {
                 if (dateNow > dateTransaction)
                 {
-                    if (totaldate == 1)// วันปัจจุบันยังไม่จ่าย
+                    if (totaldate >= 1)  // ค้างจ่าย
                     {
-                        totaldate = -1;
-                        return totaldate;
+
+
                     }
-                    else
-                    {// ไม่ได้จ่ายแล้วหลายวัน
-                        return totaldate;
+                    else // วันปัจจุบันยังไม่จ่าย
+                    {
+                       totaldate = -1;
                     }
+                }
+                else if (dateNow < dateTransaction)  // ยังไม่ถึงวันชำเริ่มชำระ
+                {
+
+                    totaldate = -1;
                 }
                 else // จ่ายแล้ว
                 {
-                    return totaldate;
-
+                    totaldate = 0;
                 }
-               
+
 
             }
-            else {
+            else
+            {
                 totaldate = -1;
-                return totaldate;
-            
+
+
             }
 
-            
-            
+
+            return totaldate;
 
         }
-
-
-
     }
 
 

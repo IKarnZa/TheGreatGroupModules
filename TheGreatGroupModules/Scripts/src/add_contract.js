@@ -21,8 +21,21 @@
         visible: false,
     });
 
+    if (getUrlParameter('ContractID') == 0) {
 
+        $("#btnPrintCard").prop("disabled", true);
+        $("#btnPrintReceipt").prop("disabled", true);
+        $("#btnPrintContract").prop("disabled", true);
+        $("#btnAddContractAmountLast").prop("disabled", true);
+        
+    } else {
 
+        $("#btnPrintCard").prop("disabled", false);
+        $("#btnPrintReceipt").prop("disabled", false);
+        $("#btnPrintContract").prop("disabled", false);
+        $("#btnAddContractAmountLast").prop("disabled", false);
+    }
+  
 });
 
 
@@ -84,11 +97,22 @@ function LoadContract() {
                   CustomerPartnerData = ListContract[0].CustomerPartnerData;
               }
 
+              if (ListContract[0].IsContractAmountLast == 1) {
+
+
+                  $("#btnAddContractAmountLast").prop("disabled", true);
+
+              } else {
+
+
+
+                  $("#btnAddContractAmountLast").prop("disabled", false);
+              }
           });
 
       } else { ListContract.push({}); }
 
-  
+    
 
       $("#product_name").dxLookup({
           dataSource: products,
@@ -139,10 +163,11 @@ function LoadContract() {
               label: {
                   text: "วันที่สิ้นสุดสัญญา"
               },
+              
               editorOptions: {
                   width: "100%",
                   displayFormat: "dd/MM/yyyy",
-
+                  disabled: true
               },
           }, {
               dataField: "ContractStartDate",
@@ -175,17 +200,21 @@ function LoadContract() {
               label: {
                   text: "จำนวนงวด/งวด"
               },
-              isRequired: true,
-              validationRules: [{
-                      type: "required",
-                      message: "โปรดระบุจำนวนงวด/งวด"
-                  }]
+              editorOptions: {
+                  disabled: true
+              },
+         
           },
           {
               dataField: "ContractAmount",
               label: {
                   text: "งวดละ/บาท"
               },
+              isRequired: true,
+              validationRules: [{
+                  type: "required",
+                  message: "โปรดระบุค่างวด/บาท"
+              }]
           },
           {
               dataField: "ContractAmountLast",
@@ -325,7 +354,12 @@ function LoadContract() {
                     , validationRules: [{
                         type: "required",
                         message: "ต้องการเลขประจำตัวประชาชน"
-                    }],
+                    },{
+              type: "stringLength",
+      max: 13,
+      min: 13,
+      message: "รหัสประจำตัวประชาชนต้องมี 13 หลัก"
+  },],
           },
            {
                dataField: "CustomerSuretyTelephone",
@@ -339,8 +373,8 @@ function LoadContract() {
                 label: {
                     text: "เบอร์มือถือ"
                 },
-                isRequired: true
-                    , validationRules: [{
+                isRequired: true,
+                   validationRules: [{
                         type: "required",
                         message: "ต้องการเบอร์มือถือ"
                     }],
@@ -432,7 +466,12 @@ function LoadContract() {
               label: {
                   text: "เลขประจำตัวประชาชน"
               },
-
+              validationRules: [ {
+                  type: "stringLength",
+                  max: 13,
+                  min: 13,
+                  message: "รหัสประจำตัวประชาชนต้องมี 13 หลัก"
+              }, ],
           },
            {
                dataField: "CustomerSuretyTelephone",
@@ -534,7 +573,12 @@ function LoadContract() {
               label: {
                   text: "เลขประจำตัวประชาชน"
               },
-
+              validationRules: [{
+                  type: "stringLength",
+                  max: 13,
+                  min: 13,
+                  message: "รหัสประจำตัวประชาชนต้องมี 13 หลัก"
+              }, ],
           },
            {
                dataField: "CustomerPartnerTelephone",
@@ -568,7 +612,12 @@ function LoadContract() {
       if (result.dataProductSelect.length > 0) {
 
           $('#gridData').dxDataGrid('instance').option('dataSource', result.dataProductSelect);
+      
 
+              $("#btnPrintCard").prop("disabled", false);
+              $("#btnPrintReceipt").prop("disabled", false);
+              $("#btnPrintContract").prop("disabled", false);
+          
       }
       /* ================================================================*/
 
@@ -677,6 +726,45 @@ function Submit_Click() {
 }
 
 
+function AddContractAmountLast() {
+
+
+    if (getUrlParameter('ContractID') > 0) {
+        //Update
+        var Contract = $("#form").dxForm("instance").option('formData');
+
+        Contract.ContractID = getUrlParameter('ContractID');
+        Contract.ContractCustomerID = getUrlParameter('CustomerID');
+
+        $.ajax({
+            url: '../Contract/PostAddContractAmountLast',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(Contract),
+            success: function (data) {
+                if (data.success == true) {
+
+                    swal("สำเร็จ!!", "บันทึกค่างวดแรกสำเร็จ !!", "success");
+
+                } else {
+
+                    DevExpress.ui.notify(data.data);
+                }
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+        
+    } else {
+
+        swal("ผิดพลาด!!", "กรุณาบันทึกข้อมูลสัญญาก่อนบันทึกค่างวดแรก !!", "error");
+    }
+
+
+
+}
+
 function AddProduct() {
     if ($("#product_name").dxLookup("instance").option("value") != null) {
 
@@ -733,7 +821,6 @@ $("#myButton").dxButton({
         Contract.CustomerSuretyData1 = $("#form1").dxForm("instance").option('formData');
         Contract.CustomerSuretyData2 = $("#form2").dxForm("instance").option('formData');
      
-
         var result = $("#form").dxForm("instance").validate();
         var result1 = $("#form1").dxForm("instance").validate();
       

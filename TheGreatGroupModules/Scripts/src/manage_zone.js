@@ -25,6 +25,8 @@ function Call_Grid() {
 
 
 function Load_DataGrid(data) {
+    
+    var rownum = 0;
 
 
     $("#gridListZone").dxDataGrid({
@@ -51,7 +53,7 @@ function Load_DataGrid(data) {
             fileName: "File",
         },
 
-        allowColumnReordering: true,
+        allowColumnReordering: false,
         allowColumnResizing: true,
         columnAutoWidth: true,
         height: 500,
@@ -67,6 +69,12 @@ function Load_DataGrid(data) {
                 allowFiltering: false,
                 fixed: false,
                 fixedPosition: 'left',
+                cellTemplate: function (container, options) {
+                    rownum = rownum + 1;
+                    $("<div>")
+                        .append(rownum)
+                        .appendTo(container);
+                }
             },
             {
                 dataField: "Code",

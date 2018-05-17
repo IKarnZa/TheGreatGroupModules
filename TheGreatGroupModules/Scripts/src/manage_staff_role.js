@@ -89,7 +89,7 @@ function Load_DataGrid(data) {
                    dataField: "StaffID",
                    caption: "กำหนดสิทธิ์พนักงาน",
                    alignment: 'center',
-                   width: 50,
+                   width: 130,
                    fixed: true,
                    fixedPosition: 'right',
                    cellTemplate: function (container, options) {

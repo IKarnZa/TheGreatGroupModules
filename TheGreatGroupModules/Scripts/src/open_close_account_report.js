@@ -220,17 +220,23 @@ function Load_DataGrid(data) {
                 caption: "เลขที่สัญญา",
                 width: 100,
                 alignment: 'center',
-                allowFiltering: false,
+                allowFiltering: true,
                 fixed: true,
                 fixedPosition: 'left',
             },
             {
                 dataField: "CustomerName",
                 caption: "ข้อมูลผู้เปิดบัญชี",
-                //width: 230,
-                //fixed: true,
                 fixedPosition: 'left',
             },
+                 {
+                     dataField: "CustomerMobile",
+                     caption: "เบอร์โทรติดต่อ",
+                     alignment: 'center',
+                     width: 120,
+
+                 },
+                  
             {
                 dataField: "ContractCreateDate_Text",
                 caption: "วันเริ่มต้นสัญญา",
@@ -259,9 +265,18 @@ function Load_DataGrid(data) {
                 width: 120,
             },
 
-
-
         ],
+        onContentReady: function (e) {
+            if (!e.component.getSelectedRowKeys().length)
+                e.component.selectRowsByIndexes(0);
+        },
+        masterDetail: {
+            enabled: true,
+            template: function (container, options) {
+                var currentEmployeeData = options.data;
+                container.append($('<label>' + currentEmployeeData.CustomerAddress + '</label>'));
+            }
+        }
 
     });
 

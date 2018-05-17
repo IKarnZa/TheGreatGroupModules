@@ -20,7 +20,7 @@ var dataZone = [];
         dataSubDistrict = data.dataSubDistrict;
         datasourceCustomer = data.dataCustomer;
         dataZone = data.dataZone;
-
+        console.log(dataZone);
 
         LoadForm_CustomerInfo(datasourceCustomer,
         dataProvince,

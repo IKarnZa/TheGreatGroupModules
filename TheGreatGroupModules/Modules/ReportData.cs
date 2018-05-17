@@ -42,7 +42,7 @@ namespace TheGreatGroupModules.Modules
 
                 List<OpenAccountReport> listData = new List<OpenAccountReport>();
 
-                string StrSql = @"   SELECT ct.ContractID,
+                string StrSql = @"   SELECT DISTINCT ct.ContractID,
                     ct.ContractCustomerID,
                     ct.ContractNumber,
                     ct.ContractCreateDate,
@@ -54,12 +54,12 @@ namespace TheGreatGroupModules.Modules
                      CONCAT( '( โทร ',c.CustomerMobile ,' )') AS CustomerMobile,
                      CONCAT(c.CustomerAddress1,'  ต.',s.SubDistrictName,'  อ.', d.DistrictName,'  จ.', p.ProvinceName,'  ',c.CustomerZipCode) AS CustomerAddress
                     FROM contract ct 
-                    LEFT JOIN customer c ON ct.ContractCustomerID=c.CustomerId
+                    LEFT OUTER JOIN customer c ON ct.ContractCustomerID=c.CustomerId
                      LEFT OUTER JOIN province p ON c.CustomerProvinceId = p.ProvinceId
                       LEFT OUTER JOIN district d ON c.CustomerDistrictId = d.DistrictId
                       LEFT OUTER JOIN subDistrict s ON c.CustomerSubDistrictId = s.SubDistrictId
-                      LEFT JOIN staff_zone sz ON c.SaleID=sz.StaffID
-                      LEFT JOIN product_customer pc ON pc.ContractID=ct.ContractID AND pc.CustomerID=ct.ContractCustomerID
+                      LEFT OUTER JOIN staff_zone sz ON c.SaleID=sz.StaffID
+                      LEFT OUTER JOIN product_customer pc ON pc.ContractID=ct.ContractID AND pc.CustomerID=ct.ContractCustomerID
                     WHERE   ct.Activated=1 ";
 
                 if (StartDate != null & EndDate != null)

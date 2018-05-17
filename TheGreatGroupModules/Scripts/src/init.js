@@ -26,7 +26,7 @@ var customerListstatus = [
       "โสด",
 ];
 var title = [
-     "นาย",
+      "นาย",
       "นาง",
       "นางสาว",
 ];
@@ -104,7 +104,6 @@ var Years = GetYear();
         yearArr.push(YearNow);
 
     }
-    console.log(yearArr);
     return yearArr;
 }
   //  [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
@@ -517,8 +516,8 @@ var Years = GetYear();
                                editorType: "dxLookup",
                                editorOptions: {
                                    items: dataZone,
-                                   valueExpr: 'ID',
-                                   displayExpr: 'Value'
+                                   valueExpr: 'StaffID',
+                                   displayExpr: 'StaffName'
                                },
 
                                label: {

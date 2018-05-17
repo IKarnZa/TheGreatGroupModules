@@ -104,6 +104,8 @@ namespace TheGreatGroupModules.Modules
         public int ContractID { get; set; }
         public string ContractNumber { get; set; }
         public string CustomerName { get; set; }
+        public string CustomerMobile { get; set; }
+        public string CustomerAddress { get; set; }
         public DateTime ContractCreateDate { get; set; }
         public string ContractCreateDate_Text { get { return ContractCreateDate.ToString("dd/MM/yyyy"); } }
         public DateTime ContractExpDate { get; set; }
@@ -122,9 +124,9 @@ namespace TheGreatGroupModules.Modules
                 CustomerID = dr.Field<int>("ContractCustomerID"),
                 ContractID = dr.Field<int>("ContractID"),
                 ContractNumber = dr.Field<string>("ContractNumber"),
-                CustomerName = dr.Field<string>("CustomerName") +
-                               dr.Field<string>("CustomerMobile") +
-                               " ที่อยู่ " + dr.Field<string>("CustomerAddress"),
+                CustomerName = dr.Field<string>("CustomerName") ,
+               CustomerMobile = dr.Field<string>("CustomerMobile") ,
+                CustomerAddress = " ที่อยู่ " + dr.Field<string>("CustomerAddress"),
                 ContractCreateDate = dr.Field<DateTime>("ContractCreateDate"),
                 ContractExpDate = dr.Field<DateTime>("ContractExpDate"),
                 TotalPayment = dr.Field<decimal>("ContractPayment"),
@@ -147,8 +149,8 @@ namespace TheGreatGroupModules.Modules
         public string ToDateStr { get { return ToDate.ToString("dd/MM/yyyy"); } }
         public int Month { get; set; }
         public int Year { get; set; }
-
-
+        public int ContractID { get; set; }
+        public int CustomerID { get; set; }
     }
 
 
@@ -185,5 +187,25 @@ namespace TheGreatGroupModules.Modules
     
     
     
+    }
+
+
+
+    public class ReportCustomerOnCard
+    {
+
+        public int Day { get; set; }
+        public string Month1 { get; set; }
+        public string Month2 { get; set; }
+        public string Month3 { get; set; }
+        public string Month4 { get; set; }
+        public string Month5 { get; set; }
+        public string Month6 { get; set; }
+        public string Month7 { get; set; }
+        public string Month8 { get; set; }
+        public string Month9 { get; set; }
+        public string Month10 { get; set; }
+        public string Month11 { get; set; }
+        public string Month12 { get; set; }
     }
 }

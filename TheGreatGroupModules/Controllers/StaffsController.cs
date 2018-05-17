@@ -198,7 +198,8 @@ namespace TheGreatGroupModules.Controllers
                         StaffRoleName = dr.Field<string>("StaffRoleName"),
                         StaffName = dr.Field<string>("StaffTitleName") + dr.Field<string>("StaffFirstName") + " "
                         + dr.Field<string>("StaffLastName"),
-
+                        Activated = dr.Field<int>("Activated"),
+                        Deleted = dr.Field<int>("Deleted"),
                     }).ToList();
 
                 }
@@ -344,7 +345,7 @@ namespace TheGreatGroupModules.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult DeletedStaffs(int StaffID)
         {
 
@@ -376,7 +377,38 @@ namespace TheGreatGroupModules.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpGet]
+        public JsonResult ActivatedStaffs(int StaffID)
+        {
 
+
+            StaffData data = new StaffData();
+
+            try
+            {
+                if (Session["iuser"] == null)
+                    throw new Exception(" Session หมดอายุ , กรุณาเข้าสู่ระบบใหม่อีกครั้ง !! ");
+
+                int UpdateBy = (Int32)Session["iuser"];
+
+                data.ActivatedStaffs(StaffID, UpdateBy);
+
+                return Json(new
+                {
+                    data = "บันทึกข้อมูลสำเร็จ",
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new
+                {
+                    data = ex.Message,
+                    success = false
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion  ::  Manage Staff ::
 
         #region  :: Manage StaffRole  ::
@@ -630,52 +662,113 @@ namespace TheGreatGroupModules.Controllers
 
 
     //    ./staffs/DiffLastTransaction
-        public JsonResult DiffLastTransaction()
-        {
 
-            DateTime dateTransaction = new DateTime(2018, 04, 23).Date;
+        public JsonResult  DiffLastTransaction()
+        {
+            DateTime dateTransaction= new DateTime(2018,05,02).Date;
+            int ContractPayEveryDay=1;
+            bool ContractSpecialholiday=true; 
+            DateTime[] HolidaysArr = Utility.Holidays(1);
             DateTime dateNow = DateTime.Now.Date;
             double result = 0;
             result = (dateNow - dateTransaction).TotalDays;
+            int diffdate = Convert.ToInt32(Math.Floor(result))-1;
+            int totaldate = 0;
 
-            int dddd = Convert.ToInt32(Math.Floor(result));
-
-            if (dateNow > dateTransaction) 
-            {
-                if (dddd == 1)// วันปัจจุบันยังไม่จ่าย
-                {
-                    dddd = -1;
-
-                    return Json(new
-                    {
-                        data = dddd,
-                        success = true
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {// ไม่ได้จ่ายแล้วหลายวัน
-                    return Json(new
-                    {
-                        data = Math.Abs(dddd - 1),
-                        success = true
-                    }, JsonRequestBehavior.AllowGet);
-                
-                }
-                
-              
-            }
-            else // จ่ายแล้ว
+            DateTime startDate = dateTransaction;
+            DateTime EndDate = dateNow;
+            totaldate = diffdate;
+            // เว้นวันหยุด
+            if (ContractSpecialholiday)
             {
 
-                return Json(new
+                if (ContractPayEveryDay == 1) // ทุกวัน ยกเว้นวันหยุดนขตฤกษ์
                 {
-                    data = dddd,
-                    success = true
-                }, JsonRequestBehavior.AllowGet);
+                    while (diffdate > 0)
+                    {
+
+                        EndDate = EndDate.AddDays(-1);
+                        
+                        if (Utility.IsHolidays(EndDate, HolidaysArr))
+                            totaldate = totaldate - 1;
+
+                        diffdate--;
+                    }
+
+                }
+                else if (ContractPayEveryDay == 2)
+                {// จัน-ศุก ยกเว้นวันหยุดนขตฤกษ์
+                    while (diffdate > 0)
+                    {
+                       EndDate = EndDate.AddDays(-1);
+                        if (EndDate.DayOfWeek == DayOfWeek.Saturday || EndDate.DayOfWeek == DayOfWeek.Sunday || Utility.IsHolidays(EndDate, HolidaysArr))
+                            totaldate = totaldate - 1;
+
+                       
+                        diffdate--;
+                    }
+                }
             }
-         
+            else  // จ-ศ =1
+            {
+                if (ContractPayEveryDay == 1) // ทุกวัน ไม่เว้นวันหยุดนขตฤกษ์
+                {
+                    totaldate = diffdate;
+                }
+                else if (ContractPayEveryDay == 2) // จัน-ศุก ไม่เว้นวันหยุดนขตฤกษ์
+                {
+
+
+                    while (diffdate > 0) 
+                    {
+                        EndDate = EndDate.AddDays(-1);
+                       
+                        if (EndDate.DayOfWeek == DayOfWeek.Saturday || EndDate.DayOfWeek == DayOfWeek.Sunday)
+                            totaldate = totaldate - 1;
+                        
+                    
+                        diffdate--;
+                    }
+
+                }
+            }
+
+            if (dateTransaction != DateTime.MinValue)
+            {
+                if (dateNow > dateTransaction)
+                {
+                    if (totaldate >= 1) 
+                    {
+                        
+                    
+                    }
+                    else // วันปัจจุบันยังไม่จ่าย
+                    {
+                        totaldate= - 1;
+                    }
+                }
+                else // จ่ายแล้ว
+                {
+                    totaldate = 0;
+                }
+
+
+            }
+            else
+            {
+                totaldate =-1;
+             
+
+            }
+
+
+
+            return Json(new
+            {
+                data = totaldate,
+                success = true
+            }, JsonRequestBehavior.AllowGet);
+
         }
-        
-
     }
 }
